@@ -9,6 +9,8 @@ import org.xml.sax.*;
 public class OAIHarvester {
 
     private ArrayList<String> fields = null;
+    private ArrayList<String> affiliations = null;
+    
     private final MongoManager mongoManager;    
     private static int nullBinaries = 0;
 
@@ -29,6 +31,8 @@ public class OAIHarvester {
         //fields.add("QFIN"); 
         //fields.add("STAT");
         //fields.add("phys"); // physique
+        
+        affiliations.add("INRIA");
     }
 
     /**
@@ -74,7 +78,7 @@ public class OAIHarvester {
                     int loop = 0;
                     while (!stop) {
 
-                        String request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&set=subject:" + field + "&set=collection:INRIA&from=" + dateFrom + "&until=" + dateUntil;
+                        String request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&set=subject:" + field + "&set=collection:"+affiliations.get(0)+"&from=" + dateFrom + "&until=" + dateUntil;
                         if (tokenn != null) {
                             request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&resumptionToken=" + tokenn;
                         }
