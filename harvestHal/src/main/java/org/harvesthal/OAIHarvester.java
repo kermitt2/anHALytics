@@ -9,7 +9,8 @@ import org.xml.sax.*;
 public class OAIHarvester {
 
     private ArrayList<String> fields = null;
-    private final MongoManager mongoManager;
+    private final MongoManager mongoManager;    
+    private static int nullBinaries = 0;
 
     public OAIHarvester() {
 
@@ -221,6 +222,10 @@ public class OAIHarvester {
         try {
             URL url = new URL(request);
             URLConnection conn = url.openConnection();
+            if(request.endsWith("document") && !conn.getContentType().equals("application/pdf")){
+                nullBinaries++;
+                throw new BinaryNotAvailableException("Cannot download pdf file, because input file is null.");
+            }
             in = conn.getInputStream();
             return in;
 
