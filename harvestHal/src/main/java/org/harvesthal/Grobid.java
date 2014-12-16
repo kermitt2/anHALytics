@@ -26,9 +26,7 @@ public class Grobid {
 
             engine = GrobidFactory.getInstance().createEngine();
 
-            // Biblio object for the result
-            BiblioItem resHeader = new BiblioItem();
-            tei = engine.processHeader(pdfPath, false, resHeader);
+            tei = engine.fullTextToTEI(pdfPath, false, false);
         } 
         catch (Exception e) {
             // If an exception is generated, print a stack trace
