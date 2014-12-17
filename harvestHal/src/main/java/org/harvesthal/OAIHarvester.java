@@ -118,7 +118,7 @@ public class OAIHarvester {
                         while (it1.hasNext()) {
                             Map.Entry pairsIdTei = (Map.Entry) it1.next();
                             try {
-                                String filename = ((String) pairsIdTei.getKey()) + ".tei";
+                                String filename = ((String) pairsIdTei.getKey()) + ".tei.xml";
                                 StringBuilder tei = (StringBuilder) pairsIdTei.getValue();
                                 String formatedTei = xmlFormatter.format(tei.toString());
                                 mongoManager.storeToGridfs(new ByteArrayInputStream(formatedTei.getBytes()), filename, teisNamespace);
