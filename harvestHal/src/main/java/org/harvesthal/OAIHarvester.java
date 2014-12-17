@@ -3,6 +3,8 @@ package org.harvesthal;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.*;
 import org.xml.sax.*;
 
@@ -13,6 +15,7 @@ public class OAIHarvester {
     
     private final MongoManager mongoManager;    
     private static int nullBinaries = 0;
+    private static String tmpPath = null;
 
     public OAIHarvester() {
 
@@ -34,6 +37,14 @@ public class OAIHarvester {
         //fields.add("phys"); // physique
         
         affiliations.add("INRIA");
+        
+        Properties prop = new Properties();
+        try {
+            prop.load(new FileInputStream("harvestHal.properties"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        tmpPath = prop.getProperty("harvestHal.tmpPath");
     }
 
     /**
@@ -184,7 +195,7 @@ public class OAIHarvester {
     }
 
     public static String storeTmpFile(InputStream inBinary) throws IOException {
-        File f = File.createTempFile("tmp", ".pdf", new File("tmpPdf"));
+        File f = File.createTempFile("tmp", ".pdf", new File(tmpPath));
         // deletes file when the virtual machine terminate
         f.deleteOnExit();
         String filePath = f.getAbsolutePath();
