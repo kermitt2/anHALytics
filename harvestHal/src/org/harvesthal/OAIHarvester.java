@@ -19,7 +19,8 @@ public class OAIHarvester {
         mongoManager = new MongoManager();
 
         fields = new ArrayList<String>();
-
+        affiliations = new ArrayList<String>();
+        
         // we store the main HAL scientific fields for a basic organization 
         //fields.add("CHIM"); 
         //fields.add("SCCO"); 
