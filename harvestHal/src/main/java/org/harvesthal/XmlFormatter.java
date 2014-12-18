@@ -23,8 +23,6 @@ public class XmlFormatter {
 
     public String format(String unformattedXml) {
         try {
-            //org.xml.sax.SAXParseException: The reference to entity “&” must end with the ';' delimiter
-            unformattedXml = unformattedXml.replaceAll("&([^;&]+(?!(?:\\w|;)))", "&amp;$1" );
             final Document document = parseXmlFile(unformattedXml);
 
             OutputFormat format = new OutputFormat(document);
