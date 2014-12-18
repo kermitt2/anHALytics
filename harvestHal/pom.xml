@@ -140,10 +140,10 @@
                
     <profiles>
         <profile>
-            <id>process</id>
+            <id>harvest</id>
             <activation>
                 <property>
-                    <name>process</name>
+                    <name>harvest</name>
                 </property>
             </activation>
             <build>
@@ -154,11 +154,7 @@
                         <configuration>
                             <executable>java</executable>
                             <classpathScope>compile</classpathScope>
-                            <arguments>
-                                <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>org.harvesthal.OAIHarvester</argument>
-                            </arguments>
+                            <commandlineArgs>-classpath %classpath org.harvesthal.OAIHarversterV2 harvest ${fromDate}</commandlineArgs>
                         </configuration>
                     </plugin>
                 </plugins>
