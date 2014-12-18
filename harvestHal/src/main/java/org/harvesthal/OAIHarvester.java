@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.harvesthal;
 
 import java.io.*;
@@ -23,6 +18,26 @@ public class OAIHarvester {
 
     private static int nullBinaries = 0;
     private static String tmpPath = null;
+    
+    private static Set<String> dates = new HashSet<String>();
+
+    static {
+        Calendar toDay = Calendar.getInstance();
+        int todayYear = toDay.get(Calendar.YEAR);
+        for (int year = 1900; year < todayYear; year++) {
+            for (int month = 1; month <= 12; month++) {
+                for (int day = 1; day <= daysInMonth(year, month); day++) {
+                    StringBuilder date = new StringBuilder();
+                    date.append(String.format("%04d", year));
+                    date.append("-");
+                    date.append(String.format("%02d", month));
+                    date.append("-");
+                    date.append(String.format("%02d", day));
+                    dates.add(date.toString());
+                }
+            }
+        }
+    }
 
     public OAIHarvester() {
 
@@ -162,14 +177,7 @@ public class OAIHarvester {
                 year--;
                 continue;
             }
-            if ((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8)
-                    || (month == 10) || (month == 12)) {
-                day = 31;
-            } else if (month == 2) {
-                day = 28;
-            } else {
-                day = 30;
-            }
+            day = daysInMonth(year, month);
 
             while (day > 0) {
 
@@ -314,5 +322,32 @@ public class OAIHarvester {
                 break;
         }
         return yn;
+    }
+    
+    
+    private static int daysInMonth(int year, int month) {
+        int daysInMonth;
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                daysInMonth = 31;
+                break;
+            case 2:
+                if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
+                    daysInMonth = 29;
+                } else {
+                    daysInMonth = 28;
+                }
+                break;
+            default:
+                // returns 30 even for nonexistant months 
+                daysInMonth = 30;
+        }
+        return daysInMonth;
     }
 }
