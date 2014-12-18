@@ -283,10 +283,13 @@ public class OAIHarvester {
         }
         String fromDate = null;
         if(args.length > 1){
-            fromDate = args[1];
-        }
-        if(args.length > 0)
-            fromDate = args[0];
+            if(dates.contains(fromDate))
+                fromDate = args[1];
+            else {
+                System.err.println("Date argument must be like :2014-12-18");
+                return;
+            }
+        }   
 
         OAIHarvester oai = new OAIHarvester();
         if (fromDate == null) {
