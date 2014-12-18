@@ -3,6 +3,7 @@ package org.harvesthal;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 import java.util.*;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * OAI-PMH harvesting of Open Access repositories. Metadata are stored in the
@@ -57,7 +58,7 @@ public class OAISaxParser extends DefaultHandler {
     }
 
     public String getText() {
-        return accumulator.toString().trim();
+        return StringEscapeUtils.escapeXml(accumulator.toString().trim());
     }
 
     @Override
@@ -175,7 +176,7 @@ public class OAISaxParser extends DefaultHandler {
                 for (int i = 0; i < length; i++) {
                     // Get names and values for each attribute
                     String name = atts.getQName(i);
-                    String value = atts.getValue(i);
+                    String value = StringEscapeUtils.escapeXml(atts.getValue(i));
                     String attr = " " + name + "=\"" + value + "\"";
                     tei.append(attr);
                     //I could've used xslt..!
