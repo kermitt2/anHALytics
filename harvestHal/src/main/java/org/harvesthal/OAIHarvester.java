@@ -139,7 +139,7 @@ public class OAIHarvester {
                         String tei = getTeiFromBinary(tmpFilePath);
 
                         inTeiGrobid = new ByteArrayInputStream(tei.getBytes());
-                        mongoManager.storeToGridfs(inTeiGrobid, filename + ".tei", binariesNamespace);
+                        mongoManager.storeToGridfs(inTeiGrobid, filename + ".tei.xml", binariesNamespace);
                         mongoManager.storeToGridfs(tmpFilePath, filename + ".pdf", binariesNamespace);
                     } catch (Exception e) {
                         e.printStackTrace();
