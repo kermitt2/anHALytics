@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.*;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.*;
 
 public class OAIHarvester {
@@ -24,7 +25,7 @@ public class OAIHarvester {
     static {
         Calendar toDay = Calendar.getInstance();
         int todayYear = toDay.get(Calendar.YEAR);
-        for (int year = 1900; year < todayYear; year++) {
+        for (int year = 1950; year <= todayYear; year++) {
             for (int month = 1; month <= 12; month++) {
                 for (int day = 1; day <= daysInMonth(year, month); day++) {
                     StringBuilder date = new StringBuilder();
@@ -120,6 +121,7 @@ public class OAIHarvester {
                 //binaries
                 Map<String, String> urls = oaisax.getBinaryUrls();
                 System.out.println("\t Downloading binaries.... for " + date);
+			
                 String binariesNamespace = namespace + ".documents";
                 Iterator it2 = urls.entrySet().iterator();
                 InputStream inTeiGrobid = null;
@@ -283,10 +285,9 @@ public class OAIHarvester {
         }
         String fromDate = null;
         if(args.length > 1){
-            if(dates.contains(fromDate))
-                fromDate = args[1];
-            else {
-                System.err.println("Date argument must be like :2014-12-18");
+            fromDate = args[1];
+            if(!dates.contains(fromDate)) {
+                System.err.println(dates.contains(fromDate)+" Date argument must be like :2014-12-18");
                 return;
             }
         }   
