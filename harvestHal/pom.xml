@@ -154,7 +154,7 @@
                         <configuration>
                             <executable>java</executable>
                             <classpathScope>compile</classpathScope>
-                            <commandlineArgs>-classpath %classpath org.harvesthal.OAIHarversterV2 harvest ${fromDate}</commandlineArgs>
+                            <commandlineArgs>-classpath %classpath org.harvesthal.OAIHarvester harvest ${fromDate}</commandlineArgs>
                         </configuration>
                     </plugin>
                 </plugins>
