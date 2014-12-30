@@ -2,6 +2,7 @@ package org.harvesthal;
 
 import java.io.*;
 import java.net.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,13 +20,13 @@ public class OAIHarvester {
 
     private static int nullBinaries = 0;
     private static String tmpPath = null;
-    
+
     private static Set<String> dates = new HashSet<String>();
 
     static {
         Calendar toDay = Calendar.getInstance();
         int todayYear = toDay.get(Calendar.YEAR);
-        for (int year = 1950; year <= todayYear; year++) {
+        for (int year = 1970; year <= todayYear; year++) {
             for (int month = 1; month <= 12; month++) {
                 for (int day = 1; day <= daysInMonth(year, month); day++) {
                     StringBuilder date = new StringBuilder();
@@ -121,7 +122,7 @@ public class OAIHarvester {
                 //binaries
                 Map<String, String> urls = oaisax.getBinaryUrls();
                 System.out.println("\t Downloading binaries.... for " + date);
-			
+
                 String binariesNamespace = namespace + ".documents";
                 Iterator it2 = urls.entrySet().iterator();
                 InputStream inTeiGrobid = null;
@@ -163,33 +164,8 @@ public class OAIHarvester {
      * Harvesting of all HAL repository
      */
     public void harvestAllHAL() throws IOException, SAXException, ParserConfigurationException {
-
-        String date = null;
-
-        Calendar toDay = Calendar.getInstance();
-        int year = toDay.get(Calendar.YEAR); // this is the current year... then we go back in time
-        int month = toDay.get(Calendar.MONTH) + 1; // we start one month in the future... and then go back in time
-        int day = 0;
-
-        while (year >= 2014) {
-            // limit year for going back in time (these are the publication year, not 
-            //the submission ones)
-            if (month == 0) {
-                month = 12;
-                year--;
-                continue;
-            }
-            day = daysInMonth(year, month);
-
-            while (day > 0) {
-
-                date = "" + year + "-" + ((month < 10) ? "0" + month : month) + "-" + ((day < 10) ? "0" + day : day);
-
-                harvestHALFromDate(date, false);
-
-                day--;
-            }
-            month--;
+        for (String date : dates) {
+            harvestHALFromDate(date, false);
         }
     }
 
@@ -283,26 +259,19 @@ public class OAIHarvester {
             System.err.println("unknown process: " + process);
             return;
         }
-        String fromDate = null;
-        if(args.length > 1){
-            fromDate = args[1];
-            if(!dates.contains(fromDate)) {
-                System.err.println(dates.contains(fromDate)+" Date argument must be like :2014-12-18");
-                return;
-            }
-        }   
-
+        String fromDate = args[1];
         OAIHarvester oai = new OAIHarvester();
-        if (fromDate == null) {
+
+        if (!dates.contains(fromDate)) {
+            fromDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
             if (askConfirm()) {
                 oai.harvestAllHAL();
             } else {
                 return;
             }
-
-        } else {
-            oai.harvestHALFromDate(fromDate, true);
         }
+        oai.harvestHALFromDate(fromDate, true);
     }
 
     public static boolean askConfirm() {
@@ -311,7 +280,7 @@ public class OAIHarvester {
         String decision = null;
 
         boolean yn = true;
-        System.out.println("Are you sur you want to get all hal document ? [yes]");
+        System.out.println("Are you sur you want to start harvesting all hal documents ? [yes]");
         decision = kbd.nextLine();
 
         switch (decision) {
@@ -327,8 +296,7 @@ public class OAIHarvester {
         }
         return yn;
     }
-    
-    
+
     private static int daysInMonth(int year, int month) {
         int daysInMonth;
         switch (month) {
