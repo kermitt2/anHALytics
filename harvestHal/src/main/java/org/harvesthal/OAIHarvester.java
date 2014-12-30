@@ -21,14 +21,14 @@ public class OAIHarvester {
     private static int nullBinaries = 0;
     private static String tmpPath = null;
 
-    private static Set<String> dates = new HashSet<String>();
+    private static Set<String> dates = new LinkedHashSet<String>();
 
     static {
         Calendar toDay = Calendar.getInstance();
         int todayYear = toDay.get(Calendar.YEAR);
-        for (int year = 1970; year <= todayYear; year++) {
-            for (int month = 1; month <= 12; month++) {
-                for (int day = 1; day <= daysInMonth(year, month); day++) {
+        for (int year = todayYear; year >= 2000; year--) {
+            for (int month = 12; month >= 1; month--) {
+                for (int day = daysInMonth(year, month); day >=1 ; day--) {
                     StringBuilder date = new StringBuilder();
                     date.append(String.format("%04d", year));
                     date.append("-");
@@ -164,6 +164,7 @@ public class OAIHarvester {
      * Harvesting of all HAL repository
      */
     public void harvestAllHAL() throws IOException, SAXException, ParserConfigurationException {
+
         for (String date : dates) {
             harvestHALFromDate(date, false);
         }
