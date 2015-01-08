@@ -2,6 +2,7 @@ package org.harvesthal;
 
 import java.io.*;
 import java.net.*;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
@@ -72,16 +73,13 @@ public class OAIHarvester {
         tmpPath = prop.getProperty("harvestHal.tmpPath");
     }
 
-    public void harvestHALFromDate(String date, boolean isStartDate) throws IOException, SAXException, ParserConfigurationException {
+    public void harvestHALForDate(String date) throws IOException, SAXException, ParserConfigurationException {
         for (String field : fields) {
             boolean stop = false;
             String tokenn = null;
             int loop = 0;
             while (!stop) {
                 String request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&set=subject:" + field + "&set=collection:" + affiliations.get(0) + "&from=" + date + "&until=" + date;
-                if (isStartDate) {
-                    request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&set=subject:" + field + "&set=collection:" + affiliations.get(0) + "&from=" + date;
-                }
                 if (tokenn != null) {
                     request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&resumptionToken=" + tokenn;
                 }
@@ -115,8 +113,9 @@ public class OAIHarvester {
                         if (tei.length() > 0) {
                             String formatedTei = xmlFormatter.format(tei.toString());
                             mongoManager.storeToGridfs(new ByteArrayInputStream(formatedTei.getBytes()), filename, teisNamespace);
-                        } else
+                        } else {
                             System.out.println("\t\t\t Tei not found !!!");
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -169,7 +168,7 @@ public class OAIHarvester {
     public void harvestAllHAL() throws IOException, SAXException, ParserConfigurationException {
 
         for (String date : dates) {
-            harvestHALFromDate(date, false);
+            harvestHALForDate(date);
         }
     }
 
@@ -255,27 +254,25 @@ public class OAIHarvester {
     public static void main(String[] args)
             throws IOException, SAXException, ParserConfigurationException {
         if (args.length < 1) {
-            System.err.println("usage: command process[harvest] from-date");
+            System.err.println("usage: command process[harvestDaily | harvestAll]");
             return;
         }
-        String process = args[0];
-        if (!process.equals("harvest")) {
-            System.err.println("unknown process: " + process);
-            return;
-        }
-        String fromDate = args[1];
         OAIHarvester oai = new OAIHarvester();
-
-        if (!dates.contains(fromDate)) {
-            fromDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-
+        String process = args[0];
+        if (process.equals("harvestAll")) {
             if (askConfirm()) {
                 oai.harvestAllHAL();
             } else {
                 return;
             }
+        } else if (process.equals("harvestDaily")) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            oai.harvestHALForDate(dateFormat.format(date));
+        } else {
+            System.err.println("unknown process: " + process);
+            return;
         }
-        oai.harvestHALFromDate(fromDate, true);
     }
 
     public static boolean askConfirm() {
