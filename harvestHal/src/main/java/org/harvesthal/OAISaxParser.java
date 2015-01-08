@@ -19,13 +19,13 @@ public class OAISaxParser extends DefaultHandler {
     private StringBuffer accumulator = new StringBuffer(); // Accumulate parsed text
 
     StringBuilder tei = new StringBuilder();
-    private Map<String, StringBuilder> teis = new HashMap<String, StringBuilder>();;
+    private Map<String, StringBuilder> teis = new HashMap<String, StringBuilder>();
+    
     private String setSpec = null;
     private String identifier = null;
     private String submission_date = null;
     private String file_url = null;
 
-    
     private Map<String, String> binaryUrls = new HashMap<String, String>();
     private ArrayList<String> collections = new ArrayList<String>();
 
@@ -142,7 +142,7 @@ public class OAISaxParser extends DefaultHandler {
                 break;
             case "record":
                 tei = new StringBuilder();
-                tei.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+                accumulator.setLength(0);
                 break;
             case "header":
                 accumulator.setLength(0);
@@ -168,11 +168,13 @@ public class OAISaxParser extends DefaultHandler {
                 accumulator.setLength(0);
                 break;
             default: {
+                if (qName.contains("TEI")) {
+                    tei.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+                    tei.append("<TEI xmlns=\"http://www.tei-c.org/ns/1.0\" xmlns:hal=\"http://hal.archives-ouvertes.fr/\" > \n");
+                    break;
+                }
                 int length = atts.getLength();
                 tei.append("<").append(qName.split(":")[1]);
-                if(qName.contains("TEI")){
-                        tei.append(" xmlns=\"http://www.tei-c.org/ns/1.0\" xmlns:hal=\"http://hal.archives-ouvertes.fr/\" ");
-                }
                 for (int i = 0; i < length; i++) {
                     // Get names and values for each attribute
                     String name = atts.getQName(i);

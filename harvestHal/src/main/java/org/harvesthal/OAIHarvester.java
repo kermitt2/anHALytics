@@ -28,7 +28,7 @@ public class OAIHarvester {
         int todayYear = toDay.get(Calendar.YEAR);
         for (int year = todayYear; year >= 2000; year--) {
             for (int month = 12; month >= 1; month--) {
-                for (int day = daysInMonth(year, month); day >=1 ; day--) {
+                for (int day = daysInMonth(year, month); day >= 1; day--) {
                     StringBuilder date = new StringBuilder();
                     date.append(String.format("%04d", year));
                     date.append("-");
@@ -112,8 +112,11 @@ public class OAIHarvester {
                         String filename = ((String) pairsIdTei.getKey()) + ".tei.xml";
                         System.out.println("\t\t Extracting tei.... for " + ((String) pairsIdTei.getKey()));
                         StringBuilder tei = (StringBuilder) pairsIdTei.getValue();
-                        String formatedTei = xmlFormatter.format(tei.toString());
-                        mongoManager.storeToGridfs(new ByteArrayInputStream(formatedTei.getBytes()), filename, teisNamespace);
+                        if (tei.length() > 0) {
+                            String formatedTei = xmlFormatter.format(tei.toString());
+                            mongoManager.storeToGridfs(new ByteArrayInputStream(formatedTei.getBytes()), filename, teisNamespace);
+                        } else
+                            System.out.println("\t\t\t Tei not found !!!");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
