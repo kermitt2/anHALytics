@@ -67,13 +67,29 @@
         </plugins>		
     </build>
         
-    <dependencies>	
+    <dependencies>
+        <dependency>
+            <groupId>fr.limsi.wapiti</groupId>
+            <artifactId>wapiti</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cybozu</groupId>
+            <artifactId>language-detection</artifactId>
+            <version>09-13-2011</version>
+        </dependency>
+        <dependency>
+            <groupId>net.arnx</groupId>
+            <artifactId>jsonic</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+                	
         <dependency>
             <groupId>org.grobid.core</groupId>
             <artifactId>grobid</artifactId>
-            <version>0.2.10</version>
+            <version>0.3.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/grobid-core-0.2.10.jar</systemPath>
+            <systemPath>${project.basedir}/lib/grobid-core-0.3.0.jar</systemPath>
         </dependency>
         
         <dependency>
