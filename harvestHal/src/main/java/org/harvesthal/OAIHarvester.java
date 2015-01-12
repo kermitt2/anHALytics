@@ -27,8 +27,10 @@ public class OAIHarvester {
     static {
         Calendar toDay = Calendar.getInstance();
         int todayYear = toDay.get(Calendar.YEAR);
+        int todayMonth = toDay.get(Calendar.MONTH) + 1;
         for (int year = todayYear; year >= 2000; year--) {
-            for (int month = 12; month >= 1; month--) {
+            int monthYear = (year == todayYear) ? todayMonth : 12 ;
+            for (int month = monthYear; month >= 1; month--) {
                 for (int day = daysInMonth(year, month); day >= 1; day--) {
                     StringBuilder date = new StringBuilder();
                     date.append(String.format("%04d", year));
