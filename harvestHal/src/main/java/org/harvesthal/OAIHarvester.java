@@ -3,6 +3,7 @@ package org.harvesthal;
 import java.io.*;
 import java.net.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
@@ -29,7 +30,7 @@ public class OAIHarvester {
         int todayYear = toDay.get(Calendar.YEAR);
         int todayMonth = toDay.get(Calendar.MONTH) + 1;
         for (int year = todayYear; year >= 2000; year--) {
-            int monthYear = (year == todayYear) ? todayMonth : 12 ;
+            int monthYear = (year == todayYear) ? todayMonth : 12;
             for (int month = monthYear; month >= 1; month--) {
                 for (int day = daysInMonth(year, month); day >= 1; day--) {
                     StringBuilder date = new StringBuilder();
@@ -75,7 +76,7 @@ public class OAIHarvester {
         tmpPath = prop.getProperty("harvestHal.tmpPath");
     }
 
-    public void harvestHALForDate(String date) throws IOException, SAXException, ParserConfigurationException {
+    public void harvestHALForDate(String date) throws IOException, SAXException, ParserConfigurationException, ParseException {
         for (String field : fields) {
             boolean stop = false;
             String tokenn = null;
@@ -87,7 +88,6 @@ public class OAIHarvester {
                 }
 
                 String fileName = "oai-inria-" + field + "-" + loop + ".xml";
-                String namespace = "HAL." + date;
 
                 System.out.println("Sending: " + request);
 
@@ -95,7 +95,7 @@ public class OAIHarvester {
                 ArrayList<InputStream> ins = cloneInputStream(in, 2);
                 in.close();
 
-                mongoManager.storeToGridfs(ins.get(0), fileName, namespace);
+                mongoManager.storeToGridfs(ins.get(0), fileName, MongoManager.OAI_NAMESPACE, date);
                 ins.get(0).close();
 
                 OAISaxParser oaisax = parse(ins.get(1));
@@ -104,17 +104,37 @@ public class OAIHarvester {
                 //teis
                 System.out.println("\t Extracting teis.... for " + date);
                 Map<String, StringBuilder> teis = oaisax.getTeis();
-                String teisNamespace = namespace + ".tei";
+                Map<String, String> urls = oaisax.getBinaryUrls();
                 Iterator it1 = teis.entrySet().iterator();
                 while (it1.hasNext()) {
                     Map.Entry pairsIdTei = (Map.Entry) it1.next();
+                    String id = (String) pairsIdTei.getKey();
                     try {
-                        String filename = ((String) pairsIdTei.getKey()) + ".tei.xml";
-                        System.out.println("\t\t Extracting tei.... for " + ((String) pairsIdTei.getKey()));
+                        String teiFilename = id + ".tei.xml";
+                        System.out.println("\t\t Extracting tei.... for " + id);
                         StringBuilder tei = (StringBuilder) pairsIdTei.getValue();
                         if (tei.length() > 0) {
                             String formatedTei = xmlFormatter.format(tei.toString());
-                            mongoManager.storeToGridfs(new ByteArrayInputStream(formatedTei.getBytes()), filename, teisNamespace);
+                            mongoManager.storeToGridfs(new ByteArrayInputStream(formatedTei.getBytes()), teiFilename, MongoManager.OAI_TEI_NAMESPACE, date);
+
+                            //binary processing.
+                            if (urls.containsKey(id)) {
+                                String binaryUrl = urls.get(id);
+                                System.out.println("\t\t\t Downloading: " + binaryUrl);
+                                InputStream inBinary = new BufferedInputStream(request(binaryUrl));
+                                String tmpFilePath = storeTmpFile(inBinary);
+                                inBinary.close();
+                                
+                                System.out.println("\t\t\t Grobid processing...");
+                                String grobidTei = getTeiFromBinary(tmpFilePath);
+                                InputStream inTeiGrobid = new ByteArrayInputStream(grobidTei.getBytes());
+                                mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, date);
+                                //mongoManager.storeToGridfs(tmpFilePath, (String) pairsIdTei.getKey() + ".pdf", MongoManager.BINARY_NAMESPACE, date);
+                                inTeiGrobid.close();
+
+                            } else {
+                                System.out.println("\t\t\t PDF not found !");
+                            }
                         } else {
                             System.out.println("\t\t\t Tei not found !!!");
                         }
@@ -123,37 +143,7 @@ public class OAIHarvester {
                     }
                 }
 
-                //binaries
-                Map<String, String> urls = oaisax.getBinaryUrls();
-                System.out.println("\t Downloading binaries.... for " + date);
-
-                String binariesNamespace = namespace + ".documents";
-                Iterator it2 = urls.entrySet().iterator();
-                InputStream inTeiGrobid = null;
-                InputStream inBinary = null;
-                while (it2.hasNext()) {
-                    Map.Entry pairs = (Map.Entry) it2.next();
-                    try {
-                        String filename = (String) pairs.getKey();
-                        String binaryUrl = (String) pairs.getValue();
-
-                        inBinary = new BufferedInputStream(request(binaryUrl));
-
-                        System.out.println("\t\t Downloading: " + binaryUrl);//identifier + " as " + file.toString());
-                        String tmpFilePath = storeTmpFile(inBinary);
-                        inBinary.close();
-
-                        String tei = getTeiFromBinary(tmpFilePath);
-
-                        inTeiGrobid = new ByteArrayInputStream(tei.getBytes());
-                        mongoManager.storeToGridfs(inTeiGrobid, filename + ".tei.xml", binariesNamespace);
-                        mongoManager.storeToGridfs(tmpFilePath, filename + ".pdf", binariesNamespace);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
                 // token if any:
-
                 tokenn = oaisax.token;
                 if (tokenn == null) {
                     stop = true;
@@ -167,7 +157,7 @@ public class OAIHarvester {
     /**
      * Harvesting of all HAL repository
      */
-    public void harvestAllHAL() throws IOException, SAXException, ParserConfigurationException {
+    public void harvestAllHAL() throws IOException, SAXException, ParserConfigurationException, ParseException {
 
         for (String date : dates) {
             harvestHALForDate(date);
@@ -254,7 +244,7 @@ public class OAIHarvester {
     }
 
     public static void main(String[] args)
-            throws IOException, SAXException, ParserConfigurationException {
+            throws IOException, SAXException, ParserConfigurationException, ParseException {
         if (args.length < 1) {
             System.err.println("usage: command process[harvestDaily | harvestAll]");
             return;
