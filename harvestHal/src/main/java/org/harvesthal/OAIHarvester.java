@@ -53,18 +53,6 @@ public class OAIHarvester {
         fields = new ArrayList<String>();
         affiliations = new ArrayList<String>();
 
-        // we store the main HAL scientific fields for a basic organization 
-        //fields.add("CHIM"); 
-        //fields.add("SCCO"); 
-        fields.add("info"); // info
-        //fields.add("SPI"); 
-        //fields.add("SDV"); // life science
-        //fields.add("MATH"); 
-        //fields.add("NLIN"); 
-        //fields.add("QFIN"); 
-        //fields.add("STAT");
-        //fields.add("phys"); // physique
-
         affiliations.add("INRIA");
 
         Properties prop = new Properties();
@@ -77,79 +65,78 @@ public class OAIHarvester {
     }
 
     public void harvestHALForDate(String date) throws IOException, SAXException, ParserConfigurationException, ParseException {
-        for (String field : fields) {
-            boolean stop = false;
-            String tokenn = null;
-            int loop = 0;
-            while (!stop) {
-                String request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&set=subject:" + field + "&set=collection:" + affiliations.get(0) + "&from=" + date + "&until=" + date;
-                if (tokenn != null) {
-                    request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&resumptionToken=" + tokenn;
-                }
+        boolean stop = false;
+        String tokenn = null;
+        int loop = 0;
+        while (!stop) {
+            //String request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&set=subject:" + field + "&set=collection:" + affiliations.get(0) + "&from=" + date + "&until=" + date;
+            String request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&set=collection:" + affiliations.get(0) + "&from=" + date + "&until=" + date;
 
-                String fileName = "oai-inria-" + field + "-" + loop + ".xml";
+            if (tokenn != null) {
+                request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&resumptionToken=" + tokenn;
+            }
+            String fileName = "oai-inria-" + loop + ".xml";
 
-                System.out.println("Sending: " + request);
+            System.out.println("Sending: " + request);
 
-                InputStream in = request(request);
-                ArrayList<InputStream> ins = cloneInputStream(in, 2);
-                in.close();
+            InputStream in = request(request);
+            ArrayList<InputStream> ins = cloneInputStream(in, 2);
+            in.close();
 
-                mongoManager.storeToGridfs(ins.get(0), fileName, MongoManager.OAI_NAMESPACE, date);
-                ins.get(0).close();
+            mongoManager.storeToGridfs(ins.get(0), fileName, MongoManager.OAI_NAMESPACE, date);
+            ins.get(0).close();
 
-                OAISaxParser oaisax = parse(ins.get(1));
-                ins.get(1).close();
+            OAISaxParser oaisax = parse(ins.get(1));
+            ins.get(1).close();
 
-                //teis
-                System.out.println("\t Extracting teis.... for " + date);
-                Map<String, StringBuilder> teis = oaisax.getTeis();
-                Map<String, String> urls = oaisax.getBinaryUrls();
-                Iterator it1 = teis.entrySet().iterator();
-                while (it1.hasNext()) {
-                    Map.Entry pairsIdTei = (Map.Entry) it1.next();
-                    String id = (String) pairsIdTei.getKey();
-                    try {
-                        String teiFilename = id + ".tei.xml";
-                        System.out.println("\t\t Extracting tei.... for " + id);
-                        StringBuilder tei = (StringBuilder) pairsIdTei.getValue();
-                        if (tei.length() > 0) {
-                            String formatedTei = xmlFormatter.format(tei.toString());
-                            mongoManager.storeToGridfs(new ByteArrayInputStream(formatedTei.getBytes()), teiFilename, MongoManager.OAI_TEI_NAMESPACE, date);
+            //teis
+            System.out.println("\t Extracting teis.... for " + date);
+            Map<String, StringBuilder> teis = oaisax.getTeis();
+            Map<String, String> urls = oaisax.getBinaryUrls();
+            Iterator it1 = teis.entrySet().iterator();
+            while (it1.hasNext()) {
+                Map.Entry pairsIdTei = (Map.Entry) it1.next();
+                String id = (String) pairsIdTei.getKey();
+                try {
+                    String teiFilename = id + ".tei.xml";
+                    System.out.println("\t\t Extracting tei.... for " + id);
+                    StringBuilder tei = (StringBuilder) pairsIdTei.getValue();
+                    if (tei.length() > 0) {
+                        String formatedTei = xmlFormatter.format(tei.toString());
+                        mongoManager.storeToGridfs(new ByteArrayInputStream(formatedTei.getBytes()), teiFilename, MongoManager.OAI_TEI_NAMESPACE, date);
 
-                            //binary processing.
-                            if (urls.containsKey(id)) {
-                                String binaryUrl = urls.get(id);
-                                System.out.println("\t\t\t Downloading: " + binaryUrl);
-                                InputStream inBinary = new BufferedInputStream(request(binaryUrl));
-                                String tmpFilePath = storeTmpFile(inBinary);
-                                inBinary.close();
-                                
-                                System.out.println("\t\t\t Grobid processing...");
-                                String grobidTei = getTeiFromBinary(tmpFilePath);
-                                InputStream inTeiGrobid = new ByteArrayInputStream(grobidTei.getBytes());
-                                mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, date);
-                                //mongoManager.storeToGridfs(tmpFilePath, (String) pairsIdTei.getKey() + ".pdf", MongoManager.BINARY_NAMESPACE, date);
-                                inTeiGrobid.close();
+                        //binary processing.
+                        if (urls.containsKey(id)) {
+                            String binaryUrl = urls.get(id);
+                            System.out.println("\t\t\t Downloading: " + binaryUrl);
+                            InputStream inBinary = new BufferedInputStream(request(binaryUrl));
+                            String tmpFilePath = storeTmpFile(inBinary);
+                            inBinary.close();
 
-                            } else {
-                                System.out.println("\t\t\t PDF not found !");
-                            }
+                            System.out.println("\t\t\t Grobid processing...");
+                            String grobidTei = getTeiFromBinary(tmpFilePath);
+                            InputStream inTeiGrobid = new ByteArrayInputStream(grobidTei.getBytes());
+                            mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, date);
+                            //mongoManager.storeToGridfs(tmpFilePath, (String) pairsIdTei.getKey() + ".pdf", MongoManager.BINARY_NAMESPACE, date);
+                            inTeiGrobid.close();
+
                         } else {
-                            System.out.println("\t\t\t Tei not found !!!");
+                            System.out.println("\t\t\t PDF not found !");
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } else {
+                        System.out.println("\t\t\t Tei not found !!!");
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+            }
 
-                // token if any:
-                tokenn = oaisax.token;
-                if (tokenn == null) {
-                    stop = true;
-                } else {
-                    loop++;
-                }
+            // token if any:
+            tokenn = oaisax.token;
+            if (tokenn == null) {
+                stop = true;
+            } else {
+                loop++;
             }
         }
     }
@@ -245,25 +232,36 @@ public class OAIHarvester {
 
     public static void main(String[] args)
             throws IOException, SAXException, ParserConfigurationException, ParseException {
-        if (args.length < 1) {
-            System.err.println("usage: command process[harvestDaily | harvestAll]");
-            return;
-        }
         OAIHarvester oai = new OAIHarvester();
-        String process = args[0];
-        if (process.equals("harvestAll")) {
-            if (askConfirm()) {
-                oai.harvestAllHAL();
-            } else {
-                return;
-            }
-        } else if (process.equals("harvestDaily")) {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = new Date();
-            oai.harvestHALForDate(dateFormat.format(date));
+        if (args.length == 0) {
+            System.out.println(getHelp());
         } else {
-            System.err.println("unknown process: " + process);
-            return;
+            String currArg;
+            for (int i = 0; i < args.length; i++) {
+                currArg = args[i];
+                if (currArg.equals("-h")) {
+                    System.out.println(getHelp());
+                    break;
+                }
+                if (currArg.equals("-exe")) {
+                    final String process = args[i + 1];
+                    if (process.equals("harvestAll")) {
+                        if (askConfirm()) {
+                            oai.harvestAllHAL();
+                        } else {
+                            return;
+                        }
+                    } else if (process.equals("harvestDaily")) {
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date = new Date();
+                        oai.harvestHALForDate(dateFormat.format(date));
+                    } else {
+                        System.err.println("-exe value should be one value from [harvestDaily | harvestAll] ");
+                        break;
+                    }
+
+                }
+            }
         }
     }
 
@@ -288,6 +286,14 @@ public class OAIHarvester {
                 break;
         }
         return yn;
+    }
+
+    protected static String getHelp() {
+        final StringBuffer help = new StringBuffer();
+        help.append("HELP HAL_OAI_HARVESTER\n");
+        help.append("-h: displays help\n");
+        help.append("-exe: gives the command to execute. The value should be one of these : [harvestDaily | harvestAll]\n");
+        return help.toString();
     }
 
     private static int daysInMonth(int year, int month) {

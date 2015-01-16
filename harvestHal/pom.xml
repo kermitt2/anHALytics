@@ -5,7 +5,7 @@
     <artifactId>harvestHal</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-	
+    
     <contributors>
         <contributor>
             <name>Achraf Azhar</name>
@@ -14,7 +14,14 @@
             </roles>
         </contributor>
     </contributors>
-        
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+    
+    
+    
     <repositories>
         <repository>
             <id>3rd-party-local-repo</id>
@@ -22,8 +29,14 @@
             <url>file:///${basedir}/lib/</url>
             <layout>default</layout>
         </repository>
+        <repository>
+            <id>maven2-repository.dev.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/2/</url>
+            <layout>default</layout>
+        </repository>
     </repositories>
-                
+        
     <build>
         <resources>
             <resource>
@@ -38,8 +51,30 @@
                 </includes>
             </resource>
         </resources>
-                                
-        <plugins>                   
+        
+        <plugins>
+            <plugin>
+                <groupId>com.jolira</groupId>
+                <artifactId>onejar-maven-plugin</artifactId>
+                <version>1.4.4</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>org.harvesthal.OAIHarvester</mainClass>
+                            <!-- Optional -->
+                            <onejarVersion>0.97</onejarVersion>
+                            <!-- Optional, default is false -->
+                            <attachToBuild>true</attachToBuild>
+                            <!-- Optional, default is "onejar" -->
+                            <classifier>onejar</classifier>
+                        </configuration>
+                        <goals>
+                            <goal>one-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+                    
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -56,7 +91,7 @@
                 <version>2.12.4</version>
                 <configuration>
                     <forkMode>pertest</forkMode>
-                    <argLine>-Xms64m -Xmx256m</argLine>
+                    <argLine>-Xms256m -Xmx1024m</argLine>
                     <testFailureIgnore>false</testFailureIgnore>
                     <skip>false</skip>
                     <systemPropertyVariables>
@@ -64,7 +99,8 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
-        </plugins>		
+        </plugins>
+        
     </build>
         
     <dependencies>
@@ -83,7 +119,7 @@
             <artifactId>jsonic</artifactId>
             <version>1.3.5</version>
         </dependency>
-                	
+
         <dependency>
             <groupId>org.grobid.core</groupId>
             <artifactId>grobid</artifactId>
@@ -91,56 +127,56 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/grobid-core-0.3.0.jar</systemPath>
         </dependency>
-        
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>16.0.1</version>
         </dependency>
-		
+
         <dependency>
             <groupId>directory-naming</groupId>
             <artifactId>naming-java</artifactId>
             <version>0.8</version>
         </dependency>
-		
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.0.1</version>
         </dependency>
-		
+
         <dependency>
             <groupId>org.chasen</groupId>
             <artifactId>crfpp</artifactId>
             <version>1.0.2</version>
             <scope>compile</scope>
         </dependency>
-		
+
         <dependency>
             <groupId>com.aliasi</groupId>
             <artifactId>lingpipe</artifactId>
             <version>3.8.2</version>
         </dependency>
-		
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.0.1</version>
         </dependency>
-		
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.6.6</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.6.6</version>
         </dependency>
-        
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -153,50 +189,4 @@
             <version>2.10.1</version>
         </dependency>
     </dependencies>
-               
-    <profiles>
-        <profile>
-            <id>harvestAll</id>
-            <activation>
-                <property>
-                    <name>harvestAll</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>	
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <commandlineArgs>-classpath %classpath org.harvesthal.OAIHarvester harvestAll</commandlineArgs>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        
-        <profile>
-            <id>harvestDaily</id>
-            <activation>
-                <property>
-                    <name>harvestDaily</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>	
-                        <configuration>
-                            <executable>java</executable>
-                            <classpathScope>compile</classpathScope>
-                            <commandlineArgs>-classpath %classpath org.harvesthal.OAIHarvester harvestDaily</commandlineArgs>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
