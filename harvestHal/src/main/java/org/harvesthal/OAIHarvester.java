@@ -5,13 +5,15 @@ import java.net.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.*;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.*;
 
+
 public class OAIHarvester {
+	
+	private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
 
     private ArrayList<String> fields = null;
     private ArrayList<String> affiliations = null;
@@ -21,6 +23,10 @@ public class OAIHarvester {
 
     private static int nullBinaries = 0;
     private static String tmpPath = null;
+
+	public enum Decision {
+	    yes, no
+	}
 
     private static Set<String> dates = new LinkedHashSet<String>();
 
@@ -168,7 +174,8 @@ public class OAIHarvester {
      * Harvesting of all HAL repository
      */
     public void harvestAllHAL() throws IOException, SAXException, ParserConfigurationException {
-
+		logger.info("harvesting all HAL...");
+		
         for (String date : dates) {
             harvestHALForDate(date);
         }
@@ -286,11 +293,11 @@ public class OAIHarvester {
         System.out.println("Are you sur you want to start harvesting all hal documents ? [yes]");
         decision = kbd.nextLine();
 
-        switch (decision) {
-            case "yes":
+        switch (Decision.valueOf(decision)) {
+            case yes:
                 break;
 
-            case "no":
+            case no:
                 yn = false;
                 break;
 

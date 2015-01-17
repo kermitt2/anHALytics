@@ -37,6 +37,10 @@ public class OAISaxParser extends DefaultHandler {
 
     public int processedPDF = 0;
 
+	public enum QNames {
+	    record, error, identifier, datestamp, setSpec, ListRecords, responseDate, request, header, OAIPMH, metadata, resumptionToken
+	}
+
     public OAISaxParser() {
     }
 
@@ -63,46 +67,48 @@ public class OAISaxParser extends DefaultHandler {
 
     @Override
     public void endElement(java.lang.String uri, java.lang.String localName, java.lang.String qName) throws SAXException {
-        switch (qName) {
-            case "record":
+		if (qName.equals("OAI-PMH"))
+			qName = "OAIPMH";
+        switch (QNames.valueOf(qName)) {
+            case record:
                 counter++;
                 teis.put(identifier, tei);
                 accumulator.setLength(0);
                 break;
-            case "error":
+            case error:
                 accumulator.setLength(0);
                 break;
-            case "identifier":
+            case identifier:
                 identifier = getText();
                 accumulator.setLength(0);
                 break;
-            case "datestamp":
+            case datestamp:
                 submission_date = getText();
                 accumulator.setLength(0);
                 break;
-            case "setSpec":
+            case setSpec:
                 setSpec = getText();
                 accumulator.setLength(0);
                 break;
-            case "ListRecords":
+            case ListRecords:
                 accumulator.setLength(0);
                 break;
-            case "responseDate":
+            case responseDate:
                 accumulator.setLength(0);
                 break;
-            case "request":
+            case request:
                 accumulator.setLength(0);
                 break;
-            case "header":
+            case header:
                 accumulator.setLength(0);
                 break;
-            case "OAI-PMH":
+            case OAIPMH:
                 accumulator.setLength(0);
                 break;
-            case "metadata":
+            case metadata:
                 accumulator.setLength(0);
                 break;
-            case "resumptionToken":
+            case resumptionToken:
                 // for OAI implementation
                 token = getText();
                 if (token != null) {
@@ -115,6 +121,8 @@ public class OAISaxParser extends DefaultHandler {
             default:
                 String text = getText();
                 tei.append(text);
+				if (qName.equals("OAIPMH"))
+					qName = "OAI-PMH";
                 tei.append("</").append(qName.split(":")[1]).append(">\n");
                 accumulator.setLength(0);
                 break;
@@ -123,51 +131,55 @@ public class OAISaxParser extends DefaultHandler {
 
     @Override
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
-        switch (qName) {
-            case "ListRecords": {
+		if (qName.equals("OAI-PMH"))
+			qName = "OAIPMH";
+        switch (QNames.valueOf(qName)) {
+            case ListRecords: {
                 token = null;
                 teis = new HashMap<String, StringBuilder>();
                 binaryUrls = new HashMap<String, String>();
                 accumulator.setLength(0);
                 break;
             }
-            case "responseDate":
+            case responseDate:
                 accumulator.setLength(0);
                 break;
-            case "request":
+            case request:
                 accumulator.setLength(0);
                 break;
-            case "error":
+            case error:
                 accumulator.setLength(0);
                 break;
-            case "record":
+            case record:
                 tei = new StringBuilder();
                 accumulator.setLength(0);
                 break;
-            case "header":
+            case header:
                 accumulator.setLength(0);
                 break;
-            case "setSpec":
+            case setSpec:
                 collections = new ArrayList<String>();
                 accumulator.setLength(0);
                 break;
-            case "identifier":
+            case identifier:
                 identifier = getText();
                 accumulator.setLength(0);
                 break;
-            case "datestamp":
+            case datestamp:
                 accumulator.setLength(0);
                 break;
-            case "OAI-PMH":
+            case OAIPMH:
                 accumulator.setLength(0);
                 break;
-            case "resumptionToken":
+            case resumptionToken:
                 accumulator.setLength(0);
                 break;
-            case "metadata":
+            case metadata:
                 accumulator.setLength(0);
                 break;
             default: {
+				if (qName.equals("OAIPMH"))
+					qName = "OAI-PMH";
                 if (qName.contains("TEI")) {
                     tei.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
                     tei.append("<TEI xmlns=\"http://www.tei-c.org/ns/1.0\" xmlns:hal=\"http://hal.archives-ouvertes.fr/\" > \n");
