@@ -1,0 +1,5 @@
+
+*.log
+harvestHAL/target
+harvestHAL/target/*
+harvestHAL/*.patrice
