@@ -10,37 +10,42 @@ import java.util.Properties;
 import java.io.FileInputStream;
 
 public class Grobid {
+
     private static Engine engine;
 
-    //synchronized to avoid : javax.naming.NameAlreadyBoundException: Name java: is already bound in this Context !
-    synchronized public static String runGrobid(String pdfPath) {
-        String tei = null;
+    public Grobid() {
         try {
             Properties prop = new Properties();
             prop.load(new FileInputStream("harvestHal.properties"));
             String pGrobidHome = prop.getProperty("harvestHal.pGrobidHome");
             String pGrobidProperties = prop.getProperty("harvestHal.pGrobidProperties");
 
-            MockContext.setInitialContext(pGrobidHome, pGrobidProperties);		
+            MockContext.setInitialContext(pGrobidHome, pGrobidProperties);
             GrobidProperties.getInstance();
 
             engine = GrobidFactory.getInstance().createEngine();
-
-            tei = engine.fullTextToTEI(pdfPath, false, false);
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             // If an exception is generated, print a stack trace
             e.printStackTrace();
-        } 
-        finally {
+        } finally {
             try {
-                    MockContext.destroyInitialContext();
-            } 
-            catch (Exception e) {
-                    e.printStackTrace();
+                MockContext.destroyInitialContext();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+        }
+    }
+
+    public String runGrobid(String pdfPath) {
+        String tei = null;
+        try {
+            BiblioItem resHeader = new BiblioItem();
+            tei = engine.processHeader(pdfPath, false, resHeader);
+        } catch (Exception e) {
+            // If an exception is generated, print a stack trace
+            e.printStackTrace();
         }
         return tei;
     }
-	
+
 }
