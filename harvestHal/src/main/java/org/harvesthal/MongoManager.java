@@ -1,16 +1,14 @@
 package org.harvesthal;
 
+import com.mongodb.MongoClient;
 import com.mongodb.DB;
-import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.mongodb.gridfs.GridFS;
-import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,20 +24,20 @@ public class MongoManager {
     public static final String GROBID_NAMESPACE = "teigrobidnamespaces";
 
     public static String filePath = "";
-    public String mongodbServer = "";
-    public int mongodbPort;
-    public String mongodbDb = "";
     public DB db = null;
 
     public MongoManager() {
         try {
             Properties prop = new Properties();
             prop.load(new FileInputStream("harvestHal.properties"));
-            mongodbServer = prop.getProperty("harvestHal.mongodbServer");
-            mongodbPort = Integer.parseInt(prop.getProperty("harvestHal.mongodbPort"));
-            mongodbDb = prop.getProperty("harvestHal.mongodbDb");
-            Mongo mongo = new Mongo(mongodbServer, mongodbPort);
+            String mongodbServer  = prop.getProperty("harvestHal.mongodbServer");
+            int mongodbPort = Integer.parseInt(prop.getProperty("harvestHal.mongodbPort"));
+            String mongodbDb = prop.getProperty("harvestHal.mongodbDb");
+            String mongodbUser = prop.getProperty("harvestHal.mongodbUser");
+            String mongodbPass = prop.getProperty("harvestHal.mongodbPass");
+            MongoClient mongo = new MongoClient(mongodbServer, mongodbPort);
             db = mongo.getDB(mongodbDb);
+            boolean auth = db.authenticate(mongodbUser, mongodbPass.toCharArray());
         } catch (IOException e) {
             e.printStackTrace();
         }
