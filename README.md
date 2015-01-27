@@ -1,6 +1,6 @@
-# Anhalytics
+# AnHALytics
 
-### Harvesting
+### 1-Harvesting
 #### Build/Run
 In the main directory(harvestHal):
 
