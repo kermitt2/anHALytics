@@ -14,14 +14,15 @@ import org.xml.sax.*;
 
 public class OAIHarvester {
 	
-	private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
+   private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
 
     private ArrayList<String> fields = null;
     private ArrayList<String> affiliations = null;
 
     private final MongoManager mongoManager;
     private final XmlFormatter xmlFormatter;
-
+    private Grobid grobidProcess = null;
+    
     private static int nullBinaries = 0;
     private static String tmpPath = null;
 
@@ -49,13 +50,16 @@ public class OAIHarvester {
                 }
             }
         }
+        
+        
     }
 
     public OAIHarvester() {
 
         mongoManager = new MongoManager();
         xmlFormatter = new XmlFormatter();
-
+        grobidProcess = new Grobid();
+        
         fields = new ArrayList<String>();
         affiliations = new ArrayList<String>();
 
@@ -76,27 +80,25 @@ public class OAIHarvester {
         int loop = 0;
         while (!stop) {
             //String request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&set=subject:" + field + "&set=collection:" + affiliations.get(0) + "&from=" + date + "&until=" + date;
-            String request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&set=collection:" + affiliations.get(0) + "&from=" + date + "&until=" + date;
+            String request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&from=" + date + "&until=" + date;
 
             if (tokenn != null) {
                 request = "http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&resumptionToken=" + tokenn;
             }
             String fileName = "oai-inria-" + loop + ".xml";
 
-            System.out.println("Sending: " + request);
+            logger.debug("Sending: " + request);
 
             InputStream in = request(request);
-            ArrayList<InputStream> ins = cloneInputStream(in, 2);
-            in.close();
+            String tmpXmlPath = storeToTmpXmlFile(in);
+            File xmlFile = new File(tmpXmlPath);
 
-            mongoManager.storeToGridfs(ins.get(0), fileName, MongoManager.OAI_NAMESPACE, date);
-            ins.get(0).close();
+            //mongoManager.storeToGridfs(tmpXmlPath, fileName, MongoManager.OAI_NAMESPACE, date);
 
-            OAISaxParser oaisax = parse(ins.get(1));
-            ins.get(1).close();
+            OAISaxParser oaisax = parse(xmlFile);
 
             //teis
-            System.out.println("\t Extracting teis.... for " + date);
+            logger.debug("\t Extracting teis.... for " + date);
             Map<String, StringBuilder> teis = oaisax.getTeis();
             Map<String, String> urls = oaisax.getBinaryUrls();
             Iterator it1 = teis.entrySet().iterator();
@@ -105,32 +107,33 @@ public class OAIHarvester {
                 String id = (String) pairsIdTei.getKey();
                 try {
                     String teiFilename = id + ".tei.xml";
-                    System.out.println("\t\t Extracting tei.... for " + id);
+                    logger.debug("\t\t Extracting tei.... for " + id);
                     StringBuilder tei = (StringBuilder) pairsIdTei.getValue();
                     if (tei.length() > 0) {
                         String formatedTei = xmlFormatter.format(tei.toString());
+                        logger.debug("\t\t\t\t Storing tei : "+id); 
                         mongoManager.storeToGridfs(new ByteArrayInputStream(formatedTei.getBytes()), teiFilename, MongoManager.OAI_TEI_NAMESPACE, date);
 
                         //binary processing.
                         if (urls.containsKey(id)) {
                             String binaryUrl = urls.get(id);
-                            System.out.println("\t\t\t Downloading: " + binaryUrl);
+                            logger.debug("\t\t\t Downloading: " + binaryUrl);
                             InputStream inBinary = new BufferedInputStream(request(binaryUrl));
                             String tmpFilePath = storeTmpFile(inBinary);
+                            System.out.println((String) pairsIdTei.getKey() + ".pdf");
+                            mongoManager.storeToGridfs(tmpFilePath, (String) pairsIdTei.getKey() + ".pdf", MongoManager.BINARY_NAMESPACE, date);
                             inBinary.close();
 
-                            System.out.println("\t\t\t Grobid processing...");
+                            logger.debug("\t\t\t Grobid processing...");
                             String grobidTei = getTeiFromBinary(tmpFilePath);
                             InputStream inTeiGrobid = new ByteArrayInputStream(grobidTei.getBytes());
-                            mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, date);
-                            //mongoManager.storeToGridfs(tmpFilePath, (String) pairsIdTei.getKey() + ".pdf", MongoManager.BINARY_NAMESPACE, date);
+                            mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, date);                  
                             inTeiGrobid.close();
-
                         } else {
-                            System.out.println("\t\t\t PDF not found !");
+                            logger.debug("\t\t\t PDF not found !");
                         }
                     } else {
-                        System.out.println("\t\t\t Tei not found !!!");
+                        logger.debug("\t\t\t Tei not found !!!");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -173,8 +176,8 @@ public class OAIHarvester {
         }
     }
 
-    public static String getTeiFromBinary(String filePath) throws IOException {
-        String tei = Grobid.runGrobid(filePath);
+    public String getTeiFromBinary(String filePath) throws IOException {
+        String tei = grobidProcess.runGrobid(filePath);
         return tei;
     }
 
@@ -186,14 +189,23 @@ public class OAIHarvester {
         getBinaryURLContent(f, inBinary);
         return filePath;
     }
+    
+    public static String storeToTmpXmlFile(InputStream inBinary) throws IOException {
+        File f = File.createTempFile("tmp", ".xml", new File(tmpPath));
+        // deletes file when the virtual machine terminate
+        f.deleteOnExit();
+        String filePath = f.getAbsolutePath();
+        getBinaryURLContent(f, inBinary);
+        return filePath;
+    }
 
-    private static OAISaxParser parse(InputStream is) throws IOException, SAXException, ParserConfigurationException {
+    private static OAISaxParser parse(File file) throws IOException, SAXException, ParserConfigurationException {
         OAISaxParser oaisax = new OAISaxParser();
         SAXParserFactory spf = SAXParserFactory.newInstance();
         spf.setNamespaceAware(true);
         //get a new instance of parser
         SAXParser parser = spf.newSAXParser();
-        parser.parse(is, oaisax);
+        parser.parse(file, oaisax);
         return oaisax;
     }
 
@@ -224,6 +236,7 @@ public class OAIHarvester {
             URLConnection conn = url.openConnection();
             if (request.endsWith("document") && !conn.getContentType().equals("application/pdf")) {
                 nullBinaries++;
+                logger.debug("\t\t\t Cannot download pdf file, because input file is null.");
                 throw new BinaryNotAvailableException("Cannot download pdf file, because input file is null.");
             }
             in = conn.getInputStream();
@@ -251,11 +264,11 @@ public class OAIHarvester {
                 if (currArg.equals("-exe")) {
                     final String process = args[i + 1];
                     if (process.equals("harvestAll")) {
-                        if (askConfirm()) {
+//                        if (askConfirm()) {
                             oai.harvestAllHAL();
-                        } else {
-                            return;
-                        }
+  //                      } else {
+   //                         return;
+    //                    }
                     } else if (process.equals("harvestDaily")) {
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         Date date = new Date();
