@@ -1,6 +1,6 @@
 # AnHALytics
 
-### 1-Harvesting
+### 1. Harvesting
 #### Build/Run
 In the main directory(harvestHal):
 
@@ -36,7 +36,7 @@ Each 'kind' of files are stored in a collection apart; hal tei => hal-tei-collec
 
 
 
-### 2-Indexing
+### 2. Indexing
 #### Build/Run
 In the main directory(indexHal):
 
@@ -45,7 +45,7 @@ In the main directory(indexHal):
 #### Index HAL collection in ElasticSearch
 
 
-### 3-Annotate
+### 3. Annotate
 #### Build/Run
 In the main directory(annotateHal):
 

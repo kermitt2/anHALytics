@@ -5,6 +5,7 @@ import com.mongodb.DB;
 import com.mongodb.MongoException;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSInputFile;
+import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.WriteConcern;
 import com.mongodb.DBCollection;
 import com.mongodb.BasicDBObject;
@@ -26,6 +27,8 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.Properties;
 
+import org.apache.commons.io.IOUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +36,7 @@ public class MongoManager {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MongoManager.class);
 
     public static final String BINARY_NAMESPACE = "binarynamespaces";
+	public static final String OAI_TEI_NAMESPACE = "oaiteis";
     public static final String TEI_NAMESPACE = "halheader_grobidbody"; // TBR
 
 	private String mongodbServer = null;
@@ -40,10 +44,10 @@ public class MongoManager {
 	
     private DB db = null;
 	private MongoClient mongo = null;
-	private DBCollection collectionTEI = null;
+	private GridFS gfs = null;
 	
-	private int nbRemainingDoc = 0;
-
+	private DBCursor curs;
+	
     public MongoManager() {
         try {
             Properties prop = new Properties();
@@ -71,40 +75,40 @@ public class MongoManager {
 			throw new Exception(e);
 		}
 		
-		// open the collection
+		// open the GridFS
 		try {
-			// collection
-			boolean collectionFound = false;
-			Set<String> collections = db.getCollectionNames();
-			for(String collection : collections) {
-				if (collection.equals(TEI_NAMESPACE)) {
-					collectionFound = true;
-				}
-			}
-			if (!collectionFound) {
-				LOGGER.debug("MongoDB collection for TEI documents does not exist");
-				return false;
-			}
-			collectionTEI = db.getCollection(TEI_NAMESPACE);
-		
-			// index on PageID
-			collectionTEI.ensureIndex(new BasicDBObject("filename", 1));  
+			gfs = new GridFS(db, OAI_TEI_NAMESPACE);
+			
+			// init the loop
+			curs = gfs.getFileList();
 		}
 		catch(Exception e) {
-			LOGGER.debug("Cannot retrieve MongoDB TEI doc collection.");
+			LOGGER.debug("Cannot retrieve MongoDB TEI doc GridFS.");
 			throw new Exception(e);
 		}
 		return true;
 	}
 
 	public boolean hasMoreDocuments() {
-		boolean result = false;
-		
-		return result;
+		return curs.hasNext();
 	}
 
 	public String next() {
 		String tei = null;
+		
+		try {
+			if (curs.hasNext()) {
+                GridFSDBFile teifile = (GridFSDBFile)curs.next();
+				InputStream input = teifile.getInputStream();
+				tei = IOUtils.toString(input, "UTF-8");
+            }
+		} 
+		catch (MongoException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return tei;
 	}
