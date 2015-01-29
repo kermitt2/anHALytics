@@ -40,7 +40,9 @@ public class Grobid {
     public String runFullTextGrobid(String pdfPath) {
         String tei = null;
         try {
-			tei = engine.fullTextToTEI(pdfPath, false, false, 1, -1);
+			tei = engine.fullTextToTEI(pdfPath, false, false, null, 1, -1);
+			// no consolidation (it would take too much time)
+			// document assets not saved
 			// startPage is 1 to skip the cover page
 			// endPage is -1, meaning end of the document 
         } catch (Exception e) {

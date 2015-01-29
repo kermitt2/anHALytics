@@ -3,3 +3,8 @@
 harvestHAL/target
 harvestHAL/target/*
 harvestHAL/*.patrice
+tempPdf/*
+*.old
+indexHAL/target
+indexHAL/target/*
+indexHAL/*.patrice

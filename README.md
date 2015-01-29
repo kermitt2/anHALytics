@@ -30,4 +30,32 @@ This command is supposed to run on daily basis :
 
 #### Storage
 We use mongoDb along with gridFS component for file support.
-Each 'kind' of files are stored in a collection apart; hal tei => hal-tei-collection , binaries => binaries-collection,..., other additional collections may be added (authors, institutions....)
+Each 'kind' of files are stored in a collection apart; hal tei => hal-tei-collection , binaries => binaries-collection,..., 
+
+<!-- other additional collections may be added (authors, institutions....) -->
+
+
+
+### 2-Indexing
+#### Build/Run
+In the main directory(indexHal):
+
+>mvn clean install
+
+#### Index HAL collection in ElasticSearch
+
+
+### 3-Annotate
+#### Build/Run
+In the main directory(annotateHal):
+
+>mvn clean install
+
+#### Annotate HAL collection
+
+
+#### Index annotations
+
+
+
+
