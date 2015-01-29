@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 public class Grobid {
 
     private static Engine engine;
+	
 
     public Grobid() {
         try {
@@ -36,10 +37,25 @@ public class Grobid {
         }
     }
 
-    public String runGrobid(String pdfPath) {
+    public String runFullTextGrobid(String pdfPath) {
         String tei = null;
         try {
-            BiblioItem resHeader = new BiblioItem();
+			tei = engine.fullTextToTEI(pdfPath, false, false, 1, -1);
+			// startPage is 1 to skip the cover page
+			// endPage is -1, meaning end of the document 
+        } catch (Exception e) {
+            // If an exception is generated, print a stack trace
+            e.printStackTrace();
+        }
+        return tei;
+    }
+
+    public String runHeaderGrobid(String pdfPath) {
+	   String tei = null;
+        try {
+			BiblioItem resHeader = new BiblioItem();
+			// startPage is 1 to skip the cover page
+			// endPage is -1, meaning end of the document 
             tei = engine.processHeader(pdfPath, false, resHeader);
         } catch (Exception e) {
             // If an exception is generated, print a stack trace
