@@ -11,10 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.*;
 
-
 public class OAIHarvester {
-	
-   private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
 
     private ArrayList<String> fields = null;
     private ArrayList<String> affiliations = null;
@@ -22,13 +21,14 @@ public class OAIHarvester {
     private final MongoManager mongoManager;
     private final XmlFormatter xmlFormatter;
     private Grobid grobidProcess = null;
-    
+
     private static int nullBinaries = 0;
     private static String tmpPath = null;
 
-	public enum Decision {
-	    yes, no
-	}
+    public enum Decision {
+
+        yes, no
+    }
 
     private static Set<String> dates = new LinkedHashSet<String>();
 
@@ -50,16 +50,14 @@ public class OAIHarvester {
                 }
             }
         }
-        
-        
+
     }
 
     public OAIHarvester() {
 
         mongoManager = new MongoManager();
         xmlFormatter = new XmlFormatter();
-        grobidProcess = new Grobid();
-        
+
         fields = new ArrayList<String>();
         affiliations = new ArrayList<String>();
 
@@ -94,7 +92,6 @@ public class OAIHarvester {
             File xmlFile = new File(tmpXmlPath);
 
             //mongoManager.storeToGridfs(tmpXmlPath, fileName, MongoManager.OAI_NAMESPACE, date);
-
             OAISaxParser oaisax = parse(xmlFile);
 
             //teis
@@ -111,7 +108,7 @@ public class OAIHarvester {
                     StringBuilder tei = (StringBuilder) pairsIdTei.getValue();
                     if (tei.length() > 0) {
                         String formatedTei = xmlFormatter.format(tei.toString());
-                        logger.debug("\t\t\t\t Storing tei : "+id); 
+                        logger.debug("\t\t\t\t Storing tei : " + id);
                         mongoManager.storeToGridfs(new ByteArrayInputStream(formatedTei.getBytes()), teiFilename, MongoManager.OAI_TEI_NAMESPACE, date);
 
                         //binary processing.
@@ -119,16 +116,17 @@ public class OAIHarvester {
                             String binaryUrl = urls.get(id);
                             logger.debug("\t\t\t Downloading: " + binaryUrl);
                             InputStream inBinary = new BufferedInputStream(request(binaryUrl));
-                            String tmpFilePath = storeTmpFile(inBinary);
+                            //String tmpFilePath = storeTmpFile(inBinary);
                             System.out.println((String) pairsIdTei.getKey() + ".pdf");
-                            mongoManager.storeToGridfs(tmpFilePath, (String) pairsIdTei.getKey() + ".pdf", MongoManager.BINARY_NAMESPACE, date);
+                            mongoManager.storeToGridfs(inBinary, (String) pairsIdTei.getKey() + ".pdf", MongoManager.BINARY_NAMESPACE, date);
                             inBinary.close();
 
-                            logger.debug("\t\t\t Grobid processing...");
-                            String grobidTei = getTeiFromBinary(tmpFilePath);
-                            InputStream inTeiGrobid = new ByteArrayInputStream(grobidTei.getBytes());
-                            mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, date);                  
-                            inTeiGrobid.close();
+                            /*logger.debug("\t\t\t Grobid processing...");
+                             String grobidTei = getTeiFromBinary(tmpFilePath);
+                             InputStream inTeiGrobid = new ByteArrayInputStream(grobidTei.getBytes());
+                             mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, date);                  
+                             inTeiGrobid.close();
+                             */
                         } else {
                             logger.debug("\t\t\t PDF not found !");
                         }
@@ -177,7 +175,8 @@ public class OAIHarvester {
     }
 
     public String getTeiFromBinary(String filePath) throws IOException {
-        String tei = grobidProcess.runHeaderGrobid(filePath);
+        grobidProcess = new Grobid();
+        String tei = grobidProcess.runFullTextGrobid(filePath);
         return tei;
     }
 
@@ -189,7 +188,7 @@ public class OAIHarvester {
         getBinaryURLContent(f, inBinary);
         return filePath;
     }
-    
+
     public static String storeToTmpXmlFile(InputStream inBinary) throws IOException {
         File f = File.createTempFile("tmp", ".xml", new File(tmpPath));
         // deletes file when the virtual machine terminate
@@ -265,20 +264,80 @@ public class OAIHarvester {
                     final String process = args[i + 1];
                     if (process.equals("harvestAll")) {
 //                        if (askConfirm()) {
-                            oai.harvestAllHAL();
+                        oai.harvestAllHAL();
   //                      } else {
-   //                         return;
-    //                    }
+                        //                         return;
+                        //                    }
                     } else if (process.equals("harvestDaily")) {
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         Date date = new Date();
                         oai.harvestHALForDate(dateFormat.format(date));
+                    } else if (process.equals("processGrobid")) {
+                        clearTmpDirectory();
+                        oai.loadBinaries();
+                        oai.processGrobid();
                     } else {
                         System.err.println("-exe value should be one value from [harvestDaily | harvestAll] ");
                         break;
                     }
 
                 }
+            }
+        }
+    }
+
+    private static void clearTmpDirectory() throws IOException {
+        File tmpDirectory = new File(tmpPath);
+        if (!tmpDirectory.exists() || !tmpDirectory.isDirectory()) {
+
+            logger.debug("Directory does not exist.");
+            System.exit(0);
+
+        } else {
+            if (tmpDirectory.list().length == 0) {
+                logger.debug("Directory is already empty : "
+                        + tmpPath);
+            }
+            String files[] = tmpDirectory.list();
+            for (String temp : files) {
+                File fileDelete = new File(tmpDirectory, temp);
+                fileDelete.delete();
+                logger.debug("File is deleted : " + fileDelete.getAbsolutePath());
+            }
+        }
+    }
+
+    private void loadBinaries() throws IOException {
+        mongoManager.loadBinaries(tmpPath);
+    }
+
+    private void processGrobid() {
+        String grobidTei;
+        InputStream inTeiGrobid;
+        grobidProcess = new Grobid();
+        logger.debug("Grobid processing...");
+
+        File tmpDirectory = new File(tmpPath);
+        if (tmpDirectory.list().length == 0) {
+            tmpDirectory.delete();
+            logger.debug("No pdf found in : " + tmpPath);
+            System.exit(0);
+        }
+
+        File[] files = tmpDirectory.listFiles();
+        for (final File currPdf : files) {
+            try {
+                if (currPdf.getName().toLowerCase().endsWith(".pdf")) {
+                    logger.debug("\t\t processing :" + currPdf.getName());
+                    grobidTei = getTeiFromBinary(currPdf.getAbsolutePath());
+                    System.out.println(grobidTei);
+                    inTeiGrobid = new ByteArrayInputStream(grobidTei.getBytes());
+                    mongoManager.storeToGridfs(inTeiGrobid, currPdf.getName().split("_")[0] + ".tei.xml", MongoManager.GROBID_NAMESPACE, (String) dates.toArray()[dates.size() - 1]);
+                    inTeiGrobid.close();
+                }
+            } catch (final Exception exp) {
+                logger.error("An error occured while processing the file " + currPdf.getAbsolutePath()
+                        + ". Continuing the process for the other files");
             }
         }
     }

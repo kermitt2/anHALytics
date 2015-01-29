@@ -5,7 +5,6 @@ import org.grobid.core.engines.Engine;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.mock.MockContext;
 import org.grobid.core.utilities.GrobidProperties;
-
 import java.util.Properties;
 import java.io.FileInputStream;
 
@@ -53,11 +52,9 @@ public class Grobid {
     }
 
     public String runHeaderGrobid(String pdfPath) {
-	   String tei = null;
+	String tei = null;
         try {
-			BiblioItem resHeader = new BiblioItem();
-			// startPage is 1 to skip the cover page
-			// endPage is -1, meaning end of the document 
+	    BiblioItem resHeader = new BiblioItem();
             tei = engine.processHeader(pdfPath, false, resHeader);
         } catch (Exception e) {
             // If an exception is generated, print a stack trace
