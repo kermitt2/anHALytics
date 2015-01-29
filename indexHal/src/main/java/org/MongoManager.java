@@ -118,5 +118,24 @@ public class MongoManager {
 		return tei;
 	}
 
+	public String getCurrentHalID() {
+		String halID = null;
+		try {
+			if (indexFile < files.size()) {
+                GridFSDBFile teifile = files.get(indexFile);
+				String filename = teifile.getFilename();
+				int ind = filename.indexOf(".");
+				halID = filename.substring(0,ind);
+				// we still have possibly the version information
+				ind = halID.indexOf("v");
+				halID = halID.substring(0,ind);
+            }
+		} 
+		catch (MongoException e) {
+			e.printStackTrace();
+		}
+		return halID;
+	}
+
 }
 

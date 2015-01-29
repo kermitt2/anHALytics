@@ -37,6 +37,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.json.JsonTapasML;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  *  Method for management of the ElasticSearch cluster.  
  *
@@ -47,8 +51,10 @@ public class ElasticSearchManager {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ElasticSearchManager.class);
 	
 	private String elasticSearch_host = null;
-	private String elasticSearch_port;
+	private String elasticSearch_port = null;
+	private String elasticSearchClusterName = null;
 	private String indexName = null;
+	private Client client = null;
 	
 	private void loadProperties() {
 		try {
@@ -56,6 +62,7 @@ public class ElasticSearchManager {
             prop.load(new FileInputStream("indexHal.properties"));
 			elasticSearch_host = prop.getProperty("org.indexHal.elasticSearch_host");			
 			elasticSearch_port = prop.getProperty("org.indexHal.elasticSearch_port");
+			elasticSearchClusterName = prop.getProperty("org.indexHal.elasticSearch_cluster");
 			indexName = prop.getProperty("org.indexHal.elasticSearch_indexName");
 		}
 		catch (Exception e) {
@@ -203,19 +210,59 @@ public class ElasticSearchManager {
 	 *  Launch the indexing of the HAL collection in ElasticSearch
 	 */	
 	public int index() throws Exception {
+		Settings settings = ImmutableSettings.settingsBuilder()
+		        .put("cluster.name", elasticSearchClusterName).build();
+		Client client = new TransportClient(settings)
+		        .addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
+		
 		MongoManager mm = new MongoManager();
 		int nb = 0;
 		
 		if (mm.init()) {
+			int i = 0;
+			BulkRequestBuilder bulkRequest = client.prepareBulk();
+			bulkRequest.setRefresh(true);
 			while(mm.hasMoreDocuments()) {
+				String halID = mm.getCurrentHalID();
 				String tei = mm.next();
 			
 				// convert the TEI document into JSON via JsonML
-	System.out.println(tei);			
+	System.out.println(halID);
+				JSONObject json = JsonTapasML.toJSONObject(tei);
+				String jsonStr = json.toString();
+	//System.out.println(jsonStr);
 
 				// index in ElasticSearch
-			
-				nb++;
+				
+				try {
+					
+					bulkRequest.add(client.prepareIndex("hal", "npl", halID).setSource(jsonStr));
+					
+					if (i >= 500) {
+						BulkResponse bulkResponse = bulkRequest.execute().actionGet();
+						if (bulkResponse.hasFailures()) {
+					    	// process failures by iterating through each bulk response item	
+							System.out.println(bulkResponse.buildFailureMessage()); 
+						}
+						bulkRequest = client.prepareBulk();
+						bulkRequest.setRefresh(true);
+						i = 0;
+						System.out.print(".");
+						System.out.flush();
+					}
+				
+					i++;
+					nb++;
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			// last bulk
+			BulkResponse bulkResponse = bulkRequest.execute().actionGet();
+			if (bulkResponse.hasFailures()) {
+		    	// process failures by iterating through each bulk response item	
+				System.out.println(bulkResponse.buildFailureMessage());
 			}
 		}
 				
