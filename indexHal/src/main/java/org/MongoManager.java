@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
@@ -43,15 +44,15 @@ public class MongoManager {
 	private int mongodbPort;
 	
     private DB db = null;
-	private MongoClient mongo = null;
 	private GridFS gfs = null;
 	
-	private DBCursor curs;
+	private List<GridFSDBFile> files = null;
+	private int indexFile = 0;
 	
     public MongoManager() {
         try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream("horg.indextHal.properties"));
+            prop.load(new FileInputStream("indexHal.properties"));
             mongodbServer = prop.getProperty("org.indexHal.mongodb_host");
             mongodbPort = Integer.parseInt(prop.getProperty("org.indexHal.mongodb_port"));
             String mongodbDb = prop.getProperty("org.indexHal.mongodb_db");
@@ -66,21 +67,22 @@ public class MongoManager {
     }
 	
 	public boolean init() throws Exception {
-		try {
+		/*try {
 			mongo = new MongoClient(mongodbServer, 
 									mongodbPort);
 		}
 		catch(Exception e) {
 			LOGGER.debug("Cannot open a client to MongoDB.");
 			throw new Exception(e);
-		}
+		}*/
 		
 		// open the GridFS
 		try {
 			gfs = new GridFS(db, OAI_TEI_NAMESPACE);
 			
 			// init the loop
-			curs = gfs.getFileList();
+			files = gfs.find(new BasicDBObject());
+			indexFile = 0;
 		}
 		catch(Exception e) {
 			LOGGER.debug("Cannot retrieve MongoDB TEI doc GridFS.");
@@ -90,17 +92,20 @@ public class MongoManager {
 	}
 
 	public boolean hasMoreDocuments() {
-		return curs.hasNext();
+		if (indexFile < files.size())
+			return true;
+		else 
+			return false;
 	}
 
 	public String next() {
 		String tei = null;
-		
 		try {
-			if (curs.hasNext()) {
-                GridFSDBFile teifile = (GridFSDBFile)curs.next();
+			if (indexFile < files.size()) {
+                GridFSDBFile teifile = files.get(indexFile);
 				InputStream input = teifile.getInputStream();
 				tei = IOUtils.toString(input, "UTF-8");
+				indexFile++;
             }
 		} 
 		catch (MongoException e) {
@@ -112,9 +117,6 @@ public class MongoManager {
 		
 		return tei;
 	}
-	
-	public void closeMongoDB() {
-		mongo.close();
-	}
+
 }
 

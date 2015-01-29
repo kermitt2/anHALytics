@@ -53,7 +53,7 @@ public class ElasticSearchManager {
 	private void loadProperties() {
 		try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream("horg.indextHal.properties"));
+            prop.load(new FileInputStream("indexHal.properties"));
 			elasticSearch_host = prop.getProperty("org.indexHal.elasticSearch_host");			
 			elasticSearch_port = prop.getProperty("org.indexHal.elasticSearch_port");
 			indexName = prop.getProperty("org.indexHal.elasticSearch_indexName");
@@ -125,11 +125,11 @@ public class ElasticSearchManager {
 		    "Content-Type", "application/x-www-form-urlencoded" );
 		httpCon.setRequestMethod("PUT");
 		
-		System.out.println("ElasticSearch Index " + indexName + " creation: status is " + 
+		/*System.out.println("ElasticSearch Index " + indexName + " creation: status is " + 
 			httpCon.getResponseCode());
 		if (httpCon.getResponseCode() == 200) {
 			val = true;
-		}
+		}*/
 		
 		// load custom analyzer
 		String analyserStr = null;
@@ -205,21 +205,20 @@ public class ElasticSearchManager {
 	public int index() throws Exception {
 		MongoManager mm = new MongoManager();
 		int nb = 0;
-		mm.init();
 		
-		while(mm.hasMoreDocuments()) {
-			String tei = mm.next();
+		if (mm.init()) {
+			while(mm.hasMoreDocuments()) {
+				String tei = mm.next();
 			
-			// convert the TEI document into JSON via JsonML
+				// convert the TEI document into JSON via JsonML
+	System.out.println(tei);			
+
+				// index in ElasticSearch
 			
-			
-			// index in ElasticSearch
-			
-			
+				nb++;
+			}
 		}
-		
-		mm.closeMongoDB();
-		
+				
 		return nb;
 	}
 	
