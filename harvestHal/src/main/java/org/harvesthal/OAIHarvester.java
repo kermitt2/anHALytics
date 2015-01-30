@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.xml.parsers.*;
+import javax.xml.transform.TransformerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.*;
@@ -274,8 +275,8 @@ public class OAIHarvester {
                         oai.harvestHALForDate(dateFormat.format(date));
                     } else if (process.equals("processGrobid")) {
                         clearTmpDirectory();
-                        oai.loadBinaries();
-                        oai.processGrobid();
+                        List<String> filenames = oai.loadBinaries();
+                        oai.processGrobid(filenames);
                     } else {
                         System.err.println("-exe value should be one value from [harvestDaily | harvestAll] ");
                         break;
@@ -307,41 +308,57 @@ public class OAIHarvester {
         }
     }
 
-    private void loadBinaries() throws IOException {
-        mongoManager.loadBinaries(tmpPath);
+    private List<String> loadBinaries() throws IOException {
+        return mongoManager.getFilenames();
     }
 
-    private void processGrobid() {
-        String grobidTei;
+    private void processGrobid(List<String> filenames) {
+        String tei;
+        String teiFilename;
         InputStream inTeiGrobid;
         grobidProcess = new Grobid();
         logger.debug("Grobid processing...");
 
-        File tmpDirectory = new File(tmpPath);
+        /*File tmpDirectory = new File(tmpPath);
         if (tmpDirectory.list().length == 0) {
             tmpDirectory.delete();
             logger.debug("No pdf found in : " + tmpPath);
             System.exit(0);
-        }
+        }*/
 
-        File[] files = tmpDirectory.listFiles();
-        for (final File currPdf : files) {
+        //File[] files = tmpDirectory.listFiles();
+        for (final String filename : filenames) {
             try {
-                if (currPdf.getName().toLowerCase().endsWith(".pdf")) {
-                    logger.debug("\t\t processing :" + currPdf.getName());
-                    grobidTei = getTeiFromBinary(currPdf.getAbsolutePath());
-                    System.out.println(grobidTei);
-                    inTeiGrobid = new ByteArrayInputStream(grobidTei.getBytes());
-                    mongoManager.storeToGridfs(inTeiGrobid, currPdf.getName().split("_")[0] + ".tei.xml", MongoManager.GROBID_NAMESPACE, (String) dates.toArray()[dates.size() - 1]);
+                if (filename.toLowerCase().endsWith(".pdf")) {
+                    logger.debug("\t\t processing :" + filename);
+                    teiFilename = filename.split("\\.")[0] + ".tei.xml";
+                    InputStream inBinary = mongoManager.streamFile(filename);
+                    String filepath = storeTmpFile(inBinary);
+                    inBinary.close();
+                    tei = getTeiFromBinary(filepath);
+                    
+                    String teiGrobid= addHalTeiHeader(teiFilename, tei);
+                    System.out.println(teiGrobid);
+                    inTeiGrobid = new ByteArrayInputStream(teiGrobid.getBytes());
+                    mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, (String) dates.toArray()[dates.size() - 1]);
                     inTeiGrobid.close();
                 }
             } catch (final Exception exp) {
-                logger.error("An error occured while processing the file " + currPdf.getAbsolutePath()
-                        + ". Continuing the process for the other files");
+                logger.error("An error occured while processing the file " + filename
+                        + ". Continuing the process for the other files"+exp.getMessage());
             }
         }
     }
-
+    
+    private String addHalTeiHeader(String filename, String inTeiGrobid) throws ParserConfigurationException, IOException, SAXException, TransformerException {
+        InputStream headerHal = mongoManager.getHalTei(filename);
+        String result = HalTeiAppender.replaceHeader(headerHal, inTeiGrobid);
+        headerHal.close();
+        return result;
+    }
+    
+    
+    
     public static boolean askConfirm() {
 
         Scanner kbd = new Scanner(System.in);
