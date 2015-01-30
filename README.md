@@ -26,7 +26,7 @@ An executable jar file is produced under the directory ``harvestHal/target``.
 
 The following command displays the help:
 
-> java -jar target/harvestHal-``<current version>``.one-jar.jar -h
+> java -jar target/harvestHal-```<current version>```.one-jar.jar -h
 
 For a large harvesting task, use -Xmx2048m to set the JVM memory to avoid OutOfMemoryException.
 
@@ -34,14 +34,14 @@ For a large harvesting task, use -Xmx2048m to set the JVM memory to avoid OutOfM
 #### HarvestAll / HarvestDaily
 To start harvesting all the documents of HAL based on [OAI-PMH](http://www.openarchives.org/pmh) v2, use:
 
-	> java -Xmx2048m -jar target/harvestHal-``<current version>``.one-jar.jar -exe harvestAll
+> java -Xmx2048m -jar target/harvestHal-```<current version>```.one-jar.jar -exe harvestAll
 
 Harvesting is done through a reverse chronological order, here is a sample of the OAI-PMH request:
 http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&from=2015-01-14&until=2015-01-14
 
 To perform an harvesting on a daily basis, use:
 
-> java -jar target/harvestHal-``<current version>``.one-jar.jar -exe harvestDaily
+> java -jar target/harvestHal-```<current version>```.one-jar.jar -exe harvestDaily
 
 For instance, the process can be configured on a cron table.
 
