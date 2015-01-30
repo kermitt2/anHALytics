@@ -14,6 +14,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
+import com.mongodb.CommandResult;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -179,6 +180,20 @@ public class MongoManager {
 			e.printStackTrace();
 		}
 		return halID;
+	}
+
+	public boolean insertAnnotation(String json) {
+		if (collection == null) {
+			collection = db.getCollection("annotations");	
+			collection.ensureIndex(new BasicDBObject("filename", 1)); 
+		}
+		DBObject dbObject = (DBObject)JSON.parse(json);
+		WriteResult result = collection.insert(dbObject);
+		CommandResult res = result.getCachedLastError();
+		if ((res != null) && (res.ok()))
+			return true;
+		else 
+			return false;
 	}
 
 }

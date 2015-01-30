@@ -18,7 +18,7 @@ Update the the sub-project property file ``harvestHal/harvestHal.properties`` wi
 
 A running instance of MongoDB is required to store the harvested data. Before harvesting, update the sub-project property file ``harvestHal/harvestHal.properties`` with your MongoDB settings. 
 
-In the main directory of the sub-project ``harvestHal``:
+In the main directory of the sub-project ``harvestHal/``:
 
 	> mvn clean install
 
@@ -26,7 +26,7 @@ An executable jar file is produced under the directory ``harvestHal/target``.
 
 The following command displays the help:
 
-	> java -jar target/harvestHal-``<current version>``.one-jar.jar -h
+> java -jar target/harvestHal-``<current version>``.one-jar.jar -h
 
 For a large harvesting task, use -Xmx2048m to set the JVM memory to avoid OutOfMemoryException.
 

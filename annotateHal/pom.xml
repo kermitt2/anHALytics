@@ -39,7 +39,7 @@
 		      <executable>java</executable>
 		      <arguments>
 		        <argument>-classpath</argument><classpath />
-		        <argument>org.indexHal.Annotater</argument>
+		        <argument>org.indexHal.Annotator</argument>
 		      </arguments>
 		    </configuration>
 		  </plugin></plugins></build>
