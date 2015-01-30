@@ -8,3 +8,6 @@ tempPdf/*
 indexHAL/target
 indexHAL/target/*
 indexHAL/*.patrice
+annotateHAL/target
+annotateHAL/target/*
+annotateHAL/*.patrice

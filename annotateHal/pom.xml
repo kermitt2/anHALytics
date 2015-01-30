@@ -28,6 +28,38 @@
 	</licenses>
 	
 	<profiles>
+		<!-- mvn -Dmaven.test.skip=true compile exec:exec -Pannotate -->
+		<profile>
+		  <id>annotate</id>
+		  <activation><property><name>annotate</name></property></activation>
+		  <build><plugins><plugin>
+		    <groupId>org.codehaus.mojo</groupId>
+		    <artifactId>exec-maven-plugin</artifactId>
+		    <configuration>
+		      <executable>java</executable>
+		      <arguments>
+		        <argument>-classpath</argument><classpath />
+		        <argument>org.indexHal.Annotater</argument>
+		      </arguments>
+		    </configuration>
+		  </plugin></plugins></build>
+		</profile>
+		<!-- mvn -Dmaven.test.skip=true compile exec:exec -Pindex -->
+		<profile>
+		  <id>index</id>
+		  <activation><property><name>index</name></property></activation>
+		  <build><plugins><plugin>
+		    <groupId>org.codehaus.mojo</groupId>
+		    <artifactId>exec-maven-plugin</artifactId>
+		    <configuration>
+		      <executable>java</executable>
+		      <arguments>
+		        <argument>-classpath</argument><classpath />
+		        <argument>org.indexHal.ElasticSearchManager</argument>
+		      </arguments>
+		    </configuration>
+		  </plugin></plugins></build>
+		</profile>
 	</profiles>
     
     <repositories>
@@ -65,27 +97,24 @@
         </resources>
         
         <plugins>
-            <plugin>
+            <!--plugin>
                 <groupId>com.jolira</groupId>
                 <artifactId>onejar-maven-plugin</artifactId>
                 <version>1.4.4</version>
                 <executions>
                     <execution>
                         <configuration>
-                            <mainClass>org.annotatehal.Annotator</mainClass>
-                            <!-- Optional -->
-                            <onejarVersion>0.97</onejarVersion>
-                            <!-- Optional, default is false -->
-                            <attachToBuild>true</attachToBuild>
-                            <!-- Optional, default is "onejar" -->
-                            <classifier>onejar</classifier>
+                            <mainClass>org.annotateHal.Main</mainClass>
+							<onejarVersion>0.97</onejarVersion>
+							<attachToBuild>true</attachToBuild>
+							<classifier>onejar</classifier>
                         </configuration>
                         <goals>
                             <goal>one-jar</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin-->
                     
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -129,6 +158,18 @@
             <artifactId>commons-io</artifactId>
             <version>2.0.1</version>
         </dependency>
+		
+		<dependency>
+		   <groupId>org.apache.httpcomponents</groupId>
+		   <artifactId>httpclient</artifactId>
+		   <version>4.2</version>
+		</dependency>
+		
+		<dependency>
+		   <groupId>org.apache.httpcomponents</groupId>
+		   <artifactId>httpmime</artifactId>
+		   <version>4.2</version>
+		</dependency>
         
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -147,12 +188,24 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.8.5</version>
+		</dependency>
                 
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
             <version>2.10.1</version>
         </dependency>
+		
+		<dependency>
+		    <groupId>org.elasticsearch</groupId>
+		    <artifactId>elasticsearch</artifactId>
+		    <version>1.4.2</version>
+		</dependency>
 		
     </dependencies>
 </project>

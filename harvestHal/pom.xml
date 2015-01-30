@@ -27,7 +27,6 @@
     </properties>
     
     
-    
     <repositories>
         <repository>
             <id>3rd-party-local-repo</id>

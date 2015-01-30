@@ -22,11 +22,11 @@ In the main directory of the sub-project ``harvestHal``:
 
 	> mvn clean install
 
-An executable jar file is produced under the directory ```harvestHal/target```.
+An executable jar file is produced under the directory ``harvestHal/target``.
 
 The following command displays the help:
 
-	> java -jar target/harvestHal-```<current version>```.one-jar.jar -h
+	> java -jar target/harvestHal-``<current version>``.one-jar.jar -h
 
 For a large harvesting task, use -Xmx2048m to set the JVM memory to avoid OutOfMemoryException.
 
@@ -34,14 +34,14 @@ For a large harvesting task, use -Xmx2048m to set the JVM memory to avoid OutOfM
 #### HarvestAll / HarvestDaily
 To start harvesting all the documents of HAL based on [OAI-PMH](http://www.openarchives.org/pmh) v2, use:
 
-	> java -Xmx2048m -jar target/harvestHal-```<current version>```.one-jar.jar -exe harvestAll
+	> java -Xmx2048m -jar target/harvestHal-``<current version>``.one-jar.jar -exe harvestAll
 
 Harvesting is done through a reverse chronological order, here is a sample of the OAI-PMH request:
 http://api.archives-ouvertes.fr/oai/hal/?verb=ListRecords&metadataPrefix=xml-tei&from=2015-01-14&until=2015-01-14
 
 To perform an harvesting on a daily basis, use:
 
-> java -jar target/harvestHal-```<current version>```.one-jar.jar -exe harvestDaily
+> java -jar target/harvestHal-``<current version>``.one-jar.jar -exe harvestDaily
 
 For instance, the process can be configured on a cron table.
 
@@ -66,17 +66,19 @@ Before indexing, update the sub-project property file ``indexHal/indexHal.proper
 
 Indexing can be launch with the command: 
 
-	> mvn exec:exec -Pelasticsearch
+	> mvn exec:exec -Pindex
 
 ### 3. Annotate
 #### Build
-In the main directory(annotateHal):
+In the main directory of the sub-project ``annotateHal/``:
 
->mvn clean install
+	> mvn clean install
 
 #### Annotation of the HAL collection
 
+The annotation on the HAL collection cab be launch with the command in the main directory of the sub-project ``annotateHal/``:
 
+	> mvn exec:exec -Pannotate
 
 #### Storage of annotations
 
@@ -85,6 +87,9 @@ Annotations are preliminary stored in a MongoDB collection before being indexed 
 
 #### Annotation indexing
 
+For indexing the produced annotations in ElasticSearch, in the main directory of the sub-project ``annotateHal/``:
+
+	> mvn exec:exec -Pindex
 
 ### 4. Graph
 

@@ -1,4 +1,4 @@
-package org.indexHal;
+package org.annotateHal;
 
 import java.io.*;
 import java.util.*;
@@ -37,16 +37,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.json.JsonTapasML;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 /**
- *  Method for management of the ElasticSearch cluster.  
+ *  Methods for indexing the annotations in the ElasticSearch cluster.  
  *
  *  @author Patrice Lopez
  */
- 
 public class ElasticSearchManager {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ElasticSearchManager.class);
 	
@@ -59,11 +54,11 @@ public class ElasticSearchManager {
 	private void loadProperties() {
 		try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream("indexHal.properties"));
-			elasticSearch_host = prop.getProperty("org.indexHal.elasticSearch_host");			
-			elasticSearch_port = prop.getProperty("org.indexHal.elasticSearch_port");
-			elasticSearchClusterName = prop.getProperty("org.indexHal.elasticSearch_cluster");
-			indexName = prop.getProperty("org.indexHal.elasticSearch_indexName");
+            prop.load(new FileInputStream("annotateHal.properties"));
+			elasticSearch_host = prop.getProperty("org.annotateHal.elasticSearch_host");			
+			elasticSearch_port = prop.getProperty("org.annotateHal.elasticSearch_port");
+			elasticSearchClusterName = prop.getProperty("org.annotateHal.elasticSearch_cluster");
+			indexName = prop.getProperty("org.annotateHal.elasticSearch_indexName");
 		}
 		catch (Exception e) {
 			System.err.println("Failed to load properties: " + e.getMessage());
@@ -182,7 +177,7 @@ public class ElasticSearchManager {
 		httpCon.setRequestMethod("PUT");
 		String mappingStr = null;
 		try {
-			File file = new File("src/main/resources/elasticSearch/mapping_npl.json");
+			File file = new File("src/main/resources/elasticSearch/mapping_annotations.json");
 			mappingStr = FileUtils.readFileToString(file, "UTF-8");
 		}
 		catch(Exception e) {
@@ -207,7 +202,7 @@ public class ElasticSearchManager {
 	}
 
 	/**
-	 *  Launch the indexing of the HAL collection in ElasticSearch
+	 *  Launch the indexing of the HAL annotations in ElasticSearch
 	 */	
 	public int index() throws Exception {
 		Settings settings = ImmutableSettings.settingsBuilder()
@@ -218,24 +213,18 @@ public class ElasticSearchManager {
 		MongoManager mm = new MongoManager();
 		int nb = 0;
 		
-		if (mm.init()) {
+		if (mm.initAnnotations()) {
 			int i = 0;
 			BulkRequestBuilder bulkRequest = client.prepareBulk();
 			bulkRequest.setRefresh(true);
-			while(mm.hasMoreDocuments()) {
+			while(mm.hasMoreAnnotations()) {
 				String halID = mm.getCurrentHalID();
-				String tei = mm.next();
-			
-				// convert the TEI document into JSON via JsonML
-				System.out.println(halID);
-				JSONObject json = JsonTapasML.toJSONObject(tei);
-				String jsonStr = json.toString();
-				//System.out.println(jsonStr);
+				String json = mm.nextAnnotation();
 
 				// index the json in ElasticSearch
 				try {
 					// beware the document type bellow and corresponding mapping!
-					bulkRequest.add(client.prepareIndex(indexName, "npl", halID).setSource(jsonStr));
+					bulkRequest.add(client.prepareIndex(indexName, "annotation", halID).setSource(json));
 					
 					if (i >= 500) {
 						BulkResponse bulkResponse = bulkRequest.execute().actionGet();
@@ -264,8 +253,7 @@ public class ElasticSearchManager {
 				System.out.println(bulkResponse.buildFailureMessage());
 			}
 		}
-		client.close();	
-			
+				
 		return nb;
 	}
 	
@@ -282,9 +270,9 @@ public class ElasticSearchManager {
 		// loading based on DocDB XML, with TEI conversion
 		try {
 			esm.setUpElasticSearch();
-			int nbDoc = esm.index();
+			int nbAnnots = esm.index();
 			
-			System.out.println("Total: " + nbDoc + " documents indexed.");
+			System.out.println("Total: " + nbAnnots + " annotations indexed.");
 		}
 		catch(Exception e) {
 			System.err.println("Error when setting-up ElasticSeach cluster");

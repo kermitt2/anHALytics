@@ -28,10 +28,10 @@
 	</licenses>
 	
 	<profiles>
-		<!-- mvn -Dmaven.test.skip=true compile exec:exec -Pelasticsearch -->
+		<!-- mvn -Dmaven.test.skip=true compile exec:exec -Pindex -->
 		<profile>
-		  <id>elasticsearch</id>
-		  <activation><property><name>elasticsearch</name></property></activation>
+		  <id>index</id>
+		  <activation><property><name>index</name></property></activation>
 		  <build><plugins><plugin>
 		    <groupId>org.codehaus.mojo</groupId>
 		    <artifactId>exec-maven-plugin</artifactId>
