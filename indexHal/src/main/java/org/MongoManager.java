@@ -67,15 +67,6 @@ public class MongoManager {
     }
 	
 	public boolean init() throws Exception {
-		/*try {
-			mongo = new MongoClient(mongodbServer, 
-									mongodbPort);
-		}
-		catch(Exception e) {
-			LOGGER.debug("Cannot open a client to MongoDB.");
-			throw new Exception(e);
-		}*/
-		
 		// open the GridFS
 		try {
 			gfs = new GridFS(db, OAI_TEI_NAMESPACE);

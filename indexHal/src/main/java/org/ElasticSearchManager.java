@@ -227,16 +227,15 @@ public class ElasticSearchManager {
 				String tei = mm.next();
 			
 				// convert the TEI document into JSON via JsonML
-	System.out.println(halID);
+				System.out.println(halID);
 				JSONObject json = JsonTapasML.toJSONObject(tei);
 				String jsonStr = json.toString();
-	//System.out.println(jsonStr);
+				//System.out.println(jsonStr);
 
-				// index in ElasticSearch
-				
+				// index the json in ElasticSearch
 				try {
-					
-					bulkRequest.add(client.prepareIndex("hal", "npl", halID).setSource(jsonStr));
+					// beware the document type bellow and corresponding mapping!
+					bulkRequest.add(client.prepareIndex("hal", "npl_type", halID).setSource(jsonStr));
 					
 					if (i >= 500) {
 						BulkResponse bulkResponse = bulkRequest.execute().actionGet();
