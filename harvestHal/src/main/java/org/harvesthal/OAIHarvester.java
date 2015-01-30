@@ -336,9 +336,7 @@ public class OAIHarvester {
                     String filepath = storeTmpFile(inBinary);
                     inBinary.close();
                     tei = getTeiFromBinary(filepath);
-                    
                     String teiGrobid= addHalTeiHeader(teiFilename, tei);
-                    System.out.println(teiGrobid);
                     inTeiGrobid = new ByteArrayInputStream(teiGrobid.getBytes());
                     mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, (String) dates.toArray()[dates.size() - 1]);
                     inTeiGrobid.close();
@@ -352,7 +350,7 @@ public class OAIHarvester {
     
     private String addHalTeiHeader(String filename, String inTeiGrobid) throws ParserConfigurationException, IOException, SAXException, TransformerException {
         InputStream headerHal = mongoManager.getHalTei(filename);
-        String result = HalTeiAppender.replaceHeader(headerHal, inTeiGrobid);
+        String result = HalTeiAppender.replaceHeader(headerHal, new ByteArrayInputStream(inTeiGrobid.getBytes()));
         headerHal.close();
         return result;
     }

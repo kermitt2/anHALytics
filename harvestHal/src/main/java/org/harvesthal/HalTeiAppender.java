@@ -26,7 +26,7 @@ import org.xml.sax.SAXException;
 
 public class HalTeiAppender {
 
-    public static String replaceHeader(InputStream halTei, String tei) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+    public static String replaceHeader(InputStream halTei, InputStream tei) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         //docFactory.setValidating(false);
         //docFactory.setNamespaceAware(true);
