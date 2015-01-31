@@ -44,7 +44,6 @@ public class TestHalTeiAppender extends BaseTest {
 
 		result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath());
 		//System.out.println(result);
-		
 	}
 	
 	@Test

@@ -33,13 +33,13 @@ import org.w3c.dom.ls.DOMImplementationLS;
 
 public class HalTeiAppender {
 
-    public static String replaceHeader(InputStream halTei, InputStream tei) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+    public static String replaceHeader(InputStream halTei, String teiPath) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
         //docFactory.setNamespaceAware(true);
 
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();  
-        Document doc = docBuilder.parse(tei);
+        Document doc = docBuilder.parse(teiPath);
         Document docHalTei = docBuilder.parse(halTei);
 
         NodeList orgs = docHalTei.getElementsByTagName("org");
@@ -52,7 +52,7 @@ public class HalTeiAppender {
         return toString(doc);
     }
 
-    public static String replaceHeaderBrutal(InputStream halTei, String tei) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+    public static String replaceHeaderBrutal(InputStream halTei, String teiPath) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
 
@@ -66,7 +66,7 @@ public class HalTeiAppender {
         updateAffiliations(editors, orgs, docHalTei);
         NodeList biblFull = docHalTei.getElementsByTagName("biblFull");
 		
-		String teiStr = FileUtils.readFileToString(new File(tei), "UTF-8");
+		String teiStr = FileUtils.readFileToString(new File(teiPath), "UTF-8");
 		int ind1 = teiStr.indexOf("<teiHeader");
 		int ind12 = teiStr.indexOf(">", ind1+1);
 		int ind2 = teiStr.indexOf("</teiHeader>");

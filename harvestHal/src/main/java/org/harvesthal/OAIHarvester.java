@@ -350,7 +350,7 @@ public class OAIHarvester {
     
     private String addHalTeiHeader(String filename, String inTeiGrobid) throws ParserConfigurationException, IOException, SAXException, TransformerException {
         InputStream headerHal = mongoManager.getHalTei(filename);
-        String result = HalTeiAppender.replaceHeader(headerHal, new ByteArrayInputStream(inTeiGrobid.getBytes()));
+        String result = HalTeiAppender.replaceHeader(headerHal, inTeiGrobid);
         headerHal.close();
         return result;
     }
