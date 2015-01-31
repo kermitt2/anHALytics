@@ -46,7 +46,7 @@ public class Annotator {
 	
 	public void annotateNERD() throws Exception {
 		try {
-			URL url = new URL("http://" + nerd_host + ":" + nerd_port + RESOURCEPATH);
+			URL url = new URL("http://" + nerd_host + ":" + nerd_port + "/" + RESOURCEPATH);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");

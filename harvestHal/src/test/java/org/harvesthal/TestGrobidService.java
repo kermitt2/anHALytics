@@ -10,11 +10,11 @@ import org.apache.commons.io.FileUtils;
 /**
  *  @author Patrice Lopez
  */
-public class TestGrobid extends BaseTest {
+public class TestGrobidService extends BaseTest {
 	
 	//@Test
 	public void testFullText() throws Exception {
-		Grobid grobid = new Grobid();
+		GrobidService grobid = new GrobidService();
 		
 		File pdfFile = new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
 			"/hal-01110586.pdf");
@@ -23,9 +23,8 @@ public class TestGrobid extends BaseTest {
 		}
 		
 		String fulltext = grobid.runFullTextGrobid(pdfFile.getPath());
-		//FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
-		//	"/hal-01110586.fulltext.tei.xml"), fulltext, "UTF-8");
 		// some test here...
+		System.out.println(fulltext);
 		
 		pdfFile = new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
 			"/hal-01110668.pdf");
@@ -34,9 +33,8 @@ public class TestGrobid extends BaseTest {
 		}
 		
 		fulltext = grobid.runFullTextGrobid(pdfFile.getPath());
-		//FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
-		//	"/hal-01110668.fulltext.tei.xml"), fulltext, "UTF-8");
 		// some test here...
+		System.out.println(fulltext);
 	}
 	
 }

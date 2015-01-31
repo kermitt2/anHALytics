@@ -11,7 +11,6 @@ import java.io.FileInputStream;
 public class Grobid {
 
     private static Engine engine;
-	
 
     public Grobid() {
         try {
