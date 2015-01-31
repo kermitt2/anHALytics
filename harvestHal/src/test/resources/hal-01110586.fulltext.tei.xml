@@ -1,0 +1,5645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" 
+ xmlns:mml="http://www.w3.org/1998/Math/MathML">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project) A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project) A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project)</title>
+			</titleStmt>
+			<publicationStmt>
+unknown
+				<date type="published" when="2014">2014 . 2014</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName>
+								<forename type="first">Sofie</forename>
+								<surname>Compernolle</surname>
+							</persName>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Katrien</forename>
+								<surname>De Cocker</surname>
+							</persName>
+							<email>Email: katrien.decocker@ugent.be</email>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Jeroen</forename>
+								<surname>Lakerveld</surname>
+							</persName>
+							<email>Email: j.lakerveld@vumc.nl</email>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Joreintje</forename>
+								<forename type="middle">D</forename>
+								<surname>Mackenbach</surname>
+							</persName>
+							<email>Email: j.mackenbach@vumc.nl</email>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Giel</forename>
+								<surname>Nijpels</surname>
+							</persName>
+							<email>Email: g.nijpels@vumc.nl,6 Email: jean-michel.oppert@psl.aphp.fr</email>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Jean-Michel</forename>
+								<surname>Oppert</surname>
+							</persName>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Harry</forename>
+								<surname>Rutter</surname>
+							</persName>
+							<email>Email: harry.rutter@lshtm.ac.uk</email>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Pedro</forename>
+								<forename type="middle">J</forename>
+								<surname>Teixeira</surname>
+							</persName>
+							<email>Email: pteixeira@fmh.ulisboa.pt</email>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Greet</forename>
+								<surname>Cardon</surname>
+							</persName>
+							<email>Email: greet.cardon@ugent.be</email>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Ilse</forename>
+								<surname>De Bourdeaudhuij</surname>
+							</persName>
+							<email>Email: ilse.debourdeaudhuij@ugent.be</email>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Sofie</forename>
+								<surname>Compernolle</surname>
+							</persName>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Katrien</forename>
+								<surname>De Cocker</surname>
+							</persName>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Jeroen</forename>
+								<surname>Lakerveld</surname>
+							</persName>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Joreintje</forename>
+								<forename type="middle">D</forename>
+								<surname>Mackenbach</surname>
+								<roleName>Giel</roleName>
+							</persName>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Sofie</forename>
+								<surname>Compernolle</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department" key="dep1">Department of Movement and Sport Sciences</orgName>
+								<orgName type="department" key="dep2">Faculty of Medicine and Health Sciences</orgName>
+								<orgName type="institution">Ghent University</orgName>
+								<address>
+									<settlement>Ghent</settlement>
+									<country key="BE">Belgium</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Katrien</forename>
+								<surname>De Cocker</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department" key="dep1">Department of Movement and Sport Sciences</orgName>
+								<orgName type="department" key="dep2">Faculty of Medicine and Health Sciences</orgName>
+								<orgName type="institution">Ghent University</orgName>
+								<address>
+									<settlement>Ghent</settlement>
+									<country key="BE">Belgium</country>
+								</address>
+							</affiliation>
+							<affiliation>
+								<orgName type="institution">Research Foundation Flanders (FWO)</orgName>
+								<address>
+									<postCode>B-1000</postCode>
+									<settlement>Ghent</settlement>
+									<country key="BE">Belgium</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Jeroen</forename>
+								<surname>Lakerveld</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Department of Epidemiology and Biostatistics</orgName>
+								<orgName type="institution" key="instit1">The EMGO Institute for Health and Care Research</orgName>
+								<orgName type="institution" key="instit2">VU University Medical Center</orgName>
+								<address>
+									<settlement>Amsterdam</settlement>
+									<country key="NL">The Netherlands</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Joreintje</forename>
+								<forename type="middle">D</forename>
+								<surname>Mackenbach</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Department of Epidemiology and Biostatistics</orgName>
+								<orgName type="institution" key="instit1">The EMGO Institute for Health and Care Research</orgName>
+								<orgName type="institution" key="instit2">VU University Medical Center</orgName>
+								<address>
+									<settlement>Amsterdam</settlement>
+									<country key="NL">The Netherlands</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Giel</forename>
+								<surname>Nijpels</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Department of General Practice and Elderly Care Medicine</orgName>
+								<orgName type="institution" key="instit1">The EMGO Institute for Health and Care Research</orgName>
+								<orgName type="institution" key="instit2">VU University Medical Center</orgName>
+								<address>
+									<settlement>Amsterdam</settlement>
+									<country key="NL">The Netherlands</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Jean-Michel</forename>
+								<surname>Oppert</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Centre for Research on</orgName>
+								<orgName type="institution" key="instit1">Université Paris 13</orgName>
+								<orgName type="institution" key="instit2">Sorbonne Paris Cité -UREN (Unité de Recherche en Epidémiologie Nutritionnelle)</orgName>
+								<address>
+									<addrLine>U557 Inserm, U1125 Inra</addrLine>
+									<settlement>Cnam</settlement>
+								</address>
+							</affiliation>
+							<affiliation>
+								<orgName type="institution">Human Nutrition Ile-de-France (CRNH IdF)</orgName>
+								<address>
+									<settlement>Bobigny</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Harry</forename>
+								<surname>Rutter</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">London School of Hygiene and Tropical Medicine</orgName>
+								<orgName type="institution">European Centre on Health of Societies in Transition</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Pedro</forename>
+								<forename type="middle">J</forename>
+								<surname>Teixeira</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Faculty of Human Kinetics</orgName>
+								<orgName type="laboratory">Interdisciplinary Center for the Study of Human Performance</orgName>
+								<orgName type="institution">University of Lisbon</orgName>
+								<address>
+									<settlement>Lisbon</settlement>
+									<country key="PT">Portugal</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Greet</forename>
+								<surname>Cardon</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department" key="dep1">Department of Movement and Sport Sciences</orgName>
+								<orgName type="department" key="dep2">Faculty of Medicine and Health Sciences</orgName>
+								<orgName type="institution">Ghent University</orgName>
+								<address>
+									<settlement>Ghent</settlement>
+									<country key="BE">Belgium</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Ilse</forename>
+								<surname>De Bourdeaudhuij</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department" key="dep1">Department of Movement and Sport Sciences</orgName>
+								<orgName type="department" key="dep2">Faculty of Medicine and Health Sciences</orgName>
+								<orgName type="institution">Ghent University</orgName>
+								<address>
+									<settlement>Ghent</settlement>
+									<country key="BE">Belgium</country>
+								</address>
+							</affiliation>
+						</author>
+						<affiliation>
+							<orgName type="department">Department of Nutrition Pitié</orgName>
+							<orgName type="institution">Université Pierre et Marie Curie-Paris 6</orgName>
+							<address>
+							</address>
+						</affiliation>
+						<affiliation>
+							<orgName type="department" key="dep1">CRNH IdF</orgName>
+							<orgName type="department" key="dep2">Institute of Cardiometabolism and Nutrition (ICAN)</orgName>
+							<orgName type="institution">Salpêtrière Hospital (AP-HP)</orgName>
+							<address>
+								<settlement>Paris</settlement>
+								<country key="FR">France</country>
+							</address>
+						</affiliation>
+						<title level="a" type="main">A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project) A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project) A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project)</title>
+					</analytic>
+					<monogr>
+						<title level="j" type="main">International Journal of Behavioral Nutrition and Physical Activity BioMed Central International Journal of Behavioral International Journal of Behavioral Nutrition and Physical Activity Nutrition and Physical Activity International Journal of Behavioral Nutrition and Physical Activity</title>
+						<imprint>
+							<biblScope unit="volume">11</biblScope>
+							<biblScope unit="issue">11</biblScope>
+							<biblScope unit="page" from="147"/>
+							<date type="published" when="2014">2014 . 2014</date>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1186/s12966-014-0147-3></idno>
+					<note type="submission">Submitted on 28 Jan 2015 Article type Review</note>
+					<note>To cite this version: HAL Id: hal-01110586 This Provisional PDF corresponds to the article as it appeared upon acceptance. Fully formatted PDF and full text (HTML) versions will be made available soon. Sample Article URL http://www.ijbnpa.org/content/11/1/147 Like all articles in BMC journals, this peer-reviewed article can be downloaded, printed and distributed freely for any purposes (see copyright notice below). Articles in BMC journals are listed in PubMed and archived at PubMed Central. For information about publishing your research in BMC journals or any BioMed Central journal, go to http://www.biomedcentral.com/info/authors//publicdomain/zero/1.0/) applies to the data made available in this article, unless otherwise stated.</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<front>
+			<div type="abstract">
+				<head>Abstract</head>
+<p>Nijpels, et al.. A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project). HAL is a multidisciplinary open access archive for the deposit and dissemination of scientific research documents, whether they are published or not. The documents may come from teaching and research institutions in France or abroad, or from public or private research centers. L&apos;archive ouverte pluridisciplinaire HAL, est destinée au dépôt et a la diffusion de documents scientifiques de niveau recherche, publiés ou non, ´ emanant des etablissements d&apos;enseignement et de recherche français oú etrangers, des laboratoires publics ou privés. Sofie Compernolle (sofie.compernolle@ugent.be) Katrien De Cocker (katrien.decocker@ugent.be) Jeroen Lakerveld (j.lakerveld@vumc.nl) Joreintje D Mackenbach (j.mackenbach@vumc.nl) Giel Nijpels (g.nijpels@vumc.nl) Jean-Michel Oppert (jean-michel.oppert@psl.aphp.fr) Harry Rutter (harry.rutter@lshtm.ac.uk) Pedro J Teixeira (pteixeira@fmh.ulisboa.pt) Greet Cardon (greet.cardon@ugent.be) Ilse De Bourdeaudhuij (ilse.debourdeaudhuij@ugent.be) Abstract Background</p>
+			</div>
+		</front>
+		<body>
+			<head>Table 1 Characteristics of identified studies</head>
+
+			<p>Study characteristics No. Studies (%) Design Quasi-experimental design 70% Pre-experimental design 30% Focus Combination physical activity, sedentary behaviour and eating behaviour 57% Physical activity 33% Sedentary behaviour 0% Eating behaviour 9% Setting Schools/workplaces 27% Churches 12% Communities 61% Participants &gt; 1000 in at least one measurement 69% &gt; 1000 in all measurements 38% Data collection method Questionnaire 91% Clinical measures 39% Pedometers 6% Geographical area America 58% Europe 18% Oceania 15% Asia 9%</p>
+
+			<head>RE-AIM evaluation</head>
+
+			<p>Thirty-two interventions did not report on all five dimensions. More than one-third of the selected interventions (15/35) only provided information on the degree of effectiveness. Eight interventions confined themselves to the report of two dimensions, namely the reach and the effectiveness. Another eight interventions, reported on three dimensions, of which four reported on the effectiveness, the adoption and the implementation, three reported on the reach, the effectiveness and the adoption and one intervention reported on the reach, the effectiveness and the implementation. This left us with only four interventions that gave information on at least four of the five RE-AIM dimensions.</p>
+
+			<p>Table 2 presents the main results regarding the report on Reach, Effectiveness, Adoption, Implementation and Maintenance of the included interventions. Details of the information extracted from the intervention studies are provided in the paragraphs below (see Additional file 3).</p>
+
+			<head>Table 2 Number of studies reporting on the different RE-AIM dimensions</head>
+
+			<p>Component Number of studies reporting n (%) Reach -Description of target population within the geographical area/worksite 33 (100) -Awareness of the intervention/participation rate 16 (48) -Characteristics of people aware of the intervention/participants 10 (30) -Representativeness of people aware of the intervention/participants 9 (27) Effectiveness -Positive outcomes 30 (91) -Quality of life 1 (3) -Negative consequences 1 (3) -Short-term attrition 15 (43) Adoption -Description of staff delivering the intervention 6 (17) -Representativeness of staff delivering the intervention 1 (3) -Description of intervention delivery settings 23 (70) -Description of non-delivering settings 5 (15) -Representativeness of delivery settings 3 (9) Implementation -Completeness of implementation 10 (30) -Fidelity of implementation 2 (6) -Time needed to implement the intervention 0 (0) -Financial investment of the intervention 8 (24) -Staff expertise of training of the deliverers 4 (12) Maintenance – setting -Program sustainability 8 (24) -Program adaptations 3 (9) -Representativeness of organizations who are still delivering the intervention</p>
+
+			<formula>1 (3)</formula>
+
+			<p>Maintenance – individual -Long-term effects 8 (23)</p>
+
+			<head>Competing interests</head>
+
+			<p>The authors declare that they have no competing interests.</p>
+
+			<head>Authors&amp;apos; contributions</head>
+
+			<p>JL, IDB and SC conceived of the idea for the review. IDB wrote the protocol and led the writing of the manuscript. KDC checked the eligibility of the included intervention studies and performed data extraction. JDM assessed methodological quality of the included interventions studies. All authors read, provided feedback, and approved the final submitted version of the manuscript.</p>
+
+			<head>Acknowledgements</head>
+
+			<p>This work is part of the SPOTLIGHT project funded by the Seventh Framework Programme (CORDIS FP7) of the European Commission, HEALTH (FP7-HEALTH-2011-two-stage), Grant agreement no. 278186. The content of this article reflects only the authors&amp;apos; views and the European Commission is not liable for any use that may be made of the information contained therein.</p>
+
+		</body>
+		<back>
+			<div type="references">
+
+		<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">The Challenge of Obesity in the WHO European Region and the Strategies for Response</title>
+		<author>
+			<persName>
+				<forename type="middle">F</forename>
+				<surname>Branca</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">H</forename>
+				<surname>Nikogosian</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lobstein</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Postmenopausal women and the health consequences of obesity</title>
+		<author>
+			<persName>
+				<surname>Dennis</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ke</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Obstet Gynecol Neonatal Nurs</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="511" to="517" />
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Health risks associated with overweight and obesity</title>
+		<author>
+			<persName>
+				<surname>Kopelman</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Obes Rev</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="13" to="17" />
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+	<note>Suppl</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">The disease burden associated with overweight and obesity</title>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Must</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Spadano</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Eh</forename>
+				<surname>Coakley</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Field Ae</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">G</forename>
+				<surname>Colditz</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Dietz</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">JAMA</title>
+		<imprint>
+			<biblScope unit="volume">282</biblScope>
+			<biblScope unit="page" from="1523" to="1529" />
+			<date type="published" when="1999" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Comparative appraisal of educational inequalities in overweight and obesity among adults in 19 European countries</title>
+		<author>
+			<persName>
+				<forename type="first">Roskam</forename>
+				<forename type="middle">Aj</forename>
+				<surname>Kunst</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<surname>Ae</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">H</forename>
+				<surname>Oyen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Demarest</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Regidor</forename>
+				<forename type="middle">J E</forename>
+				<surname>Klumbiene</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">U</forename>
+				<surname>Helmert</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">F</forename>
+				<surname>Jusot</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">D</forename>
+				<surname>Dzurova</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mackenbach</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jp</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int J Epidemiol</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="392" to="404" />
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">OECD: Overweight and obesity among adults</title>
+	</analytic>
+	<monogr>
+		<title level="m">Health at a Glance: Europe 2012</title>
+		<imprint>
+			<biblScope unit="page" from="62" to="64" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">National, regional, and global trends in body-mass index since 1980: systematic analysis of health examination surveys and epidemiological studies with 960 country-years and 9.1 million participants</title>
+		<author>
+			<persName>
+				<surname>Finucane Mm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ga</forename>
+				<surname>Stevens</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Cowan Mj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Lin</forename>
+				<forename type="middle">G Jk</forename>
+				<surname>Danaei</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Cj</forename>
+				<surname>Paciorek</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Gm</forename>
+				<surname>Singh</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gutierrez</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Lu</forename>
+				<forename type="middle">Y</forename>
+				<surname>Hr</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">An</forename>
+				<surname>Bahalim</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Riley</forename>
+				<forename type="middle">F Lm</forename>
+				<surname>Farzadfar</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ezzati</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Lancet</title>
+		<imprint>
+			<biblScope unit="volume">377</biblScope>
+			<biblScope unit="page" from="557" to="567" />
+			<date type="published" when="2011" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">National, regional, and global trends in adult overweight and obesity prevalences</title>
+		<author>
+			<persName>
+				<forename type="middle">Ga</forename>
+				<surname>Stevens</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Singh</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Lu</forename>
+				<forename type="middle">Y</forename>
+				<surname>Gm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Lin</forename>
+				<forename type="middle">G Jk</forename>
+				<surname>Danaei</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Finucane Mm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">An</forename>
+				<surname>Bahalim</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Rk</forename>
+				<surname>Mcintire</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gutierrez Hr</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Cowan</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Paciorek Cj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Riley</forename>
+				<forename type="middle">F L</forename>
+				<surname>Farzadfar</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ezzati</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Popul Health Metr</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">22</biblScope>
+			<date type="published" when="2012" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Ajzen I: From intentions to actions: A theory of planned behavior</title>
+	</analytic>
+	<monogr>
+		<title level="j">In Action Control. Edited by Kuhl J, Beckmann J. Berlin Heidelberg</title>
+		<imprint>
+			<publisher>Springer SSSP Springer Series in Social Psychology</publisher>
+			<biblScope unit="volume">1985</biblScope>
+			<biblScope unit="page" from="11" to="39" />
+			<publisher>Springer SSSP Springer Series in Social Psychology</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">The transtheoretical model: applications to exercise behavior</title>
+		<author>
+			<persName>
+				<forename type="first">Marcus</forename>
+				<forename type="middle">Bh</forename>
+				<surname>Simkin</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Med Sci Sports Exerc</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1400" to="1404" />
+			<date type="published" when="1994" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Correlates of physical activity: why are some people physically active and others not? Lancet</title>
+		<author>
+			<persName>
+				<forename type="first">Reis</forename>
+				<forename type="middle">Rs</forename>
+				<surname>Bauman Ae</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sallis</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Wells</forename>
+				<forename type="middle">Jc</forename>
+				<surname>Jf</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Rj</forename>
+				<surname>Loos</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Martin</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Bw</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012" />
+			<biblScope unit="page" from="258" to="271" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Toward a comprehensive model of physical activity</title>
+		<author>
+			<persName>
+				<forename type="middle">Jc</forename>
+				<surname>Spence</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lee</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Psychol Sport Exerc</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="7" to="24" />
+			<date type="published" when="2003" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Relative influences of individual, social environmental, and physical environmental correlates of walking</title>
+		<author>
+			<persName>
+				<forename type="first">Giles-Corti</forename>
+				<forename type="middle">B</forename>
+				<surname>Donovan</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Public Health</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="page" from="1583" to="1589" />
+			<date type="published" when="2003" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+	</monogr>
+	<note>ev20081028_rep_. en.pdf]</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Challenges in obesity epidemiology</title>
+		<author>
+			<persName>
+				<forename type="first">Canoy</forename>
+				<forename type="middle">D I</forename>
+				<surname>Buchan</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Obes Rev</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+	<note>Suppl</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Obesity and the environment: where do we go from here? Science</title>
+		<author>
+			<persName>
+				<surname>Hill</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Wyatt</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Reed</forename>
+				<forename type="middle">Gw</forename>
+				<surname>Hr</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Peters</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jc</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2003" />
+			<biblScope unit="page" from="853" to="855" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Environmental determinants of physical activity and sedentary behavior</title>
+		<author>
+			<persName>
+				<forename type="first">Owen</forename>
+				<forename type="middle">N</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Leslie</forename>
+				<forename type="middle">E J</forename>
+				<surname>Salmon</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Fotheringham</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mj</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Exerc Sport Sci Rev</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="153" to="158" />
+			<date type="published" when="2000" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">A systematic review of environmental factors and obesogenic dietary intakes among adults: are we getting closer to understanding obesogenic environments? Obes Rev</title>
+		<author>
+			<persName>
+				<forename type="first">Giskes</forename>
+				<forename type="middle">K F M</forename>
+				<surname>Lenthe</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brug</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011" />
+			<biblScope unit="page" from="95" to="106" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">The challenge of managing body weight in the modern world</title>
+		<author>
+			<persName>
+				<surname>Peters</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jc</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Asia Pac J Clin Nutr</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="714" to="717" />
+			<date type="published" when="2002" />
+		</imprint>
+	</monogr>
+	<note>Suppl</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<author>
+			<persName>
+				<forename type="middle">An</forename>
+				<surname>Fabricatore</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Wadden</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ta</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Obesity. Annu Rev Clin Psychol</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="357" to="377" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Behavioral science at the crossroads in public health: extending horizons, envisioning the future</title>
+		<author>
+			<persName>
+				<forename type="first">Glass</forename>
+				<forename type="middle">Ta</forename>
+				<surname>Mcatee</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mj</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Soc Sci Med</title>
+		<imprint>
+			<biblScope unit="volume">62</biblScope>
+			<biblScope unit="page" from="1650" to="1671" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">A systems-oriented multilevel framework for addressing obesity in the 21st century</title>
+		<author>
+			<persName>
+				<surname>Huang Tt</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Drewnosksi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Kumanyika</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Glass</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ta</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Prev Chronic Dis</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">82</biblScope>
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Unpacking vertical and horizontal integration: childhood overweight/obesity programs and planning, a Canadian perspective</title>
+		<author>
+			<persName>
+				<surname>Maclean</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Clinton</forename>
+				<forename type="middle">K</forename>
+				<surname>Lm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Edwards</forename>
+				<forename type="middle">N M</forename>
+				<surname>Garrard</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Ashley</forename>
+				<forename type="middle">L P</forename>
+				<surname>Hansen-Ketchum</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Walsh</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Implement Sci</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">36</biblScope>
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">School-based interventions promoting both physical activity and healthy eating in Europe: a systematic review within the HOPE project</title>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">I</forename>
+				<surname>Bourdeaudhuij</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">E</forename>
+				<surname>Cauwenberghe</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">H</forename>
+				<surname>Spittaels</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Rostami</forename>
+				<forename type="middle">C</forename>
+				<surname>Oppert Jm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">J</forename>
+				<surname>Brug</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">F</forename>
+				<surname>Lenthe</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">T</forename>
+				<surname>Lobstein</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Maes</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Obes Rev</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="205" to="216" />
+			<date type="published" when="2011" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Is reporting on interventions a weak link in understanding how and why they work? A preliminary exploration using community heart health exemplars</title>
+		<author>
+			<persName>
+				<forename type="first">Riley</forename>
+				<forename type="middle">Bl J</forename>
+				<surname>Macdonald</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">O</forename>
+				<surname>Mansi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Kothari</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">D</forename>
+				<surname>Kurtz</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Li</forename>
+				<surname>Vontettenborn</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Edwards</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Implement Sci</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">27</biblScope>
+			<date type="published" when="2008" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Evaluating the public health impact of health promotion interventions: the RE-AIM framework</title>
+		<author>
+			<persName>
+				<surname>Glasgow Re</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Tm</forename>
+				<surname>Vogt</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Boles</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sm</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Public Health</title>
+		<imprint>
+			<biblScope unit="volume">89</biblScope>
+			<biblScope unit="page" from="1322" to="1327" />
+			<date type="published" when="1999" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">and on behalf of the SPOTLIGHT consortium: Sustainable prevention of obesity through integrated strategies: The SPOTLIGHT project&apos;s conceptual framework and design</title>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Lakerveld</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Brug</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Bot</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Teixeira</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Rutter</forename>
+				<forename type="middle">H</forename>
+				<surname>Pj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">E</forename>
+				<surname>Woodward</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">O</forename>
+				<surname>Samdal</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">L</forename>
+				<surname>Stockley</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">I</forename>
+				<surname>Bourdeaudhuij</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Robertson</forename>
+				<forename type="middle">P A</forename>
+				<surname>Assema</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">T</forename>
+				<surname>Lobstein</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Opper Jm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">R</forename>
+				<surname>Ádány</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012" />
+			<publisher>BMC Public Health</publisher>
+			<biblScope unit="page">793</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">The transtheoretical model of health behavior change</title>
+		<author>
+			<persName>
+				<surname>Prochaska</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Velicer</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Wf</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Health Promot</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="38" to="48" />
+			<date type="published" when="1997" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Understanding the internal and external validity of health literacy interventions: a systematic literature review using the RE-AIM framework</title>
+		<author>
+			<persName>
+				<forename type="first">Allen</forename>
+				<forename type="middle">K J</forename>
+				<surname>Zoellner</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Motley</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Estabrooks</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Pa</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Health Commun</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="55" to="72" />
+			<date type="published" when="2011" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Distribution theory for Glass&apos;s estimator of effect size and related estimators</title>
+		<author>
+			<persName>
+				<surname>Hedges</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Educ Statistics</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">128</biblScope>
+			<date type="published" when="1981" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Evaluating the impact of health promotion programs: using the RE-AIM framework to form summary measures for decision making involving complex issues</title>
+		<author>
+			<persName>
+				<surname>Glasgow Re</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Estabrooks</forename>
+				<forename type="middle">Da Pa</forename>
+				<surname>Dzewaltowski</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Vogt</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Educ Res</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="688" to="694" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Using RE-AIM metrics to evaluate diabetes self-management support interventions</title>
+		<author>
+			<persName>
+				<surname>Glasgow Re</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Cc</forename>
+				<surname>Nelson</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">La</forename>
+				<surname>Strycker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>King</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Dk</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="67" to="73" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Evaluating the dissemination of Body &amp; Soul, an evidence-based fruit and vegetable intake intervention: challenges for dissemination and implementation research</title>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Allicock</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Mk</forename>
+				<surname>Campbell</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Cg</forename>
+				<surname>Valle</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Resnicow</forename>
+				<forename type="middle">C K</forename>
+				<surname>Carr</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gizlice</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Nutr Educ Behav</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page" from="530" to="538" />
+			<date type="published" when="2012" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Effects of a promotor-based intervention to promote physical activity: Familias Sanas y Activas</title>
+		<author>
+			<persName>
+				<surname>Ayala</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gx</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Public Health</title>
+		<imprint>
+			<biblScope unit="volume">101</biblScope>
+			<biblScope unit="page" from="2261" to="2268" />
+			<date type="published" when="2011" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">A nutrition and exercise intervention program for controlling weight in Samoan communities in New Zealand</title>
+		<author>
+			<persName>
+				<forename type="first">Bell</forename>
+				<forename type="middle">Ac Ba</forename>
+				<surname>Swinburn</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">H</forename>
+				<surname>Amosa</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Scragg</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int J Obes Relat Metab Disord</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="920" to="927" />
+			<date type="published" when="2001" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Using the RE-AIM framework to evaluate a physical activity intervention in churches</title>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Bopp</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Wilcox</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Laken</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Hooker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Saunders</forename>
+				<forename type="middle">R</forename>
+				<surname>Sp</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">D</forename>
+				<surname>Parra-Medina</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Butler</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mcclorin</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Prev Chronic Dis</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">87</biblScope>
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Effects of 5-year interventions on cardiovascular risk factors of factories and offies employees of isfahan and najafabad: worksite intervention project-isfahan healthy heart program</title>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Boshtam</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">N</forename>
+				<surname>Sarafzadegan</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Zare</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Sadeghi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Rabiei</forename>
+				<forename type="middle">F K</forename>
+				<surname>Sajjadi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Boshtam</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ARYA Atheroscler</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="94" to="101" />
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Effects of a multilevel dietary intervention in religious organizations</title>
+		<author>
+			<persName>
+				<surname>Bowen Dj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Beresford</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sa</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Christensen Cl</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Aa</forename>
+				<surname>Kuniyuki</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">D</forename>
+				<surname>Mclerran</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Z</forename>
+				<surname>Feng</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Hart</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jr</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">L</forename>
+				<surname>Tinker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Campbell</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Satia</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Health Promot</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="15" to="22" />
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">A community-based approach to promoting walking in rural areas</title>
+		<author>
+			<persName>
+				<surname>Brownson Rc</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Baker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Boyd</forename>
+				<forename type="middle">Rl</forename>
+				<surname>Ea</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Nm</forename>
+				<surname>Caito</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Duggan</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ra</forename>
+				<surname>Housemann</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Kreuter</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Mitchell</forename>
+				<forename type="middle">T</forename>
+				<surname>Mw</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">F</forename>
+				<surname>Motton</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Pulley</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Schmid</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Tl</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Walton</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="28" to="34" />
+			<date type="published" when="2004" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">A multilevel ecological approach to promoting walking in rural communities</title>
+		<author>
+			<persName>
+				<surname>Brownson Rc</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">L</forename>
+				<surname>Hagood</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lovegreen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sl</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">B</forename>
+				<surname>Britton</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Caito</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Nm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Elliott</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mb</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Emery</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Hicks</forename>
+				<forename type="middle">D D</forename>
+				<surname>Haire-Joshu</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Johnson</forename>
+				<forename type="middle">B</forename>
+				<surname>Mcgill</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Morton</forename>
+				<forename type="middle">S</forename>
+				<surname>Jb</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Rhodes</forename>
+				<forename type="middle">G</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Thurman</forename>
+				<forename type="middle">T</forename>
+				<surname>Tune</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="837" to="842" />
+			<date type="published" when="2005" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Process evaluation of an effective church-based diet intervention: Body &amp; Soul</title>
+		<author>
+			<persName>
+				<forename type="first">Resnicow</forename>
+				<forename type="middle">K</forename>
+				<surname>Campbell Mk</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Wang</forename>
+				<forename type="middle">C T</forename>
+				<surname>Carr</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Williams</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Educ Behav</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="864" to="880" />
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Prospective associations between intervention components and website engagement in a publicly available physical activity website: the case of 10,000 Steps Australia</title>
+		<author>
+			<persName>
+				<forename type="first">Davies</forename>
+				<forename type="middle">C</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Corry</forename>
+				<forename type="middle">K</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">A</forename>
+				<surname>Itallie</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Vandelanotte</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Caperchione</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mummery</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Wk</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Med Internet Res</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">4</biblScope>
+			<date type="published" when="2012" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Effects of &quot; 10,000 steps Ghent &quot; : a whole-community intervention</title>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">Ka</forename>
+				<surname>Cocker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">Im</forename>
+				<surname>Bourdeaudhuij</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brown Wj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Cardon</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gm</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="455" to="463" />
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Four-year follow-up of the community intervention&apos;10,000 steps Ghent</title>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">Ka</forename>
+				<surname>Cocker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">Im</forename>
+				<surname>Bourdeaudhuij</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brown Wj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Cardon</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gm</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Educ Res</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="372" to="380" />
+			<date type="published" when="2011" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">Twelve-month effects of the Groningen active living model (GALM) on physical activity, health and fitness outcomes in sedentary and underactive older adults</title>
+		<author>
+			<persName>
+				<forename type="first">Jong</forename>
+				<forename type="middle">J Ka</forename>
+				<surname>Lemmink</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ac</forename>
+				<surname>King</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Huisman</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Stevens</surname>
+			</persName>
+		</author>
+		<imprint>
+			<biblScope unit="page" from="55" to="65" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+	</analytic>
+	<monogr>
+		<title level="j">Patient Educ Couns</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="page" from="167" to="176" />
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Six-month effects of the Groningen active living model (GALM) on physical activity, health and fitness outcomes in sedentary and underactive older adults aged 55–65</title>
+		<author>
+			<persName>
+				<forename type="first">Jong</forename>
+				<forename type="middle">J Ka</forename>
+				<surname>Lemmink</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Stevens</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Rispens</forename>
+				<forename type="middle">P</forename>
+				<surname>De Greef Mh</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ac</forename>
+				<surname>King</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mulder</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Patient Educ Couns</title>
+		<imprint>
+			<biblScope unit="volume">62</biblScope>
+			<biblScope unit="page" from="132" to="141" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">10 000 Steps Flanders&apos;: evaluation of the state-wide dissemination of a physical activity intervention in Flanders</title>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">V</forename>
+				<surname>Dubuy</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">Ka</forename>
+				<surname>Cocker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Maes</forename>
+				<forename type="middle">Im L</forename>
+				<surname>Bourdeaudhuij</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">P</forename>
+				<surname>Metsu</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">R</forename>
+				<surname>Acker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Cardon</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gm</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Educ Res</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="546" to="551" />
+			<date type="published" when="2013" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Correlates of pedometer use: results from a community-based physical activity intervention trial (10,000 Steps Rockhampton)</title>
+		<author>
+			<persName>
+				<surname>Eakin Eg</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Reeves</forename>
+				<forename type="middle">K Mm</forename>
+				<surname>Mummery</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lawler</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sp</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Marshall</forename>
+				<forename type="middle">G Aj</forename>
+				<surname>Schofield</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brown</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int J Behav Nutr Phys Act</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">31</biblScope>
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Determining the impact of Walk Kansas: applying a team-building approach to community physical activity promotion</title>
+		<author>
+			<persName>
+				<forename type="first">Estabrooks</forename>
+				<forename type="middle">Pa M</forename>
+				<surname>Bradshaw</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Dzewaltowski</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Da</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Smith-Ray Rl</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ann Behav Med</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2008" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Worksite environment intervention to prevent obesity among metropolitan transit workers</title>
+		<author>
+			<persName>
+				<forename type="first">French</forename>
+				<surname>Sa</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Lj</forename>
+				<surname>Harnack</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Hannan</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Mitchell</forename>
+				<forename type="middle">Nr</forename>
+				<surname>Pj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gerlach Af</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Toomey</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Tl</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page" from="180" to="185" />
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Promoting weight loss and blood pressure control at work: impact of an education and intervention program</title>
+		<author>
+			<persName>
+				<surname>Gemson Dh</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">R</forename>
+				<surname>Commisso</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Fuente</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Newman</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Benson</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Occup Environ Med</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page" from="272" to="281" />
+			<date type="published" when="2008" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Baase CM: First-year results of an obesity prevention program at The Dow Chemical Company</title>
+		<author>
+			<persName>
+				<surname>Goetzel Rz</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Km</forename>
+				<surname>Baker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Short</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Me</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">X</forename>
+				<surname>Pei</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Wang</forename>
+				<forename type="middle">Rj S</forename>
+				<surname>Ozminkowski</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Bowen Jd</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ec</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Craun</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ba</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Tully</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Kj</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Occup Environ Med</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="125" to="138" />
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Second-year results of an obesity prevention program at the Dow Chemical Company</title>
+		<author>
+			<persName>
+				<surname>Goetzel Rz</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Pei</forename>
+				<forename type="middle">X</forename>
+				<surname>Ec</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Short Me</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Tabrizi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Wilson</forename>
+				<forename type="middle">Mg</forename>
+				<surname>Mj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Dejoy Dm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Craun</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Tully</forename>
+				<forename type="middle">Kj</forename>
+				<surname>Ba</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>White Jm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Baase</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Cm</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Occup Environ Med</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="page" from="291" to="302" />
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Promoting physical activity in a low-income multiethnic district: effects of a community intervention study to reduce risk factors for type 2 diabetes and cardiovascular disease: a community intervention reducing inactivity</title>
+		<author>
+			<persName>
+				<surname>Jenum Ak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Anderssen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sa</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ki</forename>
+				<surname>Birkeland</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">I</forename>
+				<surname>Holme</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Graff-Iversen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Lorentzen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Raastad</forename>
+				<forename type="middle">Y T</forename>
+				<surname>Ommundsen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Odegaard Ak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Bahr</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Diabetes Care</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="1605" to="1612" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Targeting physical activity in a low socioeconomic status population: observations from the Norwegian &apos;Romsas in Motion&apos; study</title>
+		<author>
+			<persName>
+				<surname>Jenum Ak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ca</forename>
+				<surname>Lorentzen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ommundsen</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Br J Sports Med</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="page" from="64" to="69" />
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Promoting physical activity in a multi-ethnic district -methods and baseline results of a pseudo-experimental intervention study</title>
+		<author>
+			<persName>
+				<forename type="first">Karen</forename>
+				<forename type="middle">A</forename>
+				<surname>Jenum</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Lorentzen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Anderssen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sa</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ki</forename>
+				<surname>Birkeland</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">I</forename>
+				<surname>Holme</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lund-Larsen Pg</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Raastad</forename>
+				<forename type="middle">Y T</forename>
+				<surname>Ommundsen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Thelle Ds</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Bahr</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Eur J Cardiovasc Prev Rehabil</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="387" to="396" />
+			<date type="published" when="2003" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">The impact of a 6-year comprehensive community trial on the awareness, treatment and control rates of hypertension in Iran: experiences from the Isfahan healthy heart program</title>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Khosravi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mehr Gk</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">R</forename>
+				<surname>Kelishadi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Shirani</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Gharipour</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Tavassoli</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">F</forename>
+				<surname>Noori</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sarrafzadegan</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Cardiovasc Disord</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">61</biblScope>
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Process evaluation of a Dutch community intervention to improve health related behaviour in deprived neighbourhoods</title>
+		<author>
+			<persName>
+				<surname>Kloek</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gc</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lenthe Fj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ym</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ma</forename>
+				<surname>Koelen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mackenbach</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jp</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Soz Praventivmed</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="259" to="272" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Impact evaluation of a Dutch community intervention to improve health-related behaviour in deprived neighbourhoods</title>
+		<author>
+			<persName>
+				<surname>Kloek</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gc</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lenthe</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Fj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Nierop Pw</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ma</forename>
+				<surname>Koelen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mackenbach</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jp</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Place</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="665" to="677" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Changes in skinfold thickness and waist circumference after 12 and 24 months resulting from the NHF-NRG In Balance-project</title>
+		<author>
+			<persName>
+				<forename type="middle">L</forename>
+				<surname>Kwak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sp</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Visscher Tl</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Brug</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Baak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ma</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int J Behav Nutr Phys Act</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">26</biblScope>
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Behavioral and cognitive effects of a worksite-based weight gain prevention program: the NHF-NRG in balance-project</title>
+		<author>
+			<persName>
+				<forename type="middle">L</forename>
+				<surname>Kwak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sp</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Visscher</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Tl</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ma</forename>
+				<surname>Baak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brug</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Occup Environ Med</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="1437" to="1446" />
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">The NHF-NRG In Balance-project: the application of Intervention Mapping in the development, implementation and evaluation of weight gain prevention at the worksite</title>
+		<author>
+			<persName>
+				<forename type="middle">L</forename>
+				<surname>Kwak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sp</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Werkman</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Visscher</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Tl</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ma</forename>
+				<surname>Baak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brug</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Obes Rev</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="347" to="361" />
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">HealthWorks: results of a multi-component group-randomized worksite environmental intervention trial for weight gain prevention</title>
+		<author>
+			<persName>
+				<forename type="middle">Ja</forename>
+				<surname>Linde</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Nygaard Ke</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Mitchell</forename>
+				<forename type="middle">Rf Nr</forename>
+				<surname>Maclehose</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Cousins</forename>
+				<forename type="middle">Lj Jm</forename>
+				<surname>Harnack</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Graham</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Dj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jeffery</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int J Behav Nutr Phys Act</title>
+		<imprint>
+			<biblScope unit="volume">2012</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page">14</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">The &quot; Romsas in Motion &quot; community intervention: program exposure and psychosocial mediated relationships to change in stages of change in physical activity</title>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Lorentzen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Y</forename>
+				<surname>Ommundsen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jenum Ak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Holme</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int J Behav Nutr Phys Act</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">15</biblScope>
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">The &quot; Romsas in Motion &quot; community intervention: mediating effects of psychosocial factors on forward transition in the stages of change in physical activity</title>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Lorentzen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Y</forename>
+				<surname>Ommundsen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jenum Ak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Holme</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Educ Behav</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="348" to="365" />
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<monogr>
+		<title level="m" type="main">Evaluation of a statewide program to reduce chronic disease: The Healthy Hawaii Initiative</title>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Maddock</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">L</forename>
+				<surname>Takeuchi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">B</forename>
+				<surname>Nett</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Irvin</forename>
+				<forename type="middle">C L</forename>
+				<surname>Tanaka</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Matsuoka</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Wood</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2000" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+	</analytic>
+	<monogr>
+		<title level="j">Eval Program Plann</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="293" to="300" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Evaluation of a physical activity promotion program: The example of Agita São Paulo</title>
+		<author>
+			<persName>
+				<surname>Matsudo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Vkr</forename>
+				<surname>Matsudo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Andrade Dr</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Tl</forename>
+				<surname>Araújo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Pratt</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Eval Program Plann</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="301" to="311" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">The Agita Sao Paulo Program as a model for using physical activity to promote health</title>
+		<author>
+			<persName>
+				<surname>Matsudo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Vr</forename>
+				<surname>Matsudo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Tl</forename>
+				<surname>Araujo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Dr</forename>
+				<surname>Andrade</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">El</forename>
+				<surname>Andrade</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>De Oliveira Lc</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Braggion</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gf</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Rev Panam Salud Publica</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="265" to="272" />
+			<date type="published" when="2003" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Promotion of physical activity in a developing country: the Agita Sao Paulo experience</title>
+		<author>
+			<persName>
+				<forename type="middle">V</forename>
+				<surname>Matsudo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Matsudo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">D</forename>
+				<surname>Andrade</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">T</forename>
+				<surname>Araujo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">E</forename>
+				<surname>Andrade</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>De Oliveira Lc</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Braggion</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Public Health Nutr</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="253" to="261" />
+			<date type="published" when="2002" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<author>
+			<persName>
+				<surname>Matsudo Vk</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Matsudo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Tl</forename>
+				<surname>Araujo</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Dr</forename>
+				<surname>Andrade</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Oliveira Lc</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Pc</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Time trends in physical activity in the state of Sao Paulo</title>
+<meeting><address>Brazil</address></meeting>		<imprint>
+			<biblScope unit="page" from="2002" to="2008" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+	</analytic>
+	<monogr>
+		<title level="j">Med Sci Sports Exerc</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="2231" to="2236" />
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<analytic>
+		<title level="a" type="main">Dissemination of a community-based physical activity project: the case of 10,000 steps</title>
+		<author>
+			<persName>
+				<surname>Mummery Wk</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">G</forename>
+				<surname>Schofield</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Hinchliffe</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Joyner</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brown</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Sci Med Sport</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="424" to="430" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">The healthy Hawaii initiative: A social ecological approach promoting healthy communities</title>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Nigg</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Maddock</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Yamauchi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">V</forename>
+				<surname>Pressler</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">B</forename>
+				<surname>Wood</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jackson</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Health Promot</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="310" to="313" />
+			<date type="published" when="2005" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Effect of the Heart At Work program on awareness of risk factors, self-efficacy, and health behaviors</title>
+		<author>
+			<persName>
+				<forename type="first">Pegus</forename>
+				<forename type="middle">C Tl</forename>
+				<surname>Bazzarre</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brown Js</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Menzin</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Occup Environ Med</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page" from="228" to="236" />
+			<date type="published" when="2002" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<monogr>
+		<title level="m" type="main">Promoting dietary change among state health employees in Arkansas through a worksite wellness program: the Healthy Employee Lifestyle Program (HELP) Prev Chronic Dis</title>
+		<author>
+			<persName>
+				<surname>Perez Ap</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Phillips</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Cornell</forename>
+				<forename type="middle">Ce</forename>
+				<surname>Mm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">G</forename>
+				<surname>Mays</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Adams</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009" />
+			<biblScope unit="page">123</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">The Well London program–a cluster randomized trial of community engagement for improving health behaviors and mental wellbeing: baseline survey results</title>
+		<author>
+			<persName>
+				<forename type="first">Phillips</forename>
+				<forename type="middle">G</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Renton</forename>
+				<forename type="middle">A Dg</forename>
+				<surname>Moore</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Bottomley</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Lais</forename>
+				<forename type="middle">E S</forename>
+				<surname>Schmidt</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Yu</forename>
+				<forename type="middle">G M</forename>
+				<surname>Wall</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Tobi</forename>
+				<forename type="middle">P C</forename>
+				<surname>Frostick</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Clow</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Lock</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Petticrew</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Hayes</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Trials</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">105</biblScope>
+			<date type="published" when="2012" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<monogr>
+		<title level="m" type="main">Process evaluation of a community-based program for prevention and control of non-communicable disease in a developing country: The Isfahan Healthy Heart Program</title>
+		<author>
+			<persName>
+				<forename type="first">Rabiei</forename>
+				<forename type="middle">K R</forename>
+				<surname>Kelishadi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">N</forename>
+				<surname>Sarrafzadegan</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ha</forename>
+				<surname>Abedi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Alavi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Heidari</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Bahonar</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Boshtam</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Zare</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sadeghi</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009" />
+			<publisher>BMC Public Health</publisher>
+			<biblScope unit="page">57</biblScope>
+			<pubPlace>Iran</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">Short-term results of community-based interventions for improving physical activity: Isfahan Healthy Heart Programme</title>
+		<author>
+			<persName>
+				<forename type="first">Rabiei</forename>
+				<forename type="middle">K R</forename>
+				<surname>Kelishadi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">N</forename>
+				<surname>Sarrafzadegan</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">G</forename>
+				<surname>Sadri</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Amani</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Arch Med Sci</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="32" to="39" />
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">Worksite Opportunities for Wellness (WOW): effects on cardiovascular disease risk factors after 1 year</title>
+		<author>
+			<persName>
+				<forename type="first">Racette</forename>
+				<surname>Sb</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Deusinger</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ss</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Inman Cl</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Tl</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Highstein Gr</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Buskirk Td</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Steger-May</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Peterson</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="page" from="108" to="114" />
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<analytic>
+		<title level="a" type="main">Body and soul. A dietary intervention conducted through African-American churches</title>
+		<author>
+			<persName>
+				<forename type="first">Resnicow</forename>
+				<forename type="middle">K M</forename>
+				<surname>Campbell</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">C</forename>
+				<surname>Carr</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Wang</forename>
+				<forename type="middle">F T</forename>
+				<surname>Mccarty</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Rahotep</forename>
+				<forename type="middle">S S</forename>
+				<surname>Periasamy</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Doyle</forename>
+				<forename type="middle">C</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Williams</forename>
+				<forename type="middle">A</forename>
+				<surname>Stables</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="97" to="105" />
+			<date type="published" when="2004" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<analytic>
+		<title level="a" type="main">The effectiveness of community-based cycling promotion: findings from the Cycling Connecting Communities project in Sydney, Australia</title>
+		<author>
+			<persName>
+				<forename type="first">Rissel</forename>
+				<forename type="middle">Ce C</forename>
+				<surname>New</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Wen</forename>
+				<forename type="middle">Lm D</forename>
+				<surname>Merom</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Bauman Ae</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Garrard</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int J Behav Nutr Phys Act</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<analytic>
+		<title level="a" type="main">Costs of the &apos;Hartslag Limburg&apos; community heart health intervention</title>
+		<author>
+			<persName>
+				<forename type="first">Ronckers</forename>
+				<forename type="middle">Et W</forename>
+				<surname>Groot</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Ruland</forename>
+				<forename type="middle">M E</forename>
+				<surname>Steenbakkers</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ament</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Public Health</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">51</biblScope>
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<analytic>
+		<title level="a" type="main">The Dutch Heart Health community intervention &apos;Hartslag Limburg&apos;: results of an effect study at individual level</title>
+		<author>
+			<persName>
+				<forename type="first">Ronda</forename>
+				<forename type="middle">G</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">P</forename>
+				<surname>Assema</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Ruland</forename>
+				<forename type="middle">M E</forename>
+				<surname>Candel</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">M</forename>
+				<surname>Steenbakkers</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Ree</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brug</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Promot Int</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="21" to="31" />
+			<date type="published" when="2004" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">The Dutch Heart Health Community Intervention &apos;Hartslag Limburg&apos;: design and results of a process study</title>
+		<author>
+			<persName>
+				<forename type="first">Ronda</forename>
+				<forename type="middle">G</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">P</forename>
+				<surname>Assema</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Ruland</forename>
+				<forename type="middle">E M</forename>
+				<surname>Steenbakkers</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brug</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Educ Res</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="596" to="607" />
+			<date type="published" when="2004" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<analytic>
+		<title level="a" type="main">The Dutch heart health community intervention &apos;Hartslag Limburg&apos;: results of an effect study at organizational level</title>
+		<author>
+			<persName>
+				<forename type="first">Ronda</forename>
+				<forename type="middle">G</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">P</forename>
+				<surname>Assema</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Ruland</forename>
+				<forename type="middle">E M</forename>
+				<surname>Steenbakkers</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">J</forename>
+				<surname>Ree</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brug</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Public Health</title>
+		<imprint>
+			<biblScope unit="volume">119</biblScope>
+			<biblScope unit="page" from="353" to="360" />
+			<date type="published" when="2005" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<analytic>
+		<title level="a" type="main">Effectiveness of a community-directed &apos;healthy lifestyle&apos; program in a remote Australian aboriginal community</title>
+		<author>
+			<persName>
+				<forename type="first">Rowley</forename>
+				<surname>Kg</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Daniel</forename>
+				<forename type="middle">M K</forename>
+				<surname>Skinner</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Skinner</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">O</forename>
+				<forename type="middle">Ga</forename>
+				<surname>White</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Dea</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Aust N Z J Public Health</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="136" to="144" />
+			<date type="published" when="2000" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<monogr>
+		<title level="m" type="main">Do lifestyle interventions work in developing countries? Findings from the Isfahan Healthy Heart Program in the Islamic Republic of Iran. Bull World Health Organ</title>
+		<author>
+			<persName>
+				<forename type="middle">N</forename>
+				<surname>Sarrafzadegan</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">R</forename>
+				<surname>Kelishadi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Esmaillzadeh</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Rabiei</forename>
+				<forename type="middle">N K</forename>
+				<surname>Mohammadifard</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Roohafza</forename>
+				<forename type="middle">H L</forename>
+				<surname>Azadbakht</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Bahonar</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">G</forename>
+				<surname>Sadri</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Amani</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Heidari</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Malekafzali</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009" />
+			<biblScope unit="page" from="39" to="50" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<analytic>
+		<title level="a" type="main">Isfahan Healthy Heart Programme: a comprehensive integrated community-based programme for cardiovascular disease prevention and control. Design, methods and initial experience</title>
+		<author>
+			<persName>
+				<forename type="middle">N</forename>
+				<surname>Sarraf-Zadegan</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Malek</forename>
+				<forename type="middle">G</forename>
+				<surname>Sadri</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">H</forename>
+				<surname>Afzali</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Mohammadi</forename>
+				<forename type="middle">M</forename>
+				<surname>Baghaei</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">N</forename>
+				<surname>Fard</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Shahrokhi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Poormoghaddas</forename>
+				<forename type="middle">H M</forename>
+				<surname>Tolooie</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Sadeghi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Rafiei</forename>
+				<forename type="middle">A M</forename>
+				<surname>Tavassoli</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Rabiei</forename>
+				<forename type="middle">R K</forename>
+				<surname>Kelishadi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">N</forename>
+				<surname>Bashardoost</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Boshtam</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Asgary</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">G</forename>
+				<surname>Naderi</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">T</forename>
+				<surname>Changiz</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Yousefie</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Acta Cardiol</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="page" from="309" to="320" />
+			<date type="published" when="2003" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<analytic>
+		<title level="a" type="main">Effect of 5-year community intervention Hartslag Limburg on cardiovascular risk factors</title>
+		<author>
+			<persName>
+				<surname>Schuit</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Aj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Gc</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Wm</forename>
+				<surname>Verschuren</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Et</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">A</forename>
+				<surname>Ament</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">P</forename>
+				<surname>Assema</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Ree</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ec</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="237" to="242" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<analytic>
+		<title level="a" type="main">A worksite obesity intervention: results from a group-randomized trial</title>
+		<author>
+			<persName>
+				<surname>Siegel Jm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Prelip Ml</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Erausquin</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jt</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Kim</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Sa</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Public Health</title>
+		<imprint>
+			<biblScope unit="volume">100</biblScope>
+			<biblScope unit="page" from="327" to="333" />
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<analytic>
+		<title level="a" type="main">Effects of a community-based, professionally supervised intervention on physical activity levels among residents of Recife</title>
+		<author>
+			<persName>
+				<forename type="middle">P</forename>
+				<surname>Simoes Ej</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Ramos</forename>
+				<forename type="middle">M L</forename>
+				<surname>Pratt</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Munk</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">W</forename>
+				<surname>Damascena</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Perez Dp</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Hoehner Cm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">D</forename>
+				<surname>Gilbertz</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Malta Dc</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Brownson</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Brazil. Am J Public Health</title>
+		<imprint>
+			<biblScope unit="volume">99</biblScope>
+			<biblScope unit="page" from="68" to="75" />
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<analytic>
+		<title level="a" type="main">Effectiveness of the Pasos Adelante chronic disease prevention and control program in a US-Mexico border community</title>
+		<author>
+			<persName>
+				<surname>Staten Lk</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Cutshaw</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Davidson</forename>
+				<forename type="middle">C</forename>
+				<surname>Ca</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Reinschmidt</forename>
+				<forename type="middle">K R</forename>
+				<surname>Stewart</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Roe</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Prev Chronic Dis</title>
+		<imprint>
+			<biblScope unit="volume">2012</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page">08</biblScope>
+			<date type="published" when="2005" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<analytic>
+		<title level="a" type="main">Pasos Adelante: the effectiveness of a community-based chronic disease prevention program</title>
+		<author>
+			<persName>
+				<surname>Staten Lk</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Scheu</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Bronson</forename>
+				<forename type="middle">D</forename>
+				<surname>Ll</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">V</forename>
+				<surname>Pena</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Prev Chronic Dis</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">18</biblScope>
+			<date type="published" when="2005" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<analytic>
+		<title level="a" type="main">The Groningen Active Living Model, an example of successful recruitment of sedentary and underactive older adults</title>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Stevens</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Jong</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lemmink</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ka</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page" from="398" to="401" />
+			<date type="published" when="2008" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b96">
+	<analytic>
+		<title level="a" type="main">Groningen active living model (GALM): stimulating physical activity in sedentary older adults; first results</title>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Stevens</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Ka</forename>
+				<surname>Lemmink</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>De Greef Mh</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="547" to="553" />
+			<date type="published" when="2000" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b97">
+	<monogr>
+		<title level="m" type="main">The impact of disseminating the whole-community project &apos;10,000 Steps&apos;: a RE-AIM analysis</title>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">R</forename>
+				<surname>Acker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">I</forename>
+				<surname>Bourdeaudhuij</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">K</forename>
+				<surname>Cocker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Cardon</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011" />
+			<publisher>BMC Public Health</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b98">
+	<monogr>
+		<title level="m" type="main">Sustainability of the whole-community project &apos;10,000 Steps&apos;: a longitudinal study</title>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">R</forename>
+				<surname>Acker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">I</forename>
+				<surname>Bourdeaudhuij</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">K</forename>
+				<surname>Cocker</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Willem</forename>
+				<forename type="middle">A</forename>
+				<surname>Lm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Cardon</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012" />
+			<publisher>BMC Public Health</publisher>
+			<biblScope unit="page">155</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b99">
+	<analytic>
+		<title level="a" type="main">Evaluation of community level interventions to address social and structural determinants of health: a cluster randomised controlled trial</title>
+		<author>
+			<persName>
+				<forename type="first">Hayes</forename>
+				<forename type="middle">M R</forename>
+				<surname>Wall</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Moore</forename>
+				<forename type="middle">D M</forename>
+				<surname>Petticrew</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Clow</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">E</forename>
+				<surname>Schmidt</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Draper</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Lock</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">R</forename>
+				<surname>Lynch</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Renton</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Public Health</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">207</biblScope>
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b100">
+	<analytic>
+		<title level="a" type="main">Promoting physical activity in women: evaluation of a 2-year community-based intervention in Sydney, Australia</title>
+		<author>
+			<persName>
+				<forename type="first">Wen</forename>
+				<forename type="middle">Lm</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Thomas</forename>
+				<forename type="middle">M</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Jones</forename>
+				<forename type="middle">H N</forename>
+				<surname>Orr</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">R</forename>
+				<surname>Moreton</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">L</forename>
+				<surname>King</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">P</forename>
+				<surname>Hawe</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Humphries</forename>
+				<forename type="middle">J J</forename>
+				<surname>Bindon</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Schicht</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Corne</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Bauman</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Promot Int</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="127" to="137" />
+			<date type="published" when="2002" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b101">
+	<analytic>
+		<title level="a" type="main">The health-e-AME faith-based physical activity initiative: Description and baseline findings</title>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Wilcox</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Anderson</forename>
+				<forename type="middle">M T</forename>
+				<surname>Laken</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Bryant</forename>
+				<forename type="middle">M D</forename>
+				<surname>Bopp</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Carter</forename>
+				<forename type="middle">R</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Gethers</forename>
+				<forename type="middle">O</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Jordan</forename>
+				<forename type="middle">J L</forename>
+				<surname>Mcclorin</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">O</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Rourke</forename>
+				<forename type="middle">K</forename>
+				<surname>Parrot Aw</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">R</forename>
+				<surname>Swinton</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Yancey</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Promot Pract</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="69" to="78" />
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b102">
+	<analytic>
+		<title level="a" type="main">Beijing health promoting universities: practice and evaluation</title>
+		<author>
+			<persName>
+				<forename type="first">Lan</forename>
+				<forename type="middle">T Z</forename>
+				<surname>Xiangyang</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Xueping</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Z</forename>
+				<surname>Tao</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Yuzhen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jagusztyn</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Promot Int</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="107" to="113" />
+			<date type="published" when="2003" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b103">
+	<analytic>
+		<title level="a" type="main">A food store-based environmental intervention is associated with reduced BMI and improved psychosocial factors and food-related behaviors on the Navajo nation</title>
+		<author>
+			<persName>
+				<forename type="first">Kim</forename>
+				<forename type="middle">J Em</forename>
+				<surname>Gittelsohn</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>He</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Pardilla</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Nutr</title>
+		<imprint>
+			<biblScope unit="volume">143</biblScope>
+			<biblScope unit="page" from="1494" to="1500" />
+			<date type="published" when="2013" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b104">
+	<analytic>
+		<title level="a" type="main">Healthy Alberta Communities: Impact of a three-year community-based obesity and chronic disease prevention intervention</title>
+		<author>
+			<persName>
+				<forename type="first">Raine</forename>
+				<forename type="middle">Kd R</forename>
+				<surname>Plotnikoff</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">D</forename>
+				<surname>Schopflocher</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">E</forename>
+				<surname>Lytvyak</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Nykiforuk</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ci</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">K</forename>
+				<surname>Storey</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">A</forename>
+				<surname>Ohinmaa</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Veugelers</forename>
+				<forename type="middle">L P</forename>
+				<surname>Purdy</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Wild</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="955" to="962" />
+			<date type="published" when="2013" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b105">
+	<analytic>
+		<title level="a" type="main">What does it mean to be pragmatic? Pragmatic methods, measures, and models to facilitate research translation</title>
+		<author>
+			<persName>
+				<surname>Glasgow</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Educ Behav</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="page" from="257" to="265" />
+			<date type="published" when="2013" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b106">
+	<analytic>
+		<title level="a" type="main">A RE-AIM evaluation of theory-based physical activity interventions</title>
+		<author>
+			<persName>
+				<forename type="middle">I</forename>
+				<surname>Antikainen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ellis</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Sport Exerc Psychol</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="198" to="214" />
+			<date type="published" when="2011" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b107">
+	<analytic>
+		<title level="a" type="main">Behavior change intervention research in community settings: how generalizable are the results?</title>
+		<author>
+			<persName>
+				<forename type="first">Estabrooks</forename>
+				<forename type="middle">Da Pa</forename>
+				<surname>Dzewaltowski</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">S</forename>
+				<surname>Bull</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Glasgow</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health Promot Int</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="235" to="245" />
+			<date type="published" when="2004" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b108">
+	<analytic>
+		<title level="a" type="main">Review of external validity reporting in childhood obesity prevention research</title>
+		<author>
+			<persName>
+				<forename type="first">Klesges</forename>
+				<forename type="middle">Lm Da</forename>
+				<surname>Dzewaltowski</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Glasgow</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Prev Med</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="216" to="223" />
+			<date type="published" when="2008" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b109">
+	<monogr>
+		<title level="m" type="main">Worksite physical activity interventions and obesity: a review of European studies (the HOPE project) Obes Facts</title>
+		<author>
+			<persName>
+				<forename type="first">Rostami</forename>
+				<forename type="middle">A C</forename>
+				<surname>Vuillemin</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Maes</forename>
+				<forename type="middle">L</forename>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<forename type="middle">E</forename>
+				<surname>Cauwenberghe</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<surname>Lenthe Fj</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">De</forename>
+				<forename type="middle">J</forename>
+				<surname>Brug</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">I</forename>
+				<surname>Bourdeaudhuij</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Oppert</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Jm</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011" />
+			<biblScope unit="page" from="479" to="488" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b110">
+	<analytic>
+		<title level="a" type="main">Assessing the internal and external validity of mobile health physical activity promotion interventions: a systematic literature review using the RE-AIM framework</title>
+		<author>
+			<persName>
+				<surname>Blackman Kc</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Zoellner</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Berrey</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Alexander</forename>
+				<forename type="middle">R</forename>
+				<surname>Lm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">J</forename>
+				<surname>Fanning</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Jl</forename>
+				<surname>Hill</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Estabrooks</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Pa</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Med Internet Res</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">224</biblScope>
+			<date type="published" when="2013" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b111">
+	<monogr>
+		<title level="m" type="main">A systematic review of eHealth cancer prevention and control interventions: new technology, same methods and designs? Transl Behav Med</title>
+		<author>
+			<persName>
+				<forename type="first">Rabin</forename>
+				<forename type="middle">M B</forename>
+				<surname>Sanchez</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">B</forename>
+				<surname>Gaglio</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">M</forename>
+				<surname>Henton</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Purcell</forename>
+				<forename type="middle">M P</forename>
+				<surname>Elzarrad</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Glasgow</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013" />
+			<biblScope unit="page" from="392" to="401" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b112">
+	<monogr>
+		<title level="m" type="main">What is actually measured in process evaluations for worksite health promotion programs: a systematic review</title>
+		<author>
+			<persName>
+				<forename type="middle">D</forename>
+				<surname>Wierenga</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<surname>Lh</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Duijts</forename>
+				<forename type="middle">P S</forename>
+				<surname>Empelen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Hildebrandt</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Van</forename>
+				<surname>Vh</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Mechelen</surname>
+			</persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013" />
+			<publisher>BMC Public Health</publisher>
+			<biblScope unit="page">1190</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b113">
+	<analytic>
+		<title level="a" type="main">The future of health behavior change research: what is needed to improve translation of research into health promotion practice?</title>
+		<author>
+			<persName>
+				<surname>Glasgow Re</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Lm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="middle">Da</forename>
+				<surname>Dzewaltowski</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Bull</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ss</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Estabrooks</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ann Behav Med</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="3" to="12" />
+			<date type="published" when="2004" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b114">
+	<analytic>
+		<title level="a" type="main">Diffusion theory and knowledge dissemination, utilization, and integration in public health</title>
+		<author>
+			<persName>
+				<surname>Green Lw</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Ottoson</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">Garcia</forename>
+				<forename type="middle">C</forename>
+				<surname>Jm</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Hiatt</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annu Rev Public Health</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="151" to="174" />
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b115">
+	<analytic>
+		<title level="a" type="main">Search strategy, existing of keywords used for inclusion, and keywords used for exclusion (118k) http://www.ijbnpa.org/content/supplementary/s12966-014-0147-3-s1.pdf Additional file 2. Characteristics of the included studies. Characteristics of the identified studies, including information on the focus of the intervention, study design, target population, study participants, intervention components, outcome measures and geographical information (262k) http://www.ijbnpa.org/content/supplementary/s12966-014-0147-3-s2.pdf Additional file 3. RE-AIM evaluation. Reach, Effectiveness, Adoption, Implementation and Maintenance of the included interventions</title>
+	</analytic>
+	<monogr>
+		<title level="m">Addtional files provided with this submission: Additional file 1. Search strategy</title>
+	</monogr>
+</biblStruct>
+
+		</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

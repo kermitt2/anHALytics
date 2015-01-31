@@ -1,0 +1,1579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" 
+ xmlns:mml="http://www.w3.org/1998/Math/MathML">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Enhanced humanization and affinity maturation of neutralizing anti-hepatitis B virus preS1 antibody based on antigen–antibody complex structure</title>
+			</titleStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName>
+								<forename type="first">Jin</forename>
+							</persName>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Hong</forename>
+								<surname>Kim</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Institute of Antibody Research</orgName>
+								<orgName type="institution">Kangwon National University</orgName>
+								<address>
+									<postCode>200-701</postCode>
+									<settlement>Chuncheon</settlement>
+									<country key="KR">Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Philippe</forename>
+								<surname>Gripon</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Institut de Recherche Santé Environnement et Travail (IRSET) -U.1085</orgName>
+								<orgName type="institution">Institut National de la Santé et de la Recherche Médicale (Inserm)</orgName>
+								<address>
+									<settlement>Rennes, Bretagne</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation>
+								<orgName type="laboratory">Structure Fédérative Biosit UMS 3480 CNRS-US18 Inserm</orgName>
+								<orgName type="institution">Université de Rennes 1</orgName>
+								<address>
+									<settlement>Rennes, Bretagne, Rennes, Bretagne</settlement>
+									<country>France, France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Fidaa</forename>
+								<surname>Bouezzedine</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Institut de Recherche Santé Environnement et Travail (IRSET) -U.1085</orgName>
+								<orgName type="institution">Institut National de la Santé et de la Recherche Médicale (Inserm)</orgName>
+								<address>
+									<settlement>Rennes, Bretagne</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation>
+								<orgName type="laboratory">Structure Fédérative Biosit UMS 3480 CNRS-US18 Inserm</orgName>
+								<orgName type="institution">Université de Rennes 1</orgName>
+								<address>
+									<settlement>Rennes, Bretagne, Rennes, Bretagne</settlement>
+									<country>France, France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Mun</forename>
+								<forename type="middle">Sik</forename>
+								<surname>Jeong</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Institute of Antibody Research</orgName>
+								<orgName type="institution">Kangwon National University</orgName>
+								<address>
+									<postCode>200-701</postCode>
+									<settlement>Chuncheon</settlement>
+									<country key="KR">Korea</country>
+								</address>
+							</affiliation>
+							<affiliation>
+								<orgName type="department" key="dep1">Department of Systems Immunology</orgName>
+								<orgName type="department" key="dep2">College of Biomedical Science</orgName>
+								<orgName type="institution">Kangwon National University</orgName>
+								<address>
+									<postCode>200-701</postCode>
+									<settlement>Chuncheon</settlement>
+									<country key="KR">Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Seung-Wook</forename>
+								<surname>Chi</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department" key="dep1">Medical Proteomics Research Center</orgName>
+								<orgName type="department" key="dep2">Institute of Bioscience and Biotechnology</orgName>
+								<address>
+									<postCode>305-806</postCode>
+									<settlement>Daejeon</settlement>
+									<country>Korea Research, Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Seong-Eon</forename>
+								<surname>Ryu</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Department of Bio-engineering and Institute for Bioengineering and Biopharmaceutical Research</orgName>
+								<orgName type="institution">Hanyang University</orgName>
+								<address>
+									<postCode>133-791</postCode>
+									<settlement>Seoul</settlement>
+									<country key="KR">Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Hyo</forename>
+								<surname>Jeong</surname>
+							</persName>
+							<affiliation>
+								<orgName type="department">Institute of Antibody Research</orgName>
+								<orgName type="institution">Kangwon National University</orgName>
+								<address>
+									<postCode>200-701</postCode>
+									<settlement>Chuncheon</settlement>
+									<country key="KR">Korea</country>
+								</address>
+							</affiliation>
+							<affiliation>
+								<orgName type="department" key="dep1">Department of Systems Immunology</orgName>
+								<orgName type="department" key="dep2">College of Biomedical Science</orgName>
+								<orgName type="institution">Kangwon National University</orgName>
+								<address>
+									<postCode>200-701</postCode>
+									<settlement>Chuncheon</settlement>
+									<country key="KR">Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName>
+								<forename type="first">Hong</forename>
+							</persName>
+						</author>
+						<title level="a" type="main">Enhanced humanization and affinity maturation of neutralizing anti-hepatitis B virus preS1 antibody based on antigen–antibody complex structure</title>
+					</analytic>
+					<note>* Corresponding author:</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<profileDesc>
+			<textClass>
+				<keywords type="author">
+					<list>
+						<item>
+							<term>humanized antibody</term>
+						</item>
+						<item>
+							<term>specificity-determining residue grafting</term>
+						</item>
+						<item>
+							<term>affinity 
+ maturation</term>
+						</item>
+						<item>
+							<term>HBV</term>
+						</item>
+						<item>
+							<term>preS1</term>
+						</item>
+						<item>
+							<term>virus neutralization</term>
+						</item>
+					</list>
+				</keywords>
+			</textClass>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<front>
+			<div type="abstract">
+				<head>Abstract</head>
+<p>To improve a previously constructed broadly neutralizing hepatitis B virus (HBV)-specific preS1 humanized antibody (HzKR127), we further humanized it through specificity-determining residue (SDR) grafting. Moreover, we improved affinity by mutating two residues in heavy-chain complementarity-determining regions (CDR), on the basis of the crystal structure of the antigen–antibody complex. HzKR127-3.2 exhibited 2.5-fold higher affinity and enhanced virus-neutralizing activity compared to the original KR127 antibody and showed less immunogenic potential than HzKR127. Enhanced virus-neutralizing activity was achieved by the increased association rate, providing insights into engineering potent antibody therapeutics for HBV immunoprophylaxis. HzKR127-3.2 may be a good candidate for HBV immunoprophylaxis.</p>
+			</div>
+		</front>
+		<body>
+			<figure>
+				<trash>FR1 HCDR1 FR2 HCDR2 1 10 20 30 40 52a 60 KR127 QVQLQQSGPELVKPGASVKISCKASGYAFS SSWMN WVKQRPGQGLEWIG RIYPGDGDTNYNGKFKG DP7</trash>
+
+
+			</figure>
+
+			<p>--------A-VK-------V-------T-T -YY-H --R-A-------M- I-N-SG-S-S-AQ--Q- HzKR127 --------A-V--------V---------- ----- --R-A--------- -----------AQ--Q- HzKR127-3</p>
+
+			<p>--------A-VK-------V-------T-T ----- --R-A-------M-</p>
+
+			<figure>
+				<trash>HzKR127-3.1</trash>
+
+
+			</figure>
+
+			<p>--------A-VK-------V-------T-T ----- --R-A-------M-</p>
+
+			<figure>
+				<trash>HzKR127-3.2</trash>
+
+
+			</figure>
+
+			<p>--------A-VK-------V-------T-T ----- --R-A-------M-</p>
+
+			<figure>
+				<trash>FR3 HCDR3 FR4 70 82abc 90 102 110 KR127 KATLTADKSSSTAYMQLSSLTSVDSAVYFCAR EYDEAY WGQGTLVTVSA DP7</trash>
+
+
+			</figure>
+
+			<p>RV-M-R-T-T--V--E----R-E-T---Y--- - ----------S HzKR127I ---------T-----E----R-E-T------- ------ ----------S</p>
+
+			<head>HzKR127-3</head>
+
+			<p>RV-M-----T--V--E----R-E-T---Y--- ------ ----------S</p>
+
+			<figure>
+				<head>HzKR127-3.1</head>
+
+
+			</figure>
+
+			<p>RV-M-----T--V--E----R-E-T---Y--- --A--- ----------S</p>
+
+			<figure>
+				<trash>HzKR127-3.2</trash>
+
+
+			</figure>
+
+			<p>RV-M-----T--V--E----R-E-T---Y--- --A--- ----------S</p>
+
+			<figure>
+				<trash>FR1 LCDR1 FR2 LCDR2 10 20 27abcd 30 40 50 KR127 DILMTQTPLILSVTIGQPASISC KSSQSLLYSNGKTYLN WLLQRPGQSPKRLIY LVSKLDS DPK12</trash>
+
+
+			</figure>
+
+			<p>--V------S----P-------- -------H-D-----Y</p>
+
+			<formula>-V-NRF- HzKR127</formula>
+
+			<p>---------S----P-------- ----------------</p>
+
+			<formula>------- HzKR127-3</formula>
+
+			<p>--V------S----P-------- ----------------</p>
+
+			<figure>
+				<trash>---NR-- FR3 LCDR3 FR4 60 70 80 90 100 KR127 GVPDRFTGSGSGTDFTLKIIRVEAEDLGVYYC VQGTHFPQT FGGGTKLEIKR DPK12</trash>
+
+
+			</figure>
+
+			<p>------S------------S------V----- M-SIQL-L-</p>
+
+			<head>HzKR127</head>
+
+			<p>------S------------S------V----- ---------</p>
+
+			<head>HzKR127-3</head>
+
+			<p>------S------------S------V----- ---------</p>
+
+			<figure>
+				<trash>A B A D H1 loop preS1 Lys73H H3 loop H2 loop Gly54H H2 loop Asn58H H3 loop preS1 B L2 loop Leu36L Glu98H H3 loop C Leu54L Lys53L L2 loop H3 loop preS1 Pro53H Ile51H Ala71H Trp103H B Arg46L Asp97H Tyr96H Gln96L Glu98H Asn35H Glu95H Arg94H Tyr102H A Arg46L Asp97H Tyr96H Gln96L Asn35H Glu95H Arg94H Tyr102H Glu98H (kDa) 35 25 KR127 hzKR127-3.1 GST-preS1 hzKR127-3.2 A ACHN 293T 293T-S1-L1 SCK-L1 B16F1 CHO B A Ayw subtype Adr subtype B C</trash>
+
+
+			</figure>
+
+			<p>Table 1. Affinity determination of murine and humanized antibodies using Octet Red Antibody name K D (M) K on (1/Ms) K off (1/s)</p>
+
+			<figure>
+				<trash>KR127 1.23 x 10 -9 4.68 x 10 4 5.74 x 10 -5 HzKR127-3 3.97 x 10 -9 4.23 x 10 4 1.68 x 10 -4 HzKR127-3.1 8.13 x 10 -10 5.08 x 10 4 4.13 x 10 -5 HzKR127-3.2 4.93 x 10 -10 1.08 x 10 5 5.32 x 10 -5</trash>
+
+
+			</figure>
+
+			<p>Table 2. Assessment of potential immunogenicity of humanized antibodies by T-cell epitope analysis. Prediction of HLA-DR binding sites by ProPred analysis (www.imtech.res.in/raghave/proped/index.html)񮽙</p>
+
+			<figure>
+				<table>Antibody HzKR127 HzKR127-3.2 HzKR127 HzKR127-3.2 HzKR127 HzKR127-3.2 Location HCDR2/FR3 FR2 in VL FR2/LCDR2</table>
+
+			</figure>
+
+			<head>Peptide sequence YNGKFKGKA YAQKFQGRV WLLQKPGQS WLLQKPGQP IYLVSKLDS IYLVSNRDS MHC Class II molecules that Bind to peptide DRB1_0801 DRB1_0802 DRB1_0804 DRB1_0806 DRB1_0813 DRB1_0817 DRB1_1307 DRB1_0305 DRB1_0309 DRB1_0401 DRB1_0426 DRB1_0802 DRB1_1101 DRB1_1114 DRB1_1120 DRB1_1128 DRB1_1302 DRB1_1305 DRB1_1307 DRB1_1323 DRB5_0101 DRB5_0105 DRB1_0301 DRB1_0305 DRB1_0306 DRB1_0307 DRB1_0308 DRB1_0309 DRB1_0311 DRB1_0801 DRB1_0802 DRB1_0804 DRB1_0806 DRB1_0813 DRB1_0817 DRB1_1101 DRB1_1102 DRB1_1104 DRB1_1106 DRB1_1107 DRB1_1114 DRB1_1120 DRB1_1121 DRB1_1128 DRB1_1301 DRB1_1302 DRB1_1304 DRB1_1305 DRB1_1307 DRB1_1311 DRB1_1321 DRB1_1322 DRB1_1323 DRB1_1327 DRB1_1328</head>
+
+			<p>DRB1_0402 DRB1_0404 DRB1_0405 DRB1_0408 DRB1_0410 DRB1_0423 DRB1_1102 DRB1_1121 DRB1_1322 DRB5_0101</p>
+
+			<p>Total number 7 0 15 0 33 10</p>
+
+		</body>
+		<back>
+			<div type="references">
+
+		<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Monoclonal antibody therapeutics: history and future</title>
+		<author>
+			<persName>
+				<forename type="first">N</forename>
+				<forename type="middle">A</forename>
+				<surname>Buss</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Curr Opin Pharmacol</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="615" to="22" />
+			<date type="published" when="2012" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Human immune response to multiple injections of murine monoclonal IgG</title>
+		<author>
+			<persName>
+				<forename type="first">D</forename>
+				<forename type="middle">L</forename>
+				<surname>Shawler</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Immunol</title>
+		<imprint>
+			<biblScope unit="volume">135</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="1530" to="5" />
+			<date type="published" when="1985" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Replacing the complementarity-determining regions in a human antibody with those from a mouse</title>
+		<author>
+			<persName>
+				<forename type="first">P</forename>
+				<forename type="middle">T</forename>
+				<surname>Jones</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="issue">6069</biblScope>
+			<biblScope unit="page" from="321" to="522" />
+			<date type="published" when="1986" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">A humanized antibody that binds to the interleukin 2 receptor</title>
+		<author>
+			<persName>
+				<forename type="first">C</forename>
+				<surname>Queen</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci U S A</title>
+		<imprint>
+			<biblScope unit="issue">24</biblScope>
+			<biblScope unit="page" from="86" to="10029" />
+			<date type="published" when="1989" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Standard conformations for the canonical structures of immunoglobulins</title>
+		<author>
+			<persName>
+				<forename type="first">B</forename>
+				<surname>Al-Lazikani</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">A</forename>
+				<forename type="middle">M</forename>
+				<surname>Lesk</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">C</forename>
+				<surname>Chothia</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">273</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="927" to="48" />
+			<date type="published" when="1997" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<author>
+			<persName>
+				<forename type="first">G</forename>
+				<surname>Winter</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">W</forename>
+				<forename type="middle">J</forename>
+				<surname>Harris</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Humanized</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Immunol Today</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="243" to="6" />
+			<date type="published" when="1993" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Antibody humanization methods -a review and update</title>
+		<author>
+			<persName>
+				<forename type="first">Y</forename>
+				<surname>Safdari</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biotechnol Genet Eng Rev</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="175" to="86" />
+			<date type="published" when="2013" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Immunogenicity of engineered antibodies</title>
+		<author>
+			<persName>
+				<forename type="first">W</forename>
+				<forename type="middle">Y</forename>
+				<surname>Hwang</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">J</forename>
+				<surname>Foote</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Methods</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="3" to="10" />
+			<date type="published" when="2005" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">The immunogenicity of humanized and fully human antibodies: residual immunogenicity resides in the CDR regions</title>
+		<author>
+			<persName>
+				<forename type="first">F</forename>
+				<forename type="middle">A</forename>
+				<surname>Harding</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">MAbs</title>
+		<imprint>
+			<biblScope unit="issue">23</biblScope>
+			<biblScope unit="page" from="256" to="65" />
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Anatomy of the antibody molecule</title>
+		<author>
+			<persName>
+				<forename type="first">E</forename>
+				<forename type="middle">A</forename>
+				<surname>Padlan</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Immunol</title>
+		<imprint>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="31" to="169" />
+			<date type="published" when="1994" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">SDR grafting of a murine antibody using multiple human germline templates to minimize its immunogenicity</title>
+		<author>
+			<persName>
+				<forename type="first">N</forename>
+				<forename type="middle">R</forename>
+				<surname>Gonzales</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Immunol</title>
+		<imprint>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="41" to="863" />
+			<date type="published" when="2004" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Construction, affinity maturation, and biological characterization of an anti-tumor-associated glycoprotein-72 humanized antibody</title>
+		<author>
+			<persName>
+				<forename type="first">S</forename>
+				<forename type="middle">O</forename>
+				<surname>Yoon</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Biol Chem</title>
+		<imprint>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="281" to="6985" />
+			<date type="published" when="2006" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Construction of a humanized antibody to hepatitis B surface antigen by specificity-determining residues (SDR)-grafting and de-immunization</title>
+		<author>
+			<persName>
+				<forename type="first">K</forename>
+				<forename type="middle">S</forename>
+				<surname>Kim</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biochem Biophys Res Commun</title>
+		<imprint>
+			<biblScope unit="volume">396</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="231" to="7" />
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Hepatitis B virus infection--natural history and clinical consequences</title>
+		<author>
+			<persName>
+				<forename type="first">D</forename>
+				<surname>Ganem</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">A</forename>
+				<forename type="middle">M</forename>
+				<surname>Prince</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">N Engl J Med</title>
+		<imprint>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="350" to="1118" />
+			<date type="published" when="2004" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Large surface proteins of hepatitis B virus containing the pre-s sequence</title>
+		<author>
+			<persName>
+				<forename type="first">K</forename>
+				<forename type="middle">H</forename>
+				<surname>Heermann</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Virol</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="396" to="402" />
+			<date type="published" when="1984" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Antibody to hepatitis B surface antigen after a single inoculation of uncoupled synthetic HBsAg peptides</title>
+		<author>
+			<persName>
+				<forename type="first">G</forename>
+				<forename type="middle">R</forename>
+				<surname>Dreesman</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="issue">5845</biblScope>
+			<biblScope unit="page" from="295" to="158" />
+			<date type="published" when="1982" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Immunogenicity of the gene S and Pre-S domains in hepatitis B virions and HBsAg filaments</title>
+		<author>
+			<persName>
+				<forename type="first">K</forename>
+				<forename type="middle">H</forename>
+				<surname>Heermann</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Intervirology</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="14" to="25" />
+			<date type="published" when="1987" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">A synthetic peptide vaccine involving the product of the pre-S(2) region of hepatitis B virus DNA: protective efficacy in chimpanzees</title>
+		<author>
+			<persName>
+				<forename type="first">Y</forename>
+				<surname>Itoh</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci U S A</title>
+		<imprint>
+			<biblScope unit="issue">23</biblScope>
+			<biblScope unit="page" from="83" to="9174" />
+			<date type="published" when="1986" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Pre-S1 antigens and antibodies early in the course of acute hepatitis B virus infection</title>
+		<author>
+			<persName>
+				<forename type="first">M</forename>
+				<forename type="middle">Q</forename>
+				<surname>Klinkert</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Virol</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="522" to="5" />
+			<date type="published" when="1986" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Antibodies to synthetic peptides from the preS1 region of the hepatitis B virus (HBV) envelope (env) protein are virus-neutralizing and protective</title>
+		<author>
+			<persName>
+				<forename type="first">A</forename>
+				<forename type="middle">R</forename>
+				<surname>Neurath</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">B</forename>
+				<surname>Seto</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">N</forename>
+				<surname>Strick</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Vaccine</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="234" to="6" />
+			<date type="published" when="1989" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Identification and chemical synthesis of a host cell receptor binding site on hepatitis B virus</title>
+		<author>
+			<persName>
+				<forename type="first">A</forename>
+				<forename type="middle">R</forename>
+				<surname>Neurath</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cell</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="429" to="36" />
+			<date type="published" when="1986" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Identification of an attachment site for human liver plasma membranes on hepatitis B virus particles</title>
+		<author>
+			<persName>
+				<forename type="first">P</forename>
+				<surname>Pontisso</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Virology</title>
+		<imprint>
+			<biblScope unit="volume">173</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="522" to="30" />
+			<date type="published" when="1989" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Infection process of the hepatitis B virus depends on the presence of a defined sequence in the pre-S1 domain</title>
+		<author>
+			<persName>
+				<forename type="first">Le</forename>
+				<surname>Seyec</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">J</forename>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Virol</title>
+		<imprint>
+			<biblScope unit="volume">73</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="2052" to="7" />
+			<date type="published" when="1999" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Infection of a human hepatoma cell line by hepatitis B virus</title>
+		<author>
+			<persName>
+				<forename type="first">P</forename>
+				<surname>Gripon</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci U S A</title>
+		<imprint>
+			<biblScope unit="issue">24</biblScope>
+			<biblScope unit="page" from="99" to="15655" />
+			<date type="published" when="2002" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Pre-s1 antigen-dependent infection of Tupaia hepatocyte cultures with human hepatitis B virus</title>
+		<author>
+			<persName>
+				<forename type="first">D</forename>
+				<surname>Glebe</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Virol</title>
+		<imprint>
+			<biblScope unit="issue">17</biblScope>
+			<biblScope unit="page" from="77" to="9511" />
+			<date type="published" when="2003" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Efficient inhibition of hepatitis B virus infection by acylated peptides derived from the large viral surface protein</title>
+		<author>
+			<persName>
+				<forename type="first">P</forename>
+				<surname>Gripon</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">I</forename>
+				<surname>Cannie</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">S</forename>
+				<surname>Urban</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Virol</title>
+		<imprint>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="79" to="1613" />
+			<date type="published" when="2005" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">A function essential to viral entry underlies the hepatitis B virus &quot;a&quot; determinant</title>
+		<author>
+			<persName>
+				<forename type="first">J</forename>
+				<surname>Salisse</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">C</forename>
+				<surname>Sureau</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Virol</title>
+		<imprint>
+			<biblScope unit="issue">18</biblScope>
+			<biblScope unit="page" from="83" to="9321" />
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Sodium taurocholate cotransporting polypeptide is a functional receptor for human hepatitis B and D virus</title>
+		<author>
+			<persName>
+				<forename type="first">H</forename>
+				<surname>Yan</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Elife</title>
+		<imprint>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">00049</biblScope>
+			<date type="published" when="2012" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">A conformational heparan sulfate binding site essential to infectivity overlaps with the conserved hepatitis B virus a-determinant</title>
+		<author>
+			<persName>
+				<forename type="first">C</forename>
+				<surname>Sureau</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">J</forename>
+				<surname>Salisse</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Hepatology</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="985" to="94" />
+			<date type="published" when="2013" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Prevention of perinatally transmitted hepatitis B virus infections with hepatitis B immune globulin and hepatitis B vaccine</title>
+		<author>
+			<persName>
+				<forename type="first">R</forename>
+				<forename type="middle">P</forename>
+				<surname>Beasley</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Lancet</title>
+		<imprint>
+			<biblScope unit="issue">28359</biblScope>
+			<biblScope unit="page" from="1099" to="102" />
+			<date type="published" when="1983" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Improved outcome of orthotopic liver transplantation for chronic hepatitis B cirrhosis with aggressive passive immunization</title>
+		<author>
+			<persName>
+				<forename type="first">R</forename>
+				<forename type="middle">W</forename>
+				<surname>Mcgory</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transplantation</title>
+		<imprint>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="61" to="1358" />
+			<date type="published" when="1996" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Prophylaxis in liver transplant recipients using a fixed dosing schedule of hepatitis B immunoglobulin</title>
+		<author>
+			<persName>
+				<forename type="first">N</forename>
+				<forename type="middle">A</forename>
+				<surname>Terrault</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Hepatology</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1327" to="33" />
+			<date type="published" when="1996" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Mouse monoclonal antibodies to hepatitis B virus preS1 produced after immunization with recombinant preS1 peptide</title>
+		<author>
+			<persName>
+				<forename type="first">C</forename>
+				<forename type="middle">J</forename>
+				<surname>Ryu</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Hybridoma</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="185" to="9" />
+			<date type="published" when="2000" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Fine mapping of virus-neutralizing epitopes on hepatitis B virus PreS1</title>
+		<author>
+			<persName>
+				<forename type="first">C</forename>
+				<forename type="middle">Y</forename>
+				<surname>Maeng</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Virology</title>
+		<imprint>
+			<biblScope unit="volume">270</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="9" to="16" />
+			<date type="published" when="2000" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">In vivo neutralization of hepatitis B virus infection by an anti-preS1 humanized antibody in chimpanzees</title>
+		<author>
+			<persName>
+				<forename type="first">H</forename>
+				<forename type="middle">J</forename>
+				<surname>Hong</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Virology</title>
+		<imprint>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="318" to="134" />
+			<date type="published" when="2004" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Broadly neutralizing anti-hepatitis B virus antibody reveals a complementarity determining region H3 lid-opening mechanism</title>
+		<author>
+			<persName>
+				<forename type="first">S</forename>
+				<forename type="middle">W</forename>
+				<surname>Chi</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci</title>
+		<imprint>
+			<biblScope unit="issue">22</biblScope>
+			<biblScope unit="page" from="104" to="9230" />
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">L1 cell adhesion molecule is a novel therapeutic target in intrahepatic cholangiocarcinoma</title>
+		<author>
+			<persName>
+				<forename type="first">J</forename>
+				<forename type="middle">K</forename>
+				<surname>Min</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Clin Cancer Res</title>
+		<imprint>
+			<biblScope unit="issue">14</biblScope>
+			<biblScope unit="page" from="16" to="3571" />
+			<date type="published" when="2010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">A new epitope tag from hepatitis B virus preS1 for immunodetection, localization and affinity purification of recombinant proteins</title>
+		<author>
+			<persName>
+				<forename type="first">M</forename>
+				<forename type="middle">S</forename>
+				<surname>Oh</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Immunol Methods</title>
+		<imprint>
+			<biblScope unit="volume">283</biblScope>
+			<biblScope unit="page" from="1" to="2" />
+			<date type="published" when="2003" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Production of hepatitis B virus particles in Hep G2 cells transfected with cloned hepatitis B virus DNA</title>
+		<author>
+			<persName>
+				<forename type="first">M</forename>
+				<forename type="middle">A</forename>
+				<surname>Sells</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">M</forename>
+				<forename type="middle">L</forename>
+				<surname>Chen</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">G</forename>
+				<surname>Acs</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci U S A</title>
+		<imprint>
+			<biblScope unit="volume">84</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1005" to="9" />
+			<date type="published" when="1987" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Myristylation of the hepatitis B virus large surface protein is essential for viral infectivity</title>
+		<author>
+			<persName>
+				<forename type="first">P</forename>
+				<surname>Gripon</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Virology</title>
+		<imprint>
+			<biblScope unit="volume">213</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="292" to="9" />
+			<date type="published" when="1995" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Nucleotide sequence of the hepatitis B virus genome (subtype ayw) cloned in E. coli</title>
+		<author>
+			<persName>
+				<forename type="first">F</forename>
+				<surname>Galibert</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="issue">5733</biblScope>
+			<biblScope unit="page" from="281" to="646" />
+			<date type="published" when="1979" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">HBVdb: a knowledge database for Hepatitis B Virus</title>
+		<author>
+			<persName>
+				<forename type="first">J</forename>
+				<surname>Hayer</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="page" from="41" to="566" />
+			<date type="published" when="2013" />
+		</imprint>
+	</monogr>
+	<note>Database. issue</note>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">In vitro neutralization of hepatitis B virus by monoclonal antibodies against the viral surface antigen</title>
+		<author>
+			<persName>
+				<forename type="first">C</forename>
+				<forename type="middle">J</forename>
+				<surname>Ryu</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Med Virol</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="226" to="33" />
+			<date type="published" when="1997" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Efficient expression, purification and characterization of hepatitis B virus preS1 from Escherichia coli</title>
+		<author>
+			<persName>
+				<forename type="first">H</forename>
+				<forename type="middle">S</forename>
+				<surname>Kim</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">H</forename>
+				<forename type="middle">J</forename>
+				<surname>Hong</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biotechnology letters</title>
+		<imprint>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="17" to="871" />
+			<date type="published" when="1995" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Reproducible high level infection of cultured adult human hepatocytes by hepatitis B virus: effect of polyethylene glycol on adsorption and penetration</title>
+		<author>
+			<persName>
+				<forename type="first">P</forename>
+				<surname>Gripon</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">C</forename>
+				<surname>Diot</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">C</forename>
+				<surname>Guguen</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Virology</title>
+		<imprint>
+			<biblScope unit="volume">192</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="534" to="40" />
+			<date type="published" when="1993" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">ProPred: prediction of HLA-DR binding sites</title>
+		<author>
+			<persName>
+				<forename type="first">H</forename>
+				<surname>Singh</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<forename type="first">G</forename>
+				<forename type="middle">P</forename>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="1236" to="7" />
+			<date type="published" when="2001" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">N-terminal myristoylation-dependent masking of neutralizing epitopes in the preS1 attachment site of hepatitis B virus</title>
+		<author>
+			<persName>
+				<forename type="first">C</forename>
+				<forename type="middle">M</forename>
+				<surname>Bremer</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Hepatol</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="29" to="37" />
+			<date type="published" when="2011" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Ultra-potent antibodies against respiratory syncytial virus: effects of binding kinetics and binding valence on viral neutralization</title>
+		<author>
+			<persName>
+				<forename type="first">H</forename>
+				<surname>Wu</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">350</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="126" to="44" />
+			<date type="published" when="2005" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Development of motavizumab, an ultra-potent antibody for the prevention of respiratory syncytial virus infection in the upper and lower respiratory tract</title>
+		<author>
+			<persName>
+				<forename type="first">H</forename>
+				<surname>Wu</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">368</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="652" to="65" />
+			<date type="published" when="2007" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Reversion of somatic mutations of the respiratory syncytial virus-specific human monoclonal antibody Fab19 reveal a direct relationship between association rate and neutralizing potency</title>
+		<author>
+			<persName>
+				<forename type="first">J</forename>
+				<forename type="middle">T</forename>
+				<surname>Bates</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Immunol</title>
+		<imprint>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="190" to="3732" />
+			<date type="published" when="2013" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Dissociation rate of antibody-gp120 binding interactions is predictive of V3-mediated neutralization of HIV-1</title>
+		<author>
+			<persName>
+				<forename type="first">T</forename>
+				<forename type="middle">C</forename>
+				<surname>Vancott</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Immunol</title>
+		<imprint>
+			<biblScope unit="volume">153</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="449" to="59" />
+			<date type="published" when="1994" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Functional maturation of the human antibody response to rotavirus</title>
+		<author>
+			<persName>
+				<forename type="first">N</forename>
+				<forename type="middle">L</forename>
+				<surname>Kallewaard</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Immunol</title>
+		<imprint>
+			<biblScope unit="volume">180</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="3980" to="9" />
+			<date type="published" when="2008" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Monoclonal antibodies to various epitopes of hepatitis B surface antigen inhibit hepatitis B virus infection</title>
+		<author>
+			<persName>
+				<forename type="first">F</forename>
+				<forename type="middle">G</forename>
+				<surname>Shirazi</surname>
+			</persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Gastroenterol Hepatol</title>
+		<imprint>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="29" to="1083" />
+			<date type="published" when="2014" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">B virus preS1 humanized antibody was constructed by SDR grafting. @BULLET SDR-grafted humanized antibody was affinity-matured by mutating two HCDR residues. @BULLET Affinity matured humanized antibody exhibits enhanced HBV-neutralizing activity. @BULLET Enhanced HBV-neutralizing activity was achieved by an increased association rate</title>
+		<author>
+			<persName>
+				<surname>Highlights</surname>
+			</persName>
+		</author>
+		<author>
+			<persName>
+				<surname>Anti</surname>
+			</persName>
+		</author>
+	</monogr>
+</biblStruct>
+
+		</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
