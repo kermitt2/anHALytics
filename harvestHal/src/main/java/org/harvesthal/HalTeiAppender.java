@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.File;
 import java.io.StringWriter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,54 +23,92 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import org.apache.commons.io.FileUtils;
+import org.w3c.dom.ls.LSSerializer;
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.w3c.dom.ls.DOMImplementationLS;
+	
 
 public class HalTeiAppender {
 
     public static String replaceHeader(InputStream halTei, InputStream tei) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        //docFactory.setValidating(false);
+        docFactory.setValidating(false);
         //docFactory.setNamespaceAware(true);
 
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();  
         Document doc = docBuilder.parse(tei);
         Document docHalTei = docBuilder.parse(halTei);
-        NodeList orgs = docHalTei.getElementsByTagName("listOrg");
+
+        NodeList orgs = docHalTei.getElementsByTagName("org");
         NodeList authors = docHalTei.getElementsByTagName("author");
-        updateAffiliations(authors, orgs);
+        updateAffiliations(authors, orgs, docHalTei);
         NodeList editors = docHalTei.getElementsByTagName("editor");
-        updateAffiliations(editors, orgs);
+        updateAffiliations(editors, orgs, docHalTei);
         NodeList biblFull = docHalTei.getElementsByTagName("biblFull");
         updateFullTextTei(doc, biblFull);
         return toString(doc);
     }
 
+    public static String replaceHeaderBrutal(InputStream halTei, String tei) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        docFactory.setValidating(false);
+
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();  
+        Document docHalTei = docBuilder.parse(halTei);
+
+        NodeList orgs = docHalTei.getElementsByTagName("listOrg");
+        NodeList authors = docHalTei.getElementsByTagName("author");
+        updateAffiliations(authors, orgs, docHalTei);
+        NodeList editors = docHalTei.getElementsByTagName("editor");
+        updateAffiliations(editors, orgs, docHalTei);
+        NodeList biblFull = docHalTei.getElementsByTagName("biblFull");
+		
+		String teiStr = FileUtils.readFileToString(new File(tei), "UTF-8");
+		int ind1 = teiStr.indexOf("<teiHeader");
+		int ind12 = teiStr.indexOf(">", ind1+1);
+		int ind2 = teiStr.indexOf("</teiHeader>");
+		teiStr = teiStr.substring(0, ind12+1) + innerXmlToString(biblFull.item(0)) + teiStr.substring(ind2, teiStr.length());
+        return teiStr;
+    }
+
+
     private static Node findNode(String id, NodeList orgs) {
         Node org = null;
         for (int i = 0; i < orgs.getLength(); i++) {
             NamedNodeMap attr = orgs.item(i).getAttributes();
-            if (id.equals(attr.getNamedItem("id").getNodeName())) {
-                org = orgs.item(i);
+			if (attr.getNamedItem("xml:id") == null)
+				continue;
+            if (attr.getNamedItem("xml:id").getNodeValue().equals(id)) {
+            	org = orgs.item(i);
+	            break;
             }
-            break;
         }
         return org;
     }
 
-    private static void updateAffiliations(NodeList persons, NodeList orgs) {
+    private static void updateAffiliations(NodeList persons, NodeList orgs, Document docHalTei) {
         Node person = null;
-        NodeList nodes = null;
+        NodeList theNodes = null;
         NamedNodeMap attr = null;
         for (int i = 0; i < persons.getLength(); i++) {
-            person = persons.item(i);
-            nodes = person.getChildNodes();
-            for (int y = 0; y < nodes.getLength(); y++) {
-                if ("affiliation".equals(nodes.item(i).getNodeName())) {
-                    attr = nodes.item(i).getAttributes();
-                    Node aff = findNode(attr.getNamedItem("ref").getNodeName().replace("#", ""), orgs);
-                    person.removeChild(nodes.item(i));
-                    person.appendChild(aff);
-                }
+            person = persons.item(i);		
+			theNodes = person.getChildNodes();
+            for (int y = 0; y < theNodes.getLength(); y++) {
+				if (theNodes.item(y).getNodeType() == Node.ELEMENT_NODE) {
+					Element e = (Element)(theNodes.item(y));
+					if (e.getTagName().equals("affiliation")) {	
+						String name = e.getAttribute("ref").replace("#", "");
+	                    Node aff = findNode(name, orgs);
+						if (aff != null) {
+							person.removeChild(theNodes.item(y));
+							Node localNode = docHalTei.importNode(aff, true); 
+	                    	person.appendChild(localNode);
+	                	}
+					}
+				}
             }
         }
     }
@@ -77,37 +116,53 @@ public class HalTeiAppender {
     private static void updateFullTextTei(Document doc, NodeList biblFull) {
         Node teiHeader = doc.getElementsByTagName("teiHeader").item(0);
         clear(teiHeader);
-        addHalHeader(biblFull, teiHeader);
+        addHalHeader(biblFull, teiHeader, doc);
 
     }
 
     private static void clear(Node node) {
-        for (int i = 0; i < node.getChildNodes().getLength(); i++) {
+        for (int i = node.getChildNodes().getLength()-1; i >=0 ; i--) {
             node.removeChild(node.getChildNodes().item(i));
         }
     }
 
-    private static void addHalHeader(NodeList biblFull, Node header) {
-        for (int i = 0; i < biblFull.getLength(); i++) {
-            header.appendChild(biblFull.item(i));
+    private static void addHalHeader(NodeList biblFull, Node header, Document doc) {
+		if (biblFull.getLength() == 0)
+			return;
+		Node biblFullRoot = biblFull.item(0);
+        for (int i = 0; i < biblFullRoot.getChildNodes().getLength(); i++) {
+			Node localNode = doc.importNode(biblFullRoot.getChildNodes().item(i), true); 
+            header.appendChild(localNode);
         }
-
     }
     
     private static String toString(Document doc) {
-    try {
-        StringWriter sw = new StringWriter();
-        TransformerFactory tf = TransformerFactory.newInstance();
-        Transformer transformer = tf.newTransformer();
-        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-        transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+	    try {
+	        StringWriter sw = new StringWriter();
+	        TransformerFactory tf = TransformerFactory.newInstance();
+	        Transformer transformer = tf.newTransformer();
+	        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+	        transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+	        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+	        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
-        transformer.transform(new DOMSource(doc), new StreamResult(sw));
-        return sw.toString();
-    } catch (Exception ex) {
-        throw new RuntimeException("Error converting to String", ex);
-    }
-}
+	        transformer.transform(new DOMSource(doc), new StreamResult(sw));
+	        return sw.toString();
+	    } catch (Exception ex) {
+	        throw new RuntimeException("Error converting to String", ex);
+	    }
+	}
+	
+	public static String innerXmlToString(Node node) {
+	    DOMImplementationLS lsImpl = 
+			(DOMImplementationLS)node.getOwnerDocument().getImplementation().getFeature("LS", "3.0");
+	    LSSerializer lsSerializer = lsImpl.createLSSerializer();
+		lsSerializer.getDomConfig().setParameter("xml-declaration", false);
+	    NodeList childNodes = node.getChildNodes();
+	    StringBuilder sb = new StringBuilder();
+	    for (int i = 0; i < childNodes.getLength(); i++) {
+	       sb.append(lsSerializer.writeToString(childNodes.item(i)));
+	    }
+	    return sb.toString(); 
+	}
 }
