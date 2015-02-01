@@ -22,29 +22,24 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.Callable;
 
 /**
  *  Call of Grobid process via its REST web services. 
  *
  *  @author Patrice Lopez
  */
-public class GrobidService {
+public class GrobidService implements Callable<String>{
 
     private String grobid_host = null;
     private String grobid_port = null;
+    private String pdf_path = null;
 
-    public GrobidService() {
-		try {
-	        Properties prop = new Properties();
-	        prop.load(new FileInputStream("harvestHal.properties"));
-	        grobid_host = prop.getProperty("harvestHal.grobid_host");
-	        grobid_port = prop.getProperty("harvestHal.grobid_port");
-		}
-		catch (Exception e) {
-			System.err.println("Failed to load properties: " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
+    public GrobidService(String pdfPath, String grobidHost, String grobidPort) {
+		pdf_path = pdfPath;
+                grobid_host = grobidHost;
+                grobid_port = grobidPort;
+    }
 	
 	/**
 	 *  Call the Grobid full text extraction service on server.
@@ -54,8 +49,10 @@ public class GrobidService {
 	 *  @param last last page of the PDF to be processed, default -1 last page	
 	 *  @return the resulting TEI document as a String or null if the service failed	
 	 */
-    public String runFullTextGrobid(String pdfPath, int start, int end) {
+    public String runFullTextGrobid() {
 		String tei = null;
+                int start =2;
+                int end = -1;
 		try {
 			URL url = new URL("http://" + grobid_host + ":" + grobid_port + "/processFulltextDocument");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -63,7 +60,7 @@ public class GrobidService {
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "application/xml");
 
-			FileBody fileBody = new FileBody(new File(pdfPath));
+			FileBody fileBody = new FileBody(new File(pdf_path));
 			MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.STRICT);
 			multipartEntity.addPart("input", fileBody);
 			
@@ -94,7 +91,9 @@ public class GrobidService {
 				output.append(line);
 				output.append("\n");
 			}
+                        
 			tei = output.toString();
+                        tei = tei.replace("&amp\\s+;", "&amp;");
 			conn.disconnect();
 		}
 		catch (MalformedURLException e) {
@@ -104,6 +103,11 @@ public class GrobidService {
 			e.printStackTrace();
 		}
 		return tei;
+    }
+
+    @Override
+    public String call() throws Exception {
+        return runFullTextGrobid();
     }
 	
 }

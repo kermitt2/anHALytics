@@ -6,6 +6,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import javax.xml.parsers.*;
 import javax.xml.transform.TransformerException;
 import org.slf4j.Logger;
@@ -16,6 +19,8 @@ public class OAIHarvester {
 
     private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
 
+    
+    private static final int NTHREDS = 10;
     private ArrayList<String> fields = null;
     private ArrayList<String> affiliations = null;
 
@@ -25,6 +30,9 @@ public class OAIHarvester {
 
     private static int nullBinaries = 0;
     private static String tmpPath = null;
+    
+    private String grobid_host = null;
+    private String grobid_port = null;
 
     public enum Decision {
 
@@ -67,6 +75,8 @@ public class OAIHarvester {
         Properties prop = new Properties();
         try {
             prop.load(new FileInputStream("harvestHal.properties"));
+            grobid_host = prop.getProperty("harvestHal.grobid_host");
+	    grobid_port = prop.getProperty("harvestHal.grobid_port");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -174,12 +184,13 @@ public class OAIHarvester {
             in.close();
         }
     }
-
+/*
     public String getTeiFromBinary(String filePath) throws IOException {
         String tei = grobidProcess.runFullTextGrobid(filePath, 2, -1);
         tei = tei.replace("&amp\\s+;", "&amp;");
         return tei;
     }
+    */
 
     public static String storeTmpFile(InputStream inBinary) throws IOException {
         File f = File.createTempFile("tmp", ".pdf", new File(tmpPath));
@@ -318,7 +329,7 @@ public class OAIHarvester {
     private void processGrobid(Map<String, List<String>> filenames) {
         String teiFilename;
         InputStream inTeiGrobid;
-        grobidProcess = new Grobid();
+        ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
         for(String date:dates){
         List<String> dateFilenames = filenames.get(date);
         if(dateFilenames != null){
@@ -340,7 +351,9 @@ public class OAIHarvester {
                     InputStream inBinary = mongoManager.streamFile(filename);
                     String filepath = storeTmpFile(inBinary);
                     inBinary.close();
-                    inTeiGrobid = new ByteArrayInputStream(getTeiFromBinary(filepath).getBytes());                  
+                    System.out.println(filename);
+                    Future<String> submit = executor.submit(new GrobidService(filepath, grobid_host, grobid_port));
+                    inTeiGrobid = new ByteArrayInputStream(submit.get().getBytes());                  
                     mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_TEI_NAMESPACE, date);
                     inTeiGrobid.close();
                 }
@@ -350,6 +363,7 @@ public class OAIHarvester {
             }
         }}
         }
+        executor.shutdown();
     }
     
     
