@@ -34,7 +34,7 @@ import org.w3c.dom.ls.DOMImplementationLS;
 
 public class HalTeiAppender {
     
-    public static String replaceHeader(InputStream halTei, InputStream grobidTei, boolean mode) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+    public static String replaceHeader(InputStream halTei, InputStream grobidTei, boolean modeBrutal) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
         String teiString;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
@@ -42,6 +42,13 @@ public class HalTeiAppender {
 
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         Document docHalTei = docBuilder.parse(halTei);
+		
+		// add random xml:id on textual elements
+		XmlFormatter.generateIDs(docHalTei);
+		
+		// remove ugly end-of-line in starting and ending text as it is
+		// a problem for stand-off annotations
+		XmlFormatter.trimEOL(docHalTei.getDocumentElement(), docHalTei);
 
         NodeList orgs = docHalTei.getElementsByTagName("org");
         NodeList authors = docHalTei.getElementsByTagName("author");
@@ -50,10 +57,9 @@ public class HalTeiAppender {
         updateAffiliations(editors, orgs, docHalTei);
         NodeList biblFull = docHalTei.getElementsByTagName("biblFull");
         
-        if(mode){
-            
+        if (modeBrutal) {
             teiString = updateFullTextTeiBrutal(biblFull, grobidTei);
-        }else{
+        } else {
             Document doc = docBuilder.parse(grobidTei);
             teiString = updateFullTextTei(doc, biblFull);
         }

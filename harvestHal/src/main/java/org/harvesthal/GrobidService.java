@@ -34,11 +34,18 @@ public class GrobidService implements Callable<String>{
     private String grobid_host = null;
     private String grobid_port = null;
     private String pdf_path = null;
+	private int start = -1;
+	private int end = -1;
+	private boolean generateIDs = false;
 
-    public GrobidService(String pdfPath, String grobidHost, String grobidPort) {
+    public GrobidService(String pdfPath, String grobidHost, String grobidPort, 
+						int start, int end, boolean generateIDs) {
 		pdf_path = pdfPath;
-                grobid_host = grobidHost;
-                grobid_port = grobidPort;
+        grobid_host = grobidHost;
+        grobid_port = grobidPort;
+		this.start = start;
+		this.end = end;
+		this.generateIDs = generateIDs;
     }
 	
 	/**
@@ -51,8 +58,6 @@ public class GrobidService implements Callable<String>{
 	 */
     public String runFullTextGrobid() {
 		String tei = null;
-                int start =2;
-                int end = -1;
 		try {
 			URL url = new URL("http://" + grobid_host + ":" + grobid_port + "/processFulltextDocument");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -72,6 +77,11 @@ public class GrobidService implements Callable<String>{
 				StringBody contentString = new StringBody(""+end);
 				multipartEntity.addPart("end", contentString);
 			}
+			if (generateIDs) {
+				StringBody contentString = new StringBody("1");
+				multipartEntity.addPart("generateIDs", contentString);
+			}
+			
 			conn.setRequestProperty("Content-Type", multipartEntity.getContentType().getValue());
 			OutputStream out = conn.getOutputStream();
 			try {

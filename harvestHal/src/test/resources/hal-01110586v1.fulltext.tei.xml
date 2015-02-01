@@ -4,7 +4,7 @@
 	<teiHeader xml:lang="en">
 		<fileDesc>
 			<titleStmt>
-				<title level="a" type="main">A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project) A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project)</title>
+				<title level="a" type="main" id="_uFkkQN3">A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project) A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project)</title>
 			</titleStmt>
 			<publicationStmt>
 unknown
@@ -164,10 +164,10 @@ unknown
 								</address>
 							</affiliation>
 						</author>
-						<title level="a" type="main">A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project) A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project)</title>
+						<title level="a" type="main" id="_PhteMXR">A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project) A RE-AIM evaluation of evidence-based multi-level interventions to improve obesity-related behaviours in adults: a systematic review (the SPOTLIGHT project)</title>
 					</analytic>
 					<monogr>
-						<title level="j" type="main">International Journal of Behavioral International Journal of Behavioral Nutrition and Physical Activity Nutrition and Physical Activity International Journal of Behavioral Nutrition and Physical Activity</title>
+						<title level="j" type="main" id="_HzMpxet">International Journal of Behavioral International Journal of Behavioral Nutrition and Physical Activity Nutrition and Physical Activity International Journal of Behavioral Nutrition and Physical Activity</title>
 						<imprint>
 							<biblScope unit="volume">11</biblScope>
 							<biblScope unit="page" from="147"/>
@@ -175,7 +175,7 @@ unknown
 						</imprint>
 					</monogr>
 					<note type="submission">Article type Review</note>
-					<note>This Provisional PDF corresponds to the article as it appeared upon acceptance. Fully formatted PDF and full text (HTML) versions will be made available soon. Sample Article URL http://www.ijbnpa.org/content/11/1/147 Like all articles in BMC journals, this peer-reviewed article can be downloaded, printed and distributed freely for any purposes (see copyright notice below). Articles in BMC journals are listed in PubMed and archived at PubMed Central. For information about publishing your research in BMC journals or any BioMed Central journal, go to http://www.biomedcentral.com/info/authors//publicdomain/zero/1.0/) applies to the data made available in this article, unless otherwise stated.</note>
+					<note id="_KRURwqs">This Provisional PDF corresponds to the article as it appeared upon acceptance. Fully formatted PDF and full text (HTML) versions will be made available soon. Sample Article URL http://www.ijbnpa.org/content/11/1/147 Like all articles in BMC journals, this peer-reviewed article can be downloaded, printed and distributed freely for any purposes (see copyright notice below). Articles in BMC journals are listed in PubMed and archived at PubMed Central. For information about publishing your research in BMC journals or any BioMed Central journal, go to http://www.biomedcentral.com/info/authors//publicdomain/zero/1.0/) applies to the data made available in this article, unless otherwise stated.</note>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
@@ -183,145 +183,145 @@ unknown
 	<text xml:lang="en">
 		<front>
 			<div type="abstract" xml:lang="nl">
-				<head>Abstract</head>
-<p>Sofie Compernolle (sofie.compernolle@ugent.be) Katrien De Cocker (katrien.decocker@ugent.be) Jeroen Lakerveld (j.lakerveld@vumc.nl) Joreintje D Mackenbach (j.mackenbach@vumc.nl) Giel Nijpels (g.nijpels@vumc.nl) Jean-Michel Oppert (jean-michel.oppert@psl.aphp.fr) Harry Rutter (harry.rutter@lshtm.ac.uk) Pedro J Teixeira (pteixeira@fmh.ulisboa.pt) Greet Cardon (greet.cardon@ugent.be) Ilse De Bourdeaudhuij (ilse.debourdeaudhuij@ugent.be) Abstract Background</p>
+				<head id="_M2ZWXg6">Abstract</head>
+<p id="_vzMbWrP">Sofie Compernolle (sofie.compernolle@ugent.be) Katrien De Cocker (katrien.decocker@ugent.be) Jeroen Lakerveld (j.lakerveld@vumc.nl) Joreintje D Mackenbach (j.mackenbach@vumc.nl) Giel Nijpels (g.nijpels@vumc.nl) Jean-Michel Oppert (jean-michel.oppert@psl.aphp.fr) Harry Rutter (harry.rutter@lshtm.ac.uk) Pedro J Teixeira (pteixeira@fmh.ulisboa.pt) Greet Cardon (greet.cardon@ugent.be) Ilse De Bourdeaudhuij (ilse.debourdeaudhuij@ugent.be) Abstract Background</p>
 			</div>
 		</front>
 		<body>
-			<head>Table 1 Characteristics of identified studies</head>
+			<head xml:id="_VGF74xT">Table 1 Characteristics of identified studies</head>
 
-			<p>Study characteristics No. Studies (%) Design Quasi-experimental design 70% Pre-experimental design 30% Focus Combination physical activity, sedentary behaviour and eating behaviour 57% Physical activity 33% Sedentary behaviour 0% Eating behaviour 9% Setting Schools/workplaces 27% Churches 12% Communities 61% Participants &gt; 1000 in at least one measurement 69% &gt; 1000 in all measurements 38% Data collection method Questionnaire 91% Clinical measures 39% Pedometers 6% Geographical area America 58% Europe 18% Oceania 15% Asia 9%</p>
+			<p xml:id="_fjtEXJ7">Study characteristics No. Studies (%) Design Quasi-experimental design 70% Pre-experimental design 30% Focus Combination physical activity, sedentary behaviour and eating behaviour 57% Physical activity 33% Sedentary behaviour 0% Eating behaviour 9% Setting Schools/workplaces 27% Churches 12% Communities 61% Participants &gt; 1000 in at least one measurement 69% &gt; 1000 in all measurements 38% Data collection method Questionnaire 91% Clinical measures 39% Pedometers 6% Geographical area America 58% Europe 18% Oceania 15% Asia 9%</p>
 
-			<head>RE-AIM evaluation</head>
+			<head xml:id="_3dp6w6P">RE-AIM evaluation</head>
 
-			<p>Thirty-two interventions did not report on all five dimensions. More than one-third of the selected interventions (15/35) only provided information on the degree of effectiveness. Eight interventions confined themselves to the report of two dimensions, namely the reach and the effectiveness. Another eight interventions, reported on three dimensions, of which four reported on the effectiveness, the adoption and the implementation, three reported on the reach, the effectiveness and the adoption and one intervention reported on the reach, the effectiveness and the implementation. This left us with only four interventions that gave information on at least four of the five RE-AIM dimensions.</p>
+			<p xml:id="_ub5vAqQ">Thirty-two interventions did not report on all five dimensions. More than one-third of the selected interventions (15/35) only provided information on the degree of effectiveness. Eight interventions confined themselves to the report of two dimensions, namely the reach and the effectiveness. Another eight interventions, reported on three dimensions, of which four reported on the effectiveness, the adoption and the implementation, three reported on the reach, the effectiveness and the adoption and one intervention reported on the reach, the effectiveness and the implementation. This left us with only four interventions that gave information on at least four of the five RE-AIM dimensions.</p>
 
-			<p>Table 2 presents the main results regarding the report on Reach, Effectiveness, Adoption, Implementation and Maintenance of the included interventions. Details of the information extracted from the intervention studies are provided in the paragraphs below (see Additional file 3).</p>
+			<p xml:id="_zEZtt9S">Table 2 presents the main results regarding the report on Reach, Effectiveness, Adoption, Implementation and Maintenance of the included interventions. Details of the information extracted from the intervention studies are provided in the paragraphs below (see Additional file 3).</p>
 
-			<head>Table 2 Number of studies reporting on the different RE-AIM dimensions</head>
+			<head xml:id="_gpuhyUB">Table 2 Number of studies reporting on the different RE-AIM dimensions</head>
 
-			<p>Component Number of studies reporting n (%) Reach -Description of target population within the geographical area/worksite 33 (100) -Awareness of the intervention/participation rate 16 (48) -Characteristics of people aware of the intervention/participants 10 (30) -Representativeness of people aware of the intervention/participants 9 (27) Effectiveness -Positive outcomes 30 (91) -Quality of life 1 (3) -Negative consequences 1 (3) -Short-term attrition 15 (43) Adoption -Description of staff delivering the intervention 6 (17) -Representativeness of staff delivering the intervention 1 (3) -Description of intervention delivery settings 23 (70) -Description of non-delivering settings 5 (15) -Representativeness of delivery settings 3 (9) Implementation -Completeness of implementation 10 (30) -Fidelity of implementation 2 (6) -Time needed to implement the intervention 0 (0) -Financial investment of the intervention 8 (24) -Staff expertise of training of the deliverers 4 (12) Maintenance – setting -Program sustainability 8 (24) -Program adaptations 3 (9) -Representativeness of organizations who are still delivering the intervention</p>
+			<p xml:id="_9u735eR">Component Number of studies reporting n (%) Reach -Description of target population within the geographical area/worksite 33 (100) -Awareness of the intervention/participation rate 16 (48) -Characteristics of people aware of the intervention/participants 10 (30) -Representativeness of people aware of the intervention/participants 9 (27) Effectiveness -Positive outcomes 30 (91) -Quality of life 1 (3) -Negative consequences 1 (3) -Short-term attrition 15 (43) Adoption -Description of staff delivering the intervention 6 (17) -Representativeness of staff delivering the intervention 1 (3) -Description of intervention delivery settings 23 (70) -Description of non-delivering settings 5 (15) -Representativeness of delivery settings 3 (9) Implementation -Completeness of implementation 10 (30) -Fidelity of implementation 2 (6) -Time needed to implement the intervention 0 (0) -Financial investment of the intervention 8 (24) -Staff expertise of training of the deliverers 4 (12) Maintenance – setting -Program sustainability 8 (24) -Program adaptations 3 (9) -Representativeness of organizations who are still delivering the intervention</p>
 
 			<formula>1 (3)</formula>
 
-			<p>Maintenance – individual -Long-term effects 8 (23)</p>
+			<p xml:id="_DqPQZ2K">Maintenance – individual -Long-term effects 8 (23)</p>
 
-			<head>Competing interests</head>
+			<head xml:id="_MnTUKEW">Competing interests</head>
 
-			<p>The authors declare that they have no competing interests.</p>
+			<p xml:id="_8CkwsH2">The authors declare that they have no competing interests.</p>
 
-			<head>Authors&amp;apos; contributions</head>
+			<head xml:id="_v2nVfGP">Authors&amp;apos; contributions</head>
 
-			<p>JL, IDB and SC conceived of the idea for the review. IDB wrote the protocol and led the writing of the manuscript. KDC checked the eligibility of the included intervention studies and performed data extraction. JDM assessed methodological quality of the included interventions studies. All authors read, provided feedback, and approved the final submitted version of the manuscript.</p>
+			<p xml:id="_JxSf5Mx">JL, IDB and SC conceived of the idea for the review. IDB wrote the protocol and led the writing of the manuscript. KDC checked the eligibility of the included intervention studies and performed data extraction. JDM assessed methodological quality of the included interventions studies. All authors read, provided feedback, and approved the final submitted version of the manuscript.</p>
 
-			<head>Acknowledgements</head>
+			<head xml:id="_XXgrjAm">Acknowledgements</head>
 
-			<p>This work is part of the SPOTLIGHT project funded by the Seventh Framework Programme (CORDIS FP7) of the European Commission, HEALTH (FP7-HEALTH-2011-two-stage), Grant agreement no. 278186. The content of this article reflects only the authors&amp;apos; views and the European Commission is not liable for any use that may be made of the information contained therein.</p>
+			<p xml:id="_qxpTJba">This work is part of the SPOTLIGHT project funded by the Seventh Framework Programme (CORDIS FP7) of the European Commission, HEALTH (FP7-HEALTH-2011-two-stage), Grant agreement no. 278186. The content of this article reflects only the authors&amp;apos; views and the European Commission is not liable for any use that may be made of the information contained therein.</p>
 
 		</body>
 		<back>
 		<div type="annex">
-			<head>Conclusions</head>
+			<head xml:id="_VEHRBS8">Conclusions</head>
 
-			<p>Although most studies underreported results within the RE-AIM dimensions, the reported Reach, Effectiveness, Adoption, Implementation and Maintenance were positively evaluated. However, more information on external validity and sustainability is needed in order to take informed decisions on the choice of interventions that should be implemented in real-world settings to accomplish long-term changes in obesity-related behaviours.</p>
+			<p xml:id="_JDd6fw4">Although most studies underreported results within the RE-AIM dimensions, the reported Reach, Effectiveness, Adoption, Implementation and Maintenance were positively evaluated. However, more information on external validity and sustainability is needed in order to take informed decisions on the choice of interventions that should be implemented in real-world settings to accomplish long-term changes in obesity-related behaviours.</p>
 
-			<head>Keywords</head>
+			<head xml:id="_jqCuYJG">Keywords</head>
 
-			<p>RE-AIM, Overweight, Obesity, Nutrition and physical activity interventions, Review</p>
+			<p xml:id="_W8JsWbU">RE-AIM, Overweight, Obesity, Nutrition and physical activity interventions, Review</p>
 
-			<head>Background</head>
+			<head xml:id="_6B3GssX">Background</head>
 
-			<p>The growing prevalence of overweight (Body Mass Index ≥25 kg/m 2 ) and obesity (Body Mass Index ≥30 kg/m 2 ) in adults is a major public health concern in European countries. Overweight and obesity contribute to mortality and the burden of many chronic diseases, such as cardiovascular diseases, cancer, type 2 diabetes and osteoarthritis [1] [2] [3] [4]. Depending on country and gender, the overall prevalence of overweight in Europe currently ranges from 39.3% (France) to 64.9% (England) in men and from 21.9% (Italy) to 51.4% (England) in women. The overall prevalence of obesity ranges from 6.0% (France) to 21.6% (England) in men and from 5.0% (Italy) to 23.3% (England) in women [5]. In several European countries, adult obesity rates have doubled during the last two decades [6] [7] [8]. Given the serious health consequences and the rapidly increased prevalence, the development and implementation of effective, sustainable overweight and obesity prevention approaches is imperative.</p>
+			<p xml:id="_rtBr5uG">The growing prevalence of overweight (Body Mass Index ≥25 kg/m 2 ) and obesity (Body Mass Index ≥30 kg/m 2 ) in adults is a major public health concern in European countries. Overweight and obesity contribute to mortality and the burden of many chronic diseases, such as cardiovascular diseases, cancer, type 2 diabetes and osteoarthritis [1] [2] [3] [4]. Depending on country and gender, the overall prevalence of overweight in Europe currently ranges from 39.3% (France) to 64.9% (England) in men and from 21.9% (Italy) to 51.4% (England) in women. The overall prevalence of obesity ranges from 6.0% (France) to 21.6% (England) in men and from 5.0% (Italy) to 23.3% (England) in women [5]. In several European countries, adult obesity rates have doubled during the last two decades [6] [7] [8]. Given the serious health consequences and the rapidly increased prevalence, the development and implementation of effective, sustainable overweight and obesity prevention approaches is imperative.</p>
 
-			<p>In the past, several theoretical models have been used to develop overweight and obesity prevention approaches. Many of these approaches were informed by social psychological theories such as the Theory of Planned Behaviour [9], and the Transtheoretical Model [10], and were thus focused on health education and the modification of individual-level determinants of obesity-related behaviours (i.e. dietary, physical activity and sedentary behaviours) [11] [12]. Athough these individual-based interventions have sometimes shown short-term effects, their long-term effectiveness is generally limited [12] [13] [14]. This could be explained by the fact that health behaviours are not solely a matter of individual determinants, but are also strongly affected by environmental factors [15] [16] [17]. Environmental factors are of growing importance with the development of increasingly &amp;apos;obesogenic&amp;apos; environments in recent decades characterized by readily available, cheap, heavily advertised energy-dense foods, often provided with large portion sizes, and by reduced opportunities for physical activity accompanied by increased likelihood of sedentary behaviour, due to features such as urban sprawl, a lack of perceived safety and reductions in walkability [17] [18] [19] [20]. These obesity-related environmental factors can be categorized using the Analysis Grid for Environments Linked to Obesity (ANGELO) framework [21]. This framework consist of two axes representing the size (micro vs. macro) and the type of the environment (i.e. sociocultural , economic, political or physical environmental level).</p>
+			<p xml:id="_GQu7pyF">In the past, several theoretical models have been used to develop overweight and obesity prevention approaches. Many of these approaches were informed by social psychological theories such as the Theory of Planned Behaviour [9], and the Transtheoretical Model [10], and were thus focused on health education and the modification of individual-level determinants of obesity-related behaviours (i.e. dietary, physical activity and sedentary behaviours) [11] [12]. Athough these individual-based interventions have sometimes shown short-term effects, their long-term effectiveness is generally limited [12] [13] [14]. This could be explained by the fact that health behaviours are not solely a matter of individual determinants, but are also strongly affected by environmental factors [15] [16] [17]. Environmental factors are of growing importance with the development of increasingly &amp;apos;obesogenic&amp;apos; environments in recent decades characterized by readily available, cheap, heavily advertised energy-dense foods, often provided with large portion sizes, and by reduced opportunities for physical activity accompanied by increased likelihood of sedentary behaviour, due to features such as urban sprawl, a lack of perceived safety and reductions in walkability [17] [18] [19] [20]. These obesity-related environmental factors can be categorized using the Analysis Grid for Environments Linked to Obesity (ANGELO) framework [21]. This framework consist of two axes representing the size (micro vs. macro) and the type of the environment (i.e. sociocultural , economic, political or physical environmental level).</p>
 
-			<p>Consequently, multi-level interventions that target both the individual level (e.g. by changing the beliefs, attitudes and knowledge of the participants) and at least one of the environmental levels as defined by the Analysis Grid for Environments Linked to Obesity (ANGELO)</p>
+			<p xml:id="_tvWjfWd">Consequently, multi-level interventions that target both the individual level (e.g. by changing the beliefs, attitudes and knowledge of the participants) and at least one of the environmental levels as defined by the Analysis Grid for Environments Linked to Obesity (ANGELO)</p>
 
-			<p>framework (i.e. socio-cultural, economic, political or physical environmental level) have shown promising results in counteracting obesity [11] [14] [22] [23] [24].</p>
+			<p xml:id="_gKuDeH4">framework (i.e. socio-cultural, economic, political or physical environmental level) have shown promising results in counteracting obesity [11] [14] [22] [23] [24].</p>
 
-			<p>However, despite the increasing interest in multi-level interventions, little information is available on their characteristics, effectiveness and external validity [25]. Information on generalizability is essential to translate research findings into practice. To gain insight into both internal and external factors of health promotion interventions, Glasgow and colleagues developed the RE-AIM framework. This framework focuses on the five most important dimensions for evaluating the potential public health impact of programs intended for widescale implementation and dissemination. The framework covers the degree to which (1) an intervention reaches the target population, and to which degree the intervention participants are representative of the non-participants; (2) an intervention achieved the assumed goals, with optimal quality of life and without negative outcomes; (3) an intervention was broadly adopted, and to which degree both delivery setting and delivery staff were representative of non-deliverers; (4) an intervention was consistently implemented at a reasonable cost; and (5) an intervention had the ability to be sustained, with long-lasting individual effects [26].</p>
+			<p xml:id="_JT7R7X8">However, despite the increasing interest in multi-level interventions, little information is available on their characteristics, effectiveness and external validity [25]. Information on generalizability is essential to translate research findings into practice. To gain insight into both internal and external factors of health promotion interventions, Glasgow and colleagues developed the RE-AIM framework. This framework focuses on the five most important dimensions for evaluating the potential public health impact of programs intended for widescale implementation and dissemination. The framework covers the degree to which (1) an intervention reaches the target population, and to which degree the intervention participants are representative of the non-participants; (2) an intervention achieved the assumed goals, with optimal quality of life and without negative outcomes; (3) an intervention was broadly adopted, and to which degree both delivery setting and delivery staff were representative of non-deliverers; (4) an intervention was consistently implemented at a reasonable cost; and (5) an intervention had the ability to be sustained, with long-lasting individual effects [26].</p>
 
-			<p>The aim of the present study was to conduct a systematic review of multi-level interventions, aimed at reducing obesity-related behaviours in adults, as part of the European Commission funded &quot; sustainable prevention of obesity through integrated strategies &quot; (SPOTLIGHT) project [27]. The purpose of this review was to gain insight into 1) the characteristics of multi-level intervention, 2) the internal and external validity factors of multi-level interventions, and 3) the potential public health impact of multi-level interventions.</p>
+			<p xml:id="_yZkRJ9F">The aim of the present study was to conduct a systematic review of multi-level interventions, aimed at reducing obesity-related behaviours in adults, as part of the European Commission funded &quot; sustainable prevention of obesity through integrated strategies &quot; (SPOTLIGHT) project [27]. The purpose of this review was to gain insight into 1) the characteristics of multi-level intervention, 2) the internal and external validity factors of multi-level interventions, and 3) the potential public health impact of multi-level interventions.</p>
 
-			<head>Methods Literature search</head>
+			<head xml:id="_SCnp5DK">Methods Literature search</head>
 
-			<p>A systematic literature search of three electronic databases (PubMed, Embase, The Cochrane Library) was conducted in April 2012, and updated in October 2013 to detect relevant intervention studies. The search strategy was developed using the PICO (participant, intervention, comparison, outcome) approach, and was limited to the English literature, published between January 2000 and October 2013. Details on the search strategy are listed in Additional file 1: Table S1.</p>
+			<p xml:id="_frZk7XE">A systematic literature search of three electronic databases (PubMed, Embase, The Cochrane Library) was conducted in April 2012, and updated in October 2013 to detect relevant intervention studies. The search strategy was developed using the PICO (participant, intervention, comparison, outcome) approach, and was limited to the English literature, published between January 2000 and October 2013. Details on the search strategy are listed in Additional file 1: Table S1.</p>
 
-			<p>After running the search strategy, duplicates were identified and removed. Subsequently, the studies were screened by title, abstract and full text to determine their eligibility by one reviewer (SC) and independently checked by a second reviewer (KDC). In addition, reference lists from the retrieved articles were examined for additional relevant intervention studies.</p>
+			<p xml:id="_96q7Y5e">After running the search strategy, duplicates were identified and removed. Subsequently, the studies were screened by title, abstract and full text to determine their eligibility by one reviewer (SC) and independently checked by a second reviewer (KDC). In addition, reference lists from the retrieved articles were examined for additional relevant intervention studies.</p>
 
-			<head>Inclusion criteria</head>
+			<head xml:id="_uqYKVhh">Inclusion criteria</head>
 
-			<p>To be eligible, intervention studies had to meet the following inclusion criteria: (1) the study included at least one outcome measure assessing obesity-related behaviours (i.e. dietary, physical activity and sedentary behaviour); (2) the study collected data over at least one year; and (3) the study intervention was community-based, multi-level, and targeted adults. Interventions were considered community-based if they targeted a group of people that were mutually connected by the geographical area in which they were living or the worksite in which they were working. Interventions were considered multi-level, if they targeted at least one individual-level and at least one environmental-level determinant of obesity-related behaviour. Environmental-level determinants were classified into four types based on the Analysis Grid for Environments Linked to Obesity (ANGELO) framework: physical environmental factors, socio-cultural environmental factors, economic environmental factors and political environmental factors.</p>
+			<p xml:id="_dJPZ9FQ">To be eligible, intervention studies had to meet the following inclusion criteria: (1) the study included at least one outcome measure assessing obesity-related behaviours (i.e. dietary, physical activity and sedentary behaviour); (2) the study collected data over at least one year; and (3) the study intervention was community-based, multi-level, and targeted adults. Interventions were considered community-based if they targeted a group of people that were mutually connected by the geographical area in which they were living or the worksite in which they were working. Interventions were considered multi-level, if they targeted at least one individual-level and at least one environmental-level determinant of obesity-related behaviour. Environmental-level determinants were classified into four types based on the Analysis Grid for Environments Linked to Obesity (ANGELO) framework: physical environmental factors, socio-cultural environmental factors, economic environmental factors and political environmental factors.</p>
 
-			<head>Data extraction</head>
+			<head xml:id="_SYkq3MG">Data extraction</head>
 
-			<p>As a result of the screening process, 35 interventions were selected. These are listed in Additional file 2, which presents information on the focus of the intervention (i.e. physical activity, sedentary behaviour or eating behaviour), study design, target population, study participants, intervention components, outcome measures and geographical area. Study design was divided into the categories of pre-experimental (one group pre-test post-test design and one group post-test only design) and experimental studies ((cluster) randomized controlled trials). As only multi-level interventions were included, the intervention components were split up into individual and environmental level components. Individual components aimed to change psychological factors, such as beliefs or knowledge (e.g. via information sessions, posters, etc.), while environmental components target the sociocultural (e.g. walking groups), economic (e.g. reduction of prices of healthy food items), political (e.g. the earning of physical activity points, which could be redeemed for paid leave) or physical environment of the participants (e.g. provision of cycling infrastructure). Outcome measures were considered in the categories of overweight and obesity-related behavioural outcomes (dietary behaviour, physical activity and sedentary behaviour) and obesity-related physiological outcomes (e.g. BMI, weight, fat percentage).</p>
+			<p xml:id="_dtgdS9x">As a result of the screening process, 35 interventions were selected. These are listed in Additional file 2, which presents information on the focus of the intervention (i.e. physical activity, sedentary behaviour or eating behaviour), study design, target population, study participants, intervention components, outcome measures and geographical area. Study design was divided into the categories of pre-experimental (one group pre-test post-test design and one group post-test only design) and experimental studies ((cluster) randomized controlled trials). As only multi-level interventions were included, the intervention components were split up into individual and environmental level components. Individual components aimed to change psychological factors, such as beliefs or knowledge (e.g. via information sessions, posters, etc.), while environmental components target the sociocultural (e.g. walking groups), economic (e.g. reduction of prices of healthy food items), political (e.g. the earning of physical activity points, which could be redeemed for paid leave) or physical environment of the participants (e.g. provision of cycling infrastructure). Outcome measures were considered in the categories of overweight and obesity-related behavioural outcomes (dietary behaviour, physical activity and sedentary behaviour) and obesity-related physiological outcomes (e.g. BMI, weight, fat percentage).</p>
 
-			<head>RE-AIM evaluation</head>
+			<head xml:id="_J2fedCy">RE-AIM evaluation</head>
 
-			<p>The included interventions were evaluated on the basis of the RE-AIM framework [26]. Each of the five RE-AIM dimensions was divided into a number of indicators, and all included articles were coded by the first author on whether they reported on these specific indicators. A random selection of one third of the interventions was also coded by the second author to determine inter-rater reliability (ICC = 0.81). Differences were discussed between the two assessors until full consensus was reached. The indicators for reach were: the description of the target population, awareness/participation rate, characteristics of people aware of the intervention and their representativeness. For effectiveness, we coded whether a study reported on positive outcomes, quality of life, negative outcomes and short-term attrition. Adoption was coded based on the following indicators: the proportion and representativeness of staff who delivered the intervention within the intervention delivery settings, and the proportion and representativeness of intervention delivery settings and non-delivery settings. Implementation was coded on completeness and fidelity of implementation and time, financial investment and staff expertise needed to implement the intervention. Maintenance was split up into individual level and organizational level maintenance. Individual level maintenance was based on whether information was reported on long term effectiveness, i.e. were outcomes reported at least six months after the completion of the intervention study: six months is a widely used time frame to assess behaviour change maintenance [28] [29]. Organizational level maintenance was based on program sustainability, program adaptations and representativeness of settings/agents who were still delivering the interventions after the intervention study had been completed. If information was available on a specific indicator, data were extracted for further analysis. After the evaluation of each of the RE-AIM dimensions separately, the potential public health impact was assessed. Glasgow and colleagues state that the public health impact of an intervention depends on all five dimensions: reach, efficacy, adoption, implementation and maintenance. However in this review only three studies were included that reported on all five dimensions, so it was decided to lower the threshold from five to four dimensions: four studies reported on four dimensions. For each intervention, individual scores were calculated for reach (defined as the number of participants/number of eligible and invited people), efficacy (defined as the effect size of the intervention [30]), adoption (defined as the number of delivery settings/number of eligible and invited settings), implementation (defined as consistency of delivering intervention components) and maintenance (defined as the number of settings that maintained the intervention after the initial phase/number of settings that stopped delivering the intervention). Subsequently, the RE-AIM average was calculated by summing the scores on the five RE-AIM dimensions (or four if only four dimensions were available), and dividing them by four or five. These RE-AIM averages were considered to reflect the potential public health impact of the interventions [31] [32].</p>
+			<p xml:id="_SQr9ErQ">The included interventions were evaluated on the basis of the RE-AIM framework [26]. Each of the five RE-AIM dimensions was divided into a number of indicators, and all included articles were coded by the first author on whether they reported on these specific indicators. A random selection of one third of the interventions was also coded by the second author to determine inter-rater reliability (ICC = 0.81). Differences were discussed between the two assessors until full consensus was reached. The indicators for reach were: the description of the target population, awareness/participation rate, characteristics of people aware of the intervention and their representativeness. For effectiveness, we coded whether a study reported on positive outcomes, quality of life, negative outcomes and short-term attrition. Adoption was coded based on the following indicators: the proportion and representativeness of staff who delivered the intervention within the intervention delivery settings, and the proportion and representativeness of intervention delivery settings and non-delivery settings. Implementation was coded on completeness and fidelity of implementation and time, financial investment and staff expertise needed to implement the intervention. Maintenance was split up into individual level and organizational level maintenance. Individual level maintenance was based on whether information was reported on long term effectiveness, i.e. were outcomes reported at least six months after the completion of the intervention study: six months is a widely used time frame to assess behaviour change maintenance [28] [29]. Organizational level maintenance was based on program sustainability, program adaptations and representativeness of settings/agents who were still delivering the interventions after the intervention study had been completed. If information was available on a specific indicator, data were extracted for further analysis. After the evaluation of each of the RE-AIM dimensions separately, the potential public health impact was assessed. Glasgow and colleagues state that the public health impact of an intervention depends on all five dimensions: reach, efficacy, adoption, implementation and maintenance. However in this review only three studies were included that reported on all five dimensions, so it was decided to lower the threshold from five to four dimensions: four studies reported on four dimensions. For each intervention, individual scores were calculated for reach (defined as the number of participants/number of eligible and invited people), efficacy (defined as the effect size of the intervention [30]), adoption (defined as the number of delivery settings/number of eligible and invited settings), implementation (defined as consistency of delivering intervention components) and maintenance (defined as the number of settings that maintained the intervention after the initial phase/number of settings that stopped delivering the intervention). Subsequently, the RE-AIM average was calculated by summing the scores on the five RE-AIM dimensions (or four if only four dimensions were available), and dividing them by four or five. These RE-AIM averages were considered to reflect the potential public health impact of the interventions [31] [32].</p>
 
-			<head>Results Study characteristics</head>
+			<head xml:id="_qjx86EA">Results Study characteristics</head>
 
-			<p>Of the 14,002 studies identified in the literature search in April 2012, 126 studies remained after removing duplicates and screening titles and abstracts. The full texts of the remaining studies were evaluated for the inclusion criteria, which resulted in a final selection of 33 interventions, described in 70 papers [33-102]. In October 2013, an update was conducted, which yielded another two interventions [103] [104]. Consequently, 35 interventions were included in the systematic review. The flow chart in Figure 1 describes the entire selection process. Figure 1 Flow chart of study selection process. Figure 1 provides an overview of the study selection process.</p>
+			<p xml:id="_nqZHsYE">Of the 14,002 studies identified in the literature search in April 2012, 126 studies remained after removing duplicates and screening titles and abstracts. The full texts of the remaining studies were evaluated for the inclusion criteria, which resulted in a final selection of 33 interventions, described in 70 papers [33-102]. In October 2013, an update was conducted, which yielded another two interventions [103] [104]. Consequently, 35 interventions were included in the systematic review. The flow chart in Figure 1 describes the entire selection process. Figure 1 Flow chart of study selection process. Figure 1 provides an overview of the study selection process.</p>
 
-			<p>The characteristics of the identified studies are described in Additional file 2 and summarized in Table 1. The majority (69%) of the interventions were assessed by a cluster-randomized controlled trial [36] [37] [38] [39] [41] [44] [47] [49] [51] [52] [53] [55] [63] [74] [76] [79] [80] [81] [82] [90] [91] [103]. Of the studies using a pre-experimental design (31%), 82% used a one group pretest posttest design without control group [35] [50] [60] [67] [75] [87] [93] [100] [102] [104] and 18% used a one group only posttest design [68] [92]. Different methods for data collection were used throughout the studies. In 32 studies [6] [35] [36] [37] [38] [39] [41] [44] [47] [49] [50] [51] [52] [53] [55] [60] [67] [68] [74] [75] [79] [80] [81] [82] [87] [91] [92] [93] [99] [100] [102] [103] [104], participants had to fill out a questionnaire to evaluate levels of physical activity and sedentary behaviour (n = 25), food intake (n = 19), knowledge on health and health-related behaviours (n = 8), psychosocial variables (n = 9) or awareness of/attendance at the intervention (n = 9). Two studies [44] [51] utilized pedometers objectively to monitor levels of physical activity, and one study used direct observations to evaluate obesity-related behaviours. In 15 studies [35] [36] [47] [51] [52] [53] [55] [61] [64] [74] [79] [84] [87] [91] [104] clinical measurements were performed to determine overweight and obesity-related physiological outcomes, such as weight, height, blood pressure, waist circumference etc. The most commonly implemented individual-level intervention components were educational sessions (n = 11), individual counselling and advice on obesity-related behaviours (n = 9), posters (n = 8) and newsletters (n = 8). Other components were leaflets, websites, pedometers, logbooks, motivational messages, food and cooking demonstrations, education tours in supermarkets, maps with physical activity possibilities, individual feedback on clinical measurements and food labeling. The most commonly implemented environmental components were the establishment of walking and cycling groups (n = 14), the organization of physical activity group sessions (n = 13) and the increase of available healthy foods (n = 12). Other environmental intervention components were social support, the improvement of walking/cycling paths, the loan of pedometers, the increase of the number of physical activity areas and improved accessibility, the organization of health/physical activity events, the start of a physical activity competition, the reduction of prices of healthy food items , etc .</p>
+			<p xml:id="_VkXa3yX">The characteristics of the identified studies are described in Additional file 2 and summarized in Table 1. The majority (69%) of the interventions were assessed by a cluster-randomized controlled trial [36] [37] [38] [39] [41] [44] [47] [49] [51] [52] [53] [55] [63] [74] [76] [79] [80] [81] [82] [90] [91] [103]. Of the studies using a pre-experimental design (31%), 82% used a one group pretest posttest design without control group [35] [50] [60] [67] [75] [87] [93] [100] [102] [104] and 18% used a one group only posttest design [68] [92]. Different methods for data collection were used throughout the studies. In 32 studies [6] [35] [36] [37] [38] [39] [41] [44] [47] [49] [50] [51] [52] [53] [55] [60] [67] [68] [74] [75] [79] [80] [81] [82] [87] [91] [92] [93] [99] [100] [102] [103] [104], participants had to fill out a questionnaire to evaluate levels of physical activity and sedentary behaviour (n = 25), food intake (n = 19), knowledge on health and health-related behaviours (n = 8), psychosocial variables (n = 9) or awareness of/attendance at the intervention (n = 9). Two studies [44] [51] utilized pedometers objectively to monitor levels of physical activity, and one study used direct observations to evaluate obesity-related behaviours. In 15 studies [35] [36] [47] [51] [52] [53] [55] [61] [64] [74] [79] [84] [87] [91] [104] clinical measurements were performed to determine overweight and obesity-related physiological outcomes, such as weight, height, blood pressure, waist circumference etc. The most commonly implemented individual-level intervention components were educational sessions (n = 11), individual counselling and advice on obesity-related behaviours (n = 9), posters (n = 8) and newsletters (n = 8). Other components were leaflets, websites, pedometers, logbooks, motivational messages, food and cooking demonstrations, education tours in supermarkets, maps with physical activity possibilities, individual feedback on clinical measurements and food labeling. The most commonly implemented environmental components were the establishment of walking and cycling groups (n = 14), the organization of physical activity group sessions (n = 13) and the increase of available healthy foods (n = 12). Other environmental intervention components were social support, the improvement of walking/cycling paths, the loan of pedometers, the increase of the number of physical activity areas and improved accessibility, the organization of health/physical activity events, the start of a physical activity competition, the reduction of prices of healthy food items , etc .</p>
 
-			<head>Reach</head>
+			<head xml:id="_ghyUgnu">Reach</head>
 
-			<p>All studies described the target population of the intervention . Two interventions ( 6% ) reported specific inclusion criteria , while all other interventions targeted the whole ( adult ) community / all employees . The number of people belonging to the target group was reported in 17 studies ( 49% ) and varied from 500 to 37 , 000 , 000 people . Almost half of the studies ( 46% ) gave information on the number of people affected by the intervention . The participation level of some intervention components could not be determined ( e . g . improving street lightning , renovating walking paths , handing out flyers , putting up posters ) so both awareness rates and participation rates were discussed . The mean awareness rate was 58% . Three studies [ 49 , 56 , 91 ] reported awareness rates above 90% , while one study [ 82 ] reported an awareness rate of less than 20% . In contrast to the high awareness rates , the mean participation rate in at least one activity was 30% and ranged from 1% in &quot; Walk Kansas &quot; [ 50 ] to 94% in &quot; Body and Soul &quot; [ 42 ] . The representativeness of people who were aware of the intervention / intervention participants was described in nine studies ( 26% ) . Of these nine studies , two found no significant differences , while seven observed significant differences by sex ( n = 5 ; women were more likely to participate ) , age ( n = 2 ; older people were more likely to participate ) , physical activity level ( n = 2 ; active people were more likely to participate ) ,</p>
+			<p xml:id="_Tc8fQM7">All studies described the target population of the intervention . Two interventions ( 6% ) reported specific inclusion criteria , while all other interventions targeted the whole ( adult ) community / all employees . The number of people belonging to the target group was reported in 17 studies ( 49% ) and varied from 500 to 37 , 000 , 000 people . Almost half of the studies ( 46% ) gave information on the number of people affected by the intervention . The participation level of some intervention components could not be determined ( e . g . improving street lightning , renovating walking paths , handing out flyers , putting up posters ) so both awareness rates and participation rates were discussed . The mean awareness rate was 58% . Three studies [ 49 , 56 , 91 ] reported awareness rates above 90% , while one study [ 82 ] reported an awareness rate of less than 20% . In contrast to the high awareness rates , the mean participation rate in at least one activity was 30% and ranged from 1% in &quot; Walk Kansas &quot; [ 50 ] to 94% in &quot; Body and Soul &quot; [ 42 ] . The representativeness of people who were aware of the intervention / intervention participants was described in nine studies ( 26% ) . Of these nine studies , two found no significant differences , while seven observed significant differences by sex ( n = 5 ; women were more likely to participate ) , age ( n = 2 ; older people were more likely to participate ) , physical activity level ( n = 2 ; active people were more likely to participate ) ,</p>
 
-			<p>BMI ( n = 1 ; people with a higher BMI were more likely to participate ) and ethnicity ( n = 1 ; Western people were more likely to participate ) between participants and non - participants .</p>
+			<p xml:id="_VnekrmX">BMI ( n = 1 ; people with a higher BMI were more likely to participate ) and ethnicity ( n = 1 ; Western people were more likely to participate ) between participants and non - participants .</p>
 
-			<head>Effectiveness</head>
+			<head xml:id="_hbJaJeN">Effectiveness</head>
 
-			<p>Nearly all intervention studies ( 89% ) recorded positive obesity - related behavioural ( 71% ) or overweight and obesity - related physiological outcomes ( 34% ) . Of the studies reporting positive behavioural outcomes , seventeen reported on physical activity or sedentary behaviour , while thirteen studies reported on dietary behaviour . One study [ 102 ] notified a negative outcome and one study reported quality of life data [ 80 ] . Information on percent attrition was provided in fifteen studies , ranging from 4 - 85% .</p>
+			<p xml:id="_bRSNdFb">Nearly all intervention studies ( 89% ) recorded positive obesity - related behavioural ( 71% ) or overweight and obesity - related physiological outcomes ( 34% ) . Of the studies reporting positive behavioural outcomes , seventeen reported on physical activity or sedentary behaviour , while thirteen studies reported on dietary behaviour . One study [ 102 ] notified a negative outcome and one study reported quality of life data [ 80 ] . Information on percent attrition was provided in fifteen studies , ranging from 4 - 85% .</p>
 
-			<head>Adoption</head>
+			<head xml:id="_v42U2mB">Adoption</head>
 
-			<p>Adoption of interventions was reported in all studies . At the staff level , six interventions described the intervention agents . Of these , five studies reported the number of intervention agents , ranging from 1 – 176 , and five studies provided information on the characteristics of intervention agents . Only one study analysed the representativeness of intervention agents [ 97 ] . This analysis indicated that women and those with more years of experience of PA promotion are more likely to adopt the program than men and those with less experience of PA promotion . No significant differences were found in mean age between intervention agents and non - project staff members [ 97 ] .</p>
+			<p xml:id="_g6EdggQ">Adoption of interventions was reported in all studies . At the staff level , six interventions described the intervention agents . Of these , five studies reported the number of intervention agents , ranging from 1 – 176 , and five studies provided information on the characteristics of intervention agents . Only one study analysed the representativeness of intervention agents [ 97 ] . This analysis indicated that women and those with more years of experience of PA promotion are more likely to adopt the program than men and those with less experience of PA promotion . No significant differences were found in mean age between intervention agents and non - project staff members [ 97 ] .</p>
 
-			<p>At the setting level , all the studies reported information on the delivery settings . Interventions were delivered in churches ( n = 4 ) , schools ( n = 2 ) , worksites ( n = 8 ) and communities ( n = 21 ) . The number of delivery settings was reported in all worksite , school - based and church - based interventions , while only 50% of the community - based interventions gave information on the number of different delivery settings . The proportion of delivery settings was presented in 23% of the studies , and ranged from 9% ( NHF - NRG In Balance [ 63 ] ) to 92% ( Walk Kansas [ 50 ] ) . Information on non - delivering settings was presented in 14% of the studies . Three studies compared the delivery setting with the non - delivery settings to work out their representativeness . This comparison showed significant differences between delivery settings and non - delivery settings in &quot; Walk Kansas &quot; and &quot; Health - e - AME &quot; . Both studies demonstrated that larger communities were more likely to adopt the intervention . No significant differences were found between deliverer settings and non - delivery settings in the intervention &quot; 10 . 000 Steps Flanders &quot; .</p>
+			<p xml:id="_DwXkhjd">At the setting level , all the studies reported information on the delivery settings . Interventions were delivered in churches ( n = 4 ) , schools ( n = 2 ) , worksites ( n = 8 ) and communities ( n = 21 ) . The number of delivery settings was reported in all worksite , school - based and church - based interventions , while only 50% of the community - based interventions gave information on the number of different delivery settings . The proportion of delivery settings was presented in 23% of the studies , and ranged from 9% ( NHF - NRG In Balance [ 63 ] ) to 92% ( Walk Kansas [ 50 ] ) . Information on non - delivering settings was presented in 14% of the studies . Three studies compared the delivery setting with the non - delivery settings to work out their representativeness . This comparison showed significant differences between delivery settings and non - delivery settings in &quot; Walk Kansas &quot; and &quot; Health - e - AME &quot; . Both studies demonstrated that larger communities were more likely to adopt the intervention . No significant differences were found between deliverer settings and non - delivery settings in the intervention &quot; 10 . 000 Steps Flanders &quot; .</p>
 
-			<head>Implementation</head>
+			<head xml:id="_TuqpB4D">Implementation</head>
 
-			<p>Within implementation , the report of five items was evaluated . Completeness of implementation was reported in ten studies ( 29% ) . Three of these studies ( 10 . 000 Steps Flanders , Healthworks and Health - e - AME ) gave a separate implementation score per intervention component . This implementation score reflected the percentage of intervention delivering settings that implemented a specific intervention component . In &quot; 10 , 000 Steps Flanders &quot; , the implementation score varied from 17% for wide - ranging personal contact with citizens to 91% for the loan and sale of pedometers . &quot; Healthworks &quot; succeeded in implementing the offering of healthy food , the promotion of walking , the loan of pedometers , the dissemination of a newsletter and the promotion of stair use , but failed in achieving a reduction in healthy food prices . The implementation score of &quot; Health - e - AME &quot; components ranged from 7 / 50 for &quot; 8 Steps to Fitness &quot; to 16 / 50 for the walking program . Reasons given for not implementing intervention components included &amp;apos; no time &amp;apos; , &amp;apos; too expensive &amp;apos; , no space &amp;apos; , &amp;apos; no added value for the project &amp;apos; , &amp;apos; not relevant to our core business &amp;apos; , and &amp;apos; lack of information to implement the component &amp;apos; . One study [ 64 ] ascribed the failure of implementation to external factors , such as vending drivers and food service managers , preventing food prices from being reduced due to concerns about possible adverse economic consequences . Fidelity of implementation was reported in two studies ( 6% ) , of which one [ 101 ] reported the adherence to program principles by component . None of the intervention studies reported time needed to implement the intervention ; eight ( 23% ) did not report financial investment of the organization , and four ( 11% ) did not report staff expertise / training . Of the eight studies reporting on financial investment , seven emphasized the low costs for organizations , because they were sponsored by external grants , which varied from € 27 , 000 ( Elementary School Personnel Intervention [ 91 ] ) to € 900 , 000 ( Hartslag Limburg [ 84 ] ) .</p>
+			<p xml:id="_jWyS4cD">Within implementation , the report of five items was evaluated . Completeness of implementation was reported in ten studies ( 29% ) . Three of these studies ( 10 . 000 Steps Flanders , Healthworks and Health - e - AME ) gave a separate implementation score per intervention component . This implementation score reflected the percentage of intervention delivering settings that implemented a specific intervention component . In &quot; 10 , 000 Steps Flanders &quot; , the implementation score varied from 17% for wide - ranging personal contact with citizens to 91% for the loan and sale of pedometers . &quot; Healthworks &quot; succeeded in implementing the offering of healthy food , the promotion of walking , the loan of pedometers , the dissemination of a newsletter and the promotion of stair use , but failed in achieving a reduction in healthy food prices . The implementation score of &quot; Health - e - AME &quot; components ranged from 7 / 50 for &quot; 8 Steps to Fitness &quot; to 16 / 50 for the walking program . Reasons given for not implementing intervention components included &amp;apos; no time &amp;apos; , &amp;apos; too expensive &amp;apos; , no space &amp;apos; , &amp;apos; no added value for the project &amp;apos; , &amp;apos; not relevant to our core business &amp;apos; , and &amp;apos; lack of information to implement the component &amp;apos; . One study [ 64 ] ascribed the failure of implementation to external factors , such as vending drivers and food service managers , preventing food prices from being reduced due to concerns about possible adverse economic consequences . Fidelity of implementation was reported in two studies ( 6% ) , of which one [ 101 ] reported the adherence to program principles by component . None of the intervention studies reported time needed to implement the intervention ; eight ( 23% ) did not report financial investment of the organization , and four ( 11% ) did not report staff expertise / training . Of the eight studies reporting on financial investment , seven emphasized the low costs for organizations , because they were sponsored by external grants , which varied from € 27 , 000 ( Elementary School Personnel Intervention [ 91 ] ) to € 900 , 000 ( Hartslag Limburg [ 84 ] ) .</p>
 
-			<head>Maintenance</head>
+			<head xml:id="_nqMKAtP">Maintenance</head>
 
-			<p>Maintenance was subdivided by <ref type="bibr" target="#b105">Glasgow et al . into the individual level maintenance and organizational level maintenance [ 26 ] . At the individual level , eight interventions reported their health behaviour at least six months beyond the study period . Of these , all studies found long - term effects . At the organizational level , to our knowledge , sixteen interventions were sustained until October 2013</ref> . Nevertheless , only eight studies explicitly described the continuation or dissemination of the intervention after the intervention study . Three studies evaluated the dissemination of the intervention and three studies reported on adaptations . The interventions &quot; 10 , 000 steps Flanders &quot; [ 44 ] and &quot; Agita São Paulo &quot; [ 68 ] were not adapted after dissemination of the intervention , while &quot; 10 , 000 steps Rockhampton &quot; [ 49 ] adapted the intervention through a website .</p>
+			<p xml:id="_XP8fdAQ">Maintenance was subdivided by <ref type="bibr" target="#b105">Glasgow et al . into the individual level maintenance and organizational level maintenance [ 26 ] . At the individual level , eight interventions reported their health behaviour at least six months beyond the study period . Of these , all studies found long - term effects . At the organizational level , to our knowledge , sixteen interventions were sustained until October 2013</ref> . Nevertheless , only eight studies explicitly described the continuation or dissemination of the intervention after the intervention study . Three studies evaluated the dissemination of the intervention and three studies reported on adaptations . The interventions &quot; 10 , 000 steps Flanders &quot; [ 44 ] and &quot; Agita São Paulo &quot; [ 68 ] were not adapted after dissemination of the intervention , while &quot; 10 , 000 steps Rockhampton &quot; [ 49 ] adapted the intervention through a website .</p>
 
-			<head>Potential public health impact</head>
+			<head xml:id="_pnNm4ZT">Potential public health impact</head>
 
-			<p>As mentioned above , the potential public health impact of four interventions was assessed ( see Figure 2 ) . Three of them provided information on all five dimensions : Walk Kansas ( USA ) [ 50 ] , 10 , 000 Steps Flanders ( Belgium ) [ 44 ] , and Health - e - AME ( USA ) [ 101 ] , while one intervention provided information on four out of five dimensions : Body and Soul ( USA ) [ 81 ] . Both &quot; Walk Kansas &quot; and &quot; 10 , 000 Steps Flanders &quot; were community - based physical activity programs , whereas the &quot; Health - e - AME &quot; intervention and the &quot; Body and Soul &quot; intervention were church - based interventions , focusing on physical activity and dietary behaviour , respectively . In &quot; Walk Kansas &quot; , participants formed a team and each team was supposed to identify a physical activity - related goal it wanted to reach . In &quot; 10 , 000 Steps Flanders &quot; , several physical activity intervention components were implemented based on the central theme of reaching 10 , 000 steps / day . In &quot; Health - e - AME , physical activity - related intervention components were implemented based on the Social Ecological Theory , and the Transtheoretical model , and in &quot; Body and Soul &quot; , intervention components related to healthy eating were implemented . When judging the potential public health impact of those four interventions by calculating the average RE - AIM score , the &quot; Health - e - AME &quot; intervention scored the lowest based on limited positive effects . Moreover , the different intervention components of the &quot; Health - e - AME &quot; intervention program were inconsistently implemented . This fragmented implementation was also observed for the &quot; Body and Soul &quot; intervention , in which only one out of eight intervention churches initiated all four pillars . In contrast , &quot; 10 , 000 Steps Flanders &quot; noticed a modest global implementation score and &quot; Walk Kansas &quot; emphasized the consistent implementation of key intervention components . In spite of this , it cannot be presumed that &quot; 10 , 000 Steps Flanders &quot; and &quot; Walk Kansas &quot; have a higher potential public health impact than &quot; Health - e - AME &quot; and &quot; Body and Soul &quot; , due to the restricted adoption rate of &quot; 10 , 000 Steps Flanders &quot; ( 36% ) , and the limited participation rate of &quot; Walk Kansas &quot; ( 1% ) . Besides the adoption and participation rate , representativeness of participants and intervention agents was judged . In &quot; 10 , 000 Steps Flanders &quot; no significant differences were found between participants and non - participants , whereas &quot; Walk Kansas &quot; and &quot; Health - e - AME &quot; identified that women were more likely to participate than men . In addition , &quot; Walk Kansas &quot; seemed more appealing for people who are already active , compared to non - active people . All four interventions found significant differences in representativeness of intervention deliverers : &quot; 10 , 000 Steps Flanders &quot; concluded that staff members with longer experience of physical activity promotion were more likely to adopt the programme ; &quot; Health - e - AME &quot; concluded that larger churches are more likely to adopt the programme ; &quot; Body and Soul &quot; noticed that intervention deliverers were likely to have higher educational status and a higher income than non - deliverers . &quot; Walk Kansas &quot; was more often adopted by counties with higher populations . Sustainability was extensively discussed in three interventions : &quot; 10 , 000 Steps Flanders &quot; , &quot; Health - e - AME &quot; , and &quot; Walk Kansas &quot; . &quot; Walk Kansas &quot; scored best , since 76% of the counties adopted the intervention for at least three years . Consequently , based on the RE - AIM evaluation , it can be concluded that &quot; Walk Kansas &quot; achieved the highest potential public health impact , in spite of its low participation rate . Figure 2 Performance of 10 , 000 Flanders , Body and Soul , Walk Kansas and Health - e - ame on individual RE - AIM dimensions . Figure 2 visually represents the performance of 10 , 000 Steps Flanders , Body and Soul , Walk Kansas and Health - e - AME on individual RE - AIM dimensions .</p>
+			<p xml:id="_bzMpQwy">As mentioned above , the potential public health impact of four interventions was assessed ( see Figure 2 ) . Three of them provided information on all five dimensions : Walk Kansas ( USA ) [ 50 ] , 10 , 000 Steps Flanders ( Belgium ) [ 44 ] , and Health - e - AME ( USA ) [ 101 ] , while one intervention provided information on four out of five dimensions : Body and Soul ( USA ) [ 81 ] . Both &quot; Walk Kansas &quot; and &quot; 10 , 000 Steps Flanders &quot; were community - based physical activity programs , whereas the &quot; Health - e - AME &quot; intervention and the &quot; Body and Soul &quot; intervention were church - based interventions , focusing on physical activity and dietary behaviour , respectively . In &quot; Walk Kansas &quot; , participants formed a team and each team was supposed to identify a physical activity - related goal it wanted to reach . In &quot; 10 , 000 Steps Flanders &quot; , several physical activity intervention components were implemented based on the central theme of reaching 10 , 000 steps / day . In &quot; Health - e - AME , physical activity - related intervention components were implemented based on the Social Ecological Theory , and the Transtheoretical model , and in &quot; Body and Soul &quot; , intervention components related to healthy eating were implemented . When judging the potential public health impact of those four interventions by calculating the average RE - AIM score , the &quot; Health - e - AME &quot; intervention scored the lowest based on limited positive effects . Moreover , the different intervention components of the &quot; Health - e - AME &quot; intervention program were inconsistently implemented . This fragmented implementation was also observed for the &quot; Body and Soul &quot; intervention , in which only one out of eight intervention churches initiated all four pillars . In contrast , &quot; 10 , 000 Steps Flanders &quot; noticed a modest global implementation score and &quot; Walk Kansas &quot; emphasized the consistent implementation of key intervention components . In spite of this , it cannot be presumed that &quot; 10 , 000 Steps Flanders &quot; and &quot; Walk Kansas &quot; have a higher potential public health impact than &quot; Health - e - AME &quot; and &quot; Body and Soul &quot; , due to the restricted adoption rate of &quot; 10 , 000 Steps Flanders &quot; ( 36% ) , and the limited participation rate of &quot; Walk Kansas &quot; ( 1% ) . Besides the adoption and participation rate , representativeness of participants and intervention agents was judged . In &quot; 10 , 000 Steps Flanders &quot; no significant differences were found between participants and non - participants , whereas &quot; Walk Kansas &quot; and &quot; Health - e - AME &quot; identified that women were more likely to participate than men . In addition , &quot; Walk Kansas &quot; seemed more appealing for people who are already active , compared to non - active people . All four interventions found significant differences in representativeness of intervention deliverers : &quot; 10 , 000 Steps Flanders &quot; concluded that staff members with longer experience of physical activity promotion were more likely to adopt the programme ; &quot; Health - e - AME &quot; concluded that larger churches are more likely to adopt the programme ; &quot; Body and Soul &quot; noticed that intervention deliverers were likely to have higher educational status and a higher income than non - deliverers . &quot; Walk Kansas &quot; was more often adopted by counties with higher populations . Sustainability was extensively discussed in three interventions : &quot; 10 , 000 Steps Flanders &quot; , &quot; Health - e - AME &quot; , and &quot; Walk Kansas &quot; . &quot; Walk Kansas &quot; scored best , since 76% of the counties adopted the intervention for at least three years . Consequently , based on the RE - AIM evaluation , it can be concluded that &quot; Walk Kansas &quot; achieved the highest potential public health impact , in spite of its low participation rate . Figure 2 Performance of 10 , 000 Flanders , Body and Soul , Walk Kansas and Health - e - ame on individual RE - AIM dimensions . Figure 2 visually represents the performance of 10 , 000 Steps Flanders , Body and Soul , Walk Kansas and Health - e - AME on individual RE - AIM dimensions .</p>
 
-			<head>Discussion</head>
+			<head xml:id="_9g3XYD6">Discussion</head>
 
-			<p>The aim of this review was to provide an overview of the existing evidence - based multi - level interventions to improve obesity - related behaviours , and to determine their Reach , Effectiveness , Adoption , Implementation and Maintenance in order to assess their potential public health impact .</p>
+			<p xml:id="_ZsxAb2y">The aim of this review was to provide an overview of the existing evidence - based multi - level interventions to improve obesity - related behaviours , and to determine their Reach , Effectiveness , Adoption , Implementation and Maintenance in order to assess their potential public health impact .</p>
 
-			<p>A total of 35 multi - level interventions were identified , described and assessed on the five RE - AIM dimensions . Typically , multi - level interventions are not evaluated using randomized controlled trials . This is due to the fact that multi - level interventions have components that cannot be individually randomized ( e . g . environmental changes ) and represent real - world settings . Despite their limitations conducting trials in real world settings provides information on whether an intervention works under usual conditions , which facilitates research translation [ 105 ] .</p>
+			<p xml:id="_vfmsYtA">A total of 35 multi - level interventions were identified , described and assessed on the five RE - AIM dimensions . Typically , multi - level interventions are not evaluated using randomized controlled trials . This is due to the fact that multi - level interventions have components that cannot be individually randomized ( e . g . environmental changes ) and represent real - world settings . Despite their limitations conducting trials in real world settings provides information on whether an intervention works under usual conditions , which facilitates research translation [ 105 ] .</p>
 
-			<p>Concerning the report of RE - AIM dimensions , the results showed that information was largely underreported , with description of elements of external validity and generalizability especially lacking . This finding is in line with the results of previous reviews [ 106 - 112 ] and hampers the assessment of potential public health impact , which is needed to determine if an intervention should be implemented and disseminated on a large scale .</p>
+			<p xml:id="_FDbGcnx">Concerning the report of RE - AIM dimensions , the results showed that information was largely underreported , with description of elements of external validity and generalizability especially lacking . This finding is in line with the results of previous reviews [ 106 - 112 ] and hampers the assessment of potential public health impact , which is needed to determine if an intervention should be implemented and disseminated on a large scale .</p>
 
-			<p>Our findings on reach of the interventions are in accordance with the results reported in previous reviews [ 25 , 106 - 109 ] . As observed in the review of Vuillemin et al . [ 109 ] , all studies described the intended target audience . This description was generally not very detailed , since the majority of the multi - level interventions were community - based , in which all members of the population were considered eligible . This is particularly relevant since people with health conditions are often omitted from experimental research [ 26 , 106 , 113 ] . Other aspects of reach were less frequently reported , although these aspects are important for assessing the external validity of the interventions . Only 46% of the studies provided information on the numbers of individuals actually reached , which is relatively low in comparison with the results of other reviews [ 106 - 108 ] . Overall participation rates were highest in church - based interventions , and lowest in community - based interventions . Furthermore , over half the studies declared that women were more likely to participate than men . Consequently , it seems that most of the obesity prevention approaches were less appealing to , or less adapted to the needs of , men rather than women .</p>
+			<p xml:id="_bUQGqs4">Our findings on reach of the interventions are in accordance with the results reported in previous reviews [ 25 , 106 - 109 ] . As observed in the review of Vuillemin et al . [ 109 ] , all studies described the intended target audience . This description was generally not very detailed , since the majority of the multi - level interventions were community - based , in which all members of the population were considered eligible . This is particularly relevant since people with health conditions are often omitted from experimental research [ 26 , 106 , 113 ] . Other aspects of reach were less frequently reported , although these aspects are important for assessing the external validity of the interventions . Only 46% of the studies provided information on the numbers of individuals actually reached , which is relatively low in comparison with the results of other reviews [ 106 - 108 ] . Overall participation rates were highest in church - based interventions , and lowest in community - based interventions . Furthermore , over half the studies declared that women were more likely to participate than men . Consequently , it seems that most of the obesity prevention approaches were less appealing to , or less adapted to the needs of , men rather than women .</p>
 
-			<p>In terms of Effectiveness of the interventions , positive overweight and obesity - related behavioural and , physiological outcomes are the most consistently reported aspects within the RE - AIM framework . However , these positive outcomes could be overestimated , since the majority of the studies did not account for attrition . Furthermore , negative outcomes of the intervention , and effects on quality of life are rarely reported , which is in agreement with the results of Dzewaltowksi et al . and Antikainen et al . [ 106 , 107 ] . Nonetheless , other reviews have identified higher percentages for reports of adverse consequences ( 30% - 32% ) [ 108 , 109 ] . The unbalanced relation in reporting positive and negative outcomes may be due to publication bias . However , knowledge on adverse effects is highly important for large - scale implementation and dissemination [ 26 ] .</p>
+			<p xml:id="_VUKY5en">In terms of Effectiveness of the interventions , positive overweight and obesity - related behavioural and , physiological outcomes are the most consistently reported aspects within the RE - AIM framework . However , these positive outcomes could be overestimated , since the majority of the studies did not account for attrition . Furthermore , negative outcomes of the intervention , and effects on quality of life are rarely reported , which is in agreement with the results of Dzewaltowksi et al . and Antikainen et al . [ 106 , 107 ] . Nonetheless , other reviews have identified higher percentages for reports of adverse consequences ( 30% - 32% ) [ 108 , 109 ] . The unbalanced relation in reporting positive and negative outcomes may be due to publication bias . However , knowledge on adverse effects is highly important for large - scale implementation and dissemination [ 26 ] .</p>
 
-			<p>Regarding the Adoption of the interventions , similar to previous reviews [ 109 , 110 ] , information on intervention agents was underreported . In contrast , the number of delivery settings was widely reported [ 106 , 108 , 109 ] . Unfortunately , this number provides insufficient information to assess the generalizability of an intervention . Therefore , our focus was on the adoption rate , which refers to the proportion of participating settings . The adoption rate was highest in &quot; Walk Kansas &quot; . However , &quot; Walk Kansas &quot; was developed based on strategies and principles about feasible implementation methods , whereas most other programs were developed simply and solely with attention to efficacy . Furthermore , most of the interventions describe the characteristics of the intervention deliverers , but only 14% of the interventions reported on characteristics of non - deliverers , which is comparable with the results of earlier reviews [ 106 - 109 ] . Consequently , information is lacking to assess the representativeness of the interventions , so no meaningful conclusions could be drawn with respect to the external validity of the interventions .</p>
+			<p xml:id="_vMA7VTE">Regarding the Adoption of the interventions , similar to previous reviews [ 109 , 110 ] , information on intervention agents was underreported . In contrast , the number of delivery settings was widely reported [ 106 , 108 , 109 ] . Unfortunately , this number provides insufficient information to assess the generalizability of an intervention . Therefore , our focus was on the adoption rate , which refers to the proportion of participating settings . The adoption rate was highest in &quot; Walk Kansas &quot; . However , &quot; Walk Kansas &quot; was developed based on strategies and principles about feasible implementation methods , whereas most other programs were developed simply and solely with attention to efficacy . Furthermore , most of the interventions describe the characteristics of the intervention deliverers , but only 14% of the interventions reported on characteristics of non - deliverers , which is comparable with the results of earlier reviews [ 106 - 109 ] . Consequently , information is lacking to assess the representativeness of the interventions , so no meaningful conclusions could be drawn with respect to the external validity of the interventions .</p>
 
-			<p>The first two aspects of implementation of the interventions - &amp;apos; completeness &amp;apos; and &amp;apos; fidelity &amp;apos; - are important to judge the internal validity of interventions and to assess the appropriateness of the interventions &amp;apos; conclusions . In addition , reporting on the consistency of intervention components provides information on the degree of ease for implementing different components . Unfortunately , despite the relatively high number reporting on completeness or fidelity of implementation , the information was largely incomplete . Moreover , the ways of providing information on completeness varied considerably , so no comparison could be made between the interventions . Nonetheless , when looking at the reasons for not implementing intervention components , it can be concluded that intervention components need to be low - cost , time - efficient and suitable for organizations or communities with limited space . Moreover , the role of external factors needs to be reduced to a minimum so that the prosperity of an intervention component is independent of external factors . Furthermore , financial investment , time and expertise needed to implement the intervention were investigated in order to estimate the load for the intervention agents . Unlike previous reviews [ 108 , 109 ] , only financial investment was extensively reported . However , it seems that the majority of the interventions were funded by external grants , so that no additional costs were required from the intervention deliverers .</p>
+			<p xml:id="_VcCRFwH">The first two aspects of implementation of the interventions - &amp;apos; completeness &amp;apos; and &amp;apos; fidelity &amp;apos; - are important to judge the internal validity of interventions and to assess the appropriateness of the interventions &amp;apos; conclusions . In addition , reporting on the consistency of intervention components provides information on the degree of ease for implementing different components . Unfortunately , despite the relatively high number reporting on completeness or fidelity of implementation , the information was largely incomplete . Moreover , the ways of providing information on completeness varied considerably , so no comparison could be made between the interventions . Nonetheless , when looking at the reasons for not implementing intervention components , it can be concluded that intervention components need to be low - cost , time - efficient and suitable for organizations or communities with limited space . Moreover , the role of external factors needs to be reduced to a minimum so that the prosperity of an intervention component is independent of external factors . Furthermore , financial investment , time and expertise needed to implement the intervention were investigated in order to estimate the load for the intervention agents . Unlike previous reviews [ 108 , 109 ] , only financial investment was extensively reported . However , it seems that the majority of the interventions were funded by external grants , so that no additional costs were required from the intervention deliverers .</p>
 
-			<p>Only eight intervention studies included information on maintenance in the form of programme sustainability , in spite of the continuation of sixteen interventions . However , this is a favourable result , compared to the results of previous reviews , in which programme sustainability varied between 0% and 5% [ 106 , 108 , 109 ] . Nevertheless , it should be acknowledged that all the included interventions were introduced in the last thirteen years , whereby the sustainability of the interventions is relative . Furthermore , it is notable that community – and church based interventions are more likely to be proceeded , than worksite – and school based interventions , which is in line with the results of Antikainen et al . [ 106 ] . They stated that all the studies that reported on institutional level maintenance were community - based interventions that focused on translating an intervention into a real - world setting .</p>
+			<p xml:id="_w6vCCmU">Only eight intervention studies included information on maintenance in the form of programme sustainability , in spite of the continuation of sixteen interventions . However , this is a favourable result , compared to the results of previous reviews , in which programme sustainability varied between 0% and 5% [ 106 , 108 , 109 ] . Nevertheless , it should be acknowledged that all the included interventions were introduced in the last thirteen years , whereby the sustainability of the interventions is relative . Furthermore , it is notable that community – and church based interventions are more likely to be proceeded , than worksite – and school based interventions , which is in line with the results of Antikainen et al . [ 106 ] . They stated that all the studies that reported on institutional level maintenance were community - based interventions that focused on translating an intervention into a real - world setting .</p>
 
-			<p>Finally , the potential public health impact of four interventions that reported on at least four RE - AIM dimensions was evaluated . This evaluation was based on the RE - AIM average score defined by Glasgow et al . [ 31 ] . This score did not contain information on all aspects within the RE - AIM dimensions , whereby the score should be interpreted with caution . Of the four interventions [ 37 , 44 , 50 , 81 ] , our findings suggest that &quot; Walk Kansas &quot; scored highest for potential public health impact . An important clarification for the high score of &quot; Walk Kansas &quot; , is that all levels were included , from potential program participants to organizational sponsors , at the beginning of the planning process . This resulted in an attractive program both for community members and programme deliverers . Moreover , in both &quot; Walk Kansas &quot; and &quot; 10 , 000 Steps Flanders &quot; , the diffusion theory was used to guide the implementation process , which was defined as &amp;apos; the process by which an innovation is communicated through certain channels over time among the members of a social system &amp;apos; [ 114 ] . Furthermore , both interventions used a website to inform potential participants , and to disseminate the intervention .</p>
+			<p xml:id="_ChbbrbH">Finally , the potential public health impact of four interventions that reported on at least four RE - AIM dimensions was evaluated . This evaluation was based on the RE - AIM average score defined by Glasgow et al . [ 31 ] . This score did not contain information on all aspects within the RE - AIM dimensions , whereby the score should be interpreted with caution . Of the four interventions [ 37 , 44 , 50 , 81 ] , our findings suggest that &quot; Walk Kansas &quot; scored highest for potential public health impact . An important clarification for the high score of &quot; Walk Kansas &quot; , is that all levels were included , from potential program participants to organizational sponsors , at the beginning of the planning process . This resulted in an attractive program both for community members and programme deliverers . Moreover , in both &quot; Walk Kansas &quot; and &quot; 10 , 000 Steps Flanders &quot; , the diffusion theory was used to guide the implementation process , which was defined as &amp;apos; the process by which an innovation is communicated through certain channels over time among the members of a social system &amp;apos; [ 114 ] . Furthermore , both interventions used a website to inform potential participants , and to disseminate the intervention .</p>
 
-			<head>Conclusions</head>
+			<head xml:id="_gdZQCY6">Conclusions</head>
 
-			<p>The majority of the obesity - related multi - level intervention that we identified have the potential to reach a large amount of people , including those who can benefit most . Moreover , it seems that multi - level interventions are likely to be broadly adopted and to be sustained . RE - AIM assessment showed that multi - level interventions that 1 ) focused on all levels , from potential program participants to organizational sponsors , at the beginning of the planning process , 2 ) applied the diffusion theory to guide the implementation process , and 3 ) used a website to disseminate the intervention , achieved the highest potential public health impact . Nevertheless , better reporting of factors related to external validity and sustainability is needed to confirm these results .</p>
+			<p xml:id="_b78xTgW">The majority of the obesity - related multi - level intervention that we identified have the potential to reach a large amount of people , including those who can benefit most . Moreover , it seems that multi - level interventions are likely to be broadly adopted and to be sustained . RE - AIM assessment showed that multi - level interventions that 1 ) focused on all levels , from potential program participants to organizational sponsors , at the beginning of the planning process , 2 ) applied the diffusion theory to guide the implementation process , and 3 ) used a website to disseminate the intervention , achieved the highest potential public health impact . Nevertheless , better reporting of factors related to external validity and sustainability is needed to confirm these results .</p>
 
-			<head>Abbreviations</head>
+			<head xml:id="_dHBjBse">Abbreviations</head>
 
-			<p>RE - AIM , Reach , Effectiveness , Adoption , Implementation , Maintenance</p>
+			<p xml:id="_2FSbwEw">RE - AIM , Reach , Effectiveness , Adoption , Implementation , Maintenance</p>
 
 		</div>
 			<div type="references">
@@ -330,7 +330,7 @@ unknown
 
 <biblStruct xml:id="b0">
 	<monogr>
-		<title level="m" type="main">The Challenge of Obesity in the WHO European Region and the Strategies for Response</title>
+		<title level="m" type="main" id="_j2cA958">The Challenge of Obesity in the WHO European Region and the Strategies for Response</title>
 		<author>
 			<persName>
 				<forename type="middle">F</forename>
@@ -356,7 +356,7 @@ unknown
 
 <biblStruct xml:id="b1">
 	<analytic>
-		<title level="a" type="main">Postmenopausal women and the health consequences of obesity</title>
+		<title level="a" type="main" id="_bddtM8G">Postmenopausal women and the health consequences of obesity</title>
 		<author>
 			<persName>
 				<surname>Dennis</surname>
@@ -369,7 +369,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Obstet Gynecol Neonatal Nurs</title>
+		<title level="j" id="_xtA4tXG">J Obstet Gynecol Neonatal Nurs</title>
 		<imprint>
 			<biblScope unit="volume">36</biblScope>
 			<biblScope unit="page" from="511" to="517" />
@@ -380,7 +380,7 @@ unknown
 
 <biblStruct xml:id="b2">
 	<analytic>
-		<title level="a" type="main">Health risks associated with overweight and obesity</title>
+		<title level="a" type="main" id="_usGujYM">Health risks associated with overweight and obesity</title>
 		<author>
 			<persName>
 				<surname>Kopelman</surname>
@@ -388,7 +388,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Obes Rev</title>
+		<title level="j" id="_TtCKcJb">Obes Rev</title>
 		<imprint>
 			<biblScope unit="volume">8</biblScope>
 			<biblScope unit="issue">1</biblScope>
@@ -401,7 +401,7 @@ unknown
 
 <biblStruct xml:id="b3">
 	<analytic>
-		<title level="a" type="main">The disease burden associated with overweight and obesity</title>
+		<title level="a" type="main" id="_UmKnC2w">The disease burden associated with overweight and obesity</title>
 		<author>
 			<persName>
 				<forename type="middle">A</forename>
@@ -438,7 +438,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">JAMA</title>
+		<title level="j" id="_gwg8HJV">JAMA</title>
 		<imprint>
 			<biblScope unit="volume">282</biblScope>
 			<biblScope unit="page" from="1523" to="1529" />
@@ -449,7 +449,7 @@ unknown
 
 <biblStruct xml:id="b4">
 	<analytic>
-		<title level="a" type="main">Comparative appraisal of educational inequalities in overweight and obesity among adults in 19 European countries</title>
+		<title level="a" type="main" id="_kY4rhE6">Comparative appraisal of educational inequalities in overweight and obesity among adults in 19 European countries</title>
 		<author>
 			<persName>
 				<forename type="first">Roskam</forename>
@@ -512,7 +512,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Int J Epidemiol</title>
+		<title level="j" id="_8kU88R2">Int J Epidemiol</title>
 		<imprint>
 			<biblScope unit="volume">39</biblScope>
 			<biblScope unit="page" from="392" to="404" />
@@ -523,10 +523,10 @@ unknown
 
 <biblStruct xml:id="b5">
 	<analytic>
-		<title level="a" type="main">OECD: Overweight and obesity among adults</title>
+		<title level="a" type="main" id="_T8x2STK">OECD: Overweight and obesity among adults</title>
 	</analytic>
 	<monogr>
-		<title level="m">Health at a Glance: Europe 2012</title>
+		<title level="m" id="_BZESpFQ">Health at a Glance: Europe 2012</title>
 		<imprint>
 			<biblScope unit="page" from="62" to="64" />
 		</imprint>
@@ -535,7 +535,7 @@ unknown
 
 <biblStruct xml:id="b6">
 	<analytic>
-		<title level="a" type="main">National, regional, and global trends in body-mass index since 1980: systematic analysis of health examination surveys and epidemiological studies with 960 country-years and 9.1 million participants</title>
+		<title level="a" type="main" id="_Es7Bj84">National, regional, and global trends in body-mass index since 1980: systematic analysis of health examination surveys and epidemiological studies with 960 country-years and 9.1 million participants</title>
 		<author>
 			<persName>
 				<surname>Finucane Mm</surname>
@@ -603,7 +603,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Lancet</title>
+		<title level="j" id="_EyZQuqB">Lancet</title>
 		<imprint>
 			<biblScope unit="volume">377</biblScope>
 			<biblScope unit="page" from="557" to="567" />
@@ -614,7 +614,7 @@ unknown
 
 <biblStruct xml:id="b7">
 	<analytic>
-		<title level="a" type="main">National, regional, and global trends in adult overweight and obesity prevalences</title>
+		<title level="a" type="main" id="_8UUgnyG">National, regional, and global trends in adult overweight and obesity prevalences</title>
 		<author>
 			<persName>
 				<forename type="middle">Ga</forename>
@@ -687,7 +687,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Popul Health Metr</title>
+		<title level="j" id="_AjKcNDU">Popul Health Metr</title>
 		<imprint>
 			<biblScope unit="volume">10</biblScope>
 			<biblScope unit="page">22</biblScope>
@@ -698,10 +698,10 @@ unknown
 
 <biblStruct xml:id="b8">
 	<analytic>
-		<title level="a" type="main">Ajzen I: From intentions to actions: A theory of planned behavior</title>
+		<title level="a" type="main" id="_QM9yu34">Ajzen I: From intentions to actions: A theory of planned behavior</title>
 	</analytic>
 	<monogr>
-		<title level="j">In Action Control. Edited by Kuhl J, Beckmann J. Berlin Heidelberg</title>
+		<title level="j" id="_KhEcHbC">In Action Control. Edited by Kuhl J, Beckmann J. Berlin Heidelberg</title>
 		<imprint>
 			<publisher>Springer SSSP Springer Series in Social Psychology</publisher>
 			<biblScope unit="volume">1985</biblScope>
@@ -713,7 +713,7 @@ unknown
 
 <biblStruct xml:id="b9">
 	<analytic>
-		<title level="a" type="main">The transtheoretical model: applications to exercise behavior</title>
+		<title level="a" type="main" id="_yb8BReT">The transtheoretical model: applications to exercise behavior</title>
 		<author>
 			<persName>
 				<forename type="first">Marcus</forename>
@@ -723,7 +723,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Med Sci Sports Exerc</title>
+		<title level="j" id="_Rvdx4Sy">Med Sci Sports Exerc</title>
 		<imprint>
 			<biblScope unit="volume">26</biblScope>
 			<biblScope unit="page" from="1400" to="1404" />
@@ -734,7 +734,7 @@ unknown
 
 <biblStruct xml:id="b10">
 	<monogr>
-		<title level="m" type="main">Correlates of physical activity: why are some people physically active and others not? Lancet</title>
+		<title level="m" type="main" id="_X2jvpwm">Correlates of physical activity: why are some people physically active and others not? Lancet</title>
 		<author>
 			<persName>
 				<forename type="first">Reis</forename>
@@ -779,7 +779,7 @@ unknown
 
 <biblStruct xml:id="b11">
 	<analytic>
-		<title level="a" type="main">Toward a comprehensive model of physical activity</title>
+		<title level="a" type="main" id="_KArH7J6">Toward a comprehensive model of physical activity</title>
 		<author>
 			<persName>
 				<forename type="middle">Jc</forename>
@@ -793,7 +793,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Psychol Sport Exerc</title>
+		<title level="j" id="_jDX9whN">Psychol Sport Exerc</title>
 		<imprint>
 			<biblScope unit="volume">4</biblScope>
 			<biblScope unit="page" from="7" to="24" />
@@ -804,7 +804,7 @@ unknown
 
 <biblStruct xml:id="b12">
 	<analytic>
-		<title level="a" type="main">Relative influences of individual, social environmental, and physical environmental correlates of walking</title>
+		<title level="a" type="main" id="_Buhg4p4">Relative influences of individual, social environmental, and physical environmental correlates of walking</title>
 		<author>
 			<persName>
 				<forename type="first">Giles-Corti</forename>
@@ -814,7 +814,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Public Health</title>
+		<title level="j" id="_SrwaSVt">Am J Public Health</title>
 		<imprint>
 			<biblScope unit="volume">93</biblScope>
 			<biblScope unit="page" from="1583" to="1589" />
@@ -831,7 +831,7 @@ unknown
 
 <biblStruct xml:id="b14">
 	<analytic>
-		<title level="a" type="main">Challenges in obesity epidemiology</title>
+		<title level="a" type="main" id="_bgEQgkg">Challenges in obesity epidemiology</title>
 		<author>
 			<persName>
 				<forename type="first">Canoy</forename>
@@ -841,7 +841,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Obes Rev</title>
+		<title level="j" id="_V6fDggv">Obes Rev</title>
 		<imprint>
 			<biblScope unit="volume">8</biblScope>
 			<biblScope unit="issue">1</biblScope>
@@ -854,7 +854,7 @@ unknown
 
 <biblStruct xml:id="b15">
 	<monogr>
-		<title level="m" type="main">Obesity and the environment: where do we go from here? Science</title>
+		<title level="m" type="main" id="_a3GvrPP">Obesity and the environment: where do we go from here? Science</title>
 		<author>
 			<persName>
 				<surname>Hill</surname>
@@ -896,7 +896,7 @@ unknown
 
 <biblStruct xml:id="b16">
 	<analytic>
-		<title level="a" type="main">Environmental determinants of physical activity and sedentary behavior</title>
+		<title level="a" type="main" id="_UvzKgyd">Environmental determinants of physical activity and sedentary behavior</title>
 		<author>
 			<persName>
 				<forename type="first">Owen</forename>
@@ -922,7 +922,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Exerc Sport Sci Rev</title>
+		<title level="j" id="_r7Q2MeA">Exerc Sport Sci Rev</title>
 		<imprint>
 			<biblScope unit="volume">28</biblScope>
 			<biblScope unit="page" from="153" to="158" />
@@ -933,7 +933,7 @@ unknown
 
 <biblStruct xml:id="b17">
 	<monogr>
-		<title level="m" type="main">A systematic review of environmental factors and obesogenic dietary intakes among adults: are we getting closer to understanding obesogenic environments? Obes Rev</title>
+		<title level="m" type="main" id="_QAtRFb2">A systematic review of environmental factors and obesogenic dietary intakes among adults: are we getting closer to understanding obesogenic environments? Obes Rev</title>
 		<author>
 			<persName>
 				<forename type="first">Giskes</forename>
@@ -955,7 +955,7 @@ unknown
 
 <biblStruct xml:id="b18">
 	<analytic>
-		<title level="a" type="main">The challenge of managing body weight in the modern world</title>
+		<title level="a" type="main" id="_4YmsfpB">The challenge of managing body weight in the modern world</title>
 		<author>
 			<persName>
 				<surname>Peters</surname>
@@ -968,7 +968,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Asia Pac J Clin Nutr</title>
+		<title level="j" id="_HGmrRyE">Asia Pac J Clin Nutr</title>
 		<imprint>
 			<biblScope unit="volume">11</biblScope>
 			<biblScope unit="issue">8</biblScope>
@@ -999,7 +999,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Obesity. Annu Rev Clin Psychol</title>
+		<title level="j" id="_BcSm8V5">Obesity. Annu Rev Clin Psychol</title>
 		<imprint>
 			<biblScope unit="volume">2</biblScope>
 			<biblScope unit="page" from="357" to="377" />
@@ -1010,7 +1010,7 @@ unknown
 
 <biblStruct xml:id="b20">
 	<analytic>
-		<title level="a" type="main">Behavioral science at the crossroads in public health: extending horizons, envisioning the future</title>
+		<title level="a" type="main" id="_mTyC4ba">Behavioral science at the crossroads in public health: extending horizons, envisioning the future</title>
 		<author>
 			<persName>
 				<forename type="first">Glass</forename>
@@ -1025,7 +1025,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Soc Sci Med</title>
+		<title level="j" id="_jNGMc6a">Soc Sci Med</title>
 		<imprint>
 			<biblScope unit="volume">62</biblScope>
 			<biblScope unit="page" from="1650" to="1671" />
@@ -1036,7 +1036,7 @@ unknown
 
 <biblStruct xml:id="b21">
 	<analytic>
-		<title level="a" type="main">A systems-oriented multilevel framework for addressing obesity in the 21st century</title>
+		<title level="a" type="main" id="_mtu7MSy">A systems-oriented multilevel framework for addressing obesity in the 21st century</title>
 		<author>
 			<persName>
 				<surname>Huang Tt</surname>
@@ -1066,7 +1066,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Prev Chronic Dis</title>
+		<title level="j" id="_ZuxgpU4">Prev Chronic Dis</title>
 		<imprint>
 			<biblScope unit="volume">6</biblScope>
 			<biblScope unit="page">82</biblScope>
@@ -1077,7 +1077,7 @@ unknown
 
 <biblStruct xml:id="b22">
 	<analytic>
-		<title level="a" type="main">Unpacking vertical and horizontal integration: childhood overweight/obesity programs and planning, a Canadian perspective</title>
+		<title level="a" type="main" id="_7dnN9qS">Unpacking vertical and horizontal integration: childhood overweight/obesity programs and planning, a Canadian perspective</title>
 		<author>
 			<persName>
 				<surname>Maclean</surname>
@@ -1111,7 +1111,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Implement Sci</title>
+		<title level="j" id="_jgvg8sx">Implement Sci</title>
 		<imprint>
 			<biblScope unit="volume">5</biblScope>
 			<biblScope unit="page">36</biblScope>
@@ -1122,7 +1122,7 @@ unknown
 
 <biblStruct xml:id="b23">
 	<analytic>
-		<title level="a" type="main">School-based interventions promoting both physical activity and healthy eating in Europe: a systematic review within the HOPE project</title>
+		<title level="a" type="main" id="_tA3Pjgz">School-based interventions promoting both physical activity and healthy eating in Europe: a systematic review within the HOPE project</title>
 		<author>
 			<persName>
 				<forename type="first">De</forename>
@@ -1176,7 +1176,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Obes Rev</title>
+		<title level="j" id="_krPbcpY">Obes Rev</title>
 		<imprint>
 			<biblScope unit="volume">12</biblScope>
 			<biblScope unit="page" from="205" to="216" />
@@ -1187,7 +1187,7 @@ unknown
 
 <biblStruct xml:id="b24">
 	<analytic>
-		<title level="a" type="main">Is reporting on interventions a weak link in understanding how and why they work? A preliminary exploration using community heart health exemplars</title>
+		<title level="a" type="main" id="_jpDmask">Is reporting on interventions a weak link in understanding how and why they work? A preliminary exploration using community heart health exemplars</title>
 		<author>
 			<persName>
 				<forename type="first">Riley</forename>
@@ -1226,7 +1226,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Implement Sci</title>
+		<title level="j" id="_6pCEv7a">Implement Sci</title>
 		<imprint>
 			<biblScope unit="volume">3</biblScope>
 			<biblScope unit="page">27</biblScope>
@@ -1237,7 +1237,7 @@ unknown
 
 <biblStruct xml:id="b25">
 	<analytic>
-		<title level="a" type="main">Evaluating the public health impact of health promotion interventions: the RE-AIM framework</title>
+		<title level="a" type="main" id="_P3CE4wZ">Evaluating the public health impact of health promotion interventions: the RE-AIM framework</title>
 		<author>
 			<persName>
 				<surname>Glasgow Re</surname>
@@ -1261,7 +1261,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Public Health</title>
+		<title level="j" id="_gKS9ezm">Am J Public Health</title>
 		<imprint>
 			<biblScope unit="volume">89</biblScope>
 			<biblScope unit="page" from="1322" to="1327" />
@@ -1272,7 +1272,7 @@ unknown
 
 <biblStruct xml:id="b26">
 	<monogr>
-		<title level="m" type="main">and on behalf of the SPOTLIGHT consortium: Sustainable prevention of obesity through integrated strategies: The SPOTLIGHT project&apos;s conceptual framework and design</title>
+		<title level="m" type="main" id="_93NaBm8">and on behalf of the SPOTLIGHT consortium: Sustainable prevention of obesity through integrated strategies: The SPOTLIGHT project&apos;s conceptual framework and design</title>
 		<author>
 			<persName>
 				<forename type="middle">J</forename>
@@ -1362,7 +1362,7 @@ unknown
 
 <biblStruct xml:id="b27">
 	<analytic>
-		<title level="a" type="main">The transtheoretical model of health behavior change</title>
+		<title level="a" type="main" id="_gtc3VMR">The transtheoretical model of health behavior change</title>
 		<author>
 			<persName>
 				<surname>Prochaska</surname>
@@ -1385,7 +1385,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Health Promot</title>
+		<title level="j" id="_QpGx4fP">Am J Health Promot</title>
 		<imprint>
 			<biblScope unit="volume">12</biblScope>
 			<biblScope unit="page" from="38" to="48" />
@@ -1396,7 +1396,7 @@ unknown
 
 <biblStruct xml:id="b28">
 	<analytic>
-		<title level="a" type="main">Understanding the internal and external validity of health literacy interventions: a systematic literature review using the RE-AIM framework</title>
+		<title level="a" type="main" id="_Jd26rCd">Understanding the internal and external validity of health literacy interventions: a systematic literature review using the RE-AIM framework</title>
 		<author>
 			<persName>
 				<forename type="first">Allen</forename>
@@ -1422,7 +1422,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Health Commun</title>
+		<title level="j" id="_66K2dc6">J Health Commun</title>
 		<imprint>
 			<biblScope unit="volume">16</biblScope>
 			<biblScope unit="page" from="55" to="72" />
@@ -1433,7 +1433,7 @@ unknown
 
 <biblStruct xml:id="b29">
 	<analytic>
-		<title level="a" type="main">Distribution theory for Glass&apos;s estimator of effect size and related estimators</title>
+		<title level="a" type="main" id="_74uDMZx">Distribution theory for Glass&apos;s estimator of effect size and related estimators</title>
 		<author>
 			<persName>
 				<surname>Hedges</surname>
@@ -1441,7 +1441,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Educ Statistics</title>
+		<title level="j" id="_V7CHVnR">J Educ Statistics</title>
 		<imprint>
 			<biblScope unit="volume">6</biblScope>
 			<biblScope unit="page">128</biblScope>
@@ -1452,7 +1452,7 @@ unknown
 
 <biblStruct xml:id="b30">
 	<analytic>
-		<title level="a" type="main">Evaluating the impact of health promotion programs: using the RE-AIM framework to form summary measures for decision making involving complex issues</title>
+		<title level="a" type="main" id="_qFHHyR6">Evaluating the impact of health promotion programs: using the RE-AIM framework to form summary measures for decision making involving complex issues</title>
 		<author>
 			<persName>
 				<surname>Glasgow Re</surname>
@@ -1477,7 +1477,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Educ Res</title>
+		<title level="j" id="_Enmy2Wd">Health Educ Res</title>
 		<imprint>
 			<biblScope unit="volume">21</biblScope>
 			<biblScope unit="page" from="688" to="694" />
@@ -1488,7 +1488,7 @@ unknown
 
 <biblStruct xml:id="b31">
 	<analytic>
-		<title level="a" type="main">Using RE-AIM metrics to evaluate diabetes self-management support interventions</title>
+		<title level="a" type="main" id="_ptYPDvh">Using RE-AIM metrics to evaluate diabetes self-management support interventions</title>
 		<author>
 			<persName>
 				<surname>Glasgow Re</surname>
@@ -1518,7 +1518,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Prev Med</title>
+		<title level="j" id="_47AHMqT">Am J Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">30</biblScope>
 			<biblScope unit="page" from="67" to="73" />
@@ -1529,7 +1529,7 @@ unknown
 
 <biblStruct xml:id="b32">
 	<analytic>
-		<title level="a" type="main">Evaluating the dissemination of Body &amp; Soul, an evidence-based fruit and vegetable intake intervention: challenges for dissemination and implementation research</title>
+		<title level="a" type="main" id="_PPkZMz5">Evaluating the dissemination of Body &amp; Soul, an evidence-based fruit and vegetable intake intervention: challenges for dissemination and implementation research</title>
 		<author>
 			<persName>
 				<forename type="middle">M</forename>
@@ -1562,7 +1562,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Nutr Educ Behav</title>
+		<title level="j" id="_CPrf5Fr">J Nutr Educ Behav</title>
 		<imprint>
 			<biblScope unit="volume">44</biblScope>
 			<biblScope unit="page" from="530" to="538" />
@@ -1573,7 +1573,7 @@ unknown
 
 <biblStruct xml:id="b33">
 	<analytic>
-		<title level="a" type="main">Effects of a promotor-based intervention to promote physical activity: Familias Sanas y Activas</title>
+		<title level="a" type="main" id="_CcdMUhK">Effects of a promotor-based intervention to promote physical activity: Familias Sanas y Activas</title>
 		<author>
 			<persName>
 				<surname>Ayala</surname>
@@ -1586,7 +1586,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Public Health</title>
+		<title level="j" id="_9N4G5kR">Am J Public Health</title>
 		<imprint>
 			<biblScope unit="volume">101</biblScope>
 			<biblScope unit="page" from="2261" to="2268" />
@@ -1597,7 +1597,7 @@ unknown
 
 <biblStruct xml:id="b34">
 	<analytic>
-		<title level="a" type="main">A nutrition and exercise intervention program for controlling weight in Samoan communities in New Zealand</title>
+		<title level="a" type="main" id="_VPgJPMH">A nutrition and exercise intervention program for controlling weight in Samoan communities in New Zealand</title>
 		<author>
 			<persName>
 				<forename type="first">Bell</forename>
@@ -1618,7 +1618,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Int J Obes Relat Metab Disord</title>
+		<title level="j" id="_GvqvAGx">Int J Obes Relat Metab Disord</title>
 		<imprint>
 			<biblScope unit="volume">25</biblScope>
 			<biblScope unit="page" from="920" to="927" />
@@ -1629,7 +1629,7 @@ unknown
 
 <biblStruct xml:id="b35">
 	<analytic>
-		<title level="a" type="main">Using the RE-AIM framework to evaluate a physical activity intervention in churches</title>
+		<title level="a" type="main" id="_qbZ7ybk">Using the RE-AIM framework to evaluate a physical activity intervention in churches</title>
 		<author>
 			<persName>
 				<forename type="middle">M</forename>
@@ -1679,7 +1679,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Prev Chronic Dis</title>
+		<title level="j" id="_nmUdjVz">Prev Chronic Dis</title>
 		<imprint>
 			<biblScope unit="volume">4</biblScope>
 			<biblScope unit="page">87</biblScope>
@@ -1690,7 +1690,7 @@ unknown
 
 <biblStruct xml:id="b36">
 	<analytic>
-		<title level="a" type="main">Effects of 5-year interventions on cardiovascular risk factors of factories and offies employees of isfahan and najafabad: worksite intervention project-isfahan healthy heart program</title>
+		<title level="a" type="main" id="_57mcv3N">Effects of 5-year interventions on cardiovascular risk factors of factories and offies employees of isfahan and najafabad: worksite intervention project-isfahan healthy heart program</title>
 		<author>
 			<persName>
 				<forename type="middle">M</forename>
@@ -1729,7 +1729,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">ARYA Atheroscler</title>
+		<title level="j" id="_Yg4Rf8d">ARYA Atheroscler</title>
 		<imprint>
 			<biblScope unit="volume">6</biblScope>
 			<biblScope unit="page" from="94" to="101" />
@@ -1740,7 +1740,7 @@ unknown
 
 <biblStruct xml:id="b37">
 	<analytic>
-		<title level="a" type="main">Effects of a multilevel dietary intervention in religious organizations</title>
+		<title level="a" type="main" id="_QpM6gRP">Effects of a multilevel dietary intervention in religious organizations</title>
 		<author>
 			<persName>
 				<surname>Bowen Dj</surname>
@@ -1808,7 +1808,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Health Promot</title>
+		<title level="j" id="_jkBSPMW">Am J Health Promot</title>
 		<imprint>
 			<biblScope unit="volume">24</biblScope>
 			<biblScope unit="page" from="15" to="22" />
@@ -1819,7 +1819,7 @@ unknown
 
 <biblStruct xml:id="b38">
 	<analytic>
-		<title level="a" type="main">A community-based approach to promoting walking in rural areas</title>
+		<title level="a" type="main" id="_gwQpxPB">A community-based approach to promoting walking in rural areas</title>
 		<author>
 			<persName>
 				<surname>Brownson Rc</surname>
@@ -1896,7 +1896,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Prev Med</title>
+		<title level="j" id="_anEhqZg">Am J Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">27</biblScope>
 			<biblScope unit="page" from="28" to="34" />
@@ -1907,7 +1907,7 @@ unknown
 
 <biblStruct xml:id="b39">
 	<analytic>
-		<title level="a" type="main">A multilevel ecological approach to promoting walking in rural communities</title>
+		<title level="a" type="main" id="_cw4MQCV">A multilevel ecological approach to promoting walking in rural communities</title>
 		<author>
 			<persName>
 				<surname>Brownson Rc</surname>
@@ -1997,7 +1997,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Prev Med</title>
+		<title level="j" id="_MFD36Ke">Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">41</biblScope>
 			<biblScope unit="page" from="837" to="842" />
@@ -2008,7 +2008,7 @@ unknown
 
 <biblStruct xml:id="b40">
 	<analytic>
-		<title level="a" type="main">Process evaluation of an effective church-based diet intervention: Body &amp; Soul</title>
+		<title level="a" type="main" id="_cMRXXfx">Process evaluation of an effective church-based diet intervention: Body &amp; Soul</title>
 		<author>
 			<persName>
 				<forename type="first">Resnicow</forename>
@@ -2030,7 +2030,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Educ Behav</title>
+		<title level="j" id="_GpwHY7f">Health Educ Behav</title>
 		<imprint>
 			<biblScope unit="volume">34</biblScope>
 			<biblScope unit="page" from="864" to="880" />
@@ -2041,7 +2041,7 @@ unknown
 
 <biblStruct xml:id="b41">
 	<analytic>
-		<title level="a" type="main">Prospective associations between intervention components and website engagement in a publicly available physical activity website: the case of 10,000 Steps Australia</title>
+		<title level="a" type="main" id="_6H2baTC">Prospective associations between intervention components and website engagement in a publicly available physical activity website: the case of 10,000 Steps Australia</title>
 		<author>
 			<persName>
 				<forename type="first">Davies</forename>
@@ -2085,7 +2085,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Med Internet Res</title>
+		<title level="j" id="_EnuMhV5">J Med Internet Res</title>
 		<imprint>
 			<biblScope unit="volume">14</biblScope>
 			<biblScope unit="page">4</biblScope>
@@ -2096,7 +2096,7 @@ unknown
 
 <biblStruct xml:id="b42">
 	<analytic>
-		<title level="a" type="main">Effects of &quot; 10,000 steps Ghent &quot; : a whole-community intervention</title>
+		<title level="a" type="main" id="_s4SwJev">Effects of &quot; 10,000 steps Ghent &quot; : a whole-community intervention</title>
 		<author>
 			<persName>
 				<forename type="first">De</forename>
@@ -2128,7 +2128,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Prev Med</title>
+		<title level="j" id="_64AMUvx">Am J Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">33</biblScope>
 			<biblScope unit="page" from="455" to="463" />
@@ -2139,7 +2139,7 @@ unknown
 
 <biblStruct xml:id="b43">
 	<analytic>
-		<title level="a" type="main">Four-year follow-up of the community intervention&apos;10,000 steps Ghent</title>
+		<title level="a" type="main" id="_pUaMhVE">Four-year follow-up of the community intervention&apos;10,000 steps Ghent</title>
 		<author>
 			<persName>
 				<forename type="first">De</forename>
@@ -2171,7 +2171,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Educ Res</title>
+		<title level="j" id="_PfYe4jq">Health Educ Res</title>
 		<imprint>
 			<biblScope unit="volume">26</biblScope>
 			<biblScope unit="page" from="372" to="380" />
@@ -2182,7 +2182,7 @@ unknown
 
 <biblStruct xml:id="b44">
 	<monogr>
-		<title level="m" type="main">Twelve-month effects of the Groningen active living model (GALM) on physical activity, health and fitness outcomes in sedentary and underactive older adults</title>
+		<title level="m" type="main" id="_N6cdxWn">Twelve-month effects of the Groningen active living model (GALM) on physical activity, health and fitness outcomes in sedentary and underactive older adults</title>
 		<author>
 			<persName>
 				<forename type="first">Jong</forename>
@@ -2217,7 +2217,7 @@ unknown
 	<analytic>
 	</analytic>
 	<monogr>
-		<title level="j">Patient Educ Couns</title>
+		<title level="j" id="_zD2zMpr">Patient Educ Couns</title>
 		<imprint>
 			<biblScope unit="volume">66</biblScope>
 			<biblScope unit="page" from="167" to="176" />
@@ -2228,7 +2228,7 @@ unknown
 
 <biblStruct xml:id="b46">
 	<analytic>
-		<title level="a" type="main">Six-month effects of the Groningen active living model (GALM) on physical activity, health and fitness outcomes in sedentary and underactive older adults aged 55–65</title>
+		<title level="a" type="main" id="_Yxpwrs9">Six-month effects of the Groningen active living model (GALM) on physical activity, health and fitness outcomes in sedentary and underactive older adults aged 55–65</title>
 		<author>
 			<persName>
 				<forename type="first">Jong</forename>
@@ -2262,7 +2262,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Patient Educ Couns</title>
+		<title level="j" id="_44W9AnH">Patient Educ Couns</title>
 		<imprint>
 			<biblScope unit="volume">62</biblScope>
 			<biblScope unit="page" from="132" to="141" />
@@ -2273,7 +2273,7 @@ unknown
 
 <biblStruct xml:id="b47">
 	<analytic>
-		<title level="a" type="main">10 000 Steps Flanders&apos;: evaluation of the state-wide dissemination of a physical activity intervention in Flanders</title>
+		<title level="a" type="main" id="_26w8vVA">10 000 Steps Flanders&apos;: evaluation of the state-wide dissemination of a physical activity intervention in Flanders</title>
 		<author>
 			<persName>
 				<forename type="first">De</forename>
@@ -2320,7 +2320,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Educ Res</title>
+		<title level="j" id="_zqpkpcT">Health Educ Res</title>
 		<imprint>
 			<biblScope unit="volume">28</biblScope>
 			<biblScope unit="page" from="546" to="551" />
@@ -2331,7 +2331,7 @@ unknown
 
 <biblStruct xml:id="b48">
 	<analytic>
-		<title level="a" type="main">Correlates of pedometer use: results from a community-based physical activity intervention trial (10,000 Steps Rockhampton)</title>
+		<title level="a" type="main" id="_SMGfAZp">Correlates of pedometer use: results from a community-based physical activity intervention trial (10,000 Steps Rockhampton)</title>
 		<author>
 			<persName>
 				<surname>Eakin Eg</surname>
@@ -2368,7 +2368,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Int J Behav Nutr Phys Act</title>
+		<title level="j" id="_WSgeucG">Int J Behav Nutr Phys Act</title>
 		<imprint>
 			<biblScope unit="volume">4</biblScope>
 			<biblScope unit="page">31</biblScope>
@@ -2379,7 +2379,7 @@ unknown
 
 <biblStruct xml:id="b49">
 	<analytic>
-		<title level="a" type="main">Determining the impact of Walk Kansas: applying a team-building approach to community physical activity promotion</title>
+		<title level="a" type="main" id="_rP6a8pH">Determining the impact of Walk Kansas: applying a team-building approach to community physical activity promotion</title>
 		<author>
 			<persName>
 				<forename type="first">Estabrooks</forename>
@@ -2404,7 +2404,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Ann Behav Med</title>
+		<title level="j" id="_m32TceP">Ann Behav Med</title>
 		<imprint>
 			<biblScope unit="volume">36</biblScope>
 			<biblScope unit="page" from="1" to="12" />
@@ -2415,7 +2415,7 @@ unknown
 
 <biblStruct xml:id="b50">
 	<analytic>
-		<title level="a" type="main">Worksite environment intervention to prevent obesity among metropolitan transit workers</title>
+		<title level="a" type="main" id="_YdXED3K">Worksite environment intervention to prevent obesity among metropolitan transit workers</title>
 		<author>
 			<persName>
 				<forename type="first">French</forename>
@@ -2457,7 +2457,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Prev Med</title>
+		<title level="j" id="_rCxTzcK">Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">50</biblScope>
 			<biblScope unit="page" from="180" to="185" />
@@ -2468,7 +2468,7 @@ unknown
 
 <biblStruct xml:id="b51">
 	<analytic>
-		<title level="a" type="main">Promoting weight loss and blood pressure control at work: impact of an education and intervention program</title>
+		<title level="a" type="main" id="_Sq4mN2M">Promoting weight loss and blood pressure control at work: impact of an education and intervention program</title>
 		<author>
 			<persName>
 				<surname>Gemson Dh</surname>
@@ -2499,7 +2499,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Occup Environ Med</title>
+		<title level="j" id="_DDNeMGH">J Occup Environ Med</title>
 		<imprint>
 			<biblScope unit="volume">50</biblScope>
 			<biblScope unit="page" from="272" to="281" />
@@ -2510,7 +2510,7 @@ unknown
 
 <biblStruct xml:id="b52">
 	<analytic>
-		<title level="a" type="main">Baase CM: First-year results of an obesity prevention program at The Dow Chemical Company</title>
+		<title level="a" type="main" id="_x7HUTkk">Baase CM: First-year results of an obesity prevention program at The Dow Chemical Company</title>
 		<author>
 			<persName>
 				<surname>Goetzel Rz</surname>
@@ -2577,7 +2577,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Occup Environ Med</title>
+		<title level="j" id="_Mn6gU3u">J Occup Environ Med</title>
 		<imprint>
 			<biblScope unit="volume">51</biblScope>
 			<biblScope unit="page" from="125" to="138" />
@@ -2588,7 +2588,7 @@ unknown
 
 <biblStruct xml:id="b53">
 	<analytic>
-		<title level="a" type="main">Second-year results of an obesity prevention program at the Dow Chemical Company</title>
+		<title level="a" type="main" id="_ZFWSPx2">Second-year results of an obesity prevention program at the Dow Chemical Company</title>
 		<author>
 			<persName>
 				<surname>Goetzel Rz</surname>
@@ -2652,7 +2652,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Occup Environ Med</title>
+		<title level="j" id="_tA4a7GC">J Occup Environ Med</title>
 		<imprint>
 			<biblScope unit="volume">52</biblScope>
 			<biblScope unit="page" from="291" to="302" />
@@ -2663,7 +2663,7 @@ unknown
 
 <biblStruct xml:id="b54">
 	<analytic>
-		<title level="a" type="main">Promoting physical activity in a low-income multiethnic district: effects of a community intervention study to reduce risk factors for type 2 diabetes and cardiovascular disease: a community intervention reducing inactivity</title>
+		<title level="a" type="main" id="_2YWYT2z">Promoting physical activity in a low-income multiethnic district: effects of a community intervention study to reduce risk factors for type 2 diabetes and cardiovascular disease: a community intervention reducing inactivity</title>
 		<author>
 			<persName>
 				<surname>Jenum Ak</surname>
@@ -2722,7 +2722,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Diabetes Care</title>
+		<title level="j" id="_uwKXx5w">Diabetes Care</title>
 		<imprint>
 			<biblScope unit="volume">29</biblScope>
 			<biblScope unit="page" from="1605" to="1612" />
@@ -2733,7 +2733,7 @@ unknown
 
 <biblStruct xml:id="b55">
 	<analytic>
-		<title level="a" type="main">Targeting physical activity in a low socioeconomic status population: observations from the Norwegian &apos;Romsas in Motion&apos; study</title>
+		<title level="a" type="main" id="_edhSZyR">Targeting physical activity in a low socioeconomic status population: observations from the Norwegian &apos;Romsas in Motion&apos; study</title>
 		<author>
 			<persName>
 				<surname>Jenum Ak</surname>
@@ -2752,7 +2752,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Br J Sports Med</title>
+		<title level="j" id="_T8UNGEN">Br J Sports Med</title>
 		<imprint>
 			<biblScope unit="volume">43</biblScope>
 			<biblScope unit="page" from="64" to="69" />
@@ -2763,7 +2763,7 @@ unknown
 
 <biblStruct xml:id="b56">
 	<analytic>
-		<title level="a" type="main">Promoting physical activity in a multi-ethnic district -methods and baseline results of a pseudo-experimental intervention study</title>
+		<title level="a" type="main" id="_VE7sFtR">Promoting physical activity in a multi-ethnic district -methods and baseline results of a pseudo-experimental intervention study</title>
 		<author>
 			<persName>
 				<forename type="first">Karen</forename>
@@ -2823,7 +2823,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Eur J Cardiovasc Prev Rehabil</title>
+		<title level="j" id="_gwjtqvM">Eur J Cardiovasc Prev Rehabil</title>
 		<imprint>
 			<biblScope unit="volume">10</biblScope>
 			<biblScope unit="page" from="387" to="396" />
@@ -2834,7 +2834,7 @@ unknown
 
 <biblStruct xml:id="b57">
 	<analytic>
-		<title level="a" type="main">The impact of a 6-year comprehensive community trial on the awareness, treatment and control rates of hypertension in Iran: experiences from the Isfahan healthy heart program</title>
+		<title level="a" type="main" id="_9z36xbe">The impact of a 6-year comprehensive community trial on the awareness, treatment and control rates of hypertension in Iran: experiences from the Isfahan healthy heart program</title>
 		<author>
 			<persName>
 				<forename type="middle">A</forename>
@@ -2883,7 +2883,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">BMC Cardiovasc Disord</title>
+		<title level="j" id="_jBrYsSg">BMC Cardiovasc Disord</title>
 		<imprint>
 			<biblScope unit="volume">10</biblScope>
 			<biblScope unit="page">61</biblScope>
@@ -2894,7 +2894,7 @@ unknown
 
 <biblStruct xml:id="b58">
 	<analytic>
-		<title level="a" type="main">Process evaluation of a Dutch community intervention to improve health related behaviour in deprived neighbourhoods</title>
+		<title level="a" type="main" id="_AruXgHZ">Process evaluation of a Dutch community intervention to improve health related behaviour in deprived neighbourhoods</title>
 		<author>
 			<persName>
 				<surname>Kloek</surname>
@@ -2933,7 +2933,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Soz Praventivmed</title>
+		<title level="j" id="_JWgGXhw">Soz Praventivmed</title>
 		<imprint>
 			<biblScope unit="volume">51</biblScope>
 			<biblScope unit="page" from="259" to="272" />
@@ -2944,7 +2944,7 @@ unknown
 
 <biblStruct xml:id="b59">
 	<analytic>
-		<title level="a" type="main">Impact evaluation of a Dutch community intervention to improve health-related behaviour in deprived neighbourhoods</title>
+		<title level="a" type="main" id="_5PTkmx8">Impact evaluation of a Dutch community intervention to improve health-related behaviour in deprived neighbourhoods</title>
 		<author>
 			<persName>
 				<surname>Kloek</surname>
@@ -2988,7 +2988,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Place</title>
+		<title level="j" id="_MBr6E9b">Health Place</title>
 		<imprint>
 			<biblScope unit="volume">12</biblScope>
 			<biblScope unit="page" from="665" to="677" />
@@ -2999,7 +2999,7 @@ unknown
 
 <biblStruct xml:id="b60">
 	<analytic>
-		<title level="a" type="main">Changes in skinfold thickness and waist circumference after 12 and 24 months resulting from the NHF-NRG In Balance-project</title>
+		<title level="a" type="main" id="_Xy2J9Pc">Changes in skinfold thickness and waist circumference after 12 and 24 months resulting from the NHF-NRG In Balance-project</title>
 		<author>
 			<persName>
 				<forename type="middle">L</forename>
@@ -3039,7 +3039,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Int J Behav Nutr Phys Act</title>
+		<title level="j" id="_ESgCga8">Int J Behav Nutr Phys Act</title>
 		<imprint>
 			<biblScope unit="volume">7</biblScope>
 			<biblScope unit="page">26</biblScope>
@@ -3050,7 +3050,7 @@ unknown
 
 <biblStruct xml:id="b61">
 	<analytic>
-		<title level="a" type="main">Behavioral and cognitive effects of a worksite-based weight gain prevention program: the NHF-NRG in balance-project</title>
+		<title level="a" type="main" id="_GX2zWqz">Behavioral and cognitive effects of a worksite-based weight gain prevention program: the NHF-NRG in balance-project</title>
 		<author>
 			<persName>
 				<forename type="middle">L</forename>
@@ -3085,7 +3085,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Occup Environ Med</title>
+		<title level="j" id="_tFx4znx">J Occup Environ Med</title>
 		<imprint>
 			<biblScope unit="volume">51</biblScope>
 			<biblScope unit="page" from="1437" to="1446" />
@@ -3096,7 +3096,7 @@ unknown
 
 <biblStruct xml:id="b62">
 	<analytic>
-		<title level="a" type="main">The NHF-NRG In Balance-project: the application of Intervention Mapping in the development, implementation and evaluation of weight gain prevention at the worksite</title>
+		<title level="a" type="main" id="_2tbCfDs">The NHF-NRG In Balance-project: the application of Intervention Mapping in the development, implementation and evaluation of weight gain prevention at the worksite</title>
 		<author>
 			<persName>
 				<forename type="middle">L</forename>
@@ -3137,7 +3137,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Obes Rev</title>
+		<title level="j" id="_SSWkWQs">Obes Rev</title>
 		<imprint>
 			<biblScope unit="volume">8</biblScope>
 			<biblScope unit="page" from="347" to="361" />
@@ -3148,7 +3148,7 @@ unknown
 
 <biblStruct xml:id="b63">
 	<analytic>
-		<title level="a" type="main">HealthWorks: results of a multi-component group-randomized worksite environmental intervention trial for weight gain prevention</title>
+		<title level="a" type="main" id="_TMwEHNZ">HealthWorks: results of a multi-component group-randomized worksite environmental intervention trial for weight gain prevention</title>
 		<author>
 			<persName>
 				<forename type="middle">Ja</forename>
@@ -3191,7 +3191,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Int J Behav Nutr Phys Act</title>
+		<title level="j" id="_P5xtXEb">Int J Behav Nutr Phys Act</title>
 		<imprint>
 			<biblScope unit="volume">2012</biblScope>
 			<biblScope unit="issue">9</biblScope>
@@ -3202,7 +3202,7 @@ unknown
 
 <biblStruct xml:id="b64">
 	<analytic>
-		<title level="a" type="main">The &quot; Romsas in Motion &quot; community intervention: program exposure and psychosocial mediated relationships to change in stages of change in physical activity</title>
+		<title level="a" type="main" id="_Y4VAqQ6">The &quot; Romsas in Motion &quot; community intervention: program exposure and psychosocial mediated relationships to change in stages of change in physical activity</title>
 		<author>
 			<persName>
 				<forename type="middle">C</forename>
@@ -3227,7 +3227,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Int J Behav Nutr Phys Act</title>
+		<title level="j" id="_KShk6Ep">Int J Behav Nutr Phys Act</title>
 		<imprint>
 			<biblScope unit="volume">4</biblScope>
 			<biblScope unit="page">15</biblScope>
@@ -3238,7 +3238,7 @@ unknown
 
 <biblStruct xml:id="b65">
 	<analytic>
-		<title level="a" type="main">The &quot; Romsas in Motion &quot; community intervention: mediating effects of psychosocial factors on forward transition in the stages of change in physical activity</title>
+		<title level="a" type="main" id="_888eyWM">The &quot; Romsas in Motion &quot; community intervention: mediating effects of psychosocial factors on forward transition in the stages of change in physical activity</title>
 		<author>
 			<persName>
 				<forename type="middle">C</forename>
@@ -3263,7 +3263,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Educ Behav</title>
+		<title level="j" id="_VXTrZkx">Health Educ Behav</title>
 		<imprint>
 			<biblScope unit="volume">36</biblScope>
 			<biblScope unit="page" from="348" to="365" />
@@ -3274,7 +3274,7 @@ unknown
 
 <biblStruct xml:id="b66">
 	<monogr>
-		<title level="m" type="main">Evaluation of a statewide program to reduce chronic disease: The Healthy Hawaii Initiative</title>
+		<title level="m" type="main" id="_qduhNFe">Evaluation of a statewide program to reduce chronic disease: The Healthy Hawaii Initiative</title>
 		<author>
 			<persName>
 				<forename type="middle">J</forename>
@@ -3321,7 +3321,7 @@ unknown
 	<analytic>
 	</analytic>
 	<monogr>
-		<title level="j">Eval Program Plann</title>
+		<title level="j" id="_942D6XD">Eval Program Plann</title>
 		<imprint>
 			<biblScope unit="volume">29</biblScope>
 			<biblScope unit="page" from="293" to="300" />
@@ -3332,7 +3332,7 @@ unknown
 
 <biblStruct xml:id="b68">
 	<analytic>
-		<title level="a" type="main">Evaluation of a physical activity promotion program: The example of Agita São Paulo</title>
+		<title level="a" type="main" id="_yz5qFNm">Evaluation of a physical activity promotion program: The example of Agita São Paulo</title>
 		<author>
 			<persName>
 				<surname>Matsudo</surname>
@@ -3367,7 +3367,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Eval Program Plann</title>
+		<title level="j" id="_7sdyw3m">Eval Program Plann</title>
 		<imprint>
 			<biblScope unit="volume">29</biblScope>
 			<biblScope unit="page" from="301" to="311" />
@@ -3378,7 +3378,7 @@ unknown
 
 <biblStruct xml:id="b69">
 	<analytic>
-		<title level="a" type="main">The Agita Sao Paulo Program as a model for using physical activity to promote health</title>
+		<title level="a" type="main" id="_tff3xtJ">The Agita Sao Paulo Program as a model for using physical activity to promote health</title>
 		<author>
 			<persName>
 				<surname>Matsudo</surname>
@@ -3430,7 +3430,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Rev Panam Salud Publica</title>
+		<title level="j" id="_Bu6JngN">Rev Panam Salud Publica</title>
 		<imprint>
 			<biblScope unit="volume">14</biblScope>
 			<biblScope unit="page" from="265" to="272" />
@@ -3441,7 +3441,7 @@ unknown
 
 <biblStruct xml:id="b70">
 	<analytic>
-		<title level="a" type="main">Promotion of physical activity in a developing country: the Agita Sao Paulo experience</title>
+		<title level="a" type="main" id="_eyYvsa2">Promotion of physical activity in a developing country: the Agita Sao Paulo experience</title>
 		<author>
 			<persName>
 				<forename type="middle">V</forename>
@@ -3484,7 +3484,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Public Health Nutr</title>
+		<title level="j" id="_2UvTDXn">Public Health Nutr</title>
 		<imprint>
 			<biblScope unit="volume">5</biblScope>
 			<biblScope unit="page" from="253" to="261" />
@@ -3534,7 +3534,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="m">Time trends in physical activity in the state of Sao Paulo</title>
+		<title level="m" id="_w4qYEGR">Time trends in physical activity in the state of Sao Paulo</title>
 <meeting><address>Brazil</address></meeting>		<imprint>
 			<biblScope unit="page" from="2002" to="2008" />
 		</imprint>
@@ -3545,7 +3545,7 @@ unknown
 	<analytic>
 	</analytic>
 	<monogr>
-		<title level="j">Med Sci Sports Exerc</title>
+		<title level="j" id="_DCVC5eU">Med Sci Sports Exerc</title>
 		<imprint>
 			<biblScope unit="volume">42</biblScope>
 			<biblScope unit="page" from="2231" to="2236" />
@@ -3556,7 +3556,7 @@ unknown
 
 <biblStruct xml:id="b73">
 	<analytic>
-		<title level="a" type="main">Dissemination of a community-based physical activity project: the case of 10,000 steps</title>
+		<title level="a" type="main" id="_ugY3xXR">Dissemination of a community-based physical activity project: the case of 10,000 steps</title>
 		<author>
 			<persName>
 				<surname>Mummery Wk</surname>
@@ -3587,7 +3587,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Sci Med Sport</title>
+		<title level="j" id="_WQtE8N8">J Sci Med Sport</title>
 		<imprint>
 			<biblScope unit="volume">9</biblScope>
 			<biblScope unit="page" from="424" to="430" />
@@ -3598,7 +3598,7 @@ unknown
 
 <biblStruct xml:id="b74">
 	<analytic>
-		<title level="a" type="main">The healthy Hawaii initiative: A social ecological approach promoting healthy communities</title>
+		<title level="a" type="main" id="_4KH26KY">The healthy Hawaii initiative: A social ecological approach promoting healthy communities</title>
 		<author>
 			<persName>
 				<forename type="middle">C</forename>
@@ -3636,7 +3636,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Health Promot</title>
+		<title level="j" id="_AdenZSM">Am J Health Promot</title>
 		<imprint>
 			<biblScope unit="volume">19</biblScope>
 			<biblScope unit="page" from="310" to="313" />
@@ -3647,7 +3647,7 @@ unknown
 
 <biblStruct xml:id="b75">
 	<analytic>
-		<title level="a" type="main">Effect of the Heart At Work program on awareness of risk factors, self-efficacy, and health behaviors</title>
+		<title level="a" type="main" id="_Tg3PnbN">Effect of the Heart At Work program on awareness of risk factors, self-efficacy, and health behaviors</title>
 		<author>
 			<persName>
 				<forename type="first">Pegus</forename>
@@ -3667,7 +3667,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Occup Environ Med</title>
+		<title level="j" id="_qPXckhZ">J Occup Environ Med</title>
 		<imprint>
 			<biblScope unit="volume">44</biblScope>
 			<biblScope unit="page" from="228" to="236" />
@@ -3678,7 +3678,7 @@ unknown
 
 <biblStruct xml:id="b76">
 	<monogr>
-		<title level="m" type="main">Promoting dietary change among state health employees in Arkansas through a worksite wellness program: the Healthy Employee Lifestyle Program (HELP) Prev Chronic Dis</title>
+		<title level="m" type="main" id="_MJSG4wG">Promoting dietary change among state health employees in Arkansas through a worksite wellness program: the Healthy Employee Lifestyle Program (HELP) Prev Chronic Dis</title>
 		<author>
 			<persName>
 				<surname>Perez Ap</surname>
@@ -3716,7 +3716,7 @@ unknown
 
 <biblStruct xml:id="b77">
 	<analytic>
-		<title level="a" type="main">The Well London program–a cluster randomized trial of community engagement for improving health behaviors and mental wellbeing: baseline survey results</title>
+		<title level="a" type="main" id="_wd2B6T2">The Well London program–a cluster randomized trial of community engagement for improving health behaviors and mental wellbeing: baseline survey results</title>
 		<author>
 			<persName>
 				<forename type="first">Phillips</forename>
@@ -3782,7 +3782,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Trials</title>
+		<title level="j" id="_Ne5CG9a">Trials</title>
 		<imprint>
 			<biblScope unit="volume">13</biblScope>
 			<biblScope unit="page">105</biblScope>
@@ -3793,7 +3793,7 @@ unknown
 
 <biblStruct xml:id="b78">
 	<monogr>
-		<title level="m" type="main">Process evaluation of a community-based program for prevention and control of non-communicable disease in a developing country: The Isfahan Healthy Heart Program</title>
+		<title level="m" type="main" id="_cW7e8Xs">Process evaluation of a community-based program for prevention and control of non-communicable disease in a developing country: The Isfahan Healthy Heart Program</title>
 		<author>
 			<persName>
 				<forename type="first">Rabiei</forename>
@@ -3859,7 +3859,7 @@ unknown
 
 <biblStruct xml:id="b79">
 	<analytic>
-		<title level="a" type="main">Short-term results of community-based interventions for improving physical activity: Isfahan Healthy Heart Programme</title>
+		<title level="a" type="main" id="_gy6HdWg">Short-term results of community-based interventions for improving physical activity: Isfahan Healthy Heart Programme</title>
 		<author>
 			<persName>
 				<forename type="first">Rabiei</forename>
@@ -3886,7 +3886,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Arch Med Sci</title>
+		<title level="j" id="_bmCW3Hm">Arch Med Sci</title>
 		<imprint>
 			<biblScope unit="volume">6</biblScope>
 			<biblScope unit="page" from="32" to="39" />
@@ -3897,7 +3897,7 @@ unknown
 
 <biblStruct xml:id="b80">
 	<analytic>
-		<title level="a" type="main">Worksite Opportunities for Wellness (WOW): effects on cardiovascular disease risk factors after 1 year</title>
+		<title level="a" type="main" id="_692Ax47">Worksite Opportunities for Wellness (WOW): effects on cardiovascular disease risk factors after 1 year</title>
 		<author>
 			<persName>
 				<forename type="first">Racette</forename>
@@ -3947,7 +3947,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Prev Med</title>
+		<title level="j" id="_FEzWB9X">Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">49</biblScope>
 			<biblScope unit="page" from="108" to="114" />
@@ -3958,7 +3958,7 @@ unknown
 
 <biblStruct xml:id="b81">
 	<analytic>
-		<title level="a" type="main">Body and soul. A dietary intervention conducted through African-American churches</title>
+		<title level="a" type="main" id="_kQfCmhc">Body and soul. A dietary intervention conducted through African-American churches</title>
 		<author>
 			<persName>
 				<forename type="first">Resnicow</forename>
@@ -4001,7 +4001,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Prev Med</title>
+		<title level="j" id="_Ktf3VsJ">Am J Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">27</biblScope>
 			<biblScope unit="page" from="97" to="105" />
@@ -4012,7 +4012,7 @@ unknown
 
 <biblStruct xml:id="b82">
 	<analytic>
-		<title level="a" type="main">The effectiveness of community-based cycling promotion: findings from the Cycling Connecting Communities project in Sydney, Australia</title>
+		<title level="a" type="main" id="_cQj3y23">The effectiveness of community-based cycling promotion: findings from the Cycling Connecting Communities project in Sydney, Australia</title>
 		<author>
 			<persName>
 				<forename type="first">Rissel</forename>
@@ -4039,7 +4039,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Int J Behav Nutr Phys Act</title>
+		<title level="j" id="_mB3Sv8E">Int J Behav Nutr Phys Act</title>
 		<imprint>
 			<biblScope unit="volume">7</biblScope>
 			<biblScope unit="issue">8</biblScope>
@@ -4050,7 +4050,7 @@ unknown
 
 <biblStruct xml:id="b83">
 	<analytic>
-		<title level="a" type="main">Costs of the &apos;Hartslag Limburg&apos; community heart health intervention</title>
+		<title level="a" type="main" id="_ht7rNSv">Costs of the &apos;Hartslag Limburg&apos; community heart health intervention</title>
 		<author>
 			<persName>
 				<forename type="first">Ronckers</forename>
@@ -4072,7 +4072,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">BMC Public Health</title>
+		<title level="j" id="_zBb88tp">BMC Public Health</title>
 		<imprint>
 			<biblScope unit="volume">6</biblScope>
 			<biblScope unit="page">51</biblScope>
@@ -4083,7 +4083,7 @@ unknown
 
 <biblStruct xml:id="b84">
 	<analytic>
-		<title level="a" type="main">The Dutch Heart Health community intervention &apos;Hartslag Limburg&apos;: results of an effect study at individual level</title>
+		<title level="a" type="main" id="_RywgfDB">The Dutch Heart Health community intervention &apos;Hartslag Limburg&apos;: results of an effect study at individual level</title>
 		<author>
 			<persName>
 				<forename type="first">Ronda</forename>
@@ -4124,7 +4124,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Promot Int</title>
+		<title level="j" id="_U3VCqzq">Health Promot Int</title>
 		<imprint>
 			<biblScope unit="volume">19</biblScope>
 			<biblScope unit="page" from="21" to="31" />
@@ -4135,7 +4135,7 @@ unknown
 
 <biblStruct xml:id="b85">
 	<analytic>
-		<title level="a" type="main">The Dutch Heart Health Community Intervention &apos;Hartslag Limburg&apos;: design and results of a process study</title>
+		<title level="a" type="main" id="_Q9hb5Tq">The Dutch Heart Health Community Intervention &apos;Hartslag Limburg&apos;: design and results of a process study</title>
 		<author>
 			<persName>
 				<forename type="first">Ronda</forename>
@@ -4163,7 +4163,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Educ Res</title>
+		<title level="j" id="_v3B9Gs6">Health Educ Res</title>
 		<imprint>
 			<biblScope unit="volume">19</biblScope>
 			<biblScope unit="page" from="596" to="607" />
@@ -4174,7 +4174,7 @@ unknown
 
 <biblStruct xml:id="b86">
 	<analytic>
-		<title level="a" type="main">The Dutch heart health community intervention &apos;Hartslag Limburg&apos;: results of an effect study at organizational level</title>
+		<title level="a" type="main" id="_gqRTBv9">The Dutch heart health community intervention &apos;Hartslag Limburg&apos;: results of an effect study at organizational level</title>
 		<author>
 			<persName>
 				<forename type="first">Ronda</forename>
@@ -4209,7 +4209,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Public Health</title>
+		<title level="j" id="_KgXSVFz">Public Health</title>
 		<imprint>
 			<biblScope unit="volume">119</biblScope>
 			<biblScope unit="page" from="353" to="360" />
@@ -4220,7 +4220,7 @@ unknown
 
 <biblStruct xml:id="b87">
 	<analytic>
-		<title level="a" type="main">Effectiveness of a community-directed &apos;healthy lifestyle&apos; program in a remote Australian aboriginal community</title>
+		<title level="a" type="main" id="_ZrN98Gp">Effectiveness of a community-directed &apos;healthy lifestyle&apos; program in a remote Australian aboriginal community</title>
 		<author>
 			<persName>
 				<forename type="first">Rowley</forename>
@@ -4254,7 +4254,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Aust N Z J Public Health</title>
+		<title level="j" id="_TCC4dCJ">Aust N Z J Public Health</title>
 		<imprint>
 			<biblScope unit="volume">24</biblScope>
 			<biblScope unit="page" from="136" to="144" />
@@ -4265,7 +4265,7 @@ unknown
 
 <biblStruct xml:id="b88">
 	<monogr>
-		<title level="m" type="main">Do lifestyle interventions work in developing countries? Findings from the Isfahan Healthy Heart Program in the Islamic Republic of Iran. Bull World Health Organ</title>
+		<title level="m" type="main" id="_zgxPHyT">Do lifestyle interventions work in developing countries? Findings from the Isfahan Healthy Heart Program in the Islamic Republic of Iran. Bull World Health Organ</title>
 		<author>
 			<persName>
 				<forename type="middle">N</forename>
@@ -4336,7 +4336,7 @@ unknown
 
 <biblStruct xml:id="b89">
 	<analytic>
-		<title level="a" type="main">Isfahan Healthy Heart Programme: a comprehensive integrated community-based programme for cardiovascular disease prevention and control. Design, methods and initial experience</title>
+		<title level="a" type="main" id="_H2NG5Xb">Isfahan Healthy Heart Programme: a comprehensive integrated community-based programme for cardiovascular disease prevention and control. Design, methods and initial experience</title>
 		<author>
 			<persName>
 				<forename type="middle">N</forename>
@@ -4439,7 +4439,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Acta Cardiol</title>
+		<title level="j" id="_Je9gapC">Acta Cardiol</title>
 		<imprint>
 			<biblScope unit="volume">58</biblScope>
 			<biblScope unit="page" from="309" to="320" />
@@ -4450,7 +4450,7 @@ unknown
 
 <biblStruct xml:id="b90">
 	<analytic>
-		<title level="a" type="main">Effect of 5-year community intervention Hartslag Limburg on cardiovascular risk factors</title>
+		<title level="a" type="main" id="_q3B3SDw">Effect of 5-year community intervention Hartslag Limburg on cardiovascular risk factors</title>
 		<author>
 			<persName>
 				<surname>Schuit</surname>
@@ -4504,7 +4504,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Prev Med</title>
+		<title level="j" id="_MWftv62">Am J Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">30</biblScope>
 			<biblScope unit="page" from="237" to="242" />
@@ -4515,7 +4515,7 @@ unknown
 
 <biblStruct xml:id="b91">
 	<analytic>
-		<title level="a" type="main">A worksite obesity intervention: results from a group-randomized trial</title>
+		<title level="a" type="main" id="_ADwHKRG">A worksite obesity intervention: results from a group-randomized trial</title>
 		<author>
 			<persName>
 				<surname>Siegel Jm</surname>
@@ -4548,7 +4548,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Public Health</title>
+		<title level="j" id="_MSv5V3H">Am J Public Health</title>
 		<imprint>
 			<biblScope unit="volume">100</biblScope>
 			<biblScope unit="page" from="327" to="333" />
@@ -4559,7 +4559,7 @@ unknown
 
 <biblStruct xml:id="b92">
 	<analytic>
-		<title level="a" type="main">Effects of a community-based, professionally supervised intervention on physical activity levels among residents of Recife</title>
+		<title level="a" type="main" id="_VqFSqES">Effects of a community-based, professionally supervised intervention on physical activity levels among residents of Recife</title>
 		<author>
 			<persName>
 				<forename type="middle">P</forename>
@@ -4613,7 +4613,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Brazil. Am J Public Health</title>
+		<title level="j" id="_zWPSxsg">Brazil. Am J Public Health</title>
 		<imprint>
 			<biblScope unit="volume">99</biblScope>
 			<biblScope unit="page" from="68" to="75" />
@@ -4624,7 +4624,7 @@ unknown
 
 <biblStruct xml:id="b93">
 	<analytic>
-		<title level="a" type="main">Effectiveness of the Pasos Adelante chronic disease prevention and control program in a US-Mexico border community</title>
+		<title level="a" type="main" id="_8XUSFju">Effectiveness of the Pasos Adelante chronic disease prevention and control program in a US-Mexico border community</title>
 		<author>
 			<persName>
 				<surname>Staten Lk</surname>
@@ -4656,7 +4656,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Prev Chronic Dis</title>
+		<title level="j" id="_2PNAThc">Prev Chronic Dis</title>
 		<imprint>
 			<biblScope unit="volume">2012</biblScope>
 			<biblScope unit="issue">9</biblScope>
@@ -4668,7 +4668,7 @@ unknown
 
 <biblStruct xml:id="b94">
 	<analytic>
-		<title level="a" type="main">Pasos Adelante: the effectiveness of a community-based chronic disease prevention program</title>
+		<title level="a" type="main" id="_6T4UZQ4">Pasos Adelante: the effectiveness of a community-based chronic disease prevention program</title>
 		<author>
 			<persName>
 				<surname>Staten Lk</surname>
@@ -4694,7 +4694,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Prev Chronic Dis</title>
+		<title level="j" id="_UDCHqT5">Prev Chronic Dis</title>
 		<imprint>
 			<biblScope unit="volume">2</biblScope>
 			<biblScope unit="page">18</biblScope>
@@ -4705,7 +4705,7 @@ unknown
 
 <biblStruct xml:id="b95">
 	<analytic>
-		<title level="a" type="main">The Groningen Active Living Model, an example of successful recruitment of sedentary and underactive older adults</title>
+		<title level="a" type="main" id="_Z2YGTYB">The Groningen Active Living Model, an example of successful recruitment of sedentary and underactive older adults</title>
 		<author>
 			<persName>
 				<forename type="middle">M</forename>
@@ -4730,7 +4730,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Prev Med</title>
+		<title level="j" id="_CqHYMY8">Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">47</biblScope>
 			<biblScope unit="page" from="398" to="401" />
@@ -4741,7 +4741,7 @@ unknown
 
 <biblStruct xml:id="b96">
 	<analytic>
-		<title level="a" type="main">Groningen active living model (GALM): stimulating physical activity in sedentary older adults; first results</title>
+		<title level="a" type="main" id="_s8VHSpA">Groningen active living model (GALM): stimulating physical activity in sedentary older adults; first results</title>
 		<author>
 			<persName>
 				<forename type="middle">M</forename>
@@ -4761,7 +4761,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Prev Med</title>
+		<title level="j" id="_cvT5zUD">Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">31</biblScope>
 			<biblScope unit="page" from="547" to="553" />
@@ -4772,7 +4772,7 @@ unknown
 
 <biblStruct xml:id="b97">
 	<monogr>
-		<title level="m" type="main">The impact of disseminating the whole-community project &apos;10,000 Steps&apos;: a RE-AIM analysis</title>
+		<title level="m" type="main" id="_Nr9nFRh">The impact of disseminating the whole-community project &apos;10,000 Steps&apos;: a RE-AIM analysis</title>
 		<author>
 			<persName>
 				<forename type="first">Van</forename>
@@ -4813,7 +4813,7 @@ unknown
 
 <biblStruct xml:id="b98">
 	<monogr>
-		<title level="m" type="main">Sustainability of the whole-community project &apos;10,000 Steps&apos;: a longitudinal study</title>
+		<title level="m" type="main" id="_QZCjXsc">Sustainability of the whole-community project &apos;10,000 Steps&apos;: a longitudinal study</title>
 		<author>
 			<persName>
 				<forename type="first">Van</forename>
@@ -4857,7 +4857,7 @@ unknown
 
 <biblStruct xml:id="b99">
 	<analytic>
-		<title level="a" type="main">Evaluation of community level interventions to address social and structural determinants of health: a cluster randomised controlled trial</title>
+		<title level="a" type="main" id="_xYuRUWg">Evaluation of community level interventions to address social and structural determinants of health: a cluster randomised controlled trial</title>
 		<author>
 			<persName>
 				<forename type="first">Hayes</forename>
@@ -4909,7 +4909,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">BMC Public Health</title>
+		<title level="j" id="_U45jbpQ">BMC Public Health</title>
 		<imprint>
 			<biblScope unit="volume">9</biblScope>
 			<biblScope unit="page">207</biblScope>
@@ -4920,7 +4920,7 @@ unknown
 
 <biblStruct xml:id="b100">
 	<analytic>
-		<title level="a" type="main">Promoting physical activity in women: evaluation of a 2-year community-based intervention in Sydney, Australia</title>
+		<title level="a" type="main" id="_JdSm4EY">Promoting physical activity in women: evaluation of a 2-year community-based intervention in Sydney, Australia</title>
 		<author>
 			<persName>
 				<forename type="first">Wen</forename>
@@ -4984,7 +4984,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Promot Int</title>
+		<title level="j" id="_hGYwMAg">Health Promot Int</title>
 		<imprint>
 			<biblScope unit="volume">17</biblScope>
 			<biblScope unit="page" from="127" to="137" />
@@ -4995,7 +4995,7 @@ unknown
 
 <biblStruct xml:id="b101">
 	<analytic>
-		<title level="a" type="main">The health-e-AME faith-based physical activity initiative: Description and baseline findings</title>
+		<title level="a" type="main" id="_dBqt6eB">The health-e-AME faith-based physical activity initiative: Description and baseline findings</title>
 		<author>
 			<persName>
 				<forename type="middle">S</forename>
@@ -5060,7 +5060,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Promot Pract</title>
+		<title level="j" id="_Fw9KSWY">Health Promot Pract</title>
 		<imprint>
 			<biblScope unit="volume">8</biblScope>
 			<biblScope unit="page" from="69" to="78" />
@@ -5071,7 +5071,7 @@ unknown
 
 <biblStruct xml:id="b102">
 	<analytic>
-		<title level="a" type="main">Beijing health promoting universities: practice and evaluation</title>
+		<title level="a" type="main" id="_P9DREsa">Beijing health promoting universities: practice and evaluation</title>
 		<author>
 			<persName>
 				<forename type="first">Lan</forename>
@@ -5104,7 +5104,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Promot Int</title>
+		<title level="j" id="_y6jaawq">Health Promot Int</title>
 		<imprint>
 			<biblScope unit="volume">18</biblScope>
 			<biblScope unit="page" from="107" to="113" />
@@ -5115,7 +5115,7 @@ unknown
 
 <biblStruct xml:id="b103">
 	<analytic>
-		<title level="a" type="main">A food store-based environmental intervention is associated with reduced BMI and improved psychosocial factors and food-related behaviors on the Navajo nation</title>
+		<title level="a" type="main" id="_tS9yajD">A food store-based environmental intervention is associated with reduced BMI and improved psychosocial factors and food-related behaviors on the Navajo nation</title>
 		<author>
 			<persName>
 				<forename type="first">Kim</forename>
@@ -5136,7 +5136,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Nutr</title>
+		<title level="j" id="_qJTPBEZ">J Nutr</title>
 		<imprint>
 			<biblScope unit="volume">143</biblScope>
 			<biblScope unit="page" from="1494" to="1500" />
@@ -5147,7 +5147,7 @@ unknown
 
 <biblStruct xml:id="b104">
 	<analytic>
-		<title level="a" type="main">Healthy Alberta Communities: Impact of a three-year community-based obesity and chronic disease prevention intervention</title>
+		<title level="a" type="main" id="_6rjYRE3">Healthy Alberta Communities: Impact of a three-year community-based obesity and chronic disease prevention intervention</title>
 		<author>
 			<persName>
 				<forename type="first">Raine</forename>
@@ -5203,7 +5203,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Prev Med</title>
+		<title level="j" id="_b99wbEQ">Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">57</biblScope>
 			<biblScope unit="page" from="955" to="962" />
@@ -5214,7 +5214,7 @@ unknown
 
 <biblStruct xml:id="b105">
 	<analytic>
-		<title level="a" type="main">What does it mean to be pragmatic? Pragmatic methods, measures, and models to facilitate research translation</title>
+		<title level="a" type="main" id="_4JX4gUX">What does it mean to be pragmatic? Pragmatic methods, measures, and models to facilitate research translation</title>
 		<author>
 			<persName>
 				<surname>Glasgow</surname>
@@ -5222,7 +5222,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Educ Behav</title>
+		<title level="j" id="_dXe45pA">Health Educ Behav</title>
 		<imprint>
 			<biblScope unit="volume">40</biblScope>
 			<biblScope unit="page" from="257" to="265" />
@@ -5233,7 +5233,7 @@ unknown
 
 <biblStruct xml:id="b106">
 	<analytic>
-		<title level="a" type="main">A RE-AIM evaluation of theory-based physical activity interventions</title>
+		<title level="a" type="main" id="_WcMHDtm">A RE-AIM evaluation of theory-based physical activity interventions</title>
 		<author>
 			<persName>
 				<forename type="middle">I</forename>
@@ -5247,7 +5247,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Sport Exerc Psychol</title>
+		<title level="j" id="_DBeAmGw">J Sport Exerc Psychol</title>
 		<imprint>
 			<biblScope unit="volume">33</biblScope>
 			<biblScope unit="page" from="198" to="214" />
@@ -5258,7 +5258,7 @@ unknown
 
 <biblStruct xml:id="b107">
 	<analytic>
-		<title level="a" type="main">Behavior change intervention research in community settings: how generalizable are the results?</title>
+		<title level="a" type="main" id="_gmAtMdg">Behavior change intervention research in community settings: how generalizable are the results?</title>
 		<author>
 			<persName>
 				<forename type="first">Estabrooks</forename>
@@ -5284,7 +5284,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Health Promot Int</title>
+		<title level="j" id="_72QUmrX">Health Promot Int</title>
 		<imprint>
 			<biblScope unit="volume">19</biblScope>
 			<biblScope unit="page" from="235" to="245" />
@@ -5295,7 +5295,7 @@ unknown
 
 <biblStruct xml:id="b108">
 	<analytic>
-		<title level="a" type="main">Review of external validity reporting in childhood obesity prevention research</title>
+		<title level="a" type="main" id="_q2jEM66">Review of external validity reporting in childhood obesity prevention research</title>
 		<author>
 			<persName>
 				<forename type="first">Klesges</forename>
@@ -5310,7 +5310,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Am J Prev Med</title>
+		<title level="j" id="_TjkxbKx">Am J Prev Med</title>
 		<imprint>
 			<biblScope unit="volume">34</biblScope>
 			<biblScope unit="page" from="216" to="223" />
@@ -5321,7 +5321,7 @@ unknown
 
 <biblStruct xml:id="b109">
 	<monogr>
-		<title level="m" type="main">Worksite physical activity interventions and obesity: a review of European studies (the HOPE project) Obes Facts</title>
+		<title level="m" type="main" id="_xKvqg2U">Worksite physical activity interventions and obesity: a review of European studies (the HOPE project) Obes Facts</title>
 		<author>
 			<persName>
 				<forename type="first">Rostami</forename>
@@ -5380,7 +5380,7 @@ unknown
 
 <biblStruct xml:id="b110">
 	<analytic>
-		<title level="a" type="main">Assessing the internal and external validity of mobile health physical activity promotion interventions: a systematic literature review using the RE-AIM framework</title>
+		<title level="a" type="main" id="_amkcwJV">Assessing the internal and external validity of mobile health physical activity promotion interventions: a systematic literature review using the RE-AIM framework</title>
 		<author>
 			<persName>
 				<surname>Blackman Kc</surname>
@@ -5428,7 +5428,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">J Med Internet Res</title>
+		<title level="j" id="_JTFkB3Z">J Med Internet Res</title>
 		<imprint>
 			<biblScope unit="volume">15</biblScope>
 			<biblScope unit="page">224</biblScope>
@@ -5439,7 +5439,7 @@ unknown
 
 <biblStruct xml:id="b111">
 	<monogr>
-		<title level="m" type="main">A systematic review of eHealth cancer prevention and control interventions: new technology, same methods and designs? Transl Behav Med</title>
+		<title level="m" type="main" id="_75AQ79x">A systematic review of eHealth cancer prevention and control interventions: new technology, same methods and designs? Transl Behav Med</title>
 		<author>
 			<persName>
 				<forename type="first">Rabin</forename>
@@ -5480,7 +5480,7 @@ unknown
 
 <biblStruct xml:id="b112">
 	<monogr>
-		<title level="m" type="main">What is actually measured in process evaluations for worksite health promotion programs: a systematic review</title>
+		<title level="m" type="main" id="_cgx8mG3">What is actually measured in process evaluations for worksite health promotion programs: a systematic review</title>
 		<author>
 			<persName>
 				<forename type="middle">D</forename>
@@ -5526,7 +5526,7 @@ unknown
 
 <biblStruct xml:id="b113">
 	<analytic>
-		<title level="a" type="main">The future of health behavior change research: what is needed to improve translation of research into health promotion practice?</title>
+		<title level="a" type="main" id="_ExPqr5u">The future of health behavior change research: what is needed to improve translation of research into health promotion practice?</title>
 		<author>
 			<persName>
 				<surname>Glasgow Re</surname>
@@ -5560,7 +5560,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Ann Behav Med</title>
+		<title level="j" id="_7XZr42p">Ann Behav Med</title>
 		<imprint>
 			<biblScope unit="volume">27</biblScope>
 			<biblScope unit="page" from="3" to="12" />
@@ -5571,7 +5571,7 @@ unknown
 
 <biblStruct xml:id="b114">
 	<analytic>
-		<title level="a" type="main">Diffusion theory and knowledge dissemination, utilization, and integration in public health</title>
+		<title level="a" type="main" id="_gxZBfBm">Diffusion theory and knowledge dissemination, utilization, and integration in public health</title>
 		<author>
 			<persName>
 				<surname>Green Lw</surname>
@@ -5596,7 +5596,7 @@ unknown
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Annu Rev Public Health</title>
+		<title level="j" id="_7ukQdhQ">Annu Rev Public Health</title>
 		<imprint>
 			<biblScope unit="volume">30</biblScope>
 			<biblScope unit="page" from="151" to="174" />
@@ -5607,10 +5607,10 @@ unknown
 
 <biblStruct xml:id="b115">
 	<analytic>
-		<title level="a" type="main">Search strategy, existing of keywords used for inclusion, and keywords used for exclusion (118k) http://www.ijbnpa.org/content/supplementary/s12966-014-0147-3-s1.pdf Additional file 2. Characteristics of the included studies. Characteristics of the identified studies, including information on the focus of the intervention, study design, target population, study participants, intervention components, outcome measures and geographical information (262k) http://www.ijbnpa.org/content/supplementary/s12966-014-0147-3-s2.pdf Additional file 3. RE-AIM evaluation. Reach, Effectiveness, Adoption, Implementation and Maintenance of the included interventions</title>
+		<title level="a" type="main" id="_KysKdpP">Search strategy, existing of keywords used for inclusion, and keywords used for exclusion (118k) http://www.ijbnpa.org/content/supplementary/s12966-014-0147-3-s1.pdf Additional file 2. Characteristics of the included studies. Characteristics of the identified studies, including information on the focus of the intervention, study design, target population, study participants, intervention components, outcome measures and geographical information (262k) http://www.ijbnpa.org/content/supplementary/s12966-014-0147-3-s2.pdf Additional file 3. RE-AIM evaluation. Reach, Effectiveness, Adoption, Implementation and Maintenance of the included interventions</title>
 	</analytic>
 	<monogr>
-		<title level="m">Addtional files provided with this submission: Additional file 1. Search strategy</title>
+		<title level="m" id="_Nd3uwjF">Addtional files provided with this submission: Additional file 1. Search strategy</title>
 	</monogr>
 </biblStruct>
 

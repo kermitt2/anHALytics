@@ -186,7 +186,7 @@ public class OAIHarvester {
     }
 /*
     public String getTeiFromBinary(String filePath) throws IOException {
-        String tei = grobidProcess.runFullTextGrobid(filePath, 2, -1);
+        String tei = grobidProcess.runFullTextGrobid(filePath, 2, -1, true);
         tei = tei.replace("&amp\\s+;", "&amp;");
         return tei;
     }
@@ -352,7 +352,8 @@ public class OAIHarvester {
                     String filepath = storeTmpFile(inBinary);
                     inBinary.close();
                     System.out.println(filename);
-                    Future<String> submit = executor.submit(new GrobidService(filepath, grobid_host, grobid_port));
+                    Future<String> submit = executor.submit(
+						new GrobidService(filepath, grobid_host, grobid_port, 2, -1, true));
                     inTeiGrobid = new ByteArrayInputStream(submit.get().getBytes());                  
                     mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_TEI_NAMESPACE, date);
                     inTeiGrobid.close();

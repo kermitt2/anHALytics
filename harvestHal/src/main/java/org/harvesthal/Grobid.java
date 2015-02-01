@@ -43,10 +43,10 @@ public class Grobid {
 	 *  @param last last page of the PDF to be processed, default -1 last page	
 	 *  @return the resulting TEI document as a String or null if the extraction failed	
 	 */
-    public String runFullTextGrobid(String pdfPath, int start, int end) {
+    public String runFullTextGrobid(String pdfPath, int start, int end, boolean generateIDs) {
         String tei = null;
         try {
-			tei = engine.fullTextToTEI(pdfPath, false, false, null, 1, -1);
+			tei = engine.fullTextToTEI(pdfPath, false, false, null, 1, -1, generateIDs);
 			// no consolidation (it would take too much time)
 			// document assets not saved
 			// startPage is 1 to skip the cover page
