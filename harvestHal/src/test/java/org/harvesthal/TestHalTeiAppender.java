@@ -28,7 +28,7 @@ public class TestHalTeiAppender extends BaseTest {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
 		
-		String result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), false);
+		String result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), new FileInputStream(fullTextFile), false);
 		//System.out.println(result);
 		// some test here...
 		/*FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
@@ -46,7 +46,7 @@ public class TestHalTeiAppender extends BaseTest {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
 
-		result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), false);
+		result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), new FileInputStream(fullTextFile), false);
 		//System.out.println(result);
 		/*FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
 			"/hal-01110668v1.final.tei.xml"), result, "UTF-8");*/
@@ -67,7 +67,7 @@ public class TestHalTeiAppender extends BaseTest {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
 		
-		String result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), true);
+		String result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), new FileInputStream(fullTextFile), true);
 		//System.out.println(result);
 		// some test here...
 		
@@ -83,7 +83,7 @@ public class TestHalTeiAppender extends BaseTest {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
 
-		result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), true);
+		result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), new FileInputStream(fullTextFile), true);
 		//System.out.println(result);
 		// some test here...
 	}

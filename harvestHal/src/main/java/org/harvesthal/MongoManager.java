@@ -28,7 +28,8 @@ public class MongoManager {
     public static final String OAI_NAMESPACE = "oairesponses";
     public static final String OAI_TEI_NAMESPACE = "oaiteis";
     public static final String BINARY_NAMESPACE = "binarynamespaces";
-    public static final String GROBID_NAMESPACE = "halheader_grobidbody";
+    public static final String GROBID_HAL_TEI_NAMESPACE = "halheader_grobidbody";
+    public static final String GROBID_TEI_NAMESPACE = "grobidtei";
 
     public static String filePath = "";
     private Map<String, List<String>> filenames = null;
@@ -82,9 +83,9 @@ public class MongoManager {
         }
     }
 
-    public Map<String, List<String>> getFilenames() throws IOException {
+    public Map<String, List<String>> getFilenames(String collection) throws IOException {
         try {
-            GridFS gfs = new GridFS(db, BINARY_NAMESPACE);
+            GridFS gfs = new GridFS(db, collection);
             // print the result
             DBCursor cursor = gfs.getFileList();
             while (cursor.hasNext()) {
@@ -116,10 +117,10 @@ public class MongoManager {
         return date;
     }
 
-    public InputStream getHalTei(String filename) {
+    public InputStream streamFile(String filename, String collection) {
         GridFSDBFile file = null;
         try {
-            GridFS gfs = new GridFS(db, OAI_TEI_NAMESPACE);
+            GridFS gfs = new GridFS(db, collection);
             file = gfs.findOne(filename);
 
         } catch (MongoException e) {

@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.w3c.dom.ls.LSSerializer;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
@@ -33,14 +34,13 @@ import org.w3c.dom.ls.DOMImplementationLS;
 
 public class HalTeiAppender {
     
-    public static String replaceHeader(InputStream halTei, String teiPath, boolean mode) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+    public static String replaceHeader(InputStream halTei, InputStream grobidTei, boolean mode) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
         String teiString;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
         //docFactory.setNamespaceAware(true);
 
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder(); 
-        
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         Document docHalTei = docBuilder.parse(halTei);
 
         NodeList orgs = docHalTei.getElementsByTagName("org");
@@ -52,9 +52,9 @@ public class HalTeiAppender {
         
         if(mode){
             
-            teiString = updateFullTextTeiBrutal(biblFull, teiPath);
+            teiString = updateFullTextTeiBrutal(biblFull, grobidTei);
         }else{
-            Document doc = docBuilder.parse(teiPath);
+            Document doc = docBuilder.parse(grobidTei);
             teiString = updateFullTextTei(doc, biblFull);
         }
         return teiString;
@@ -113,8 +113,8 @@ public class HalTeiAppender {
     }
     
     
-    private static String updateFullTextTeiBrutal(NodeList biblFull, String teiPath) throws IOException {
-        String teiStr = FileUtils.readFileToString(new File(teiPath), "UTF-8");
+    private static String updateFullTextTeiBrutal(NodeList biblFull, InputStream tei) throws IOException {
+        String teiStr = IOUtils.toString(tei, "UTF-8");
         int ind1 = teiStr.indexOf("<teiHeader");
         int ind12 = teiStr.indexOf(">", ind1+1);
         int ind2 = teiStr.indexOf("</teiHeader>");
