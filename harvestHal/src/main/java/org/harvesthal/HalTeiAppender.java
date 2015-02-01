@@ -32,14 +32,15 @@ import org.w3c.dom.ls.DOMImplementationLS;
 	
 
 public class HalTeiAppender {
-
-    public static String replaceHeader(InputStream halTei, String teiPath) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+    
+    public static String replaceHeader(InputStream halTei, String teiPath, boolean mode) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+        String teiString;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
         //docFactory.setNamespaceAware(true);
 
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();  
-        Document doc = docBuilder.parse(teiPath);
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder(); 
+        
         Document docHalTei = docBuilder.parse(halTei);
 
         NodeList orgs = docHalTei.getElementsByTagName("org");
@@ -48,30 +49,15 @@ public class HalTeiAppender {
         NodeList editors = docHalTei.getElementsByTagName("editor");
         updateAffiliations(editors, orgs, docHalTei);
         NodeList biblFull = docHalTei.getElementsByTagName("biblFull");
-        updateFullTextTei(doc, biblFull);
-        return toString(doc);
-    }
-
-    public static String replaceHeaderBrutal(InputStream halTei, String teiPath) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        docFactory.setValidating(false);
-
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();  
-        Document docHalTei = docBuilder.parse(halTei);
-
-        NodeList orgs = docHalTei.getElementsByTagName("listOrg");
-        NodeList authors = docHalTei.getElementsByTagName("author");
-        updateAffiliations(authors, orgs, docHalTei);
-        NodeList editors = docHalTei.getElementsByTagName("editor");
-        updateAffiliations(editors, orgs, docHalTei);
-        NodeList biblFull = docHalTei.getElementsByTagName("biblFull");
-		
-		String teiStr = FileUtils.readFileToString(new File(teiPath), "UTF-8");
-		int ind1 = teiStr.indexOf("<teiHeader");
-		int ind12 = teiStr.indexOf(">", ind1+1);
-		int ind2 = teiStr.indexOf("</teiHeader>");
-		teiStr = teiStr.substring(0, ind12+1) + innerXmlToString(biblFull.item(0)) + teiStr.substring(ind2, teiStr.length());
-        return teiStr;
+        
+        if(mode){
+            
+            teiString = updateFullTextTeiBrutal(biblFull, teiPath);
+        }else{
+            Document doc = docBuilder.parse(teiPath);
+            teiString = updateFullTextTei(doc, biblFull);
+        }
+        return teiString;
     }
 
 
@@ -113,11 +99,22 @@ public class HalTeiAppender {
         }
     }
 
-    private static void updateFullTextTei(Document doc, NodeList biblFull) {
+    private static String updateFullTextTei(Document doc, NodeList biblFull) {
         Node teiHeader = doc.getElementsByTagName("teiHeader").item(0);
         clear(teiHeader);
         addHalHeader(biblFull, teiHeader, doc);
-
+        return toString(doc);
+    }
+    
+    
+    private static String updateFullTextTeiBrutal(NodeList biblFull, String teiPath) throws IOException {
+        String teiStr = FileUtils.readFileToString(new File(teiPath), "UTF-8");
+        int ind1 = teiStr.indexOf("<teiHeader");
+        int ind12 = teiStr.indexOf(">", ind1+1);
+        int ind2 = teiStr.indexOf("</teiHeader>");
+         
+        teiStr = teiStr.substring(0, ind12+1) + innerXmlToString(biblFull.item(0)) + teiStr.substring(ind2, teiStr.length());
+        return teiStr;
     }
 
     private static void clear(Node node) {

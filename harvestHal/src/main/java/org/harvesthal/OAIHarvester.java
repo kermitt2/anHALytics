@@ -176,7 +176,6 @@ public class OAIHarvester {
     }
 
     public String getTeiFromBinary(String filePath) throws IOException {
-        grobidProcess = new Grobid();
         String tei = grobidProcess.runFullTextGrobid(filePath);
         return tei;
     }
@@ -275,7 +274,7 @@ public class OAIHarvester {
                         oai.harvestHALForDate(dateFormat.format(date));
                     } else if (process.equals("processGrobid")) {
                         clearTmpDirectory();
-                        List<String> filenames = oai.loadBinaries();
+                        Map<String, List<String>> filenames = oai.loadBinaries();
                         oai.processGrobid(filenames);
                     } else {
                         System.err.println("-exe value should be one value from [harvestDaily | harvestAll] ");
@@ -308,16 +307,19 @@ public class OAIHarvester {
         }
     }
 
-    private List<String> loadBinaries() throws IOException {
+    private Map<String, List<String>> loadBinaries() throws IOException {
         return mongoManager.getFilenames();
     }
 
-    private void processGrobid(List<String> filenames) {
-        String tei;
+    private void processGrobid(Map<String, List<String>> filenames) {
+                String tei;
         String teiFilename;
         InputStream inTeiGrobid;
         grobidProcess = new Grobid();
-        logger.debug("Grobid processing...");
+        for(String date:dates){
+        List<String> dateFilenames = filenames.get(date);
+        if(dateFilenames != null){
+        logger.debug("Grobid processing...for : "+date);
 
         /*File tmpDirectory = new File(tmpPath);
         if (tmpDirectory.list().length == 0) {
@@ -327,7 +329,7 @@ public class OAIHarvester {
         }*/
 
         //File[] files = tmpDirectory.listFiles();
-        for (final String filename : filenames) {
+        for (final String filename : dateFilenames) {
             try {
                 if (filename.toLowerCase().endsWith(".pdf")) {
                     logger.debug("\t\t processing :" + filename);
@@ -335,22 +337,23 @@ public class OAIHarvester {
                     InputStream inBinary = mongoManager.streamFile(filename);
                     String filepath = storeTmpFile(inBinary);
                     inBinary.close();
-                    tei = getTeiFromBinary(filepath);
+                    tei = storeToTmpXmlFile(new ByteArrayInputStream(getTeiFromBinary(filepath).getBytes()));
                     String teiGrobid= addHalTeiHeader(teiFilename, tei);
-                    inTeiGrobid = new ByteArrayInputStream(teiGrobid.getBytes());
-                    mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, (String) dates.toArray()[dates.size() - 1]);
+                    inTeiGrobid = new ByteArrayInputStream(teiGrobid.getBytes());                    
+                    mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_NAMESPACE, date);
                     inTeiGrobid.close();
                 }
             } catch (final Exception exp) {
                 logger.error("An error occured while processing the file " + filename
                         + ". Continuing the process for the other files"+exp.getMessage());
             }
+        }}
         }
     }
     
-    private String addHalTeiHeader(String filename, String inTeiGrobid) throws ParserConfigurationException, IOException, SAXException, TransformerException {
+    private String addHalTeiHeader(String filename, String teiPath) throws ParserConfigurationException, IOException, SAXException, TransformerException {
         InputStream headerHal = mongoManager.getHalTei(filename);
-        String result = HalTeiAppender.replaceHeader(headerHal, inTeiGrobid);
+        String result = HalTeiAppender.replaceHeader(headerHal, teiPath, true);
         headerHal.close();
         return result;
     }

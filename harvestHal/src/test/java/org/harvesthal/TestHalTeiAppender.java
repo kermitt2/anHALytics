@@ -26,7 +26,7 @@ public class TestHalTeiAppender extends BaseTest {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
 		
-		String result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath());
+		String result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), false);
 		//System.out.println(result);
 		// some test here...
 		
@@ -42,7 +42,7 @@ public class TestHalTeiAppender extends BaseTest {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
 
-		result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath());
+		result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), false);
 		//System.out.println(result);
 	}
 	
@@ -60,7 +60,7 @@ public class TestHalTeiAppender extends BaseTest {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
 		
-		String result = HalTeiAppender.replaceHeaderBrutal(new FileInputStream(halTeiFile), fullTextFile.getPath());
+		String result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), true);
 		//System.out.println(result);
 		// some test here...
 		
@@ -76,7 +76,7 @@ public class TestHalTeiAppender extends BaseTest {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
 
-		result = HalTeiAppender.replaceHeaderBrutal(new FileInputStream(halTeiFile), fullTextFile.getPath());
+		result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), true);
 		//System.out.println(result);
 		
 	}

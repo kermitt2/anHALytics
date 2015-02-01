@@ -17,8 +17,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
 public class MongoManager {
@@ -29,7 +31,7 @@ public class MongoManager {
     public static final String GROBID_NAMESPACE = "halheader_grobidbody";
 
     public static String filePath = "";
-    private List<String> filenames = null;
+    private Map<String, List<String>> filenames = null;
     public DB db = null;
 
     public MongoManager() {
@@ -44,7 +46,7 @@ public class MongoManager {
             MongoClient mongo = new MongoClient(mongodbServer, mongodbPort);
             db = mongo.getDB(mongodbDb);
             boolean auth = db.authenticate(mongodbUser, mongodbPass.toCharArray());
-            filenames = new ArrayList<String>();
+            filenames = new HashMap<String, List<String>>();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,7 +61,6 @@ public class MongoManager {
             gfsFile.put("uploadDate", parseStringDate(dateString));
             gfsFile.setFilename(fileName);
             gfsFile.save();
-
         } catch (MongoException e) {
             e.printStackTrace();
         }
@@ -81,18 +82,32 @@ public class MongoManager {
         }
     }
 
-    public List<String> getFilenames() throws IOException {
+    public Map<String, List<String>> getFilenames() throws IOException {
         try {
             GridFS gfs = new GridFS(db, BINARY_NAMESPACE);
             // print the result
             DBCursor cursor = gfs.getFileList();
             while (cursor.hasNext()) {
-                filenames.add((String) cursor.next().get("filename"));
+                DBObject dbo = cursor.next();
+                String date = formatDate((Date) dbo.get("uploadDate"));
+                String filename = (String) dbo.get("filename");
+                if (filenames.containsKey(date)) {
+                    filenames.get(date).add(filename);
+                } else {
+                    List<String> filens = (new ArrayList<String>());
+                    filens.add(filename);
+                    filenames.put(date, filens);
+                }
             }
-            
+
         } catch (MongoException e) {
         }
         return filenames;
+    }
+
+    private String formatDate(Date date) {
+        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd");
+        return dt1.format(date);
     }
 
     private Date parseStringDate(String dateString) throws ParseException {
@@ -117,7 +132,7 @@ public class MongoManager {
         try {
             GridFS gfs = new GridFS(db, BINARY_NAMESPACE);
             file = gfs.findOne(filename);
-            
+
         } catch (MongoException e) {
         }
         return file.getInputStream();
