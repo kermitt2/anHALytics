@@ -41,6 +41,8 @@ import org.json.JsonTapasML;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import org.indexHal.utilities.IndexingPreprocess;
+
 /**
  *  Method for management of the ElasticSearch cluster.  
  *
@@ -209,13 +211,14 @@ public class ElasticSearchManager {
 	/**
 	 *  Launch the indexing of the HAL collection in ElasticSearch
 	 */	
-	public int index() throws Exception {
+	public int indexCollection() throws Exception {
 		Settings settings = ImmutableSettings.settingsBuilder()
 		        .put("cluster.name", elasticSearchClusterName).build();
 		Client client = new TransportClient(settings)
 		        .addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
 		
 		MongoManager mm = new MongoManager();
+		IndexingPreprocess indexingPreprocess = new IndexingPreprocess();
 		int nb = 0;
 		
 		if (mm.init()) {
@@ -230,6 +233,12 @@ public class ElasticSearchManager {
 				System.out.println(halID);
 				JSONObject json = JsonTapasML.toJSONObject(tei);
 				String jsonStr = json.toString();
+				try {
+					jsonStr = indexingPreprocess.process(jsonStr);
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
 				//System.out.println(jsonStr);
 
 				// index the json in ElasticSearch
@@ -269,6 +278,19 @@ public class ElasticSearchManager {
 		return nb;
 	}
 	
+	public void index(String json, String halID) {
+		Settings settings = ImmutableSettings.settingsBuilder()
+		        .put("cluster.name", elasticSearchClusterName).build();
+		Client client = new TransportClient(settings)
+		        .addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
+		
+		IndexResponse response = client.prepareIndex(indexName, "npl", halID)
+		        .setSource(json)
+		        .execute()
+		        .actionGet();
+		client.close();	
+	}
+	
 
 	/**
      *	Set-up ElasticSearch.
@@ -282,7 +304,7 @@ public class ElasticSearchManager {
 		// loading based on DocDB XML, with TEI conversion
 		try {
 			esm.setUpElasticSearch();
-			int nbDoc = esm.index();
+			int nbDoc = esm.indexCollection();
 			
 			System.out.println("Total: " + nbDoc + " documents indexed.");
 		}
