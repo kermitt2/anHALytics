@@ -177,6 +177,7 @@ public class OAIHarvester {
 
     public String getTeiFromBinary(String filePath) throws IOException {
         String tei = grobidProcess.runFullTextGrobid(filePath, 2, -1);
+        tei = tei.replace("&amp\\s+;", "&amp;");
         return tei;
     }
 
@@ -372,7 +373,6 @@ public class OAIHarvester {
                     grobid_tei.close();
                     hal_tei.close();
                              } catch (SAXParseException e) {
-                                 System.out.println(filename);
             e.printStackTrace();
         }
                 }
