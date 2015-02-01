@@ -7,6 +7,8 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileInputStream;
 
+import org.apache.commons.io.FileUtils;
+
 /**
  *  @author Patrice Lopez
  */
@@ -29,6 +31,8 @@ public class TestHalTeiAppender extends BaseTest {
 		String result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), false);
 		//System.out.println(result);
 		// some test here...
+		/*FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
+			"/hal-01110586.final.tei.xml"), result, "UTF-8");*/
 		
 		halTeiFile = new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
 					"/hal-01110668v1.tei.xml");
@@ -44,6 +48,9 @@ public class TestHalTeiAppender extends BaseTest {
 
 		result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), false);
 		//System.out.println(result);
+		/*FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
+			"/hal-01110668v1.final.tei.xml"), result, "UTF-8");*/
+		// some test here...
 	}
 	
 	@Test
@@ -78,7 +85,7 @@ public class TestHalTeiAppender extends BaseTest {
 
 		result = HalTeiAppender.replaceHeader(new FileInputStream(halTeiFile), fullTextFile.getPath(), true);
 		//System.out.println(result);
-		
+		// some test here...
 	}
 
 

@@ -89,9 +89,15 @@ public class HalTeiAppender {
 						String name = e.getAttribute("ref").replace("#", "");
 	                    Node aff = findNode(name, orgs);
 						if (aff != null) {
-							person.removeChild(theNodes.item(y));
+							//person.removeChild(theNodes.item(y));
 							Node localNode = docHalTei.importNode(aff, true); 
-	                    	person.appendChild(localNode);
+							// we need to rename this attribute because we cannot multiply the id attribute
+							// with the same value (XML doc becomes not well-formed)
+							Element orgElement = (Element)localNode;
+							orgElement.removeAttribute("xml:id");
+							orgElement.setAttribute("ref", "#"+name);
+							e.removeAttribute("ref");
+	                    	e.appendChild(localNode);
 	                	}
 					}
 				}
