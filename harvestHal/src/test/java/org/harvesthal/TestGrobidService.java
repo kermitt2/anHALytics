@@ -12,7 +12,7 @@ import org.apache.commons.io.FileUtils;
  */
 public class TestGrobidService extends BaseTest {
 	
-	@Test
+	//@Test
 	public void testFullText() throws Exception {
 		GrobidService grobid = new GrobidService();
 		
