@@ -177,7 +177,7 @@ public class OAIHarvester {
 
     public String getTeiFromBinary(String filePath) throws IOException {
         grobidProcess = new Grobid();
-        String tei = grobidProcess.runFullTextGrobid(filePath);
+        String tei = grobidProcess.runFullTextGrobid(filePath, 2, -1);
         return tei;
     }
 

@@ -316,6 +316,57 @@
 
 		</body>
 		<back>
+		<div type="annex">
+			<head n="1">Introduction</head>
+
+			<p>Over the last three decades, monoclonal antibodies (mAbs) have emerged as powerful human therapeutics due to advances in antibody engineering technologies [1]. Nonhuman antibodies induce an immune response in humans, which limits their therapeutic use [2]. To overcome this problem, humanized antibodies have been constructed by grafting the complementarity-determining regions (CDRs) of murine mAbs onto human framework regions (FRs), which is commonly referred to as CDR grafting [3]. Simple grafting of CDRs, however, often decreases affinity, because some FR residues directly contact the antigen or support conformation of the CDR loops [4] [5]. Therefore, humanized antibodies are usually constructed by CDR grafting while retaining those mouse FR residues that influence antigenbinding activity [6] [7]. These humanized antibodies are generally less immunogenic in patients than chimeric antibodies that are composed of mouse variable domains and human constant domains; however, they may still be immunogenic since the CDRs are not human [8] [9]. Therefore, to minimize the immunogenicity of humanized antibodies, only the mouse CDR residues that influence antigen binding (i.e., specificity-determining residues, or SDRs) are retained, while those that are not involved in antigen binding are replaced by human counterparts [10] [11] [12] [13]. SDR-grafted humanized antibodies exhibit less immunogenic potential than CDR-grafted humanized antibodies. HBV is a worldwide public health problem that affects 240 million chronic carriers, who have a high risk of developing hepatocellular carcinoma [14]. The HBV envelope contains three related surface glycoproteins called the large (L), middle (M), and small (S) proteins.</p>
+
+			<p>These proteins are the product of a single open reading frame that is divided into preS1, preS2, and S regions [15]. The S protein is encoded by the S region; the M protein contains the preS2 and S antigens; and the L protein contains the preS1, preS2, and S antigens. The three antigens have been shown to elicit virus-neutralizing antibodies [16] [17] [18] [19] [20]. In particular, the preS1(amino acids 2–48, ayw subtype) of the L protein and the common &quot; a &quot; determinant of the S antigen have been shown to play an essential role in viral infectivity [21] [22] [23] [24] [25] [26] [27].</p>
+
+			<p>Recently a cellular receptor for the pre-S1 sequence was identified as sodium taurocholate transporter (NTCP) [28], while heparin sulfate proteoglycan (HSPG) was recognized as a binding partner for the &quot; a &quot; determinant [29]. For immunoprophylaxis of HBV infection, hepatitis B immune globulin (HBIG) prepared from pooled human anti-HBsAg plasma is administered to infants born of HBsAg-HBeAg–positive mothers, to susceptible individuals with acute exposure to infectious HBV-containing material, and to orthotopic liver transplant patients with chronic HBV-related liver disease [30] [31] [32]. However, the currently available HBIG is not an ideal source of antibody due to its limited availability and low specific activity. Virus-neutralizing mAbs against the preS1 and S antigens would be an effective alternative for immunoprophylaxis of HBV infection.</p>
+
+			<p>We previously generated a murine mAb (KR127) that recognizes amino acids 37–45 (NSNNPDWDF) of the preS1 of adr subtype, corresponding to aa 26–34 of ayw subtype, and subsequently constructed a humanized antibody (HzKR127) by CDR grafting. HzKR127 retained the same epitope specificity and affinity as KR127 and exhibited HBV-neutralizing activity in chimpanzees [33] [34] [35]. In addition, we determined the crystal structure of the HzKR127 antigen-binding fragment (Fab) and its complex with the epitope to understand the structural mechanisms of the antigen–antibody interaction [36].</p>
+
+			<p>In the present study, based on the structural information, we further humanized HzKR127 by SDR grafting and also improved its affinity by mutating two heavy-chain CDR residues.</p>
+
+			<p>The resulting humanized antibody (HzKR127-3.2) exhibited higher HBV-neutralizing activity than KR127 and lower immunogenic potential than HzKR127. The enhanced virusneutralizing activity was achieved by an increase in the association rate. This information will be useful for the design and development of potent antibody therapeutics against HBV, and this advanced humanized antibody may be a good candidate for immunoprophylaxis of HBV infection.</p>
+
+			<head n="2">Materials and methods 2.1. Cell culture</head>
+
+			<p>HEK293T, ACHN, B16F1, and SCK-L1 [37] cells were grown in DMEM (Invitrogen) supplemented with 10% FBS. CHO-DG44 cells were grown in DMEM/F12 (Invitrogen) with supplements as described previously [35]. HepaRG cells were cultured and differentiated as previously described [24] and maintained after seeding into 96-well plates in William&amp;apos;s E medium (Gibco Life technologies) supplemented with 5% fetal calf serum, 2% DMSO, 5 mg/L insulin, 5 × 10 −6 M hydrocortisone, 5 µg/L sodium selenite, 20,000 UI/L penicillin, and 20 mg/L streptomycin. All cells were cultured in 5% CO 2 in a 37°C humidified incubator. 2.2. Construction, expression, and purification of humanized antibodies Humanized VH and VL genes were synthesized by GeneArt (Germany) and sequentially subcloned into the EcoRI-ApaI and HindIII-BsiWI sites, respectively, of pdCMV-dhfrC- cA10A3 containing human C񮽙1 and C񮽙. The resulting expression plasmids were introduced into HEK293T cells using Lipofectamine (Invitrogen). The culture supernatant was subjected to affinity chromatography on a protein A–sepharose column (Millipore), and the protein concentration was determined with a NanoDrop (Thermo Scientific) based on the molar extinction coefficient. The integrity of the purified protein was analyzed by SDS-PAGE. 2.3. Affinity determination Competition ELISA was performed as described previously [38]. Briefly, a solution containing 5–10 ng of each antibody and various concentrations (10 −10 –10 −6 M) of GST- preS1 (amino acids 1–56) as a competing antigen were preincubated at 37°C for 3 h. The mixtures were then added to each well, which had been coated with 100 ng of GST-preS1.</p>
+
+			<p>Bound antibody was detected by indirect ELISA.</p>
+
+			<p>For affinity determination by Octet Red, anti-human Fc–coated biosensor tips (ForteBio, 18-0015) were activated in PBS with 0.1% w/v bovine serum albumin (0.1% PBA) for 20 min by agitating 96-well microtiter plates (Greiner bio-one, 655209) at 1000 rpm and then saturated with 2 񮽙g/mL antibody for 10 min. This typically resulted in capture levels of 1 nm. GST-preS1 was prepared as a 2-fold serial dilution (6.25, 12.5, 25, 50, and 100 nM) in 0.1%</p>
+
+			<p>PBA and separately incubated with the antibody bound on the tips. Association and dissociation rates were measured for 15 and 30 min, respectively. All measurements were corrected for baseline drift by subtracting a control sensor exposed to running buffer only.</p>
+
+			<p>Operating temperature was maintained at 30°C. Data were analyzed using a 1:1 interaction</p>
+
+			<head>Figure legends</head>
+
+			<figure>
+				<head>Fig. 1.</head>
+
+				<figDesc>Amino acid sequences of VH (A) and VL (B) of murine antibody KR127 and humanized antibodies (HzKR127, HzKR127-3, HzKR127-3.1 and HzKR127-3.2). DP7 and DPK12 are the human Ig VH and V񮽙 germ-line segments, respectively. The dashes indicate identical amino acid residues. Fig. 2</figDesc>
+
+			</figure>
+
+			<p>. Crystal structure of the HzKR127 Fab–preS1 complex. (A) Interaction between the VH FR3 residue (Ala71H or Lys73H) and HCDR2 (H2) loop. (B) Interaction between the VL FR2 residue (Leu36L) and Trp103H in FR4. (C) Location of the LCDR2 residues (Leu54L and Lys53L). (D) Location of Asn58H in HCDR2. The VH and VL are shown in blue and in pink, respectively. The CDR loops and preS1 peptide are colored yellow and green, respectively. Fig. 3. Hydrogen bonds between the HCDR3 lid (yellow) and neighboring residues in the free (A) and preS1-bound (B) HzKR127 Fab. The residues involved in the hydrogen bonds are labeled, and the hydrogen bonds are indicated as dotted lines. The preS1 peptide is shown in green. The light and heavy chains are colored pink and blue, respectively.</p>
+
+			<head>Fig. 4. Validation of epitope specificity (A) and off-target activity (B) of HzKR127-3.2. (A)</head>
+
+			<p>GST-preS1 (amino acids 1–56) protein (WT) and a series of alanine replacement mutants were expressed in E. coli and subjected to 12% SDS-PAGE (bottom) followed by western blot analysis with KR127, HzKR127-3.1, or HzKR127-3.2 (Top). The protein band corresponding to the GST-preS1 is marked. (B) HzKR127-3.2 was subjected to flow cytometric analysis using preS1-expressing HEK293T cells (293T-S1-L1) and preS1- negative cells (HEK293T, SCK-L1, ACHN, B16F1, and CHO). Fig. 5. In vitro HBV binding (A) and neutralization (B and C) assays of HzKR127-3.2 against ayw or adr subtypes of HBV. Supplemental Fig. S1. Affinity determination of antibodies by competition ELISA. Supplemental Fig. S2. Affinity determination of antibodies using Octet Red.</p>
+
+			<p>Supplemental</p>
+
+			<p>Fig. S3. Crystal structure of the HzKR127 Fab–preS1 complex showing HCDR3 lid opening. The free and bound structures of HzKR127 Fab are superimposed. The CDRS of free and bound forms are shown in pink and in blue, respectively.</p>
+
+			<head>Supplemental Fig. S4</head>
+
+			<p>. In vitro HBV neutralization assays of HzKR127-3.2 in the presence of</p>
+
+		</div>
 			<div type="references">
 
 		<listBibl>

@@ -22,9 +22,9 @@ public class TestGrobid extends BaseTest {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
 		
-		String fulltext = grobid.runFullTextGrobid(pdfFile.getPath());
-		//FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
-		//	"/hal-01110586.fulltext.tei.xml"), fulltext, "UTF-8");
+		String fulltext = grobid.runFullTextGrobid(pdfFile.getPath(), 1, -1);
+		FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
+			"/hal-01110586.fulltext.tei.xml"), fulltext, "UTF-8");
 		// some test here...
 		
 		pdfFile = new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
@@ -33,9 +33,9 @@ public class TestGrobid extends BaseTest {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
 		
-		fulltext = grobid.runFullTextGrobid(pdfFile.getPath());
-		//FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
-		//	"/hal-01110668.fulltext.tei.xml"), fulltext, "UTF-8");
+		fulltext = grobid.runFullTextGrobid(pdfFile.getPath(), 1, -1);
+		FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
+			"/hal-01110668.fulltext.tei.xml"), fulltext, "UTF-8");
 		// some test here...
 	}
 	

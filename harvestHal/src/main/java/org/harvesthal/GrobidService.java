@@ -16,6 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import java.net.HttpURLConnection;
@@ -49,9 +50,11 @@ public class GrobidService {
 	 *  Call the Grobid full text extraction service on server.
 	 *
 	 *  @param pdfPath path to the PDF file to be processed
+	 *  @param start first page of the PDF to be processed, default -1 first page
+	 *  @param last last page of the PDF to be processed, default -1 last page	
 	 *  @return the resulting TEI document as a String or null if the service failed	
 	 */
-    public String runFullTextGrobid(String pdfPath) {
+    public String runFullTextGrobid(String pdfPath, int start, int end) {
 		String tei = null;
 		try {
 			URL url = new URL("http://" + grobid_host + ":" + grobid_port + "/processFulltextDocument");
@@ -63,7 +66,15 @@ public class GrobidService {
 			FileBody fileBody = new FileBody(new File(pdfPath));
 			MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.STRICT);
 			multipartEntity.addPart("input", fileBody);
-
+			
+			if (start != -1) {	
+				StringBody contentString = new StringBody(""+start);
+				multipartEntity.addPart("start", contentString);
+			}
+			if (end != -1) {
+				StringBody contentString = new StringBody(""+end);
+				multipartEntity.addPart("end", contentString);
+			}
 			conn.setRequestProperty("Content-Type", multipartEntity.getContentType().getValue());
 			OutputStream out = conn.getOutputStream();
 			try {

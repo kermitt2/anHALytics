@@ -35,7 +35,15 @@ public class Grobid {
         }
     }
 
-    public String runFullTextGrobid(String pdfPath) {
+	/**
+	 *  Call the Grobid full text extraction method via the Java API.
+	 *
+	 *  @param pdfPath path to the PDF file to be processed
+	 *  @param start first page of the PDF to be processed, default -1 first page
+	 *  @param last last page of the PDF to be processed, default -1 last page	
+	 *  @return the resulting TEI document as a String or null if the extraction failed	
+	 */
+    public String runFullTextGrobid(String pdfPath, int start, int end) {
         String tei = null;
         try {
 			tei = engine.fullTextToTEI(pdfPath, false, false, null, 1, -1);
