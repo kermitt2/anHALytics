@@ -37,7 +37,7 @@ public class GrobidWorker implements Runnable {
             System.out.println(Thread.currentThread().getName() + " Start. Processing = " + filename);
             processCommand();
             long endTime = System.nanoTime();
-            System.out.println(Thread.currentThread().getName() + " End. :"+ (endTime - startTime)/1000000 + " ms" );
+            System.out.println(Thread.currentThread().getName() + " End. :" + (endTime - startTime) / 1000000 + " ms");
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(GrobidWorker.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -46,16 +46,20 @@ public class GrobidWorker implements Runnable {
     }
 
     private void processCommand() throws IOException, ParseException {
-        logger.debug("\t\t processing :" + filename);
-        String teiFilename = filename.split("\\.")[0] + ".tei.xml";
-        InputStream inBinary = mm.streamFile(filename);
-        String filepath = OAIHarvester.storeTmpFile(inBinary);
-        inBinary.close();
-        System.out.println(filename);
-        GrobidService grobidService = new GrobidService(filepath, grobid_host, grobid_port, 2, -1, true);
-        InputStream inTeiGrobid = new ByteArrayInputStream(grobidService.runFullTextGrobid().getBytes());
-        mm.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_TEI_NAMESPACE, date);
-        inTeiGrobid.close();
+        try {
+            logger.debug("\t\t processing :" + filename);
+            String teiFilename = filename.split("\\.")[0] + ".tei.xml";
+            InputStream inBinary = mm.streamFile(filename);
+            String filepath = OAIHarvester.storeTmpFile(inBinary);
+            inBinary.close();
+            System.out.println(filename);
+            GrobidService grobidService = new GrobidService(filepath, grobid_host, grobid_port, 2, -1, true);
+            InputStream inTeiGrobid = new ByteArrayInputStream(grobidService.runFullTextGrobid().getBytes());
+            mm.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_TEI_NAMESPACE, date);
+            inTeiGrobid.close();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

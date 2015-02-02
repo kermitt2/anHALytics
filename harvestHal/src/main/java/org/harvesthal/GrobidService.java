@@ -109,7 +109,7 @@ public class GrobidService {
 		catch (MalformedURLException e) {
 			e.printStackTrace();
 	  	} 
-		catch (Exception e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		return tei;
