@@ -345,19 +345,8 @@ public class OAIHarvester {
         //File[] files = tmpDirectory.listFiles();
         for (final String filename : dateFilenames) {
             try {
-                if (filename.toLowerCase().endsWith(".pdf")) {
-                    logger.debug("\t\t processing :" + filename);
-                    teiFilename = filename.split("\\.")[0] + ".tei.xml";
-                    InputStream inBinary = mongoManager.streamFile(filename);
-                    String filepath = storeTmpFile(inBinary);
-                    inBinary.close();
-                    System.out.println(filename);
-                    Future<String> submit = executor.submit(
-						new GrobidService(filepath, grobid_host, grobid_port, 2, -1, true));
-                    inTeiGrobid = new ByteArrayInputStream(submit.get().getBytes());                  
-                    mongoManager.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_TEI_NAMESPACE, date);
-                    inTeiGrobid.close();
-                }
+                Runnable worker = new GrobidWorker(filename,mongoManager, grobid_host, grobid_port, date);
+                executor.execute(worker);
             } catch (final Exception exp) {
                 logger.error("An error occured while processing the file " + filename
                         + ". Continuing the process for the other files"+exp.getMessage());
@@ -365,6 +354,9 @@ public class OAIHarvester {
         }}
         }
         executor.shutdown();
+         while (!executor.isTerminated()) {
+        }
+        System.out.println("Finished all threads");
     }
     
     

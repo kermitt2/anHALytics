@@ -29,7 +29,7 @@ import java.util.concurrent.Callable;
  *
  *  @author Patrice Lopez
  */
-public class GrobidService implements Callable<String>{
+public class GrobidService {
 
     private String grobid_host = null;
     private String grobid_port = null;
@@ -113,11 +113,6 @@ public class GrobidService implements Callable<String>{
 			e.printStackTrace();
 		}
 		return tei;
-    }
-
-    @Override
-    public String call() throws Exception {
-        return runFullTextGrobid();
     }
 	
 }
