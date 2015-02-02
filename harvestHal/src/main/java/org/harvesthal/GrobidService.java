@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpRetryException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -89,6 +90,12 @@ public class GrobidService {
 			} finally {
 			    out.close();
 			}
+                        
+                        if (conn.getResponseCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
+                            throw new HttpRetryException("Failed : HTTP error code : "
+                                    + conn.getResponseCode(), conn.getResponseCode());
+                        }
+                        
 			//int status = connection.getResponseCode();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				throw new RuntimeException("Failed : HTTP error code : "
@@ -106,6 +113,15 @@ public class GrobidService {
                         tei = tei.replace("&amp\\s+;", "&amp;");
 			conn.disconnect();
 		}
+                catch (HttpRetryException e) {
+                    e.printStackTrace();
+                    try {
+                        Thread.sleep(20000);
+                        runFullTextGrobid();
+                    } catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
 		catch (MalformedURLException e) {
 			e.printStackTrace();
 	  	} 
