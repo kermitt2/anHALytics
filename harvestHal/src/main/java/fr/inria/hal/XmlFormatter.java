@@ -1,4 +1,4 @@
-package org.harvesthal;
+package fr.inria.hal;
 
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;

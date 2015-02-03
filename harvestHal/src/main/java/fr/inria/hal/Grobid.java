@@ -1,4 +1,4 @@
-package org.harvesthal;
+package fr.inria.hal;
 
 import org.grobid.core.data.BiblioItem;
 import org.grobid.core.engines.Engine;

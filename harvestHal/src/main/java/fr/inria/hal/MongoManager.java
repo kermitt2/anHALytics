@@ -1,4 +1,4 @@
-package org.harvesthal;
+package fr.inria.hal;
 
 import com.mongodb.MongoClient;
 import com.mongodb.DB;

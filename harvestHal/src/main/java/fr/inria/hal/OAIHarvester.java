@@ -1,4 +1,4 @@
-package org.harvesthal;
+package fr.inria.hal;
 
 import java.io.*;
 import java.net.*;
@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import javax.xml.parsers.*;
 import javax.xml.transform.TransformerException;
 import org.slf4j.Logger;
@@ -19,7 +18,7 @@ public class OAIHarvester {
 
     private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
 
-    private static final int NTHREDS = 10;
+    private static final int NTHREDS = 1;
     private ArrayList<String> fields = null;
     private ArrayList<String> affiliations = null;
 
@@ -351,7 +350,6 @@ public class OAIHarvester {
     private void merge(Map<String, List<String>> filenames) throws ParserConfigurationException, IOException, SAXException, TransformerException, ParseException {
         InputStream grobid_tei = null;
         InputStream hal_tei = null;
-        List<InputStream> ins = null;
 
         for (String date : dates) {
             List<String> dateFilenames = filenames.get(date);
@@ -359,11 +357,10 @@ public class OAIHarvester {
                 logger.debug("Merging documents.. for: " + date);
                 for (final String filename : dateFilenames) {
                     try {
-                        logger.debug("Merging documents.. for: " + filename);
+                        logger.debug("\t\t Merging documents.. for: " + filename);
                         grobid_tei = mongoManager.streamFile(filename, MongoManager.GROBID_TEI_NAMESPACE);
                         hal_tei = mongoManager.streamFile(filename, MongoManager.OAI_TEI_NAMESPACE);
                         InputStream tei = new ByteArrayInputStream(addHalTeiHeader(hal_tei, grobid_tei).getBytes());
-
                         mongoManager.storeToGridfs(tei, filename, MongoManager.GROBID_HAL_TEI_NAMESPACE, date);
                         grobid_tei.close();
                         hal_tei.close();

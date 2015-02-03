@@ -1,4 +1,4 @@
-package org.harvesthal;
+package fr.inria.hal;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

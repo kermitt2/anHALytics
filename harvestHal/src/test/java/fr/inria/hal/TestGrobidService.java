@@ -1,5 +1,6 @@
-package org.harvesthal;
+package fr.inria.hal;
 
+import fr.inria.hal.GrobidService;
 import java.io.ByteArrayInputStream;
 import org.junit.After;
 import org.junit.Before;

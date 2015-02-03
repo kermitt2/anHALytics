@@ -1,4 +1,4 @@
-package org.harvesthal;
+package fr.inria.hal;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;

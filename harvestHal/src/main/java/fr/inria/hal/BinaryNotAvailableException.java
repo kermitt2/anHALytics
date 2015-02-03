@@ -1,4 +1,4 @@
-package org.harvesthal;
+package fr.inria.hal;
 
 /**
  *

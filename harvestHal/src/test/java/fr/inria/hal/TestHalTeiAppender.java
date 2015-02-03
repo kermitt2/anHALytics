@@ -1,5 +1,6 @@
-package org.harvesthal;
+package fr.inria.hal;
 
+import fr.inria.hal.HalTeiAppender;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
