@@ -1,5 +1,5 @@
 /**
- *  Functions for the TAPAS ElasticSearch front end.
+ *  Functions for the anHALytics ElasticSearch front end.
  *
  */
 
