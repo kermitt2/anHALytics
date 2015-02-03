@@ -52,16 +52,16 @@ public class TestGrobidService extends BaseTest {
 		FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
 			"/hal-01110668v1.fulltext.tei.xml"), fulltext, "UTF-8");
 		/*pdfFile = new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
-			"/main.pdf");
+			"/TheseBuren-Becquet.pdf");
 		if (!pdfFile.exists()) {
 			throw new Exception("Cannot start test, because test resource folder is not correctly set.");
 		}
-		
-		fulltext = grobid.runFullTextGrobid(pdfFile.getPath(), 2, -1, true);
+		submit = executor.submit(new GrobidService(pdfFile.getPath(), grobid_host, grobid_port, 2, -1, true)); 
+		fulltext = submit.get();
 		// some test here...
 		//System.out.println(fulltext);
 		FileUtils.writeStringToFile(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile() + 
-			"/main.fulltext.tei.xml"), fulltext, "UTF-8");*/
+			"/TheseBuren-Becquet.fulltext.tei.xml"), fulltext, "UTF-8");*/
 	}
 	
 }

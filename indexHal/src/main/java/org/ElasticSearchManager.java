@@ -174,7 +174,7 @@ public class ElasticSearchManager {
 		boolean val = false;
 		
 		String urlStr = "http://"+elasticSearch_host+":"+elasticSearch_port+"/"+indexName;
-		urlStr += "/npl_type/_mapping";
+		urlStr += "/npl/_mapping";
 		
 		URL url = new URL(urlStr);
 		HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
@@ -184,7 +184,7 @@ public class ElasticSearchManager {
 		httpCon.setRequestMethod("PUT");
 		String mappingStr = null;
 		try {
-			File file = new File("src/main/resources/elasticSearch/mapping_npl.json");
+			File file = new File("src/main/resources/elasticSearch/npl.json");
 			mappingStr = FileUtils.readFileToString(file, "UTF-8");
 		}
 		catch(Exception e) {
@@ -215,7 +215,7 @@ public class ElasticSearchManager {
 		Settings settings = ImmutableSettings.settingsBuilder()
 		        .put("cluster.name", elasticSearchClusterName).build();
 		Client client = new TransportClient(settings)
-		        .addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
+		        .addTransportAddress(new InetSocketTransportAddress(elasticSearch_host, 9300));
 		
 		MongoManager mm = new MongoManager();
 		IndexingPreprocess indexingPreprocess = new IndexingPreprocess();
@@ -282,7 +282,7 @@ public class ElasticSearchManager {
 		Settings settings = ImmutableSettings.settingsBuilder()
 		        .put("cluster.name", elasticSearchClusterName).build();
 		Client client = new TransportClient(settings)
-		        .addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
+		        .addTransportAddress(new InetSocketTransportAddress(elasticSearch_host, 9300));
 		
 		IndexResponse response = client.prepareIndex(indexName, "npl", halID)
 		        .setSource(json)

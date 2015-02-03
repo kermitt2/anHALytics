@@ -1,281 +1,429 @@
 {
-    "hal": {
-        "mappings": {
-            "npl": {
+    "npl": {
+        "_all": {
+            "enabled": true, 
+            "store": "yes"
+        }, 
+        "properties": {
+            "$TEI": {
                 "properties": {
-                    "$TEI": {
+                    "$teiHeader": {
                         "properties": {
-                            "$teiHeader": {
+                            "$editionStmt": {
                                 "properties": {
-                                    "$editionStmt": {
+                                    "$edition": {
                                         "properties": {
-                                            "$edition": {
+                                            "$date": {
+                                                "type": "string"
+                                            }, 
+                                            "tagName": {
+                                                "type": "string"
+                                            }, 
+                                            "target": {
+                                                "type": "string"
+                                            }, 
+                                            "type": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "$respStmt": {
+                                        "properties": {
+                                            "$name": {
                                                 "properties": {
-                                                    "$date": {
+                                                    "$email": {
                                                         "type": "string"
                                                     }, 
-                                                    "tagName": {
+                                                    "$persName": {
+                                                        "properties": {
+                                                            "$forename": {
+                                                                "type": "string"
+                                                            }, 
+                                                            "$fullName": {
+                                                                "index": "not_analyzed", 
+                                                                "type": "string"
+                                                            }, 
+                                                            "$surname": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }, 
+                                            "$resp": {
+                                                "type": "string"
+                                            }, 
+                                            "key": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "n": {
+                                        "type": "string"
+                                    }, 
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                }
+                            }, 
+                            "$notesStmt": {
+                                "properties": {
+                                    "$note": {
+                                        "type": "string"
+                                    }, 
+                                    "n": {
+                                        "type": "string"
+                                    }, 
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                }
+                            }, 
+                            "$profileDesc": {
+                                "properties": {
+                                    "$abstract": {
+                                        "properties": {
+                                            "$lang_en": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "$langUsage": {
+                                        "properties": {
+                                            "$language": {
+                                                "type": "string"
+                                            }, 
+                                            "ident": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "$textClass": {
+                                        "properties": {
+                                            "$classCode": {
+                                                "properties": {
+                                                    "$scheme_halDomain": {
                                                         "type": "string"
                                                     }, 
-                                                    "target": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "type": {
+                                                    "$scheme_halTypology": {
                                                         "type": "string"
                                                     }
                                                 }
                                             }, 
-                                            "$respStmt": {
+                                            "$keywords": {
                                                 "properties": {
-                                                    "$name": {
+                                                    "$type_author": {
                                                         "properties": {
+                                                            "$term": {
+                                                                "type": "string"
+                                                            }, 
+                                                            "xml:id": {
+                                                                "type": "string"
+                                                            }, 
+                                                            "xml:lang": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }, 
+                                            "n": {
+                                                "type": "string"
+                                            }, 
+                                            "scheme": {
+                                                "type": "string"
+                                            }, 
+                                            "xml:id": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "xml:id": {
+                                        "type": "string"
+                                    }, 
+                                    "xml:lang": {
+                                        "type": "string"
+                                    }
+                                }
+                            }, 
+                            "$publicationStmt": {
+                                "properties": {
+                                    "$distributor": {
+                                        "type": "string"
+                                    }, 
+                                    "$idno": {
+                                        "properties": {
+                                            "$type_halBibtex": {
+                                                "type": "string"
+                                            }, 
+                                            "$type_halId": {
+                                                "type": "string"
+                                            }, 
+                                            "$type_halRef": {
+                                                "type": "string"
+                                            }, 
+                                            "$type_halRefHtml": {
+                                                "type": "string"
+                                            }, 
+                                            "$type_halUri": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                }
+                            }, 
+                            "$seriesStmt": {
+                                "properties": {
+                                    "$idno": {
+                                        "properties": {
+                                            "$type_stamp": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "n": {
+                                        "type": "string"
+                                    }, 
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                }
+                            }, 
+                            "$sourceDesc": {
+                                "properties": {
+                                    "$biblStruct": {
+                                        "properties": {
+                                            "$analytic": {
+                                                "properties": {
+                                                    "$author": {
+                                                        "properties": {
+                                                            "$affiliation": {
+                                                                "properties": {
+                                                                    "$org": {
+                                                                        "properties": {
+                                                                            "$desc": {
+                                                                                "properties": {
+                                                                                    "$address": {
+                                                                                        "properties": {
+                                                                                            "$addrLine": {
+                                                                                                "type": "string"
+                                                                                            }, 
+                                                                                            "key": {
+                                                                                                "type": "string"
+                                                                                            }, 
+                                                                                            "tagName": {
+                                                                                                "type": "string"
+                                                                                            }
+                                                                                        }
+                                                                                    }, 
+                                                                                    "$ref": {
+                                                                                        "type": "string"
+                                                                                    }, 
+                                                                                    "type": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                }
+                                                                            }, 
+                                                                            "$listRelation": {
+                                                                                "properties": {
+                                                                                    "active": {
+                                                                                        "type": "string"
+                                                                                    }, 
+                                                                                    "name": {
+                                                                                        "type": "string"
+                                                                                    }, 
+                                                                                    "tagName": {
+                                                                                        "type": "string"
+                                                                                    }, 
+                                                                                    "type": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                }
+                                                                            }, 
+                                                                            "$orgName": {
+                                                                                "type": "string"
+                                                                            }, 
+                                                                            "type": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        }
+                                                                    }, 
+                                                                    "ref": {
+                                                                        "type": "string"
+                                                                    }, 
+                                                                    "type": {
+                                                                        "type": "string"
+                                                                    }
+                                                                }
+                                                            }, 
                                                             "$email": {
                                                                 "type": "string"
+                                                            }, 
+                                                            "$idno": {
+                                                                "properties": {
+                                                                    "$type_halAuthorId": {
+                                                                        "type": "string"
+                                                                    }
+                                                                }
                                                             }, 
                                                             "$persName": {
                                                                 "properties": {
                                                                     "$forename": {
                                                                         "type": "string"
                                                                     }, 
+                                                                    "$fullName": {
+                                                                        "index": "not_analyzed", 
+                                                                        "type": "string"
+                                                                    }, 
                                                                     "$surname": {
                                                                         "type": "string"
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }, 
-                                                    "$resp": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "key": {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }, 
-                                            "n": {
-                                                "type": "string"
-                                            }, 
-                                            "type": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }, 
-                                    "$notesStmt": {
-                                        "properties": {
-                                            "$note": {
-                                                "type": "string"
-                                            }, 
-                                            "n": {
-                                                "type": "string"
-                                            }, 
-                                            "type": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }, 
-                                    "$profileDesc": {
-                                        "properties": {
-                                            "$abstract": {
-                                                "type": "string"
-                                            }, 
-                                            "$langUsage": {
-                                                "properties": {
-                                                    "$language": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "ident": {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }, 
-                                            "$textClass": {
-                                                "properties": {
-                                                    "$classCode": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "$keywords": {
-                                                        "properties": {
-                                                            "$term": {
-                                                                "type": "string"
-                                                            }, 
-                                                            "xml:lang": {
-                                                                "type": "string"
-                                                            }
-                                                        }
-                                                    }, 
-                                                    "n": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "scheme": {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }, 
-                                            "xml:lang": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }, 
-                                    "$publicationStmt": {
-                                        "properties": {
-                                            "$distributor": {
-                                                "type": "string"
-                                            }, 
-                                            "$idno": {
-                                                "type": "string"
-                                            }, 
-                                            "type": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }, 
-                                    "$seriesStmt": {
-                                        "properties": {
-                                            "$idno": {
-                                                "type": "string"
-                                            }, 
-                                            "n": {
-                                                "type": "string"
-                                            }, 
-                                            "type": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }, 
-                                    "$sourceDesc": {
-                                        "properties": {
-                                            "$biblStruct": {
-                                                "properties": {
-                                                    "$analytic": {
-                                                        "properties": {
-                                                            "$author": {
-                                                                "properties": {
-                                                                    "$affiliation": {
-                                                                        "properties": {
-                                                                            "$org": {
-                                                                                "properties": {
-                                                                                    "$desc": {
-                                                                                        "properties": {
-                                                                                            "$address": {
-                                                                                                "properties": {
-                                                                                                    "$addrLine": {
-                                                                                                        "type": "string"
-                                                                                                    }, 
-                                                                                                    "key": {
-                                                                                                        "type": "string"
-                                                                                                    }, 
-                                                                                                    "tagName": {
-                                                                                                        "type": "string"
-                                                                                                    }
-                                                                                                }
-                                                                                            }, 
-                                                                                            "$ref": {
-                                                                                                "type": "string"
-                                                                                            }, 
-                                                                                            "type": {
-                                                                                                "type": "string"
-                                                                                            }
-                                                                                        }
-                                                                                    }, 
-                                                                                    "$listRelation": {
-                                                                                        "properties": {
-                                                                                            "active": {
-                                                                                                "type": "string"
-                                                                                            }, 
-                                                                                            "name": {
-                                                                                                "type": "string"
-                                                                                            }, 
-                                                                                            "tagName": {
-                                                                                                "type": "string"
-                                                                                            }, 
-                                                                                            "type": {
-                                                                                                "type": "string"
-                                                                                            }
-                                                                                        }
-                                                                                    }, 
-                                                                                    "$orgName": {
-                                                                                        "type": "string"
-                                                                                    }, 
-                                                                                    "type": {
-                                                                                        "type": "string"
-                                                                                    }
-                                                                                }
-                                                                            }, 
-                                                                            "ref": {
-                                                                                "type": "string"
-                                                                            }, 
-                                                                            "type": {
-                                                                                "type": "string"
-                                                                            }
-                                                                        }
-                                                                    }, 
-                                                                    "$email": {
-                                                                        "type": "string"
-                                                                    }, 
-                                                                    "$idno": {
-                                                                        "type": "string"
-                                                                    }, 
-                                                                    "$persName": {
-                                                                        "properties": {
-                                                                            "$forename": {
-                                                                                "type": "string"
-                                                                            }, 
-                                                                            "$surname": {
-                                                                                "type": "string"
-                                                                            }, 
-                                                                            "type": {
-                                                                                "type": "string"
-                                                                            }
-                                                                        }
                                                                     }, 
                                                                     "type": {
                                                                         "type": "string"
                                                                     }
                                                                 }
                                                             }, 
-                                                            "$title": {
-                                                                "type": "string"
-                                                            }, 
-                                                            "role": {
-                                                                "type": "string"
-                                                            }, 
-                                                            "xml:lang": {
+                                                            "type": {
                                                                 "type": "string"
                                                             }
                                                         }
                                                     }, 
+                                                    "$title": {
+                                                        "properties": {
+                                                            "$lang_en": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }, 
+                                                    "role": {
+                                                        "type": "string"
+                                                    }, 
+                                                    "xml:id": {
+                                                        "type": "string"
+                                                    }, 
+                                                    "xml:lang": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "$idno": {
+                                                "properties": {
+                                                    "$type_doi": {
+                                                        "type": "string"
+                                                    }, 
+                                                    "$type_pubmed": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "$monogr": {
+                                                "properties": {
                                                     "$idno": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "$monogr": {
                                                         "properties": {
-                                                            "$idno": {
+                                                            "$type_halJournalId": {
                                                                 "type": "string"
                                                             }, 
-                                                            "$imprint": {
+                                                            "$type_issn": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }, 
+                                                    "$imprint": {
+                                                        "properties": {
+                                                            "$biblScope": {
+                                                                "type": "string"
+                                                            }, 
+                                                            "$date": {
+                                                                "format": "dateOptionalTime", 
+                                                                "type": "date"
+                                                            }, 
+                                                            "$publisher": {
+                                                                "type": "string"
+                                                            }, 
+                                                            "type": {
+                                                                "type": "string"
+                                                            }, 
+                                                            "unit": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }, 
+                                                    "$title": {
+                                                        "properties": {
+                                                            "$lang_en": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }, 
+                                                    "level": {
+                                                        "type": "string"
+                                                    }, 
+                                                    "type": {
+                                                        "type": "string"
+                                                    }, 
+                                                    "xml:id": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "type": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }, 
+                            "$titleStmt": {
+                                "properties": {
+                                    "$author": {
+                                        "properties": {
+                                            "$affiliation": {
+                                                "properties": {
+                                                    "$org": {
+                                                        "properties": {
+                                                            "$desc": {
                                                                 "properties": {
-                                                                    "$biblScope": {
-                                                                        "type": "string"
+                                                                    "$address": {
+                                                                        "properties": {
+                                                                            "$addrLine": {
+                                                                                "type": "string"
+                                                                            }, 
+                                                                            "key": {
+                                                                                "type": "string"
+                                                                            }, 
+                                                                            "tagName": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        }
                                                                     }, 
-                                                                    "$date": {
-                                                                        "format": "dateOptionalTime", 
-                                                                        "type": "date"
-                                                                    }, 
-                                                                    "$publisher": {
+                                                                    "$ref": {
                                                                         "type": "string"
                                                                     }, 
                                                                     "type": {
                                                                         "type": "string"
+                                                                    }
+                                                                }
+                                                            }, 
+                                                            "$listRelation": {
+                                                                "properties": {
+                                                                    "active": {
+                                                                        "type": "string"
                                                                     }, 
-                                                                    "unit": {
+                                                                    "name": {
+                                                                        "type": "string"
+                                                                    }, 
+                                                                    "tagName": {
+                                                                        "type": "string"
+                                                                    }, 
+                                                                    "type": {
                                                                         "type": "string"
                                                                     }
                                                                 }
                                                             }, 
-                                                            "$title": {
-                                                                "type": "string"
-                                                            }, 
-                                                            "level": {
+                                                            "$orgName": {
                                                                 "type": "string"
                                                             }, 
                                                             "type": {
@@ -283,61 +431,223 @@
                                                             }
                                                         }
                                                     }, 
+                                                    "ref": {
+                                                        "type": "string"
+                                                    }, 
                                                     "type": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "$email": {
+                                                "type": "string"
+                                            }, 
+                                            "$idno": {
+                                                "properties": {
+                                                    "$type_halauthor": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "$persName": {
+                                                "properties": {
+                                                    "$forename": {
+                                                        "type": "string"
+                                                    }, 
+                                                    "$fullName": {
+                                                        "index": "not_analyzed", 
+                                                        "type": "string"
+                                                    }, 
+                                                    "$surname": {
+                                                        "type": "string"
+                                                    }, 
+                                                    "type": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "tagName": {
+                                                "type": "string"
+                                            }, 
+                                            "type": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "$editor": {
+                                        "properties": {
+                                            "$email": {
+                                                "type": "string"
+                                            }, 
+                                            "$persName": {
+                                                "properties": {
+                                                    "$forename": {
+                                                        "type": "string"
+                                                    }, 
+                                                    "$fullName": {
+                                                        "index": "not_analyzed", 
+                                                        "type": "string"
+                                                    }, 
+                                                    "$surname": {
                                                         "type": "string"
                                                     }
                                                 }
                                             }
                                         }
                                     }, 
-                                    "$titleStmt": {
+                                    "$title": {
                                         "properties": {
-                                            "$author": {
+                                            "$lang_en": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "role": {
+                                        "type": "string"
+                                    }, 
+                                    "xml:id": {
+                                        "type": "string"
+                                    }, 
+                                    "xml:lang": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }, 
+                    "$text": {
+                        "properties": {
+                            "$back": {
+                                "properties": {
+                                    "$div": {
+                                        "properties": {
+                                            "$figure": {
                                                 "properties": {
-                                                    "$affiliation": {
+                                                    "$figDesc": {
                                                         "properties": {
-                                                            "$org": {
+                                                            "$lang_en": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }, 
+                                                    "$head": {
+                                                        "properties": {
+                                                            "$lang_en": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }, 
+                                                    "xml:id": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "$head": {
+                                                "properties": {
+                                                    "$lang_en": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "$listBibl": {
+                                                "properties": {
+                                                    "$biblStruct": {
+                                                        "properties": {
+                                                            "$analytic": {
                                                                 "properties": {
-                                                                    "$desc": {
+                                                                    "$author": {
                                                                         "properties": {
-                                                                            "$address": {
+                                                                            "$persName": {
                                                                                 "properties": {
-                                                                                    "$addrLine": {
+                                                                                    "$forename": {
                                                                                         "type": "string"
                                                                                     }, 
-                                                                                    "key": {
+                                                                                    "$fullName": {
+		                                                                                "index": "not_analyzed", 
+		                                                                                "type": "string"
+                                                                                    }, 
+                                                                                    "$surname": {
                                                                                         "type": "string"
                                                                                     }, 
-                                                                                    "tagName": {
+                                                                                    "type": {
                                                                                         "type": "string"
                                                                                     }
                                                                                 }
-                                                                            }, 
-                                                                            "$ref": {
-                                                                                "type": "string"
-                                                                            }, 
-                                                                            "type": {
+                                                                            }
+                                                                        }
+                                                                    }, 
+                                                                    "$title": {
+                                                                        "properties": {
+                                                                            "$lang_en": {
                                                                                 "type": "string"
                                                                             }
                                                                         }
                                                                     }, 
-                                                                    "$listRelation": {
+                                                                    "id": {
+                                                                        "type": "string"
+                                                                    }, 
+                                                                    "level": {
+                                                                        "type": "string"
+                                                                    }, 
+                                                                    "type": {
+                                                                        "type": "string"
+                                                                    }
+                                                                }
+                                                            }, 
+                                                            "$monogr": {
+                                                                "properties": {
+                                                                    "$author": {
                                                                         "properties": {
-                                                                            "active": {
+                                                                            "$persName": {
+                                                                                "properties": {
+                                                                                    "$fullName": {
+		                                                                                "index": "not_analyzed", 
+		                                                                                "type": "string"
+                                                                                    }, 
+                                                                                    "$surname": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }, 
+                                                                    "$imprint": {
+                                                                        "properties": {
+                                                                            "$biblScope": {
                                                                                 "type": "string"
                                                                             }, 
-                                                                            "name": {
+                                                                            "from": {
                                                                                 "type": "string"
                                                                             }, 
                                                                             "tagName": {
                                                                                 "type": "string"
                                                                             }, 
+                                                                            "to": {
+                                                                                "type": "string"
+                                                                            }, 
                                                                             "type": {
+                                                                                "type": "string"
+                                                                            }, 
+                                                                            "unit": {
+                                                                                "type": "string"
+                                                                            }, 
+                                                                            "when": {
+                                                                                "format": "dateOptionalTime", 
+                                                                                "type": "date"
+                                                                            }
+                                                                        }
+                                                                    }, 
+                                                                    "$title": {
+                                                                        "properties": {
+                                                                            "$lang_en": {
                                                                                 "type": "string"
                                                                             }
                                                                         }
                                                                     }, 
-                                                                    "$orgName": {
+                                                                    "id": {
+                                                                        "type": "string"
+                                                                    }, 
+                                                                    "level": {
                                                                         "type": "string"
                                                                     }, 
                                                                     "type": {
@@ -345,256 +655,129 @@
                                                                     }
                                                                 }
                                                             }, 
-                                                            "ref": {
-                                                                "type": "string"
-                                                            }, 
-                                                            "type": {
+                                                            "$note": {
                                                                 "type": "string"
                                                             }
                                                         }
                                                     }, 
-                                                    "$email": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "$idno": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "$persName": {
-                                                        "properties": {
-                                                            "$forename": {
-                                                                "type": "string"
-                                                            }, 
-                                                            "$surname": {
-                                                                "type": "string"
-                                                            }, 
-                                                            "type": {
-                                                                "type": "string"
-                                                            }
-                                                        }
-                                                    }, 
-                                                    "tagName": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "type": {
+                                                    "xml:id": {
                                                         "type": "string"
                                                     }
                                                 }
-                                            }, 
-                                            "$editor": {
-                                                "properties": {
-                                                    "$email": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "$persName": {
-                                                        "properties": {
-                                                            "$forename": {
-                                                                "type": "string"
-                                                            }, 
-                                                            "$surname": {
-                                                                "type": "string"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }, 
-                                            "$title": {
-                                                "type": "string"
-                                            }, 
-                                            "role": {
-                                                "type": "string"
-                                            }, 
-                                            "xml:lang": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                }
-                            }, 
-                            "$text": {
-                                "properties": {
-                                    "$back": {
-                                        "properties": {
-                                            "$div": {
-                                                "properties": {
-                                                    "$figure": {
-                                                        "properties": {
-                                                            "$figDesc": {
-                                                                "type": "string"
-                                                            }, 
-                                                            "$head": {
-                                                                "type": "string"
-                                                            }
-                                                        }
-                                                    }, 
-                                                    "$head": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "$listBibl": {
-                                                        "properties": {
-                                                            "$biblStruct": {
-                                                                "properties": {
-                                                                    "$analytic": {
-                                                                        "properties": {
-                                                                            "$author": {
-                                                                                "properties": {
-                                                                                    "$persName": {
-                                                                                        "properties": {
-                                                                                            "$forename": {
-                                                                                                "type": "string"
-                                                                                            }, 
-                                                                                            "$surname": {
-                                                                                                "type": "string"
-                                                                                            }, 
-                                                                                            "type": {
-                                                                                                "type": "string"
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }, 
-                                                                            "$title": {
-                                                                                "type": "string"
-                                                                            }, 
-                                                                            "level": {
-                                                                                "type": "string"
-                                                                            }, 
-                                                                            "type": {
-                                                                                "type": "string"
-                                                                            }
-                                                                        }
-                                                                    }, 
-                                                                    "$monogr": {
-                                                                        "properties": {
-                                                                            "$author": {
-                                                                                "properties": {
-                                                                                    "$persName": {
-                                                                                        "properties": {
-                                                                                            "$surname": {
-                                                                                                "type": "string"
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }, 
-                                                                            "$imprint": {
-                                                                                "properties": {
-                                                                                    "$biblScope": {
-                                                                                        "type": "string"
-                                                                                    }, 
-                                                                                    "from": {
-                                                                                        "type": "string"
-                                                                                    }, 
-                                                                                    "tagName": {
-                                                                                        "type": "string"
-                                                                                    }, 
-                                                                                    "to": {
-                                                                                        "type": "string"
-                                                                                    }, 
-                                                                                    "type": {
-                                                                                        "type": "string"
-                                                                                    }, 
-                                                                                    "unit": {
-                                                                                        "type": "string"
-                                                                                    }, 
-                                                                                    "when": {
-                                                                                        "type": "string"
-                                                                                    }
-                                                                                }
-                                                                            }, 
-                                                                            "$title": {
-                                                                                "type": "string"
-                                                                            }, 
-                                                                            "level": {
-                                                                                "type": "string"
-                                                                            }, 
-                                                                            "type": {
-                                                                                "type": "string"
-                                                                            }
-                                                                        }
-                                                                    }, 
-                                                                    "$note": {
-                                                                        "type": "string"
-                                                                    }
-                                                                }
-                                                            }, 
-                                                            "xml:id": {
-                                                                "type": "string"
-                                                            }
-                                                        }
-                                                    }, 
-                                                    "$p": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "n": {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }, 
-                                            "type": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }, 
-                                    "$body": {
-                                        "properties": {
-                                            "$figure": {
-                                                "properties": {
-                                                    "$head": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "$table": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "$trash": {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }, 
-                                            "$formula": {
-                                                "type": "string"
-                                            }, 
-                                            "$head": {
-                                                "type": "string"
                                             }, 
                                             "$p": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }, 
-                                    "$front": {
-                                        "properties": {
-                                            "$div": {
                                                 "properties": {
-                                                    "$head": {
-                                                        "type": "string"
-                                                    }, 
-                                                    "$p": {
+                                                    "$lang_en": {
                                                         "type": "string"
                                                     }
                                                 }
                                             }, 
-                                            "type": {
+                                            "id": {
+                                                "type": "string"
+                                            }, 
+                                            "n": {
+                                                "type": "string"
+                                            }, 
+                                            "xml:id": {
                                                 "type": "string"
                                             }
                                         }
+                                    }, 
+                                    "type": {
+                                        "type": "string"
                                     }
                                 }
                             }, 
-                            "xml:lang": {
-                                "type": "string"
+                            "$body": {
+                                "properties": {
+                                    "$figure": {
+                                        "properties": {
+                                            "$head": {
+                                                "properties": {
+                                                    "$lang_en": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "$table": {
+                                                "type": "string"
+                                            }, 
+                                            "$trash": {
+                                                "type": "string"
+                                            }, 
+                                            "xml:id": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "$formula": {
+                                        "type": "string"
+                                    }, 
+                                    "$head": {
+                                        "properties": {
+                                            "$lang_en": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "$p": {
+                                        "properties": {
+                                            "$lang_en": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "id": {
+                                        "type": "string"
+                                    }, 
+                                    "xml:id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }, 
+                            "$front": {
+                                "properties": {
+                                    "$div": {
+                                        "properties": {
+                                            "$head": {
+                                                "properties": {
+                                                    "$lang_en": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "$p": {
+                                                "properties": {
+                                                    "$lang_en": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }, 
+                                            "id": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }, 
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                }
                             }
                         }
                     }, 
-                    "xmlns": {
-                        "type": "string"
-                    }, 
-                    "xmlns:mml": {
-                        "type": "string"
-                    }, 
-                    "xmlns:xlink": {
+                    "xml:lang": {
                         "type": "string"
                     }
                 }
+            }, 
+            "xmlns": {
+                "type": "string"
+            }, 
+            "xmlns:mml": {
+                "type": "string"
+            }, 
+            "xmlns:xlink": {
+                "type": "string"
             }
         }
     }

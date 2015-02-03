@@ -11,6 +11,8 @@ import org.json.JsonTapasML;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import org.indexHal.utilities.IndexingPreprocess;
+
 /**
  *  @author Patrice Lopez
  */
@@ -29,18 +31,31 @@ public class TestIndexing {
 	@Test
 	public void testIndexingFullText() throws Exception {
 		ElasticSearchManager esm = new ElasticSearchManager();
+		IndexingPreprocess indexingPreprocess = new IndexingPreprocess();
 		esm.setUpElasticSearch();
 		
-		File teiFile = new File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110586.final.tei.xml");
+		File teiFile = new File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110586v1.final.tei.xml");
 		String tei = FileUtils.readFileToString(teiFile, "UTF-8");
 		JSONObject json = JsonTapasML.toJSONObject(tei);
 		String jsonStr = json.toString();
+		try {
+			jsonStr = indexingPreprocess.process(jsonStr);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		esm.index(jsonStr, "1");
 		
-		teiFile = new File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110586.final.tei.xml");
+		teiFile = new File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110668v1.final.tei.xml");
 		tei = FileUtils.readFileToString(teiFile, "UTF-8");
 		json = JsonTapasML.toJSONObject(tei);
 		jsonStr = json.toString();
+		try {
+			jsonStr = indexingPreprocess.process(jsonStr);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		esm.index(jsonStr, "2");
 	}
 		

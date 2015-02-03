@@ -27,7 +27,7 @@ public class IndexingPreprocess {
 	// this is the list of elements for which the text nodes should be expanded with an additional json
 	// node capturing the nesting xml:lang attribute name/value pair
 	static public List<String> expandable = 
-		Arrays.asList("$title", "$p", "$item", "$figDesc", "$head", "$meeting", "$div");
+		Arrays.asList("$title", "$p", "$item", "$figDesc", "$head", "$meeting", "$div", "$abstract");
 	
 	public String collection = null;
 	public String model_version = null;
@@ -109,7 +109,7 @@ public class IndexingPreprocess {
 					}
 					
 					// ignoring the possibly present $lang_ nodes (this can appear in old version of JsonTapasML)
-					if (field.startsWith("$lang_")) {
+					if (field.startsWith("$lang_") || field.startsWith("$lang_")) {
 						// we need to ignore this node, as the expansion is added automatically when the textual element 
 						// is reached
 						JsonNode theChildNode = subJson.path(field);
