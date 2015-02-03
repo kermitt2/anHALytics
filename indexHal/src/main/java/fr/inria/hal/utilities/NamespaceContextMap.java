@@ -1,4 +1,4 @@
-package org.indexhal.utilities;
+package fr.inria.hal.utilities;
 
 import java.util.Collections;
 import java.util.HashMap;

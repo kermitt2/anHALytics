@@ -1,4 +1,4 @@
-package org.indexHal;
+package fr.inria.hal;
 
 import org.junit.After;
 import org.junit.Before;
@@ -7,11 +7,12 @@ import org.junit.Test;
 import java.io.File;
 import org.apache.commons.io.FileUtils;
 
-import org.json.JsonTapasML;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import fr.inria.hal.jsonML.JsonTapasML;
+import fr.inria.hal.jsonML.JSONArray;
+import fr.inria.hal.jsonML.JSONObject;
 
-import org.indexHal.utilities.IndexingPreprocess;
+import fr.inria.hal.utilities.IndexingPreprocess;
+import fr.inria.ha.ElasticSearchManager;
 
 /**
  *  @author Patrice Lopez

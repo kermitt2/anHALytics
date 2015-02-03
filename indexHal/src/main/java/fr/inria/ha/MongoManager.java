@@ -1,4 +1,4 @@
-package org.annotateHal;
+package fr.inria.ha;
 
 import com.mongodb.MongoClient;
 import com.mongodb.DB;
@@ -14,7 +14,6 @@ import com.mongodb.DBCursor;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
-import com.mongodb.CommandResult;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,37 +34,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *  Class for retrieving TEI files from MongoDB GridFS and for storing annotations
- *
- *  @author Patrice Lopez
+ *  Class for retrieving TEI files to be indexed from MongoDB GridFS
+ * 
  */
 public class MongoManager {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MongoManager.class);
 
-    public static final String BINARY_NAMESPACE = "binarynamespaces";
-	public static final String OAI_TEI_NAMESPACE = "oaiteis";
-    public static final String TEI_NAMESPACE = "halheader_grobidbody"; // TBR
+    public static final String BINARY = "binarynamespaces";
+	public static final String OAI_TEI = "oaiteis";
+	public static final String TEI_GROBID = "teigrobidnamespaces"; // TBR
+    public static final String TEI_FINAL = "halheader_grobidbody"; // TBR
 
 	private String mongodbServer = null;
 	private int mongodbPort;
 	
+    private DB db = null;
 	private GridFS gfs = null;
 	
 	private List<GridFSDBFile> files = null;
-	private DB db = null;
-	private DBCursor cursor = null;
 	private int indexFile = 0;
-	private DBCollection collection = null;
 	
     public MongoManager() {
         try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream("annotateHal.properties"));
-            mongodbServer = prop.getProperty("org.annotateHal.mongodb_host");
-            mongodbPort = Integer.parseInt(prop.getProperty("org.annotateHal.mongodb_port"));
-            String mongodbDb = prop.getProperty("org.annotateHal.mongodb_db");
-            String mongodbUser = prop.getProperty("org.annotateHal.mongodb_user");
-            String mongodbPass = prop.getProperty("org.annotateHal.mongodb_pass");
+            prop.load(new FileInputStream("indexHal.properties"));
+            mongodbServer = prop.getProperty("org.indexHal.mongodb_host");
+            mongodbPort = Integer.parseInt(prop.getProperty("org.indexHal.mongodb_port"));
+            String mongodbDb = prop.getProperty("org.indexHal.mongodb_db");
+            String mongodbUser = prop.getProperty("org.indexHal.mongodb_user");
+            String mongodbPass = prop.getProperty("org.indexHal.mongodb_pass");
             MongoClient mongo = new MongoClient(mongodbServer, mongodbPort);
             db = mongo.getDB(mongodbDb);
             boolean auth = db.authenticate(mongodbUser, mongodbPass.toCharArray());
@@ -74,10 +71,10 @@ public class MongoManager {
         }
     }
 	
-	public boolean initGridFS() throws Exception {
+	public boolean init() throws Exception {
 		// open the GridFS
 		try {
-			gfs = new GridFS(db, OAI_TEI_NAMESPACE);
+			gfs = new GridFS(db, TEI_GROBID);
 			
 			// init the loop
 			files = gfs.find(new BasicDBObject());
@@ -89,35 +86,6 @@ public class MongoManager {
 		}
 		return true;
 	}
-	
-	public boolean initAnnotations() throws Exception {
-		// open the collection
-		try {
-			// collection
-			boolean collectionFound = false;
-			Set<String> collections = db.getCollectionNames();
-			for(String collection : collections) {
-				if (collection.equals("annotations")) {
-					collectionFound = true;
-				}
-			}
-			if (!collectionFound) {
-				LOGGER.debug("MongoDB collection annotations does not exist and will be created");
-			}
-			collection = db.getCollection("annotations");
-		
-			// index on PageID
-			collection.ensureIndex(new BasicDBObject("filename", 1));  
-			
-			// init the loop
-			cursor = collection.find();
-		}
-		catch(Exception e) {
-			LOGGER.debug("Cannot retrieve MongoDB annotation collection.");
-			throw new Exception(e);
-		}
-		return true;
-	}
 
 	public boolean hasMoreDocuments() {
 		if (indexFile < files.size())
@@ -125,12 +93,8 @@ public class MongoManager {
 		else 
 			return false;
 	}
-	
-	public boolean hasMoreAnnotations() {	
-		return cursor.hasNext();
-	}
 
-	public String nextDocument() {
+	public String next() {
 		String tei = null;
 		try {
 			if (indexFile < files.size()) {
@@ -150,19 +114,6 @@ public class MongoManager {
 		return tei;
 	}
 
-	public String nextAnnotation() {
-		String json  = null;
-		try {
-			DBObject obj = cursor.next();
-			json = obj.toString();
-		} 
-		catch (MongoException e) {
-			e.printStackTrace();
-		}
-		
-		return json;
-	}
-
 	public String getCurrentHalID() {
 		String halID = null;
 		try {
@@ -180,20 +131,6 @@ public class MongoManager {
 			e.printStackTrace();
 		}
 		return halID;
-	}
-
-	public boolean insertAnnotation(String json) {
-		if (collection == null) {
-			collection = db.getCollection("annotations");	
-			collection.ensureIndex(new BasicDBObject("filename", 1)); 
-		}
-		DBObject dbObject = (DBObject)JSON.parse(json);
-		WriteResult result = collection.insert(dbObject);
-		CommandResult res = result.getCachedLastError();
-		if ((res != null) && (res.ok()))
-			return true;
-		else 
-			return false;
 	}
 
 }

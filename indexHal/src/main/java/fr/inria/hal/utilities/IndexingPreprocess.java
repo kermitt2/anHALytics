@@ -1,6 +1,5 @@
-package org.indexHal.utilities;
+package fr.inria.hal.utilities;
 
-import org.json.*;
 import org.codehaus.jackson.*;
 import org.codehaus.jackson.node.*;
 import org.codehaus.jackson.map.ObjectMapper;

@@ -1,5 +1,6 @@
-package org.indexHal.utilities;
+package fr.inria.hal;
 
+import fr.inria.hal.utilities.IndexingPreprocess;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -8,7 +9,6 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.json.*;
 import org.codehaus.jackson.*;
 import org.codehaus.jackson.node.*;
 import org.codehaus.jackson.map.ObjectMapper;

@@ -1,4 +1,4 @@
-package org.json;
+package fr.inria.hal.jsonML;
 
 /*
 Derived from JSON.org reference implementation:
