@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
-import java.util.concurrent.Future;
 import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GrobidWorker implements Runnable {
 
-    private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
+    private static final Logger logger = LoggerFactory.getLogger(GrobidWorker.class);
     private String filename;
     private MongoManager mm;
     private String grobid_host;
@@ -47,7 +46,6 @@ public class GrobidWorker implements Runnable {
 
     private void processCommand() throws IOException, ParseException {
         try {
-            logger.debug("\t\t processing :" + filename);
             String teiFilename = filename.split("\\.")[0] + ".tei.xml";
             InputStream inBinary = mm.streamFile(filename);
             String filepath = OAIHarvester.storeTmpFile(inBinary);
@@ -57,6 +55,7 @@ public class GrobidWorker implements Runnable {
             InputStream inTeiGrobid = new ByteArrayInputStream(grobidService.runFullTextGrobid().getBytes());
             mm.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_TEI_NAMESPACE, date);
             inTeiGrobid.close();
+            logger.debug("\t\t "+filename+" for "+date+" processed.");
         } catch (RuntimeException e) {
             e.printStackTrace();
         }

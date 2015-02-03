@@ -19,7 +19,6 @@ public class OAIHarvester {
 
     private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
 
-    
     private static final int NTHREDS = 10;
     private ArrayList<String> fields = null;
     private ArrayList<String> affiliations = null;
@@ -30,7 +29,7 @@ public class OAIHarvester {
 
     private static int nullBinaries = 0;
     private static String tmpPath = null;
-    
+
     private String grobid_host = null;
     private String grobid_port = null;
 
@@ -76,7 +75,7 @@ public class OAIHarvester {
         try {
             prop.load(new FileInputStream("harvestHal.properties"));
             grobid_host = prop.getProperty("harvestHal.grobid_host");
-	    grobid_port = prop.getProperty("harvestHal.grobid_port");
+            grobid_port = prop.getProperty("harvestHal.grobid_port");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -184,13 +183,13 @@ public class OAIHarvester {
             in.close();
         }
     }
-/*
-    public String getTeiFromBinary(String filePath) throws IOException {
-        String tei = grobidProcess.runFullTextGrobid(filePath, 2, -1, true);
-        tei = tei.replace("&amp\\s+;", "&amp;");
-        return tei;
-    }
-    */
+    /*
+     public String getTeiFromBinary(String filePath) throws IOException {
+     String tei = grobidProcess.runFullTextGrobid(filePath, 2, -1, true);
+     tei = tei.replace("&amp\\s+;", "&amp;");
+     return tei;
+     }
+     */
 
     public static String storeTmpFile(InputStream inBinary) throws IOException {
         File f = File.createTempFile("tmp", ".pdf", new File(tmpPath));
@@ -277,7 +276,7 @@ public class OAIHarvester {
                     if (process.equals("harvestAll")) {
 //                        if (askConfirm()) {
                         oai.harvestAllHAL();
-  //                      } else {
+                        //                      } else {
                         //                         return;
                         //                    }
                     } else if (process.equals("harvestDaily")) {
@@ -327,39 +326,28 @@ public class OAIHarvester {
     }
 
     private void processGrobid(Map<String, List<String>> filenames) {
-        String teiFilename;
-        InputStream inTeiGrobid;
+
         ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
-        for(String date:dates){
-        List<String> dateFilenames = filenames.get(date);
-        if(dateFilenames != null){
-        logger.debug("Grobid processing...for : "+date);
-
-        /*File tmpDirectory = new File(tmpPath);
-        if (tmpDirectory.list().length == 0) {
-            tmpDirectory.delete();
-            logger.debug("No pdf found in : " + tmpPath);
-            System.exit(0);
-        }*/
-
-        //File[] files = tmpDirectory.listFiles();
-        for (final String filename : dateFilenames) {
-            try {
-                Runnable worker = new GrobidWorker(filename,mongoManager, grobid_host, grobid_port, date);
-                executor.execute(worker);
-            } catch (final Exception exp) {
-                logger.error("An error occured while processing the file " + filename
-                        + ". Continuing the process for the other files"+exp.getMessage());
+        for (String date : dates) {
+            List<String> dateFilenames = filenames.get(date);
+            if (dateFilenames != null) {
+                for (final String filename : dateFilenames) {
+                    try {
+                        Runnable worker = new GrobidWorker(filename, mongoManager, grobid_host, grobid_port, date);
+                        executor.execute(worker);
+                    } catch (final Exception exp) {
+                        logger.error("An error occured while processing the file " + filename
+                                + ". Continuing the process for the other files" + exp.getMessage());
+                    }
+                }
             }
-        }}
         }
         executor.shutdown();
-         while (!executor.isTerminated()) {
+        while (!executor.isTerminated()) {
         }
         System.out.println("Finished all threads");
     }
-    
-    
+
     private void merge(Map<String, List<String>> filenames) throws ParserConfigurationException, IOException, SAXException, TransformerException, ParseException {
         InputStream grobid_tei = null;
         InputStream hal_tei = null;
@@ -371,27 +359,27 @@ public class OAIHarvester {
                 logger.debug("Merging documents.. for: " + date);
                 for (final String filename : dateFilenames) {
                     try {
-                    logger.debug("Merging documents.. for: " + filename);
-                    grobid_tei = mongoManager.streamFile(filename, MongoManager.GROBID_TEI_NAMESPACE);
-                    hal_tei = mongoManager.streamFile(filename, MongoManager.OAI_TEI_NAMESPACE);
-                    InputStream tei = new ByteArrayInputStream(addHalTeiHeader(hal_tei, grobid_tei).getBytes());
-           
-                    mongoManager.storeToGridfs(tei, filename, MongoManager.GROBID_HAL_TEI_NAMESPACE, date);
-                    grobid_tei.close();
-                    hal_tei.close();
-                             } catch (SAXParseException e) {
-            e.printStackTrace();
-        }
+                        logger.debug("Merging documents.. for: " + filename);
+                        grobid_tei = mongoManager.streamFile(filename, MongoManager.GROBID_TEI_NAMESPACE);
+                        hal_tei = mongoManager.streamFile(filename, MongoManager.OAI_TEI_NAMESPACE);
+                        InputStream tei = new ByteArrayInputStream(addHalTeiHeader(hal_tei, grobid_tei).getBytes());
+
+                        mongoManager.storeToGridfs(tei, filename, MongoManager.GROBID_HAL_TEI_NAMESPACE, date);
+                        grobid_tei.close();
+                        hal_tei.close();
+                    } catch (SAXParseException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
     }
-    
+
     private String addHalTeiHeader(InputStream halTei, InputStream grobidTei) throws ParserConfigurationException, IOException, SAXException, TransformerException {
         String result = HalTeiAppender.replaceHeader(halTei, grobidTei, false);
         return result;
-    }   
-    
+    }
+
     public static boolean askConfirm() {
 
         Scanner kbd = new Scanner(System.in);
