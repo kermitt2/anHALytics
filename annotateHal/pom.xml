@@ -39,7 +39,7 @@
 		      <executable>java</executable>
 		      <arguments>
 		        <argument>-classpath</argument><classpath />
-		        <argument>org.indexHal.Annotator</argument>
+		        <argument>fr.inria.hal.Annotator</argument>
 		      </arguments>
 		    </configuration>
 		  </plugin></plugins></build>
@@ -55,7 +55,7 @@
 		      <executable>java</executable>
 		      <arguments>
 		        <argument>-classpath</argument><classpath />
-		        <argument>org.indexHal.ElasticSearchManager</argument>
+		        <argument>fr.inria.hal.ElasticSearchManager</argument>
 		      </arguments>
 		    </configuration>
 		  </plugin></plugins></build>

@@ -69,7 +69,7 @@
                 <executions>
                     <execution>
                         <configuration>
-                            <mainClass>org.harvesthal.OAIHarvester</mainClass>
+                            <mainClass>fr.inria.hal.OAIHarvester</mainClass>
                             <!-- Optional -->
                             <onejarVersion>0.97</onejarVersion>
                             <!-- Optional, default is false -->
