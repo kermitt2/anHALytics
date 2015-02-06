@@ -2,14 +2,13 @@ package fr.inria.hal;
 
 import java.io.*;
 import java.util.*;
+import java.net.*;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-
-import java.net.*;
 import org.apache.commons.io.FileUtils;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.*;

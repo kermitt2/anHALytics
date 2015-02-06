@@ -45,6 +45,7 @@ public class MongoManager {
     public static final String BINARY_NAMESPACE = "binarynamespaces";
 	public static final String OAI_TEI_NAMESPACE = "oaiteis";
     public static final String TEI_NAMESPACE = "halheader_grobidbody"; // TBR
+	public static final String ANNOTATIONS = "annotations"; 
 
 	private String mongodbServer = null;
 	private int mongodbPort;
@@ -52,7 +53,8 @@ public class MongoManager {
 	private GridFS gfs = null;
 	
 	private List<GridFSDBFile> files = null;
-	private DB db = null;
+	private DB db = null; // DB for source documents
+	private DB db_annot = null; // DB for document annotations
 	private DBCursor cursor = null;
 	private int indexFile = 0;
 	private DBCollection collection = null;
@@ -64,58 +66,53 @@ public class MongoManager {
             mongodbServer = prop.getProperty("org.annotateHal.mongodb_host");
             mongodbPort = Integer.parseInt(prop.getProperty("org.annotateHal.mongodb_port"));
             String mongodbDb = prop.getProperty("org.annotateHal.mongodb_db");
+			String mongodbDbAnnot = prop.getProperty("org.annotateHal.mongodb_db_annot");
             String mongodbUser = prop.getProperty("org.annotateHal.mongodb_user");
             String mongodbPass = prop.getProperty("org.annotateHal.mongodb_pass");
             MongoClient mongo = new MongoClient(mongodbServer, mongodbPort);
             db = mongo.getDB(mongodbDb);
+			db_annot = mongo.getDB(mongodbDbAnnot);
             boolean auth = db.authenticate(mongodbUser, mongodbPass.toCharArray());
+			initGridFS();
+			initAnnotations();
         } catch (IOException e) {
             e.printStackTrace();
         }
+		catch (MongoException e) {
+			e.printStackTrace();
+		}
     }
 	
-	public boolean initGridFS() throws Exception {
+	public boolean initGridFS() throws MongoException {
 		// open the GridFS
-		try {
-			gfs = new GridFS(db, OAI_TEI_NAMESPACE);
+		gfs = new GridFS(db, TEI_NAMESPACE); // will be TEI_NAMESPACE
 			
-			// init the loop
-			files = gfs.find(new BasicDBObject());
-			indexFile = 0;
-		}
-		catch(Exception e) {
-			LOGGER.debug("Cannot retrieve MongoDB TEI doc GridFS.");
-			throw new Exception(e);
-		}
+		// init the loop
+		files = gfs.find(new BasicDBObject());
+		indexFile = 0;
 		return true;
 	}
 	
-	public boolean initAnnotations() throws Exception {
+	public boolean initAnnotations() throws MongoException {
 		// open the collection
-		try {
-			// collection
-			boolean collectionFound = false;
-			Set<String> collections = db.getCollectionNames();
-			for(String collection : collections) {
-				if (collection.equals("annotations")) {
-					collectionFound = true;
-				}
+		boolean collectionFound = false;
+		Set<String> collections = db_annot.getCollectionNames();
+		for(String collection : collections) {
+			if (collection.equals(ANNOTATIONS)) {
+				collectionFound = true;
 			}
-			if (!collectionFound) {
-				LOGGER.debug("MongoDB collection annotations does not exist and will be created");
-			}
-			collection = db.getCollection("annotations");
+		}
+		if (!collectionFound) {
+			LOGGER.debug("MongoDB collection annotations does not exist and will be created");
+		}
+		collection = db_annot.getCollection(ANNOTATIONS);
+	
+		// index on PageID
+		collection.ensureIndex(new BasicDBObject("filename", 1));  
 		
-			// index on PageID
-			collection.ensureIndex(new BasicDBObject("filename", 1));  
-			
-			// init the loop
-			cursor = collection.find();
-		}
-		catch(Exception e) {
-			LOGGER.debug("Cannot retrieve MongoDB annotation collection.");
-			throw new Exception(e);
-		}
+		// init the loop
+		cursor = collection.find();
+		
 		return true;
 	}
 
@@ -181,11 +178,26 @@ public class MongoManager {
 		}
 		return halID;
 	}
+	
+	public String getCurrentFilename() {
+		String filename = null;
+		try {
+			if (indexFile < files.size()) {
+                GridFSDBFile teifile = files.get(indexFile);
+				filename = teifile.getFilename();
+            }
+		} 
+		catch (MongoException e) {
+			e.printStackTrace();
+		}
+		return filename;
+	}
 
 	public boolean insertAnnotation(String json) {
 		if (collection == null) {
-			collection = db.getCollection("annotations");	
-			collection.ensureIndex(new BasicDBObject("filename", 1)); 
+			collection = db_annot.getCollection("annotations");	
+			collection.ensureIndex(new BasicDBObject("filename", 1));
+			collection.ensureIndex(new BasicDBObject("xml:id", 1)); 
 		}
 		DBObject dbObject = (DBObject)JSON.parse(json);
 		WriteResult result = collection.insert(dbObject);

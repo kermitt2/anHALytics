@@ -5,14 +5,35 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
+import java.net.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.w3c.dom.ls.LSSerializer;
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.w3c.dom.ls.DOMImplementationLS;
+
+import org.codehaus.jackson.*;
+import org.codehaus.jackson.node.*;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *  Use the NERD REST service for annotating HAL TEI documents. Resulting JSON annotations are then stored
@@ -25,7 +46,7 @@ public class Annotator {
 	private String nerd_host = null;
 	private String nerd_port = null;
 	
-	static private String RESOURCEPATH = "";
+	static private String RESOURCEPATH = "processNERDQueryScience";
 	
 	public Annotator() {
 		loadProperties();
@@ -44,30 +65,32 @@ public class Annotator {
 		}
 	}
 	
-	public void annotateNERD() throws Exception {
+	public String annotateNERD(String input) throws Exception {
+		StringBuffer output = new StringBuffer();
 		try {
 			URL url = new URL("http://" + nerd_host + ":" + nerd_port + "/" + RESOURCEPATH);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Content-Type", "application/json");
-
-			// text to be annotated
-			String input = "";
+			conn.setRequestProperty("Content-Type", "application/json; charset=utf8");
+			
+			ObjectMapper mapper = new ObjectMapper();
+			ObjectNode node = mapper.createObjectNode();
+			node.put("text", input);
+			byte[] postDataBytes = node.toString().getBytes("UTF-8");
 
 			OutputStream os = conn.getOutputStream();
-			os.write(input.getBytes());
+			os.write(postDataBytes);
 			os.flush();
-			if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				throw new RuntimeException("Failed : HTTP error code : "
 					+ conn.getResponseCode());
 			}
 			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-
-			String output;
-			System.out.println("Output from Server .... \n");
-			while ((output = br.readLine()) != null) {
-				System.out.println(output);
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				output.append(line);
+				output.append(" ");
 			}
 
 			conn.disconnect();
@@ -78,24 +101,63 @@ public class Annotator {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
- 
+ 		return output.toString().trim();
 	}
 	
-	
 	public int annotateCollection() {
-		// loop on the TEI documents in MongoDB
-		MongoManager mm = new MongoManager();
 		int nb = 0;
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        docFactory.setValidating(false);
+        //docFactory.setNamespaceAware(true);
 		try {
+        	DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+		
+			// loop on the TEI documents in MongoDB
+			MongoManager mm = new MongoManager();
+			
 			if (mm.initGridFS()) {
 				int i = 0;
 			
 				while(mm.hasMoreDocuments()) {
 					String halID = mm.getCurrentHalID();
+					String filename = mm.getCurrentFilename();
 					String tei = mm.nextDocument();
-				
-				
-				
+
+					List<String> halDomainTexts = new ArrayList<String>();
+					List<String> halDomains = new ArrayList<String>();
+					List<String> meSHDescriptors = new ArrayList<String>();
+					
+					try {
+						// parse the TEI
+				        Document docTei = docBuilder.parse(tei);
+
+						// get the HAL domain 
+						NodeList classes = docTei.getElementsByTagName("classCode");
+						for(int p=0; p<classes.getLength(); p++) {
+							Node node = classes.item(p);
+							if (node.getNodeType() == Node.ELEMENT_NODE) {
+								Element e = (Element)(node);
+								// filter on attribute @scheme="halDomain"
+								String scheme = e.getAttribute("scheme");
+								if ( (scheme != null) && scheme.equals("halDomain") ) {
+									halDomainTexts.add(e.getTextContent());
+									String n_att = e.getAttribute("n");
+									halDomains.add(n_att);
+								}
+								else if ( (scheme != null) && scheme.equals("mesh") ) {
+									meSHDescriptors.add(e.getTextContent());							
+								}
+							}
+						}
+						// get all the elements having an attribute id and annotate their text content
+						String jsonAnnotations = 
+							annotateDocument(docTei, filename, halID);
+						mm.insertAnnotation(jsonAnnotations);
+						nb++;
+					}
+					catch(Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -105,6 +167,120 @@ public class Annotator {
 		return nb;
 	}
 	
+	public int annotateCollectionMultiThreaded() {
+		int nb = 0;
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        docFactory.setValidating(false);
+        //docFactory.setNamespaceAware(true);
+		try {
+        	DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+		
+			// loop on the TEI documents in MongoDB
+			MongoManager mm = new MongoManager();
+			
+			if (mm.initGridFS()) {
+				int i = 0;
+			
+				while(mm.hasMoreDocuments()) {
+					String halID = mm.getCurrentHalID();
+					String filename = mm.getCurrentFilename();
+					String tei = mm.nextDocument();
+
+					List<String> halDomainTexts = new ArrayList<String>();
+					List<String> halDomains = new ArrayList<String>();
+					List<String> meSHDescriptors = new ArrayList<String>();
+					
+					try {
+						// parse the TEI
+				        Document docTei = docBuilder.parse(tei);
+
+						// get the HAL domain 
+						NodeList classes = docTei.getElementsByTagName("classCode");
+						for(int p=0; p<classes.getLength(); p++) {
+							Node node = classes.item(p);
+							if (node.getNodeType() == Node.ELEMENT_NODE) {
+								Element e = (Element)(node);
+								// filter on attribute @scheme="halDomain"
+								String scheme = e.getAttribute("scheme");
+								if ( (scheme != null) && scheme.equals("halDomain") ) {
+									halDomainTexts.add(e.getTextContent());
+									String n_att = e.getAttribute("n");
+									halDomains.add(n_att);
+								}
+								else if ( (scheme != null) && scheme.equals("mesh") ) {
+									meSHDescriptors.add(e.getTextContent());							
+								}
+							}
+						}
+						// get all the elements having an attribute id and annotate their text content
+						String jsonAnnotations = 
+							annotateDocument(docTei, filename, halID);
+						mm.insertAnnotation(jsonAnnotations);
+						nb++;
+					}
+					catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return nb;
+	
+	}
+	
+	/**
+	 *  Annotation of a complete document
+	 */
+	public String annotateDocument(Document doc, 
+								String filename, 
+								String halID) {
+		StringBuffer json = new StringBuffer();
+		json.append("{ \"filename\" : \"" + filename + 
+					  "\", \"halID\" : \"" + halID + 
+					  "\", \"nerd\" : [");
+		annotateNode(doc.getDocumentElement(), true, json);							
+		json.append("] }");
+		return json.toString();	
+	}
+	
+	/**
+	 *  Recursive tree walk for annotating every nodes having a random xml:id
+	 */
+	public boolean annotateNode(Node node, 
+							boolean first, 
+							StringBuffer json) {
+		if (node.getNodeType() == Node.ELEMENT_NODE) {
+			Element e = (Element)(node);
+			String id = e.getAttribute("xml:id");
+			if (id.startsWith("_") && (id.length() == 8)) {
+				// get the textual content of the element
+				// annotate
+				String text = e.getTextContent();
+				try {					
+					// resulting annotations, with the corresponding id
+					if (first)
+						first = false;
+					else
+						json.append(", ");
+					json.append("{ \"xml:id\" : \"" + id + "\", \"nerd\" : " + annotateNERD(text) + " }");
+				}
+				catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		NodeList nodeList = node.getChildNodes();
+	    for (int i = 0; i < nodeList.getLength(); i++) {
+	        Node currentNode = nodeList.item(i);
+            first = annotateNode(currentNode, first, json);
+	    }
+		return first;
+	}
+	
+	
     public static void main(String[] args)
         throws IOException, ClassNotFoundException, 
                InstantiationException, IllegalAccessException {
@@ -113,7 +289,7 @@ public class Annotator {
 		
 		// loading based on DocDB XML, with TEI conversion
 		try {
-			int nbAnnots = annotator.annotateCollection();
+			int nbAnnots = annotator.annotateCollectionMultiThreaded();
 			System.out.println("Total: " + nbAnnots + " annotations produced.");
 		}
 		catch(Exception e) {
