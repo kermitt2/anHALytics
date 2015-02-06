@@ -1,4 +1,4 @@
-package fr.inria.hal;
+package fr.inria.hal.annotate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,9 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.util.*;
 import java.net.*;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,6 +33,7 @@ import org.apache.commons.io.IOUtils;
 import org.w3c.dom.ls.LSSerializer;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
+import org.xml.sax.InputSource;
 
 import org.codehaus.jackson.*;
 import org.codehaus.jackson.node.*;
@@ -45,9 +49,9 @@ public class Annotator {
 	
 	private String nerd_host = null;
 	private String nerd_port = null;
-	
-	static private String RESOURCEPATH = "processNERDQueryScience";
-	
+		
+	private static final int NTHREDS = 1;	
+		
 	public Annotator() {
 		loadProperties();
 	}
@@ -65,7 +69,7 @@ public class Annotator {
 		}
 	}
 	
-	public String annotateNERD(String input) throws Exception {
+	/*public String annotateNERD(String input) throws Exception {
 		StringBuffer output = new StringBuffer();
 		try {
 			URL url = new URL("http://" + nerd_host + ":" + nerd_port + "/" + RESOURCEPATH);
@@ -102,7 +106,7 @@ public class Annotator {
 			e.printStackTrace();
 		}
  		return output.toString().trim();
-	}
+	}*/
 	
 	public int annotateCollection() {
 		int nb = 0;
@@ -129,7 +133,8 @@ public class Annotator {
 					
 					try {
 						// parse the TEI
-				        Document docTei = docBuilder.parse(tei);
+				        Document docTei = 
+							docBuilder.parse(new InputSource(new ByteArrayInputStream(tei.getBytes("utf-8"))));
 
 						// get the HAL domain 
 						NodeList classes = docTei.getElementsByTagName("classCode");
@@ -151,7 +156,7 @@ public class Annotator {
 						}
 						// get all the elements having an attribute id and annotate their text content
 						String jsonAnnotations = 
-							annotateDocument(docTei, filename, halID);
+							annotateDocument(docTei, filename, halID, nerd_host, nerd_port);						
 						mm.insertAnnotation(jsonAnnotations);
 						nb++;
 					}
@@ -168,6 +173,7 @@ public class Annotator {
 	}
 	
 	public int annotateCollectionMultiThreaded() {
+		ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
 		int nb = 0;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
@@ -186,41 +192,10 @@ public class Annotator {
 					String filename = mm.getCurrentFilename();
 					String tei = mm.nextDocument();
 
-					List<String> halDomainTexts = new ArrayList<String>();
-					List<String> halDomains = new ArrayList<String>();
-					List<String> meSHDescriptors = new ArrayList<String>();
-					
-					try {
-						// parse the TEI
-				        Document docTei = docBuilder.parse(tei);
-
-						// get the HAL domain 
-						NodeList classes = docTei.getElementsByTagName("classCode");
-						for(int p=0; p<classes.getLength(); p++) {
-							Node node = classes.item(p);
-							if (node.getNodeType() == Node.ELEMENT_NODE) {
-								Element e = (Element)(node);
-								// filter on attribute @scheme="halDomain"
-								String scheme = e.getAttribute("scheme");
-								if ( (scheme != null) && scheme.equals("halDomain") ) {
-									halDomainTexts.add(e.getTextContent());
-									String n_att = e.getAttribute("n");
-									halDomains.add(n_att);
-								}
-								else if ( (scheme != null) && scheme.equals("mesh") ) {
-									meSHDescriptors.add(e.getTextContent());							
-								}
-							}
-						}
-						// get all the elements having an attribute id and annotate their text content
-						String jsonAnnotations = 
-							annotateDocument(docTei, filename, halID);
-						mm.insertAnnotation(jsonAnnotations);
-						nb++;
-					}
-					catch(Exception e) {
-						e.printStackTrace();
-					}
+                    Runnable worker = 
+						new AnnotatorWorker(mm, filename, halID, tei, nerd_host, nerd_port);
+                    executor.execute(worker);
+					nb++;
 				}
 			}
 		}
@@ -231,17 +206,25 @@ public class Annotator {
 	
 	}
 	
-	/**
-	 *  Annotation of a complete document
-	 */
 	public String annotateDocument(Document doc, 
 								String filename, 
 								String halID) {
+		return annotateDocument(doc,filename, halID, nerd_host, nerd_port);						
+	}
+	
+	/**
+	 *  Annotation of a complete document
+	 */
+	public static String annotateDocument(Document doc, 
+								String filename, 
+								String halID, 
+								String nerd_host, 
+								String nerd_port) {
 		StringBuffer json = new StringBuffer();
 		json.append("{ \"filename\" : \"" + filename + 
 					  "\", \"halID\" : \"" + halID + 
 					  "\", \"nerd\" : [");
-		annotateNode(doc.getDocumentElement(), true, json);							
+		annotateNode(doc.getDocumentElement(), true, json, nerd_host, nerd_port);							
 		json.append("] }");
 		return json.toString();	
 	}
@@ -249,9 +232,11 @@ public class Annotator {
 	/**
 	 *  Recursive tree walk for annotating every nodes having a random xml:id
 	 */
-	public boolean annotateNode(Node node, 
+	public static boolean annotateNode(Node node, 
 							boolean first, 
-							StringBuffer json) {
+							StringBuffer json, 
+							String nerd_host, 
+							String nerd_port) {
 		if (node.getNodeType() == Node.ELEMENT_NODE) {
 			Element e = (Element)(node);
 			String id = e.getAttribute("xml:id");
@@ -265,7 +250,8 @@ public class Annotator {
 						first = false;
 					else
 						json.append(", ");
-					json.append("{ \"xml:id\" : \"" + id + "\", \"nerd\" : " + annotateNERD(text) + " }");
+		            NerdService nerdService = new NerdService(text, nerd_host, nerd_port);
+					json.append("{ \"xml:id\" : \"" + id + "\", \"nerd\" : " + nerdService.runNerd() + " }");
 				}
 				catch(Exception ex) {
 					ex.printStackTrace();
@@ -275,11 +261,10 @@ public class Annotator {
 		NodeList nodeList = node.getChildNodes();
 	    for (int i = 0; i < nodeList.getLength(); i++) {
 	        Node currentNode = nodeList.item(i);
-            first = annotateNode(currentNode, first, json);
+            first = annotateNode(currentNode, first, json, nerd_host, nerd_port);
 	    }
 		return first;
 	}
-	
 	
     public static void main(String[] args)
         throws IOException, ClassNotFoundException, 

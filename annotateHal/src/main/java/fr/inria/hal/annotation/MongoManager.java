@@ -1,4 +1,4 @@
-package fr.inria.hal;
+package fr.inria.hal.annotate;
 
 import com.mongodb.MongoClient;
 import com.mongodb.DB;
@@ -53,7 +53,7 @@ public class MongoManager {
 	private GridFS gfs = null;
 	
 	private List<GridFSDBFile> files = null;
-	private DB db = null; // DB for source documents
+	private DB db_doc = null; // DB for source documents
 	private DB db_annot = null; // DB for document annotations
 	private DBCursor cursor = null;
 	private int indexFile = 0;
@@ -70,9 +70,9 @@ public class MongoManager {
             String mongodbUser = prop.getProperty("org.annotateHal.mongodb_user");
             String mongodbPass = prop.getProperty("org.annotateHal.mongodb_pass");
             MongoClient mongo = new MongoClient(mongodbServer, mongodbPort);
-            db = mongo.getDB(mongodbDb);
+            db_doc = mongo.getDB(mongodbDb);
 			db_annot = mongo.getDB(mongodbDbAnnot);
-            boolean auth = db.authenticate(mongodbUser, mongodbPass.toCharArray());
+            boolean auth = db_doc.authenticate(mongodbUser, mongodbPass.toCharArray());
 			initGridFS();
 			initAnnotations();
         } catch (IOException e) {
@@ -83,9 +83,13 @@ public class MongoManager {
 		}
     }
 	
+	public DB getDocDB() {
+		return db_doc;
+	}
+	
 	public boolean initGridFS() throws MongoException {
 		// open the GridFS
-		gfs = new GridFS(db, TEI_NAMESPACE); // will be TEI_NAMESPACE
+		gfs = new GridFS(db_doc, TEI_NAMESPACE); // will be TEI_NAMESPACE
 			
 		// init the loop
 		files = gfs.find(new BasicDBObject());

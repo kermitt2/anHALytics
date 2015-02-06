@@ -1,10 +1,11 @@
-package org.annotateHal;
+package fr.inria.hal.annotate;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import org.apache.commons.io.FileUtils;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -32,6 +33,37 @@ import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.xml.sax.InputSource;
 	
+import com.mongodb.MongoClient;
+import com.mongodb.DB;
+import com.mongodb.MongoException;
+import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSInputFile;
+import com.mongodb.gridfs.GridFSDBFile;
+import com.mongodb.WriteConcern;
+import com.mongodb.DBCollection;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.DBCursor;
+import com.mongodb.ServerAddress;
+import com.mongodb.WriteResult;
+import com.mongodb.util.JSON;
+import com.mongodb.CommandResult;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Set;
+import java.util.List;
+import java.util.Properties;
+
+import org.apache.commons.io.IOUtils;	
+	
 /**
  *  @author Patrice Lopez
  */
@@ -47,7 +79,7 @@ public class TestAnnotator {
 		return(file);
 	}
 	
-	@Test
+	//@Test
 	public void testAnnotateFullText() throws Exception {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
@@ -56,7 +88,8 @@ public class TestAnnotator {
 		MongoManager mm = null;
 
 		try {
-			File teiFile = new File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110586v1.final.tei.xml");
+			File teiFile = new 
+				File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110586v1.final.tei.xml");
 			String tei = FileUtils.readFileToString(teiFile, "UTF-8");
 			
         	docBuilder = docFactory.newDocumentBuilder();
@@ -64,23 +97,108 @@ public class TestAnnotator {
 
 			Document docTei = docBuilder.parse(new InputSource(new ByteArrayInputStream(tei.getBytes("utf-8"))));
 			String json = annotator.annotateDocument(docTei, "1", "1");
-			System.out.println(json);
 			mm.insertAnnotation(json);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		/*try {
-			File teiFile = new File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110668v1.final.tei.xml");
+		try {
+			File teiFile = new 
+				File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110668v1.final.tei.xml");
 			String tei = FileUtils.readFileToString(teiFile, "UTF-8");		
 			
 			Document docTei = docBuilder.parse(new InputSource(new ByteArrayInputStream(tei.getBytes("utf-8"))));
-			annotator.annotateNode(docTei.getDocumentElement(), docTei, mm, "2", "2");
+			String json = annotator.annotateDocument(docTei, "2", "2");
+			
+			mm.insertAnnotation(json);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
-		
+
+
+	//@Test
+	public void testAnnotateCollection() throws Exception {
+		// insert two documents
+		MongoManager mm = null;
+		Annotator annotator = new Annotator();
+		try {
+			mm = new MongoManager();
+			
+			File teiFile = new 
+				File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110586v1.final.tei.xml");
+			String tei = FileUtils.readFileToString(teiFile, "UTF-8");
+			mm = new MongoManager();
+			insertDocument("hal-01110586v1.final.tei.xml", tei, mm);
+			
+			teiFile = new 
+				File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110668v1.final.tei.xml");
+			tei = FileUtils.readFileToString(teiFile, "UTF-8");
+			insertDocument("hal-01110668v1.final.tei.xml", tei, mm);
+			
+			int nb = annotator.annotateCollection();
+			System.out.println(nb + " documents annotated");
+			
+			// remove the documents
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testAnnotateCollectionMultiThreaded() throws Exception {
+		// insert two documents
+		MongoManager mm = null;
+		Annotator annotator = new Annotator();
+		try {
+			mm = new MongoManager();
+			
+			File teiFile = new 
+				File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110586v1.final.tei.xml");
+			String tei = FileUtils.readFileToString(teiFile, "UTF-8");
+			mm = new MongoManager();
+			insertDocument("hal-01110586v1.final.tei.xml", tei, mm);
+			
+			teiFile = new 
+				File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110668v1.final.tei.xml");
+			tei = FileUtils.readFileToString(teiFile, "UTF-8");
+			insertDocument("hal-01110668v1.final.tei.xml", tei, mm);
+			
+			int nb = annotator.annotateCollectionMultiThreaded();
+			System.out.println(nb + " documents annotated");
+			
+			// remove the documents
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void insertDocument(String filename, String content, MongoManager mm) {
+        try {
+            GridFS gfs = new GridFS(mm.getDocDB(), MongoManager.TEI_NAMESPACE);
+            gfs.remove(filename);
+			byte[] b = content.getBytes(Charset.forName("UTF-8"));
+            GridFSInputFile gfsFile = gfs.createFile(b);
+            gfsFile.setFilename(filename);
+            gfsFile.save();
+
+        } catch (MongoException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	private void removeDocument(String filename, MongoManager mm) {
+		try {
+            GridFS gfs = new GridFS(mm.getDocDB(), MongoManager.TEI_NAMESPACE);
+            gfs.remove(filename);
+		} catch (MongoException e) {
+            e.printStackTrace();
+        }
+	}
 }

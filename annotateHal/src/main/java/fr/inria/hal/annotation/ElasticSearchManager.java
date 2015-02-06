@@ -1,4 +1,4 @@
-package fr.inria.hal;
+package fr.inria.hal.annotate;
 
 import java.io.*;
 import java.util.*;
