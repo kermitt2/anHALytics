@@ -1,4 +1,4 @@
-package fr.inria.ha;
+package fr.inria.hal.indexing;
 
 import com.mongodb.MongoClient;
 import com.mongodb.DB;

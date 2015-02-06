@@ -1,4 +1,4 @@
-package fr.inria.hal.utilities;
+package fr.inria.hal.indexing.utilities;
 
 import org.codehaus.jackson.*;
 import org.codehaus.jackson.node.*;

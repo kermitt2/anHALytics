@@ -1,4 +1,4 @@
-package fr.inria.hal.jsonML;
+package org.json;
 
 /*
 Copyright (c) 2002 JSON.org

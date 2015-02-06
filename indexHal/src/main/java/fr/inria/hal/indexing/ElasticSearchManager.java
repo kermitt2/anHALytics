@@ -1,4 +1,4 @@
-package fr.inria.ha;
+package fr.inria.hal.indexing;
 
 import java.io.*;
 import java.util.*;
@@ -37,11 +37,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.inria.hal.jsonML.JsonTapasML;
-import fr.inria.hal.jsonML.JSONArray;
-import fr.inria.hal.jsonML.JSONObject;
+import org.json.JsonTapasML;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import fr.inria.hal.utilities.IndexingPreprocess;
+import fr.inria.hal.indexing.utilities.IndexingPreprocess;
 
 /**
  *  Method for management of the ElasticSearch cluster.  
