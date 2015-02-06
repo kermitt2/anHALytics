@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import org.apache.commons.io.FileUtils;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -131,18 +130,18 @@ public class TestAnnotator {
 				File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110586v1.final.tei.xml");
 			String tei = FileUtils.readFileToString(teiFile, "UTF-8");
 			mm = new MongoManager();
-			insertDocument("hal-01110586v1.final.tei.xml", tei, mm);
+			mm.insertDocument("hal-01110586v1.final.tei.xml", tei);
 			
 			teiFile = new 
 				File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110668v1.final.tei.xml");
 			tei = FileUtils.readFileToString(teiFile, "UTF-8");
-			insertDocument("hal-01110668v1.final.tei.xml", tei, mm);
+			mm.insertDocument("hal-01110668v1.final.tei.xml", tei);
 			
 			int nb = annotator.annotateCollection();
 			System.out.println(nb + " documents annotated");
 			
 			// remove the documents
-			
+			mm.removeDocument("hal-01110668v1.final.tei.xml");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -161,44 +160,21 @@ public class TestAnnotator {
 				File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110586v1.final.tei.xml");
 			String tei = FileUtils.readFileToString(teiFile, "UTF-8");
 			mm = new MongoManager();
-			insertDocument("hal-01110586v1.final.tei.xml", tei, mm);
+			mm.insertDocument("hal-01110586v1.final.tei.xml", tei);
 			
 			teiFile = new 
 				File(this.getResourceDir("src/test/resources/").getPath()+"/hal-01110668v1.final.tei.xml");
 			tei = FileUtils.readFileToString(teiFile, "UTF-8");
-			insertDocument("hal-01110668v1.final.tei.xml", tei, mm);
+			mm.insertDocument("hal-01110668v1.final.tei.xml", tei);
 			
 			int nb = annotator.annotateCollectionMultiThreaded();
 			System.out.println(nb + " documents annotated");
 			
 			// remove the documents
-			
+			mm.removeDocument("hal-01110668v1.final.tei.xml");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private void insertDocument(String filename, String content, MongoManager mm) {
-        try {
-            GridFS gfs = new GridFS(mm.getDocDB(), MongoManager.TEI_NAMESPACE);
-            gfs.remove(filename);
-			byte[] b = content.getBytes(Charset.forName("UTF-8"));
-            GridFSInputFile gfsFile = gfs.createFile(b);
-            gfsFile.setFilename(filename);
-            gfsFile.save();
-
-        } catch (MongoException e) {
-            e.printStackTrace();
-        }
-	}
-	
-	private void removeDocument(String filename, MongoManager mm) {
-		try {
-            GridFS gfs = new GridFS(mm.getDocDB(), MongoManager.TEI_NAMESPACE);
-            gfs.remove(filename);
-		} catch (MongoException e) {
-            e.printStackTrace();
-        }
 	}
 }

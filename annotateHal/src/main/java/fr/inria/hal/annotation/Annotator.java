@@ -50,7 +50,7 @@ public class Annotator {
 	private String nerd_host = null;
 	private String nerd_port = null;
 		
-	private static final int NTHREDS = 1;	
+	private int nbThreads = 1;	
 		
 	public Annotator() {
 		loadProperties();
@@ -62,6 +62,13 @@ public class Annotator {
             prop.load(new FileInputStream("annotateHal.properties"));
 			nerd_host = prop.getProperty("org.annotateHal.nerd_host");			
 			nerd_port = prop.getProperty("org.annotateHal.nerd_port");
+			String threads = prop.getProperty("org.annotateHal.nbThreads");
+			try {
+				nbThreads = Integer.parseInt(threads);
+			}
+			catch(java.lang.NumberFormatException e) {
+				e.printStackTrace();
+			}
 		}
 		catch (Exception e) {
 			System.err.println("Failed to load properties: " + e.getMessage());
@@ -173,7 +180,7 @@ public class Annotator {
 	}
 	
 	public int annotateCollectionMultiThreaded() {
-		ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
+		ExecutorService executor = Executors.newFixedThreadPool(nbThreads);
 		int nb = 0;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
@@ -198,6 +205,10 @@ public class Annotator {
 					nb++;
 				}
 			}
+	        executor.shutdown();
+	        while (!executor.isTerminated()) {
+	        }
+	        System.out.println("Finished all threads");
 		}
 		catch(Exception e) {
 			e.printStackTrace();

@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -210,6 +211,29 @@ public class MongoManager {
 			return true;
 		else 
 			return false;
+	}
+	
+	public void insertDocument(String filename, String content) {
+        try {
+            GridFS gfs = new GridFS(db_doc, TEI_NAMESPACE);
+            gfs.remove(filename);
+			byte[] b = content.getBytes(Charset.forName("UTF-8"));
+            GridFSInputFile gfsFile = gfs.createFile(b);
+            gfsFile.setFilename(filename);
+            gfsFile.save();
+
+        } catch (MongoException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void removeDocument(String filename) {
+		try {
+            GridFS gfs = new GridFS(db_doc, TEI_NAMESPACE);
+            gfs.remove(filename);
+		} catch (MongoException e) {
+            e.printStackTrace();
+        }
 	}
 
 }
