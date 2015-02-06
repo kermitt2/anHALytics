@@ -1,4 +1,4 @@
-package fr.inria.hal.annotate;
+package fr.inria.hal.annotation;
 
 import java.util.logging.Level;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package fr.inria.hal.annotate;
+package fr.inria.hal.annotation;
 
 import com.mongodb.MongoClient;
 import com.mongodb.DB;
