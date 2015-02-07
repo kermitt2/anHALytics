@@ -11,3 +11,5 @@ indexHAL/*.patrice
 annotateHAL/target
 annotateHAL/target/*
 annotateHAL/*.patrice
+tempPDF/*
+tempTEI/*

@@ -121,6 +121,10 @@ public class AnnotatorWorker implements Runnable {
 		}
         logger.debug("\t\t "+filename+" annotated.");
     }
+	
+	public String getFilename() {
+		return filename;
+	}
 
     @Override
     public String toString() {

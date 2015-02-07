@@ -7,8 +7,7 @@ import java.io.*;
 import java.util.*;
 import java.net.*;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -180,7 +179,30 @@ public class Annotator {
 	}
 	
 	public int annotateCollectionMultiThreaded() {
-		ExecutorService executor = Executors.newFixedThreadPool(nbThreads);
+		// max queue of tasks of 50 
+		BlockingQueue<Runnable> blockingQueue = new ArrayBlockingQueue<Runnable>(50);
+		ThreadPoolExecutor executor = new ThreadPoolExecutor(nbThreads, nbThreads, 50000, 
+			TimeUnit.MILLISECONDS, blockingQueue);
+		
+		// this is for handling rejected tasks (e.g. queue is full)
+		executor.setRejectedExecutionHandler(new RejectedExecutionHandler() {
+            @Override
+            public void rejectedExecution(Runnable r,
+                    ThreadPoolExecutor executor) {
+                System.out.println("Task Rejected : "
+                        + ((AnnotatorWorker) r).getFilename());
+                System.out.println("Waiting for 60 second !!");
+                try {
+                    Thread.sleep(60000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Lets add another time : "
+                        + ((AnnotatorWorker) r).getFilename());
+                executor.execute(r);
+            }
+        });
+		executor.prestartAllCoreThreads();
 		int nb = 0;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
