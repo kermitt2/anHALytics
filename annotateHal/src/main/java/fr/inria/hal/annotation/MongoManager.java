@@ -54,8 +54,8 @@ public class MongoManager {
 	private GridFS gfs = null;
 	
 	private List<GridFSDBFile> files = null;
-	private DB db_doc = null; // DB for source documents
-	private DB db_annot = null; // DB for document annotations
+	private DB db = null; // DB for source documents
+	//private DB db_annot = null; // DB for document annotations
 	private DBCursor cursor = null;
 	private int indexFile = 0;
 	private DBCollection collection = null;
@@ -67,14 +67,14 @@ public class MongoManager {
             mongodbServer = prop.getProperty("org.annotateHal.mongodb_host");
             mongodbPort = Integer.parseInt(prop.getProperty("org.annotateHal.mongodb_port"));
             String mongodbDb = prop.getProperty("org.annotateHal.mongodb_db");
-			String mongodbDbAnnot = prop.getProperty("org.annotateHal.mongodb_db_annot");
+			//String mongodbDbAnnot = prop.getProperty("org.annotateHal.mongodb_db_annot");
             String mongodbUser = prop.getProperty("org.annotateHal.mongodb_user");
             String mongodbPass = prop.getProperty("org.annotateHal.mongodb_pass");
             MongoClient mongo = new MongoClient(mongodbServer, mongodbPort);
-            db_doc = mongo.getDB(mongodbDb);
-			db_annot = mongo.getDB(mongodbDbAnnot);
-            boolean auth1 = db_doc.authenticate(mongodbUser, mongodbPass.toCharArray());
-			boolean auth2 = db_annot.authenticate(mongodbUser, mongodbPass.toCharArray());
+            db = mongo.getDB(mongodbDb);
+			//db_annot = mongo.getDB(mongodbDbAnnot);
+            boolean auth1 = db.authenticate(mongodbUser, mongodbPass.toCharArray());
+			//boolean auth2 = db_annot.authenticate(mongodbUser, mongodbPass.toCharArray());
 			initGridFS();
 			initAnnotations();
         } catch (IOException e) {
@@ -86,12 +86,12 @@ public class MongoManager {
     }
 	
 	public DB getDocDB() {
-		return db_doc;
+		return db;
 	}
 	
 	public boolean initGridFS() throws MongoException {
 		// open the GridFS
-		gfs = new GridFS(db_doc, TEI_NAMESPACE); // will be TEI_NAMESPACE
+		gfs = new GridFS(db, TEI_NAMESPACE); // will be TEI_NAMESPACE
 			
 		// init the loop
 		files = gfs.find(new BasicDBObject());
@@ -102,7 +102,7 @@ public class MongoManager {
 	public boolean initAnnotations() throws MongoException {
 		// open the collection
 		boolean collectionFound = false;
-		Set<String> collections = db_annot.getCollectionNames();
+		Set<String> collections = db.getCollectionNames();
 		for(String collection : collections) {
 			if (collection.equals(ANNOTATIONS)) {
 				collectionFound = true;
@@ -111,7 +111,7 @@ public class MongoManager {
 		if (!collectionFound) {
 			LOGGER.debug("MongoDB collection annotations does not exist and will be created");
 		}
-		collection = db_annot.getCollection(ANNOTATIONS);
+		collection = db.getCollection(ANNOTATIONS);
 	
 		// index on PageID
 		collection.ensureIndex(new BasicDBObject("filename", 1));  
@@ -201,7 +201,7 @@ public class MongoManager {
 
 	public boolean insertAnnotation(String json) {
 		if (collection == null) {
-			collection = db_annot.getCollection("annotations");	
+			collection = db.getCollection("annotations");	
 			collection.ensureIndex(new BasicDBObject("filename", 1));
 			collection.ensureIndex(new BasicDBObject("xml:id", 1)); 
 		}
@@ -216,7 +216,7 @@ public class MongoManager {
 	
 	public void insertDocument(String filename, String content) {
         try {
-            GridFS gfs = new GridFS(db_doc, TEI_NAMESPACE);
+            GridFS gfs = new GridFS(db, TEI_NAMESPACE);
             gfs.remove(filename);
 			byte[] b = content.getBytes(Charset.forName("UTF-8"));
             GridFSInputFile gfsFile = gfs.createFile(b);
@@ -230,7 +230,7 @@ public class MongoManager {
 	
 	public void removeDocument(String filename) {
 		try {
-            GridFS gfs = new GridFS(db_doc, TEI_NAMESPACE);
+            GridFS gfs = new GridFS(db, TEI_NAMESPACE);
             gfs.remove(filename);
 		} catch (MongoException e) {
             e.printStackTrace();
