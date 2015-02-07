@@ -73,7 +73,8 @@ public class MongoManager {
             MongoClient mongo = new MongoClient(mongodbServer, mongodbPort);
             db_doc = mongo.getDB(mongodbDb);
 			db_annot = mongo.getDB(mongodbDbAnnot);
-            boolean auth = db_doc.authenticate(mongodbUser, mongodbPass.toCharArray());
+            boolean auth1 = db_doc.authenticate(mongodbUser, mongodbPass.toCharArray());
+			boolean auth2 = db_annot.authenticate(mongodbUser, mongodbPass.toCharArray());
 			initGridFS();
 			initAnnotations();
         } catch (IOException e) {
