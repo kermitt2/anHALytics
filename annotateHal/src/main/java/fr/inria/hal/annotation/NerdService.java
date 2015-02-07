@@ -72,7 +72,7 @@ public class NerdService {
 			os.write(postDataBytes);
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				logger.error("Failed : HTTP error code : "
+				logger.error("Failed annotating text segment: HTTP error code : "
 					+ conn.getResponseCode());
 				return null;
 			}

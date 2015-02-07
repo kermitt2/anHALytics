@@ -77,45 +77,6 @@ public class Annotator {
 		}
 	}
 	
-	/*public String annotateNERD(String input) throws Exception {
-		StringBuffer output = new StringBuffer();
-		try {
-			URL url = new URL("http://" + nerd_host + ":" + nerd_port + "/" + RESOURCEPATH);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setDoOutput(true);
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Content-Type", "application/json; charset=utf8");
-			
-			ObjectMapper mapper = new ObjectMapper();
-			ObjectNode node = mapper.createObjectNode();
-			node.put("text", input);
-			byte[] postDataBytes = node.toString().getBytes("UTF-8");
-
-			OutputStream os = conn.getOutputStream();
-			os.write(postDataBytes);
-			os.flush();
-			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				throw new RuntimeException("Failed : HTTP error code : "
-					+ conn.getResponseCode());
-			}
-			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-			String line = null;
-			while ((line = br.readLine()) != null) {
-				output.append(line);
-				output.append(" ");
-			}
-
-			conn.disconnect();
-		}
-		catch (MalformedURLException e) {
-			e.printStackTrace();
-	  	} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
- 		return output.toString().trim();
-	}*/
-	
 	public int annotateCollection() {
 		int nb = 0;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -219,10 +180,23 @@ public class Annotator {
 				int i = 0;
 			
 				while(mm.hasMoreDocuments()) {
-					String halID = mm.getCurrentHalID();
 					String filename = mm.getCurrentFilename();
+					String halID = mm.getCurrentHalID();
+					
+					
+					// check if the document is already annotated
+					if (mm.isAnnotated()) {
+						System.out.println("skipping " + filename);
+						mm.nextDocument();
+						continue;
+					}
+					
 					String tei = mm.nextDocument();
-
+					// filter based on document size... we should actually annotate only 
+					// a given length and then stop
+					if (tei.length() > 300000)
+						continue;
+						
                     Runnable worker = 
 						new AnnotatorWorker(mm, filename, halID, tei, nerd_host, nerd_port);
                     executor.execute(worker);

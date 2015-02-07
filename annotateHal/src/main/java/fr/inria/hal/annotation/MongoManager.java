@@ -236,6 +236,27 @@ public class MongoManager {
             e.printStackTrace();
         }
 	}
+	
+	/** 
+	 * Check if the current document has already been annotated.
+	 */	
+	public boolean isAnnotated() {
+		if (collection == null) {
+			collection = db.getCollection("annotations");	
+			collection.ensureIndex(new BasicDBObject("filename", 1));
+			collection.ensureIndex(new BasicDBObject("xml:id", 1)); 
+		}
+		String filename = getCurrentFilename();	
+		BasicDBObject allQuery = new BasicDBObject();
+		BasicDBObject fields = new BasicDBObject();
+		fields.put("filename", filename);
+ 
+		DBCursor cursor = collection.find(allQuery, fields);
+		if (cursor.hasNext())
+			return true;
+		else 
+			return false;
+	}
 
 }
 
