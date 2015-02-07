@@ -1,5 +1,6 @@
 package fr.inria.hal.annotation;
 
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +46,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  *  @author Patrice Lopez
  */
 public class Annotator {
+	private static final Logger logger = LoggerFactory.getLogger(Annotator.class);
 	
 	private String nerd_host = null;
 	private String nerd_port = null;
@@ -277,17 +279,22 @@ public class Annotator {
 				// get the textual content of the element
 				// annotate
 				String text = e.getTextContent();
+				String jsonText = null;
 				try {					
+					NerdService nerdService = new NerdService(text, nerd_host, nerd_port);
+					jsonText = nerdService.runNerd();
+				}
+				catch(Exception ex) {
+					logger.debug("Text could not be annotated by NERD: " + text);
+					ex.printStackTrace();
+				}
+				if (jsonText != null) {
 					// resulting annotations, with the corresponding id
 					if (first)
 						first = false;
 					else
 						json.append(", ");
-		            NerdService nerdService = new NerdService(text, nerd_host, nerd_port);
-					json.append("{ \"xml:id\" : \"" + id + "\", \"nerd\" : " + nerdService.runNerd() + " }");
-				}
-				catch(Exception ex) {
-					ex.printStackTrace();
+					json.append("{ \"xml:id\" : \"" + id + "\", \"nerd\" : " + jsonText + " }");
 				}
 			}
 		}
