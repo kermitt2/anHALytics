@@ -35,7 +35,8 @@ import org.codehaus.jackson.map.ObjectMapper;
  *  @author Patrice Lopez
  */
 public class NerdService {
-
+	private static final Logger logger = LoggerFactory.getLogger(NerdService.class);
+	
     private String nerd_host = null;
     private String nerd_port = null;
 	private String input = null;
@@ -71,8 +72,9 @@ public class NerdService {
 			os.write(postDataBytes);
 			os.flush();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				throw new RuntimeException("Failed : HTTP error code : "
+				logger.error("Failed : HTTP error code : "
 					+ conn.getResponseCode());
+				return null;
 			}
 			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
 			String line = null;
