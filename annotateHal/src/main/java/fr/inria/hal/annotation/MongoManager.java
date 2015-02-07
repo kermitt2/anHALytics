@@ -246,16 +246,20 @@ public class MongoManager {
 			collection.ensureIndex(new BasicDBObject("filename", 1));
 			collection.ensureIndex(new BasicDBObject("xml:id", 1)); 
 		}
+		boolean result = false;
 		String filename = getCurrentFilename();	
-		BasicDBObject allQuery = new BasicDBObject();
-		BasicDBObject fields = new BasicDBObject();
-		fields.put("filename", filename);
- 
-		DBCursor cursor = collection.find(allQuery, fields);
-		if (cursor.hasNext())
-			return true;
-		else 
-			return false;
+		BasicDBObject query = new BasicDBObject("filename", filename);
+ 	   	try {
+			DBCursor cursor = collection.find(query);
+			if (cursor.hasNext())
+				result = true;
+			else 
+				result = false;
+		}
+		finally {
+			cursor.close();
+		}
+		return result;
 	}
 
 }
