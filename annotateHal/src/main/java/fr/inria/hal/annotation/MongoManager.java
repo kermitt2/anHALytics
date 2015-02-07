@@ -242,7 +242,7 @@ public class MongoManager {
 	 */	
 	public boolean isAnnotated() {
 		if (collection == null) {
-			collection = db.getCollection("annotations");	
+			collection = db.getCollection("annotations");
 			collection.ensureIndex(new BasicDBObject("filename", 1));
 			collection.ensureIndex(new BasicDBObject("xml:id", 1)); 
 		}

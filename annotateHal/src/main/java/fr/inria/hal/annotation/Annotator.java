@@ -183,10 +183,9 @@ public class Annotator {
 					String filename = mm.getCurrentFilename();
 					String halID = mm.getCurrentHalID();
 					
-					
 					// check if the document is already annotated
 					if (mm.isAnnotated()) {
-						System.out.println("skipping " + filename);
+						System.out.println("skipping " + filename + ": already annotated");
 						mm.nextDocument();
 						continue;
 					}
@@ -194,8 +193,10 @@ public class Annotator {
 					String tei = mm.nextDocument();
 					// filter based on document size... we should actually annotate only 
 					// a given length and then stop
-					if (tei.length() > 300000)
+					if (tei.length() > 300000) {
+						System.out.println("skipping " + filename + ": file too large");
 						continue;
+					}
 						
                     Runnable worker = 
 						new AnnotatorWorker(mm, filename, halID, tei, nerd_host, nerd_port);
