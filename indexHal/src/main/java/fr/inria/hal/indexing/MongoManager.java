@@ -262,5 +262,30 @@ public class MongoManager {
 		return result;
 	}
 
+	public String getAnnotation(String filename) {
+		if (collection == null) {
+			collection = db.getCollection("annotations");
+			collection.ensureIndex(new BasicDBObject("filename", 1));
+			collection.ensureIndex(new BasicDBObject("xml:id", 1)); 
+		}
+		String result = null;
+		BasicDBObject query = new BasicDBObject("filename", filename);
+		DBCursor curs = null;
+ 	   	try {
+			curs = collection.find(query);
+			if (curs.hasNext()) {
+				// we get now the sub-document corresponding to the given id
+				DBObject annotations = curs.next();
+				BasicDBList nerd = (BasicDBList)annotations.get("nerd");
+				result = nerd.toString();
+			}
+		}
+		finally {
+			if (curs != null)
+				curs.close();
+		}
+		return result;
+	}
+
 }
 

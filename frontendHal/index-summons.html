@@ -2,22 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Demo</title>
+  <title>Demo Summon</title>
 
   <script type="text/javascript" src="lib/jquery/1.7.1/jquery-1.7.1.min.js"></script>
 
-  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
   <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>  
 
   <script type="text/javascript" src="lib/linkify/1.0/jquery.linkify-1.0-min.js"></script>  
   
-  <link rel="stylesheet" href="lib/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css">
+  <link rel="stylesheet" href="lib/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css"/>
   <script type="text/javascript" src="lib/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.min.js"></script>
 
   <script type="text/javascript" src="json/json2.js"></script>
   <script type="text/javascript" src="json/jsonpath-0.8.0.js"></script>
 
-  <script type="text/javascript" src="tapas.facetview.js"></script>
+  <script type="text/javascript" src="hal.facetview.js"></script>
+  
   <script src="lib/CryptoJS/rollups/hmac-sha1.js"></script>
   <script src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
   <script src="lib/CryptoJS/rollups/md5.js"></script>
@@ -27,7 +28,7 @@
 
   <script type="text/javascript" src="lib/jquery/jquery.base64.min.js"></script>
 
-  <link rel="stylesheet" href="css/facetview.css">
+  <link rel="stylesheet" href="css/hal.css"/>
 
   <script type="text/javascript" src="lib/d3/d3.v2.min.js "></script>
 
@@ -52,11 +53,9 @@
   </script>
   <script type="text/javascript" src="lib/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-  <link rel="stylesheet" href="css/style.css">
-
   <script type="text/javascript">
-jQuery(document).ready(function($) {
-  $('.facet-view-simple').facetview({
+  jQuery(document).ready(function($) {
+    $('.facet-view-simple').facetview({
 	collection: 'npl',
     search_url: 'http://api.summon.serialssolutions.com/2.0.0/search?',
     search_index: 'summon',
@@ -76,7 +75,6 @@ jQuery(document).ready(function($) {
 		//{'field': 'Genre', 'display': 'Genre', 'type':'class', 'size':6, 'view':'textual'},
 		//{'field': 'GeographicLocations', 'display': 'GeographicLocations', 'type':'country', 'size':6, 'view':'textual'},
 		//{'field': 'Audience', 'display': 'Audience', 'type':'class', 'size':6, 'view':'textual'}
-		
 		/*{'field': '$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_hal.$list.$item.$term', 'display': 'subject-headers', 'size':20, 'type':'taxonomy', 'view':'graphic'},
 		{'field': '$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$address.key', 'display': 'country', 'size':6, 'type':'country', 'view':'graphic'},
 		{'field': '$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$orgName', 'display': 'Organisation', 'size':6, 'type':'entity', 'view':'graphic'},
@@ -86,11 +84,6 @@ jQuery(document).ready(function($) {
 	  from: 0,
       size: 10 
     }
-// 		
-/*,
-    predefined_filters: {
-        'owner.exact': 'test'
-    }*/
   });
 
 
@@ -111,10 +104,10 @@ jQuery(document).ready(function($) {
 <body>
 
 <div class="container"> 
-  <div class="content">
-    <div class="page-header">
-      <h1>
-         <small> test front-end for Summon</small>  <small><span style="position:relative; float:right;"><a href="index-summons.html?mode_query=simple">simple</a> - <a href="index-summons.html?mode_query=complex">advanced</a> - <a href="index-summons.html?mode_query=nl">NL</a></span></small>
+  <div class="content" style="margin-right:0px; padding-right:0px; margin-right: -20px;">
+    <div class="page-header" style="margin-right:0px;">
+		<h1><span style="color:#BC0E0E;"><img src="data/images/logo_INRIA_fr.png" />&nbsp;&nbsp;<span style="padding-left:40px;color:#AE0C0C;"> 
+			<!--small> test front-end for ElasticSearch</small-->  <small><span style="position:relative; float:right;"><a href="index.html?mode_query=simple">simple</a> - <a href="index.html?mode_query=complex">complex</a> - <a href="index.html?mode_query=nl">NL</a></span></small>
       </h1>
     </div>
 	

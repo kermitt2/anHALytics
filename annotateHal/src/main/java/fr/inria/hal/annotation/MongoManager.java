@@ -51,6 +51,9 @@ public class MongoManager {
 	private DBCollection collection = null;
 	private MongoClient mongo = null;
 	
+	private String currentAnnotationFilename = null;
+	private String currentAnnotationHalID = null;
+	
     public MongoManager() {
         try {
             Properties prop = new Properties();
@@ -165,9 +168,8 @@ public class MongoManager {
 			DBObject annotations = cursor.next();			
 			BasicDBList nerd = (BasicDBList)annotations.get("nerd");
 			json = nerd.toString();
-			/*if (!cursor.hasNext()) {
-				cursor.close();
-			}*/
+			currentAnnotationFilename = (String)annotations.get("filename");
+			currentAnnotationHalID = (String)annotations.get("halID");
 		} 
 		catch (MongoException e) {
 			e.printStackTrace();
@@ -207,6 +209,14 @@ public class MongoManager {
 			e.printStackTrace();
 		}
 		return filename;
+	}
+	
+	public String getCurrentAnnotationFilename() {
+		return currentAnnotationFilename;
+	}
+	
+	public String getCurrentAnnotationHalID() {
+		return currentAnnotationHalID;
 	}
 
 	public boolean insertAnnotation(String json) {
@@ -259,15 +269,17 @@ public class MongoManager {
 		boolean result = false;
 		String filename = getCurrentFilename();	
 		BasicDBObject query = new BasicDBObject("filename", filename);
+		DBCursor cursor = null;
  	   	try {
-			DBCursor cursor = collection.find(query);
+			cursor = collection.find(query);
 			if (cursor.hasNext())
 				result = true;
 			else 
 				result = false;
 		}
 		finally {
-			cursor.close();
+			if (cursor != null)
+				cursor.close();
 		}
 		return result;
 	}

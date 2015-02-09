@@ -1879,10 +1879,12 @@ jQuery.extend({
 			}
 			else {
 				dates = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date'];
-			}
-			
-			if (!dates) {
-				dates = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$when'];
+				if (!dates) {
+					dates = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$when'];
+				}
+				if (!dates) {
+					dates = jsonObject['$TEI.$teiHeader.$editionStmt.$edition.$date'];
+				}
 			}
 			
 			if (options['collection'] == 'patent') {
@@ -2830,8 +2832,8 @@ console.log(label);
 "$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$idno.$type_doi",
 "$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName",		
 "$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.*",
-"$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term"
-												   ],
+"$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term",
+'$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id' ],
 									   "query": { "filtered": { "query": { "term": { "_id": docID } } } } };
 
 						$.ajax({
@@ -3002,11 +3004,13 @@ console.log(label);
 				
 				piece += '<div class="span2" style="width:13%;">';
 				if ( options.subcollection == "hal" ) {
-					piece += "<p><strong>HAL ID:</strong> " + docid + "</p>";
+					piece += '<p><strong>HAL ID:</strong> <a href="https://hal.archives-ouvertes.fr/'
+					+ docid + '" target="_blank">' + docid + '</a></p>';
 				}
 
 				// authors and affiliation
-				var names = jsonObject.fields['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName'];
+				var names = 
+					jsonObject.fields['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName'];
 
 				if (names) {
 					for(var aut in names) {
@@ -3547,8 +3551,8 @@ console.log(label);
 				
 				var subType = entity.subtype;
 				var conf = entity.nerd_score;
-				if (conf && conf.length > 3)
-					conf = conf.substring(0, 3);
+				if (conf && conf.length > 4)
+					conf = conf.substring(0, 4);
 				var definitions = entity.definitions;
 				var wikipedia = entity.wikipediaExternalRef;
 				var freebase = entity.freeBaseExternalRef;
@@ -3581,7 +3585,7 @@ console.log(label);
 
 				string += "<p>conf: <i>"+conf+ "</i></p>";
 
-				string += "</td><td style='align:right;bgcolor:#fff'>";
+				string += "</td><td style='align:right;background-color:#fff'>";
 
 				if (freebase != null) {
 					var urlImage = 'https://usercontent.googleapis.com/freebase/v1/image' + freebase;
@@ -3655,6 +3659,7 @@ console.log(label);
 		var textFieldsNPLReturned = [ '$TEI.$teiHeader.$titleStmt.$title.$title-first', 
 			'$TEI.$teiHeader.$titleStmt.xml:id',
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date',
+			'$TEI.$teiHeader.$editionStmt.$edition.$date',
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname',
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$forename',
 			'$TEI.$teiHeader.$sourceDesc.target',

@@ -14,6 +14,9 @@ import java.util.Properties;
 import java.io.FileInputStream;
 import java.net.*;
 import java.io.*;
+import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 //import org.elasticsearch.common.io.Closeables;
 
 import fr.inria.hal.indexing.MongoManager;
@@ -83,8 +86,143 @@ public class IndexingPreprocess {
 	public String process(String jsonStr, String filename) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode jsonRoot = mapper.readTree(jsonStr);
+		
+		// root node is the TEI node, we add as a child the "light" annotations in a 
+		// standoff element
+		if (filename != null) {
+			JsonNode teiRoot = jsonRoot.findPath("$TEI");
+						
+			if ( (teiRoot != null) && (!teiRoot.isMissingNode()) ) {
+			
+				//System.out.println("filename: " + filename);
+				String annotation = mm.getAnnotation(filename);
+				//System.out.println(annotation);
+				if ( (annotation != null) && (annotation.trim().length() > 0) ) {
+					JsonNode jsonAnnotation= mapper.readTree(annotation);
+	//System.out.println(jsonAnnotation.toString());			
+					// we only get the concept IDs and the nerd confidence score
+					JsonNode nerd = jsonAnnotation.findPath("nerd");
+					JsonNode entities = nerd.findPath("entities");
+					if ( (entities != null) && (!entities.isMissingNode()) ) {
+						Iterator<JsonNode> iter = entities.getElements();
+						JsonNode annotNode = mapper.createArrayNode(); 
+				
+						while(iter.hasNext()) {
+							JsonNode piece = (JsonNode)iter.next();
+
+							JsonNode nerd_scoreN = piece.findValue("nerd_score");
+							JsonNode wikipediaExternalRefN = piece.findValue("wikipediaExternalRef");
+							JsonNode freeBaseExternalRefN = piece.findValue("freeBaseExternalRef");
+							
+							String nerd_score = nerd_scoreN.getTextValue();
+							String wikipediaExternalRef = wikipediaExternalRefN.getTextValue();
+							String freeBaseExternalRef = null;
+							if ( (freeBaseExternalRefN != null) && (!freeBaseExternalRefN.isMissingNode()) )
+								freeBaseExternalRef = freeBaseExternalRefN.getTextValue();
+							
+							JsonNode newNode = mapper.createArrayNode(); 
+							
+							JsonNode nerdScoreNode = mapper.createObjectNode();
+							((ObjectNode)nerdScoreNode).put("nerd_score",nerd_score);
+							((ArrayNode)newNode).add(nerdScoreNode);
+						
+							JsonNode wikiNode = mapper.createObjectNode();						
+							((ObjectNode)wikiNode).put("wikipediaExternalRef",wikipediaExternalRef);
+							((ArrayNode)newNode).add(wikiNode);
+							
+							if (freeBaseExternalRef != null) {
+								JsonNode freeBaseNode = mapper.createObjectNode();
+								((ObjectNode)freeBaseNode).put("freeBaseExternalRef",freeBaseExternalRef);
+								((ArrayNode)newNode).add(freeBaseNode);
+							}
+					
+							((ArrayNode)annotNode).add(newNode);
+						}
+						JsonNode standoffNode = mapper.createObjectNode(); 
+						((ObjectNode)standoffNode).put("$standoff", annotNode);
+						((ArrayNode)teiRoot).add(standoffNode);
+					}
+				}
+				else {
+					// if we don't have annotations for the file, we skip it!
+					return null;
+				}
+			}
+		}	
+		
 		// here recursive modification of the json document via Jackson
 		jsonRoot = process(jsonRoot, mapper, null, false, false, false, filename);
+		
+		// we want to filter out documents in the future...
+		// paths are $TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date
+		// or $TEI.$teiHeader.$editionStmt.$edition.$date
+		// now a piece of art of progamming : ;)
+		JsonNode teiRoot = jsonRoot.findPath("$TEI");
+		if ( (teiRoot != null) && (!teiRoot.isMissingNode()) ) {
+			JsonNode teiHeader = teiRoot.findPath("$teiHeader");
+			if ( (teiHeader != null) && (!teiHeader.isMissingNode()) ) {
+				JsonNode sourceDesc = teiHeader.findPath("$sourceDesc");
+				if ( (sourceDesc != null) && (!sourceDesc.isMissingNode()) ) {
+					JsonNode biblStruct = sourceDesc.findPath("$biblStruct");
+					if ( (biblStruct != null) && (!biblStruct.isMissingNode()) ) {
+						JsonNode monogr = biblStruct.findPath("$monogr");
+						if ( (monogr != null) && (!monogr.isMissingNode()) ) {
+							JsonNode imprint = monogr.findPath("$imprint");
+							if ( (imprint != null) && (!imprint.isMissingNode()) ) {
+								JsonNode date = imprint.findPath("$date");
+								if ( (date != null) && (!date.isMissingNode()) ) {
+									if (date.isArray()) {
+										Iterator<JsonNode> ite = ((ArrayNode)date).getElements();
+										if (ite.hasNext()) { 
+											JsonNode dateVal = (JsonNode)ite.next();
+											String dateStr = dateVal.getTextValue();
+											try {
+												Date theDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+												Date today = new Date();
+												if (theDate.compareTo(today)>0) {
+													return null;
+												}
+											}
+											catch(Exception e) {
+												e.printStackTrace();
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				else {
+					JsonNode editionStmt = teiHeader.findPath("$editionStmt");
+					if ( (editionStmt != null) && (!editionStmt.isMissingNode()) ) {
+						JsonNode edition = editionStmt.findPath("$edition");
+						if ( (edition != null) && (!edition.isMissingNode()) ) {
+							JsonNode date = edition.findPath("$date");
+							if ( (date != null) && (!date.isMissingNode()) ) {
+								if (date.isArray()) {
+									Iterator<JsonNode> ite = ((ArrayNode)date).getElements();
+									if (ite.hasNext()) { 
+										JsonNode dateVal = (JsonNode)ite.next();
+										String dateStr = dateVal.getTextValue();
+										try {
+											Date theDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+											Date today = new Date();
+											if (theDate.compareTo(today)>0) {
+												return null;
+											}
+										}
+										catch(Exception e) {
+											e.printStackTrace();
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		
 		return jsonRoot.toString();
 	}

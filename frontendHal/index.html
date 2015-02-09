@@ -25,7 +25,7 @@
   <script src="lib/CryptoJS/components/enc-utf16-min.js"></script>
   <script src="lib/CryptoJS/components/enc-base64.js"></script>
 
-  <link rel="stylesheet" href="css/hal.css"/>
+  
 
   <script type="text/javascript" src="hal.facetview.js"></script>
 
@@ -41,6 +41,8 @@
   </script>
   <script type="text/javascript" src="lib/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+	<link rel="stylesheet" href="css/hal.css"/>
+
   <script type="text/javascript">
   jQuery(document).ready(function($) {
     $('.facet-view-simple').facetview({
@@ -50,10 +52,10 @@
 	  search_url_annotations: 'http://localhost:9200/hal_annots/_search?',
       search_index: 'elasticsearch',
   	snippet_style: 'andlauer',
-  	//service: "proxy", // access to service can be local or proxy, depending on security requirements
-  	service: "local",
+  	service: "proxy", // access to service can be local or proxy, depending on security requirements
+  	//service: "local",
   	//proxy_host: "http://pl50918z:8080/proxy/",
-  	//proxy_host: "http://localhost:8080/proxy/",	
+  	proxy_host: "http://localhost:8080/proxy/",	
   	freetext_submit_delay: "200", // in ms
 	display_images: true, 
 	facets: [

@@ -229,9 +229,9 @@ public class ElasticSearchManager {
 				String filename = mm.getCurrentFilename();
 				String halID = mm.getCurrentHalID();
 				String tei = mm.next();
-			
+				
 				// convert the TEI document into JSON via JsonML
-				System.out.println(halID);
+				//System.out.println(halID);
 				JSONObject json = JsonTapasML.toJSONObject(tei);
 				String jsonStr = json.toString();
 				try {
@@ -241,6 +241,9 @@ public class ElasticSearchManager {
 					e.printStackTrace();
 				}
 				//System.out.println(jsonStr);
+
+				if (jsonStr == null)
+					continue;
 
 				// index the json in ElasticSearch
 				try {
