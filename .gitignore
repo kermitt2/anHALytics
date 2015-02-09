@@ -13,3 +13,7 @@ annotateHAL/target/*
 annotateHAL/*.patrice
 tempPDF/*
 tempTEI/*
+frontendHAL/lib/mathjax
+frontendHAL/lib/mathjax/*
+frontendHal/lib/mathjax
+frontendHal/lib/mathjax/*

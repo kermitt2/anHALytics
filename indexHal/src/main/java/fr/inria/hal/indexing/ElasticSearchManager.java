@@ -218,7 +218,7 @@ public class ElasticSearchManager {
 		        .addTransportAddress(new InetSocketTransportAddress(elasticSearch_host, 9300));
 		
 		MongoManager mm = new MongoManager();
-		IndexingPreprocess indexingPreprocess = new IndexingPreprocess();
+		IndexingPreprocess indexingPreprocess = new IndexingPreprocess(mm);
 		int nb = 0;
 		
 		if (mm.init()) {
@@ -226,6 +226,7 @@ public class ElasticSearchManager {
 			BulkRequestBuilder bulkRequest = client.prepareBulk();
 			bulkRequest.setRefresh(true);
 			while(mm.hasMoreDocuments()) {
+				String filename = mm.getCurrentFilename();
 				String halID = mm.getCurrentHalID();
 				String tei = mm.next();
 			
@@ -234,7 +235,7 @@ public class ElasticSearchManager {
 				JSONObject json = JsonTapasML.toJSONObject(tei);
 				String jsonStr = json.toString();
 				try {
-					jsonStr = indexingPreprocess.process(jsonStr);
+					jsonStr = indexingPreprocess.process(jsonStr, filename);
 				}
 				catch(Exception e) {
 					e.printStackTrace();

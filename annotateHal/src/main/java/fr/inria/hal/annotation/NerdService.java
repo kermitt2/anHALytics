@@ -82,7 +82,7 @@ public class NerdService {
 				output.append(line);
 				output.append(" ");
 			}
-
+			os.close();
 			conn.disconnect();
 		}
 		catch (MalformedURLException e) {

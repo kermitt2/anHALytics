@@ -1,20 +1,10 @@
 package fr.inria.hal.annotation;
 
-import com.mongodb.MongoClient;
-import com.mongodb.DB;
-import com.mongodb.MongoException;
+import com.mongodb.*;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSInputFile;
 import com.mongodb.gridfs.GridFSDBFile;
-import com.mongodb.WriteConcern;
-import com.mongodb.DBCollection;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.ServerAddress;
-import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
-import com.mongodb.CommandResult;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -59,6 +49,7 @@ public class MongoManager {
 	private DBCursor cursor = null;
 	private int indexFile = 0;
 	private DBCollection collection = null;
+	private MongoClient mongo = null;
 	
     public MongoManager() {
         try {
@@ -70,13 +61,13 @@ public class MongoManager {
 			//String mongodbDbAnnot = prop.getProperty("org.annotateHal.mongodb_db_annot");
             String mongodbUser = prop.getProperty("org.annotateHal.mongodb_user");
             String mongodbPass = prop.getProperty("org.annotateHal.mongodb_pass");
-            MongoClient mongo = new MongoClient(mongodbServer, mongodbPort);
+            mongo = new MongoClient(mongodbServer, mongodbPort);
             db = mongo.getDB(mongodbDb);
 			//db_annot = mongo.getDB(mongodbDbAnnot);
             boolean auth1 = db.authenticate(mongodbUser, mongodbPass.toCharArray());
 			//boolean auth2 = db_annot.authenticate(mongodbUser, mongodbPass.toCharArray());
 			initGridFS();
-			initAnnotations();
+			//initAnnotations();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,6 +75,10 @@ public class MongoManager {
 			e.printStackTrace();
 		}
     }
+	
+	public void close() {
+		mongo.close();
+	}
 	
 	public DB getDocDB() {
 		return db;
@@ -129,8 +124,18 @@ public class MongoManager {
 			return false;
 	}
 	
-	public boolean hasMoreAnnotations() {	
-		return cursor.hasNext();
+	public boolean hasMoreAnnotations() {
+		if (cursor == null) {
+			// init the loop
+			cursor = collection.find();	
+		}
+		
+		if (!cursor.hasNext()) {
+			cursor.close();
+			return false;
+		}
+		else 
+			return true;
 	}
 
 	public String nextDocument() {
@@ -141,6 +146,7 @@ public class MongoManager {
 				InputStream input = teifile.getInputStream();
 				tei = IOUtils.toString(input, "UTF-8");
 				indexFile++;
+				input.close();
             }
 		} 
 		catch (MongoException e) {
@@ -156,8 +162,12 @@ public class MongoManager {
 	public String nextAnnotation() {
 		String json  = null;
 		try {
-			DBObject obj = cursor.next();
-			json = obj.toString();
+			DBObject annotations = cursor.next();			
+			BasicDBList nerd = (BasicDBList)annotations.get("nerd");
+			json = nerd.toString();
+			/*if (!cursor.hasNext()) {
+				cursor.close();
+			}*/
 		} 
 		catch (MongoException e) {
 			e.printStackTrace();

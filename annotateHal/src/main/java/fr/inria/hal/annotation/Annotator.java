@@ -82,11 +82,12 @@ public class Annotator {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
         //docFactory.setNamespaceAware(true);
+		MongoManager mm = null;
 		try {
         	DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 		
 			// loop on the TEI documents in MongoDB
-			MongoManager mm = new MongoManager();
+			mm = new MongoManager();
 			
 			if (mm.initGridFS()) {
 				int i = 0;
@@ -138,13 +139,16 @@ public class Annotator {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		finally {
+			mm.close();
+		}
 		return nb;
 	}
 	
 	public int annotateCollectionMultiThreaded() {
 		// max queue of tasks of 50 
 		BlockingQueue<Runnable> blockingQueue = new ArrayBlockingQueue<Runnable>(50);
-		ThreadPoolExecutor executor = new ThreadPoolExecutor(nbThreads, nbThreads, 50000, 
+		ThreadPoolExecutor executor = new ThreadPoolExecutor(nbThreads, nbThreads, 60000, 
 			TimeUnit.MILLISECONDS, blockingQueue);
 		
 		// this is for handling rejected tasks (e.g. queue is full)
@@ -170,11 +174,12 @@ public class Annotator {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
         //docFactory.setNamespaceAware(true);
+		MongoManager mm = null;
 		try {
         	DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 		
 			// loop on the TEI documents in MongoDB
-			MongoManager mm = new MongoManager();
+			mm = new MongoManager();
 			
 			if (mm.initGridFS()) {
 				int i = 0;
@@ -211,6 +216,9 @@ public class Annotator {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+		}
+		finally{
+			mm.close();
 		}
 		return nb;
 	

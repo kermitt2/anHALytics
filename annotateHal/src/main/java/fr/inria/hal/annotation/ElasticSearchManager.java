@@ -166,7 +166,7 @@ public class ElasticSearchManager {
 		boolean val = false;
 		
 		String urlStr = "http://"+elasticSearch_host+":"+elasticSearch_port+"/"+indexName;
-		urlStr += "/npl_type/_mapping";
+		urlStr += "/annotation/_mapping";
 		
 		URL url = new URL(urlStr);
 		HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
@@ -176,7 +176,7 @@ public class ElasticSearchManager {
 		httpCon.setRequestMethod("PUT");
 		String mappingStr = null;
 		try {
-			File file = new File("src/main/resources/elasticSearch/mapping_annotations.json");
+			File file = new File("src/main/resources/elasticSearch/annotation.json");
 			mappingStr = FileUtils.readFileToString(file, "UTF-8");
 		}
 		catch(Exception e) {
@@ -208,51 +208,72 @@ public class ElasticSearchManager {
 		        .put("cluster.name", elasticSearchClusterName).build();
 		Client client = new TransportClient(settings)
 		        .addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
-		
-		MongoManager mm = new MongoManager();
+		MongoManager mm = null;
 		int nb = 0;
+		try {
+			mm = new MongoManager();
+			ObjectMapper mapper = new ObjectMapper();
 		
-		if (mm.initAnnotations()) {
-			int i = 0;
-			BulkRequestBuilder bulkRequest = client.prepareBulk();
-			bulkRequest.setRefresh(true);
-			while(mm.hasMoreAnnotations()) {
-				String halID = mm.getCurrentHalID();
-				String json = mm.nextAnnotation();
+			if (mm.initAnnotations()) {
+				int i = 0;
+				BulkRequestBuilder bulkRequest = client.prepareBulk();
+				bulkRequest.setRefresh(true);
+				while(mm.hasMoreAnnotations()) {
+					String filename = mm.getCurrentFilename();
+					String halID = mm.getCurrentHalID();
+					String json = mm.nextAnnotation();
 
-				// index the json in ElasticSearch
-				try {
-					// beware the document type bellow and corresponding mapping!
-					bulkRequest.add(client.prepareIndex(indexName, "annotation", halID).setSource(json));
+					JsonNode jsonAnnotation= mapper.readTree(json);
+					JsonNode newNode = mapper.createObjectNode(); 
 					
-					if (i >= 500) {
-						BulkResponse bulkResponse = bulkRequest.execute().actionGet();
-						if (bulkResponse.hasFailures()) {
-					    	// process failures by iterating through each bulk response item	
-							System.out.println(bulkResponse.buildFailureMessage()); 
-						}
-						bulkRequest = client.prepareBulk();
-						bulkRequest.setRefresh(true);
-						i = 0;
-						System.out.print(".");
-						System.out.flush();
-					}
+					Iterator<JsonNode> ite = jsonAnnotation.getElements();
+					while (ite.hasNext()) {
+						JsonNode temp = ite.next();
+						JsonNode idNode = temp.findValue("xml:id");
+						String xmlID = idNode.getTextValue();
+						((ObjectNode)newNode).put("annotation", temp);
+						String annotJson = newNode.toString();
+						//System.out.println(annotJson);
 				
-					i++;
-					nb++;
+						// index the json in ElasticSearch
+						try {
+							// beware the document type bellow and corresponding mapping!
+							bulkRequest.add(client.prepareIndex(indexName, "annotation", xmlID).setSource(annotJson));
+					
+							if (i >= 500) {
+								BulkResponse bulkResponse = bulkRequest.execute().actionGet();
+								if (bulkResponse.hasFailures()) {
+							    	// process failures by iterating through each bulk response item	
+									System.out.println(bulkResponse.buildFailureMessage()); 
+								}
+								bulkRequest = client.prepareBulk();
+								bulkRequest.setRefresh(true);
+								i = 0;
+								System.out.print(".");
+								System.out.flush();
+							}
+				
+							i++;
+							nb++;
+						}
+						catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
 				}
-				catch(Exception e) {
-					e.printStackTrace();
+				// last bulk
+				BulkResponse bulkResponse = bulkRequest.execute().actionGet();
+				if (bulkResponse.hasFailures()) {
+			    	// process failures by iterating through each bulk response item	
+					System.out.println(bulkResponse.buildFailureMessage());
 				}
-			}
-			// last bulk
-			BulkResponse bulkResponse = bulkRequest.execute().actionGet();
-			if (bulkResponse.hasFailures()) {
-		    	// process failures by iterating through each bulk response item	
-				System.out.println(bulkResponse.buildFailureMessage());
+				System.out.print("\n");
 			}
 		}
-				
+		finally {	
+			if (mm != null)
+				mm.close();
+		}
 		return nb;
 	}
 	

@@ -2,7 +2,8 @@
     "npl": {
         "_all": {
             "enabled": true, 
-            "store": "yes"
+            "store": "yes",
+			"dynamic": "false"
         }, 
         "properties": {
             "$TEI": {
@@ -14,7 +15,8 @@
                                     "$edition": {
                                         "properties": {
                                             "$date": {
-                                                "type": "string"
+                                                "format": "dateOptionalTime", 
+                                                "type": "date"
                                             }, 
                                             "tagName": {
                                                 "type": "string"
@@ -37,6 +39,7 @@
                                                     "$persName": {
                                                         "properties": {
                                                             "$forename": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }, 
                                                             "$fullName": {
@@ -44,6 +47,7 @@
                                                                 "type": "string"
                                                             }, 
                                                             "$surname": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }
                                                         }
@@ -84,7 +88,11 @@
                                     "$abstract": {
                                         "properties": {
                                             "$lang_en": {
-                                                "type": "string"
+                                                "type": "string",
+												"index" : "analyzed", 
+												"analyzer" : "english",
+												"store" : "yes",
+												"term_vector": "with_positions_offsets"
                                             }
                                         }
                                     }, 
@@ -103,9 +111,19 @@
                                             "$classCode": {
                                                 "properties": {
                                                     "$scheme_halDomain": {
+                                                        "index": "not_analyzed", 
+                                                        "type": "string"
+                                                    }, 
+                                                    "$scheme_halDomain_abbrev": {
+                                                        "index": "not_analyzed", 
                                                         "type": "string"
                                                     }, 
                                                     "$scheme_halTypology": {
+                                                        "index": "not_analyzed", 
+                                                        "type": "string"
+													},
+                                                    "$scheme_halTypology_abbrev": {
+                                                        "index": "not_analyzed", 
                                                         "type": "string"
                                                     }
                                                 }
@@ -115,12 +133,16 @@
                                                     "$type_author": {
                                                         "properties": {
                                                             "$term": {
+                                                                "analyzer": "case_insensitive", 
+                                                                "index": "analyzed", 
                                                                 "type": "string"
                                                             }, 
                                                             "xml:id": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }, 
                                                             "xml:lang": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }
                                                         }
@@ -128,20 +150,25 @@
                                                 }
                                             }, 
                                             "n": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "scheme": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "xml:id": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }
                                         }
                                     }, 
                                     "xml:id": {
+										"index": "not_analyzed", 
                                         "type": "string"
                                     }, 
                                     "xml:lang": {
+										"index": "not_analyzed", 
                                         "type": "string"
                                     }
                                 }
@@ -272,6 +299,7 @@
                                                             "$persName": {
                                                                 "properties": {
                                                                     "$forename": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "$fullName": {
@@ -279,9 +307,11 @@
                                                                         "type": "string"
                                                                     }, 
                                                                     "$surname": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "type": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }
                                                                 }
@@ -294,17 +324,26 @@
                                                     "$title": {
                                                         "properties": {
                                                             "$lang_en": {
-                                                                "type": "string"
+                                                                "type": "string",
+																"index" : "analyzed", 
+																"analyzer" : "english",
+																"store" : "yes",
+																"term_vector": "with_positions_offsets"
                                                             }
                                                         }
                                                     }, 
+													"$title-first": {
+                                                        "type": "string"
+                                                    },
                                                     "role": {
                                                         "type": "string"
                                                     }, 
                                                     "xml:id": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }, 
                                                     "xml:lang": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }
                                                 }
@@ -354,10 +393,17 @@
                                                     "$title": {
                                                         "properties": {
                                                             "$lang_en": {
-                                                                "type": "string"
+                                                                "type": "string",
+																"index" : "analyzed", 
+																"analyzer" : "english",
+																"store" : "yes",
+																"term_vector": "with_positions_offsets"
                                                             }
                                                         }
                                                     }, 
+													"$title-first": {
+                                                        "type": "string"
+                                                    },
                                                     "level": {
                                                         "type": "string"
                                                     }, 
@@ -365,6 +411,7 @@
                                                         "type": "string"
                                                     }, 
                                                     "xml:id": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }
                                                 }
@@ -452,6 +499,7 @@
                                             "$persName": {
                                                 "properties": {
                                                     "$forename": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }, 
                                                     "$fullName": {
@@ -459,9 +507,11 @@
                                                         "type": "string"
                                                     }, 
                                                     "$surname": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }, 
                                                     "type": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }
                                                 }
@@ -482,6 +532,7 @@
                                             "$persName": {
                                                 "properties": {
                                                     "$forename": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }, 
                                                     "$fullName": {
@@ -489,6 +540,7 @@
                                                         "type": "string"
                                                     }, 
                                                     "$surname": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }
                                                 }
@@ -498,17 +550,87 @@
                                     "$title": {
                                         "properties": {
                                             "$lang_en": {
-                                                "type": "string"
+                                                "type": "string",
+												"index" : "analyzed", 
+												"analyzer" : "english",
+												"store" : "yes",
+												"term_vector": "with_positions_offsets"
                                             }
                                         }
-                                    }, 
+                                    },
+									"$title-first": {
+                                        "type": "string"
+                                    },
+									"$title-nerd": {
+										"dynamic": "false", 
+										"properties": {
+		                                    "xml:id": {
+												"index": "not_analyzed", 
+		                                        "type": "string"
+		                                    }, 
+											"nerd": {
+												"dynamic": "false", 
+												"properties": {
+													"entities": {
+														"dynamic": "false", 
+														"properties": {
+															"rawName": {
+                                        						"type": "string"
+                                    						},
+															"offsetStart": {
+                                        						"type": "integer"
+                                    						},
+															"offsetEnd": {
+                                        						"type": "integer"
+                                    						},
+															"nerd_score": {
+																"index": "not_analyzed", 
+                                        						"type": "string"
+                                    						},
+															"wikipediaExternalRef": {
+																"index": "not_analyzed", 
+                                        						"type": "string"
+                                    						},
+															"freeBaseExternalRef": {
+																"index": "not_analyzed", 
+                                        						"type": "string"
+                                    						},
+															"definitions": {
+																"dynamic": "false", 
+																"properties": {
+																	"$definition": {
+																		"type": "string"
+																	},
+																	"$source": {
+																		"index": "not_analyzed", 
+																		"type": "string"
+																	},
+																	"lang": {
+																		"index": "not_analyzed", 
+																		"type": "string"
+																	}
+																}
+															},
+															"domains": {
+																"index": "not_analyzed", 
+																"type": "string"
+															}
+														}
+													}
+												}
+											}
+										}
+                                    },
                                     "role": {
+										"index": "not_analyzed", 
                                         "type": "string"
                                     }, 
                                     "xml:id": {
+										"index": "not_analyzed", 
                                         "type": "string"
                                     }, 
                                     "xml:lang": {
+										"index": "not_analyzed", 
                                         "type": "string"
                                     }
                                 }
@@ -520,32 +642,49 @@
                             "$back": {
                                 "properties": {
                                     "$div": {
+										"dynamic": "false", 
                                         "properties": {
                                             "$figure": {
+												"dynamic": "false", 
                                                 "properties": {
                                                     "$figDesc": {
                                                         "properties": {
                                                             "$lang_en": {
-                                                                "type": "string"
+                                                                "type": "string",
+																"index" : "analyzed", 
+																"analyzer" : "english",
+																"store" : "yes",
+																"term_vector": "with_positions_offsets"
                                                             }
                                                         }
                                                     }, 
                                                     "$head": {
+														"dynamic": "false", 
                                                         "properties": {
                                                             "$lang_en": {
-                                                                "type": "string"
+                                                                "type": "string",
+																"index" : "analyzed", 
+																"analyzer" : "english",
+																"store" : "yes",
+																"term_vector": "with_positions_offsets"
                                                             }
                                                         }
                                                     }, 
                                                     "xml:id": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }
                                                 }
                                             }, 
                                             "$head": {
+												"dynamic": "false", 
                                                 "properties": {
                                                     "$lang_en": {
-                                                        "type": "string"
+                                                        "type": "string",
+														"index" : "analyzed", 
+														"analyzer" : "english",
+														"store" : "yes",
+														"term_vector": "with_positions_offsets"
                                                     }
                                                 }
                                             }, 
@@ -560,6 +699,7 @@
                                                                             "$persName": {
                                                                                 "properties": {
                                                                                     "$forename": {
+																						"index": "not_analyzed", 
                                                                                         "type": "string"
                                                                                     }, 
                                                                                     "$fullName": {
@@ -567,9 +707,11 @@
 		                                                                                "type": "string"
                                                                                     }, 
                                                                                     "$surname": {
+																						"index": "not_analyzed", 
                                                                                         "type": "string"
                                                                                     }, 
                                                                                     "type": {
+																						"index": "not_analyzed", 
                                                                                         "type": "string"
                                                                                     }
                                                                                 }
@@ -579,10 +721,17 @@
                                                                     "$title": {
                                                                         "properties": {
                                                                             "$lang_en": {
-                                                                                "type": "string"
+                                                                                "type": "string",
+																				"index" : "analyzed", 
+																				"analyzer" : "english",
+																				"store" : "yes",
+																				"term_vector": "with_positions_offsets"
                                                                             }
                                                                         }
                                                                     }, 
+																	"$title-first": {
+				                                                        "type": "string"
+				                                                    },
                                                                     "id": {
                                                                         "type": "string"
                                                                     }, 
@@ -605,6 +754,7 @@
 		                                                                                "type": "string"
                                                                                     }, 
                                                                                     "$surname": {
+																						"index": "not_analyzed", 
                                                                                         "type": "string"
                                                                                     }
                                                                                 }
@@ -632,18 +782,24 @@
                                                                                 "type": "string"
                                                                             }, 
                                                                             "when": {
-                                                                                "format": "dateOptionalTime", 
-                                                                                "type": "date"
+                                                                                "type": "string"
                                                                             }
                                                                         }
                                                                     }, 
                                                                     "$title": {
                                                                         "properties": {
                                                                             "$lang_en": {
-                                                                                "type": "string"
+                                                                                "type": "string",
+																				"index" : "analyzed", 
+																				"analyzer" : "english",
+																				"store" : "yes",
+																				"term_vector": "with_positions_offsets"
                                                                             }
                                                                         }
                                                                     }, 
+																	"$title-first": {
+				                                                        "type": "string"
+				                                                    },
                                                                     "id": {
                                                                         "type": "string"
                                                                     }, 
@@ -661,24 +817,33 @@
                                                         }
                                                     }, 
                                                     "xml:id": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }
                                                 }
                                             }, 
                                             "$p": {
+												"dynamic": "false", 
                                                 "properties": {
                                                     "$lang_en": {
-                                                        "type": "string"
+                                                        "type": "string",
+														"index" : "analyzed", 
+														"analyzer" : "english",
+														"store" : "yes",
+														"term_vector": "with_positions_offsets"
                                                     }
                                                 }
                                             }, 
                                             "id": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "n": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "xml:id": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }
                                         }
@@ -689,67 +854,92 @@
                                 }
                             }, 
                             "$body": {
+								"dynamic": "false", 
                                 "properties": {
                                     "$figure": {
+										"dynamic": "false", 
                                         "properties": {
                                             "$head": {
+												"dynamic": "false", 
                                                 "properties": {
                                                     "$lang_en": {
-                                                        "type": "string"
+                                                        "type": "string",
+														"index" : "analyzed", 
+														"analyzer" : "english",
+														"store" : "yes",
+														"term_vector": "with_positions_offsets"
                                                     }
                                                 }
                                             }, 
                                             "$table": {
                                                 "type": "string"
                                             }, 
-                                            "$trash": {
-                                                "type": "string"
-                                            }, 
                                             "xml:id": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }
                                         }
                                     }, 
-                                    "$formula": {
-                                        "type": "string"
-                                    }, 
                                     "$head": {
+										"dynamic": "false", 
                                         "properties": {
                                             "$lang_en": {
-                                                "type": "string"
+                                                "type": "string",
+												"index" : "analyzed", 
+												"analyzer" : "english",
+												"store" : "yes",
+												"term_vector": "with_positions_offsets"
                                             }
                                         }
                                     }, 
                                     "$p": {
+										"dynamic": "false", 
                                         "properties": {
                                             "$lang_en": {
-                                                "type": "string"
+                                                "type": "string",
+												"index" : "analyzed", 
+												"analyzer" : "english",
+												"store" : "yes",
+												"term_vector": "with_positions_offsets"
                                             }
                                         }
                                     }, 
                                     "id": {
+										"index": "not_analyzed", 
                                         "type": "string"
                                     }, 
                                     "xml:id": {
+										"index": "not_analyzed", 
                                         "type": "string"
                                     }
                                 }
                             }, 
                             "$front": {
+								"dynamic": "false", 
                                 "properties": {
                                     "$div": {
                                         "properties": {
                                             "$head": {
+												"dynamic": "false", 
                                                 "properties": {
                                                     "$lang_en": {
-                                                        "type": "string"
+                                                        "type": "string",
+														"index" : "analyzed", 
+														"analyzer" : "english",
+														"store" : "yes",
+														"term_vector": "with_positions_offsets"
                                                     }
                                                 }
                                             }, 
                                             "$p": {
+												"dynamic": "false", 
                                                 "properties": {
                                                     "$lang_en": {
-                                                        "type": "string"
+                                                        "type": "string",
+														"index" : "analyzed", 
+														"analyzer" : "english",
+														"store" : "yes",
+														"term_vector": "with_positions_offsets"
                                                     }
                                                 }
                                             }, 
@@ -766,17 +956,27 @@
                         }
                     }, 
                     "xml:lang": {
+						"index": "not_analyzed", 
                         "type": "string"
                     }
                 }
             }, 
             "xmlns": {
+                "include_in_all": false, 
+                "index": "no", 
+                "store": "yes", 
                 "type": "string"
             }, 
             "xmlns:mml": {
+                "include_in_all": false, 
+                "index": "no", 
+                "store": "yes", 
                 "type": "string"
             }, 
             "xmlns:xlink": {
+                "include_in_all": false, 
+                "index": "no", 
+                "store": "yes", 
                 "type": "string"
             }
         }

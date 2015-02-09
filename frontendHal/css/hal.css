@@ -5,16 +5,16 @@
   	*/
 
 .label {
-    padding: 1px 3px 2px;
-    font-size: 10px;
-    font-weight: bold;
-    color: #ffffff;
-    text-transform: uppercase;
-    white-space: nowrap;
-    background-color: #bfbfbf;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+  padding: 1px 3px 2px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background-color: #87A1A8;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 .label.location {
     background-color: #398739;
@@ -44,13 +44,65 @@
     background-color: #87A1A8;
 }
 
+
+.label.biology {
+    background-color: #398739;
+}
+.label.chemistry {
+    background-color: #c43c35;
+}
+.label.food {
+    background-color: #398739;
+}
+.label.medicine {
+    background-color: #f89406;
+}
+.label.anatomy {
+    background-color: #f89406;
+}
+.label.engineering {
+    background-color: #01A9DB;
+}
+.label.animals {
+    background-color: #8904B1;
+}
+.label.plants {
+    background-color: #c43c35;
+}
+.label.earth {
+    background-color: #c43c35;
+}
+.label.mathematics {
+    background-color: #c43c35;
+}
+.label.physics {
+    background-color: #87A1A8;
+}
+.label.architecture {
+    background-color: #A901DB;
+}
+.label.astronautics {
+    background-color: #87A1A8;
+}
+.label.telecommunication {
+    background-color: #5C460C;
+}
+.label.computer_science {
+    background-color: #04B4AE;
+}
+.label.environment {
+    background-color: #31B404;
+}
+
+
+
 html, body {
   background-color: #2E2E2E;
   color:#A4A4A4; 
   word-break:normal;
 }
 body {
-  padding-top: 20px; /* 40px to make the container go all the way to the bottom of the topbar */
+  padding-top: 0px; /* 40px to make the container go all the way to the bottom of the topbar */
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#A4A4A4; 
 }
@@ -146,7 +198,7 @@ pre, pre.prettyprint {
 
 a:focus{outline:thin dotted #BC0E0E;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px;}
 a:hover,a:active{outline:0;color:#BC0E0E;}
-a{color:#848484;text-decoration:none;}                
+a{color:#767676;text-decoration:none;}                
 a:hover{color:#BC0E0E;text-decoration:underline;}
 
 h3{ color:#70695C; }
@@ -357,6 +409,58 @@ span {word-break:normal;}
 .popover-title {
     background-color: #585858; color: white;
 }
+
+
+/* DOMAINS */
+.info-sense-box.biology {
+    background-color: #398739;
+}
+.info-sense-box.chemistry {
+    background-color: #c43c35;
+}
+.info-sense-box.food {
+    background-color: #398739;
+}
+.info-sense-box.medicine {
+    background-color: #f89406;
+}
+.info-sense-box.anatomy {
+    background-color: #f89406;
+}
+.info-sense-box.engineering {
+    background-color: #01A9DB;
+}
+.info-sense-box.animals {
+    background-color: #8904B1;
+}
+.info-sense-box.plants {
+    background-color: #c43c35;
+}
+.info-sense-box.earth {
+    background-color: #c43c35;
+}
+.info-sense-box.mathematics {
+    background-color: #c43c35;
+}
+.info-sense-box.physics {
+    background-color: #87A1A8;
+}
+.info-sense-box.architecture {
+    background-color: #A901DB;
+}
+.info-sense-box.astronautics {
+    background-color: #87A1A8;
+}
+.info-sense-box.telecommunication {
+    background-color: #5C460C;
+}
+.info-sense-box.computer_science {
+    background-color: #04B4AE;
+}
+.info-sense-box.environment {
+    background-color: #31B404;
+}
+
 
 /* red: #BC0E0E */
 /* orange #FFAA00 */

@@ -8,12 +8,12 @@
 
   <script type="text/javascript" src="lib/jquery/1.7.1/jquery-1.7.1.min.js"></script>
 
-  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
   <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>  
 
   <script type="text/javascript" src="lib/linkify/1.0/jquery.linkify-1.0-min.js"></script>  
   
-  <link rel="stylesheet" href="lib/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css">
+  <link rel="stylesheet" href="lib/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css"/>
   <script type="text/javascript" src="lib/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.min.js"></script>
 
   <script type="text/javascript" src="json/json2.js"></script>
@@ -25,7 +25,7 @@
   <script src="lib/CryptoJS/components/enc-utf16-min.js"></script>
   <script src="lib/CryptoJS/components/enc-base64.js"></script>
 
-  <link rel="stylesheet" href="css/hal.css">
+  <link rel="stylesheet" href="css/hal.css"/>
 
   <script type="text/javascript" src="hal.facetview.js"></script>
 
@@ -34,11 +34,11 @@
   <script type="text/javascript" src="lib/protovis/protovis-r3.2.js"></script>
   <script type="text/javascript" src="lib/Porter-Stemmer/stemmer.js"></script>
 
-  <!--script type="text/x-mathjax-config">
+  <script type="text/x-mathjax-config">
 	MathJax.Hub.Config({
   		tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
 	});
-  </script-->
+  </script>
   <script type="text/javascript" src="lib/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   <script type="text/javascript">
@@ -47,6 +47,7 @@
   	collection: 'npl',
   	subcollection: 'hal',
       search_url: 'http://localhost:9200/hal/_search?',
+	  search_url_annotations: 'http://localhost:9200/hal_annots/_search?',
       search_index: 'elasticsearch',
   	snippet_style: 'andlauer',
   	//service: "proxy", // access to service can be local or proxy, depending on security requirements
@@ -54,14 +55,17 @@
   	//proxy_host: "http://pl50918z:8080/proxy/",
   	//proxy_host: "http://localhost:8080/proxy/",	
   	freetext_submit_delay: "200", // in ms
+	display_images: true, 
 	facets: [
   		{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date', 'display': 'publication_date', 'type':'date', 'view':'graphic'},
-  		//{'field': '$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_hal.$list.$item.$term', 'display': 'subject-headers', 'size':20, 'type':'taxonomy', 'view':'graphic'},
-		{'field': '$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_hal.$list.$item.$term', 'display': 'subject-headers', 'size':20},
-  		{'field': '$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$list.$item.$term', 'display': 'keywords', 'size':10},
-  		//{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$address.key', 'display': 'country', 'size':6, 'type':'country', 'view':'graphic'},
+		{'field': '$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halDomain_abbrev', 'display': 'subject-headers', 'size':20, 'type':'taxonomy', 'view':'graphic'},
+  		{'field': '$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term', 'display': 'keywords', 'size':10, 'type':'entity', 'view':'textual'},
+  		{'field': 
+		 	'$TEI.$teiHeader.$profileDesc.$langUsage.$language', 'display': 'language', 'size':6, 'type':'country', 'view':'graphic'},
+  		{'field': 
+		 	'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$org.$desc.$address.key', 'display': 'country', 'size':6, 'type':'country', 'view':'graphic'},
   		//{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$orgName', 'display': 'Organisation', 'size':6, 'type':'entity', 'view':'textual'},
-  		{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName', 'display': 'Author', 'size':10}
+  		{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName', 'display': 'Author', 'size':10, 'type':'entity', 'view':'graphic'}
       ],
       paging: {
   	  from: 0,
@@ -87,8 +91,8 @@
 <body>
 
 <div class="container"> 
-  <div class="content">
-    <div class="page-header">
+  <div class="content" style="margin-right:0px; padding-right:0px; margin-right: -20px;">
+    <div class="page-header" style="margin-right:0px;">
 		<h1><span style="color:#BC0E0E;"><img src="data/images/logo_INRIA_fr.png" />&nbsp;&nbsp;<img src="data/images/hal.logo.png" /> <span style="padding-left:40px;color:#AE0C0C;"> 
 			<!--small> test front-end for ElasticSearch</small-->  <small><span style="position:relative; float:right;"><a href="index.html?mode_query=simple">simple</a> - <a href="index.html?mode_query=complex">complex</a> - <a href="index.html?mode_query=nl">NL</a></span></small>
       </h1>
@@ -100,8 +104,7 @@
   </div>
 
   <footer>
-  <p>&copy; 	<a
-	    href="http://www.inria.fr">Inria</a> - 2015 </p>
+  <p>&copy; 	<a href="http://www.inria.fr">Inria</a> - 2015 </p>
   </footer>
 </div>
 </body>

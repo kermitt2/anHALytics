@@ -1,6 +1,6 @@
-package fr.inria.hal;
+package fr.inria.hal.indexing;
 
-import fr.inria.hal.utilities.IndexingPreprocess;
+import fr.inria.hal.indexing.utilities.IndexingPreprocess;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,7 +22,8 @@ public class TestIndexingPreprocessing {
 
 	//@Test
     public void testIndexingPreprocessing() throws Exception {
-		IndexingPreprocess indexingPreprocess = new IndexingPreprocess();
+		MongoManager mm = new MongoManager();
+		IndexingPreprocess indexingPreprocess = new IndexingPreprocess(mm);
 		
         String jsonInput = "{\"$textClass\":[{\"scheme\":\"ipcr\",\"$classCode\":[{\"$idno\":[\"C01B   3/30        20060101A I20051008RMEP\"],";
 		jsonInput += "\"type\":\"text\"}],\"rend\":\"1\"},{\"scheme\":\"ipc\",\"$classCode\":[" +
@@ -63,11 +64,13 @@ public class TestIndexingPreprocessing {
 		jsonOutput = indexingPreprocess.process(jsonInput);
 		System.out.println("out: " + jsonOutput+ "\n");
 		
+		mm.close();
     }
 
 	//@Test
     public void testAuthorExpansion() throws Exception {
-		IndexingPreprocess indexingPreprocess = new IndexingPreprocess();
+		MongoManager mm = new MongoManager();
+		IndexingPreprocess indexingPreprocess = new IndexingPreprocess(mm);
 		
 		String jsonInput = "{\"$author\":[{\"$persName\":[{\"$forename\":[\"Jerome\"],\"type\":\"first\"},"+
 		                   "{\"$surname\":[\"Le Noir\"]}]},{\"$affiliation\":[{\"$orgName\":[\"THALES\"],"+
@@ -76,17 +79,22 @@ public class TestIndexingPreprocessing {
 		System.out.println("\nin:  " + jsonInput);
 		String jsonOutput = indexingPreprocess.process(jsonInput);;
 		System.out.println("out: " + jsonOutput);
+		
+		mm.close();
 	}
 	
 	//@Test
     public void testDefaultKeywordsExpansion() throws Exception {
-		IndexingPreprocess indexingPreprocess = new IndexingPreprocess();
+		MongoManager mm = new MongoManager();
+		IndexingPreprocess indexingPreprocess = new IndexingPreprocess(mm);
 	
 		String jsonInput = "{\"$profileDesc\":[{\"$keywords\":[\"bla\"]}]}";
 		System.out.println("\nin:  " + jsonInput);
 		String jsonOutput = indexingPreprocess.process(jsonInput);;
 		System.out.println("out: " + jsonOutput);
 		System.out.print("\n");
+		
+		mm.close();
 	}
 	
 }

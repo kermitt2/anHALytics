@@ -108,6 +108,9 @@ jQuery.extend({
 		//var fillDefaultColor = '#FF9900';
 		var fillDefaultColorLight = '#FE9A2E';
 		
+		// this is a google key for freebase image service
+		var api_key = "AIzaSyBLNMpXpWZxcR9rbjjFQHn_ULbU-w1EZ5U";
+		
         // ===============================================
         // functions to do with filters
         // ===============================================
@@ -793,7 +796,14 @@ jQuery.extend({
 				var item2 = item.replace(/\s/g,'');
 				var count = records[item];
 				sum += count;
-				datas.push( { 'term' : item2, 'count' : records[item], 'source' : item, 'relCount' : 0} );
+				// first level
+				var ind = item2.indexOf(".");
+				if (ind != -1) {
+					
+				}
+				else {	 
+					datas.push( { 'term' : item2, 'count' : records[item], 'source' : item, 'relCount' : 0} );
+				}
 				numb++;
 			}
 
@@ -811,15 +821,22 @@ jQuery.extend({
 	
 			var json = [];
 			for(var item in entries) {
-				var ind = entries[item]['term'].indexOf(":");
+				var symbol = entries[item]['term'];
+				//var ind = symbol.indexOf(":");
+				var ind = symbol.indexOf(".");
 				if (ind == -1) {
 					//first level category
-					json.push( { 'name' : entries[item]['term'], 'colour' : fill(entries[item]['relCount']) } );
+					json.push( { 'name' : symbol, 'colour' : fill(entries[item]['relCount']) } );
 				}
+				/*else {
+					//first level category
+					json.push( { 'name' : symbol.substring(0, ind), 'colour' : fill(entries[item]['relCount']) } );
+				}*/
 			}
 			
 			for(var item in entries) {
-				var ind = entries[item]['term'].indexOf(":");
+				//var ind = entries[item]['term'].indexOf(":");
+				var ind = entries[item]['term'].indexOf(".");
 				if (ind != -1) {			
 					var symbol = entries[item]['term'];
 					var motherCategory = symbol.substring(0, ind);	
@@ -831,7 +848,8 @@ jQuery.extend({
 								children = json[item2]['children']
 							}
 							var newSymbol = symbol.substring(ind+1,symbol.length);
-							var ind2 = newSymbol.indexOf(":");
+							//var ind2 = newSymbol.indexOf(":");
+							var ind2 = newSymbol.indexOf(".");
 							if (ind2 == -1) {
 								children.push( { 'name' : newSymbol, 
 											 'colour' : fill(entries[item]['relCount']) } );
@@ -844,14 +862,16 @@ jQuery.extend({
 			}		
 			
 			for(var item in entries) {
-				var ind = entries[item]['term'].indexOf(":");
+				//var ind = entries[item]['term'].indexOf(":");
+				var ind = entries[item]['term'].indexOf(".");
 				if (ind != -1) {			
 					var symbol = entries[item]['term'];
 					var motherCategory = symbol.substring(0, ind);	
 					for(item2 in json) {
 						if (json[item2]['name'] == motherCategory) {
 							var newSymbol = symbol.substring(ind+1,symbol.length);
-							var ind2 = newSymbol.indexOf(":");
+							//var ind2 = newSymbol.indexOf(":");
+							var ind2 = newSymbol.indexOf(".");
 							if (ind2 != -1) {
 								var motherCategory2 = newSymbol.substring(0, ind2);
 								for(item3 in json[item2]['children']) {
@@ -918,9 +938,11 @@ jQuery.extend({
 					// we need to reconstitute the complete field name
 					var theName = d.name;
 					if (d.parent && d.parent.name) {
-						theName = d.parent.name + ":" + theName;
+						//theName = d.parent.name + ":" + theName;
+						theName = d.parent.name + "." + theName;
 						if (d.parent.parent && d.parent.parent.name) {
-							theName = d.parent.parent.name + ":" + theName;
+							//theName = d.parent.parent.name + ":" + theName;
+							theName = d.parent.parent.name + "." + theName;
 						}
 					}
 					
@@ -1877,6 +1899,8 @@ jQuery.extend({
 			
 			var title;	
 			var titles = null;
+			var titleID = null;
+			var titleIDs = null;
 			var titleAnnotated = null; 
 			if (options['collection'] == 'patent') 
 				titles = jsonObject['$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_en'];
@@ -1887,7 +1911,9 @@ jQuery.extend({
 				}
 			}
 			else {
-				titles = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_en'];			
+				//titles = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_en'];	
+				titles = jsonObject['$TEI.$teiHeader.$titleStmt.$title.$title-first'];		
+				titleIDs =  jsonObject['$TEI.$teiHeader.$titleStmt.xml:id'];
 			}
 			if (typeof titles == 'string') {
 				title = titles;
@@ -1897,6 +1923,17 @@ jQuery.extend({
 					title = titles[0];
 					while ((typeof title != 'string') && (typeof title != 'undefined')) {
 						title = title[0];
+					}
+				}
+			}
+			if (typeof titleIDs == 'string') {
+				titleID = titleIDs;
+			}	
+			else {
+				if (titleIDs) {
+					titleID = titleIDs[0];
+					while ((typeof title != 'string') && (typeof title != 'undefined')) {
+						titleID = titleID[0];
 					}
 				}
 			}
@@ -1927,6 +1964,26 @@ console.log(label);
 				}
 				
 				result += '<strong><span style="font-size:13px">' + string + '<span></strong>';
+			}
+			
+			if (!title || (title.length==0)) {
+				if (options['collection'] == 'patent') {
+					titles = jsonObject['$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_en'];
+				}
+				else {
+					titles = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_en'];
+				}
+				if (typeof titles == 'string') {
+					title = titles;
+				}	
+				else {
+					if (titles) {
+						title = titles[0];
+						while ((typeof title != 'string') && (typeof title != 'undefined')) {
+							title = title[0];
+						}
+					}
+				}
 			}
 			
 			if (!title || (title.length==0)) {
@@ -1976,8 +2033,11 @@ console.log(label);
 						docid = docid.replace('.fulltext', '');
 					}
 					result += '<span style="color:grey">' + docid 
-								+ ' - </span> <strong><span style="font-size:13px"> ' + title 
-								+ '<span></strong>';
+								+ ' - </span> <strong><span ' 
+					if (titleID) {
+						result += ' id="titleNaked" pos="'+index+'" rel="'+titleID+'" ';
+					}
+					result += ' style="font-size:13px"> ' + title + '<span></strong>';
 				}
 				else {
 					result += '<strong><span style="font-size:13px">' + title + '<span></strong>';
@@ -2090,7 +2150,22 @@ console.log(label);
 						result += authorsFirst[0][0] + ". "; 
 					}
 					result += authorsLast[0] + ' et al.';
-				}		 
+				}
+				/*var authors = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName'];
+				if (authors.length < 4) {
+					for (var author in authors) {
+						if (author == 0) {
+							result += authors[0] ;
+						}
+						else {
+							result += ", ";
+							result += authors[author] ;
+						}
+					}
+				}
+				else {
+					result += authors[0] + ' et al.';
+				}*/
 			}
 			
 			// book, proceedings or journal title
@@ -2109,8 +2184,8 @@ console.log(label);
 			else if (options['collection'] == 'npl') {	
 				var titleBook = null;	
 				var titlesBook = null;
-				if (options['collection'] == 'npl') {
-					titlesBook = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title'];
+				//if (options['collection'] == 'npl') {
+					titlesBook = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$title'];
 					var titleBookTmp = null;
 					if (typeof titlesBook == 'string') {
 						titleBook = titlesBook;
@@ -2135,7 +2210,7 @@ console.log(label);
 							
 						}
 					}
-				}
+					//}
 				if (titleBook && (titleBook.length > 1)) {
 					//result += '<strong><span style="font-size:13px">' + title.substring(1,title.length -1) + '<span></strong>' + '<br />';
 					result += ' - <em>' + titleBook + '</em>';
@@ -2484,12 +2559,12 @@ console.log(label);
 					}
 				}
 				else {
-            	    var recstr = JSON.stringify(record)
-	                var regex = /(http:\/\/\S+?\.(jpg|png|gif|jpeg))/
-	                var img = regex.exec(recstr);
-	                if (img) {
-	                    result += '<div class="span2"><img class="thumbnail" style="float:right; width:100px; '
-							   +'margin:0 5px 10px 0; max-height:150px;" src="' + img[0] + '" /></div>'
+					var ind = family.indexOf("-");
+					if ( (ind != -1) && (family.length>ind) ) {
+						var pubNum = family.substring(ind+1,family.length);
+	                    result += '<div class="span2"><a href="https://hal.archives-ouvertes.fr/'+ family + 
+						'/document" target="_blank"><img class="thumbnail" style="float:right; " src="' + 
+						'https://thumb.ccsd.cnrs.fr/' + pubNum + '/small' + '" /></a></div>';
 	                }
 					else {
 						result += '<div class="span2" />';
@@ -2503,7 +2578,7 @@ console.log(label);
 			result += '<div class="row-fluid"><div id="abstract_'+index+
 				'" class="collapse">';  //#f8f8f8
 			if (index % 2) {
-				result += '<div class="mini-layout fluid" style="background-color:#f8f8f8;">';
+				result += '<div class="mini-layout fluid" style="background-color:#f8f8f8; padding-right:0px;">';
 			}
 			else {
 				result += '<div class="mini-layout fluid" style="background-color:#ffffff;">';
@@ -2585,7 +2660,7 @@ console.log(label);
 			else  {
 				// we need to retrieve the extra biblio and abstract for this biblo item
 				result += 
-					'<div id="innen_abstract" pos="'+index+'" rel="'+family+'">';
+					'<div class="row-fluid" id="innen_abstract" pos="'+index+'" rel="'+family+'">';
 					//'"><div style="background:url(data/images/bar-loader.gif) '+
 					//'no-repeat center center; height:13px; "/></div>';
 				result += '</div>';
@@ -2719,31 +2794,46 @@ console.log(label);
 			//we load now in background the additional record information requiring a user interaction for
 			// visualisation - this is not require for summon
 			if ( options.search_index != "summon" ) {	
+				$('#titleNaked',obj).each(function() {
+					if ( options.collection == "npl" ) {
+						// annotations for the title
+						var index = $(this).attr('pos');
+						var titleID = $(this).attr('rel');
+						var localQuery = { "query": { "filtered": { "query": { "term": { "_id": titleID } } } } };
+
+						$.ajax({
+		                	type: "get",
+							url: options.search_url_annotations, 
+							contentType: 'application/json',
+							dataType: 'jsonp',
+							data: {source : JSON.stringify(localQuery) }, 
+						    success: function(data) { displayAnnotations(data, index, titleID, 'title'); } 
+						} );
+					}
+				});
+				
 				$('#innen_abstract',obj).each(function() {
 	                // load biblio and abstract info. 
 					// pos attribute gives the result index, rel attribute gives the document ID 
 					var index = $(this).attr('pos');
-					var docID = $(this).attr('rel');			
+					var docID = $(this).attr('rel');
 					var localQuery;
 					
-					if ( options.collection == "npl" ) {	
-						
-						localQuery = { "fields": [ "$TEI.$teiHeader.$profileDesc.$abstract.$lang_en", 
+					if ( options.collection == "npl" ) {				
+
+						// abstract and further informations
+						localQuery = { "fields": [ "$TEI.$teiHeader.$profileDesc.xml:id",
+												   "$TEI.$teiHeader.$profileDesc.$abstract.$lang_en", 
 												   "$TEI.$teiHeader.$profileDesc.$abstract.$lang_fr", 
 												   "$TEI.$teiHeader.$profileDesc.$abstract.$lang_de", 
-										           "$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.*", 
-												   "$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$idno.$type_doi",
-"$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname",
-"$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persNameforename",		
+"$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$title.$title-first",
+"$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$idno.$type_doi",
+"$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName",		
 "$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.*",
-"$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$list.$item.$term"
+"$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term"
 												   ],
 									   "query": { "filtered": { "query": { "term": { "_id": docID } } } } };
 
-						/*$.post(options.search_url, 
-							   {source : JSON.stringify(localQuery) }, 
-							   function(data) { displayAbstract(data, index); }, 
-							   "jsonp");*/
 						$.ajax({
 		                	type: "get",
 							url: options.search_url, 
@@ -2772,36 +2862,7 @@ console.log(label);
 							dataType: 'jsonp',
 							data: {source : JSON.stringify(localQuery) }, 
 							success: function(data) { displayAbstract(data, index); } 
-						} );	
-							
-					}
-					else if ( options.collection == "cendari" ) {	
-						localQuery = { "fields": [ "Abstract", 
-												   "Copyright", 
-												   "SubjectTerms", 
-												   "SourceType", 
-										           "Library",
-												   "AbstractAnnotated",
-												   "Author",
-												   "Language",
-												   "_id"
-												   ],
-									   "query": { "filtered": { "query": { "term": { "_id": docID } } } } };
-
-						/*$.post(options.search_url, 
-							   {source : JSON.stringify(localQuery) }, 
-							   function(data) { displayAbstract(data, index); }, 
-							   "jsonp");*/
-						$.ajax({
-		                	type: "get",
-							url: options.search_url, 
-							contentType: 'application/json',
-							dataType: 'jsonp',
-							data: {source : JSON.stringify(localQuery) }, 
-						    success: function(data) { displayAbstract(data, index); } 
-						} );
-						
-						
+						} );		
 					}
 	            });
 			}
@@ -2846,6 +2907,79 @@ console.log(label);
 			return res;
 		}
 
+		var displayAnnotations = function(data,index,id, origin) {
+			var jsonObject = null;
+			if (!data) {
+				return;
+			}
+			if (data.hits) {
+				if (data.hits.hits) {
+					jsonObject = eval(data.hits.hits[0]);
+				}
+			}
+			if (!jsonObject) {
+				return;
+			}
+			
+			// origin is title, abstract or keywords
+			if (!options.data[''+origin]) {
+				options.data[''+origin] = [];
+			}
+			options.data[''+origin][index] = jsonObject['_source']['annotation']['nerd'];
+			
+			//console.log('annotation for ' + id);
+			//console.log(jsonObject);
+
+			var text = jsonObject['_source']['annotation']['nerd']['text'];		
+			var entities = jsonObject['_source']['annotation']['nerd']['entities'];
+			var m = 0;
+			for(var m in entities) {
+				var entity = entities[entities.length - m - 1];
+				var chunk = entity.rawName;
+				var domains = entity.domains;
+				var domain = null;
+				if (domains && domains.length>0) {
+					domain = domains[0].toLowerCase();
+				}
+				var label = null;
+				if (entity.type)
+					label = NERTypeMapping(entity.type, entity.chunk);
+				else if (domain)
+					label = domain;
+				else
+					label = chunk;						
+		    	var start = parseInt(entity.offsetStart,10);
+			    var end = parseInt(entity.offsetEnd,10);
+				if (origin == "abstract") {
+					text = text.substring(0,start) +
+						'<span id="annot-abs-'+index+'-'+m+'" rel="popover" data-color="'+label+'">' +
+						'<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
+							+ text.substring(start,end) + '</span></span>' 
+							+ text.substring(end,text.length+1);
+				}
+				else {
+					text = text.substring(0,start) + 
+						'<span id="annot-'+index+'-'+m+'" rel="popover" data-color="'+label+'">' + 
+						'<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
+					+ text.substring(start,end) + '</span></span>' 
+					+ text.substring(end,text.length+1);
+				} 					
+			}
+				
+			//var result = '<strong><span style="font-size:13px">' + text + '<span></strong>';
+			$('[rel="'+id+'"]').html(text);
+		
+			// now set the popovers/view event 
+			var m = 0;
+			for(var m in entities) {
+				// set the info box
+				if (origin == "abstract") 
+					$('#annot-abs-'+index+'-'+m).bind('hover', viewEntity);	
+				else
+					$('#annot-'+index+'-'+m).bind('hover', viewEntity);	
+			} 
+		}
+		
 		var displayAbstract = function(data,index) {
 			var jsonObject = null;
 			if (!data) {
@@ -2864,57 +2998,43 @@ console.log(label);
 				var docid = jsonObject._id;
 				var piece = "";
 
-				piece += '<div class="row-fluid">';
+				//piece += '<div class="row-fluid">';
 				
-				piece += '<div class="span3">';
+				piece += '<div class="span2" style="width:13%;">';
 				if ( options.subcollection == "hal" ) {
 					piece += "<p><strong>HAL ID:</strong> " + docid + "</p>";
 				}
 
 				// authors and affiliation
-				var authors = jsonObject.fields['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author'];
-				
-				if (authors) {
-					for(var i=0; i<5; i++) {
-						if (authors.length > 0) {
-							authors = authors[0];
-						}
-						else {
-							authors = null;
-							break;
-						}
-					}
-				}
-				if (authors) {
-					for(var aut in authors) {
-						var author = authors[aut];
-						for(var aut1 in author) {
-							if (author[aut1]['$persName']) {
-								var forename = "";
-								var surname = "";
-								for(var aut2 in author[aut1]['$persName']) {									
-									if (author[aut1]['$persName'][aut2]['$forename']) {
-										forename = author[aut1]['$persName'][aut2]['$forename'];
-									}
-									if (author[aut1]['$persName'][aut2]['$surname']) {
-										surname = author[aut1]['$persName'][aut2]['$surname'];
-									}
-								}
-								piece += '<p>' + forename + ' ' + surname + '</p>';
-							}
-						}
-						
-						if (author['$affiliation']) {
-							
-						}
+				var names = jsonObject.fields['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName'];
+
+				if (names) {
+					for(var aut in names) {
+						var name_ = names[aut];
+						piece += '<p>' + name_ + '</p>';
 					}
 				}
 				
 				piece += '</div>';
 			
-				piece += '<div class="span9">'; 
+				piece += '<div class="span6" style="margin-left:10px;">'; 
 				// abstract, if any
 				var abstract = null;
+				
+				var abstractID = null;
+				var abstractIDs = jsonObject.fields['$TEI.$teiHeader.$profileDesc.xml:id'];
+				if (typeof abstractIDs == 'string') {
+					abstractID = abstractIDs;
+				}
+				else {
+					if (abstractIDs && (abstractIDs.length > 0)) {
+						abstractID = abstractIDs[0];
+						while ((typeof abstractID != 'string') && (typeof abstractID != 'undefined')) {
+							abstractID = abstractID[0];
+						}
+					}
+				}
+				
 				var abstracts = jsonObject.fields['$TEI.$teiHeader.$profileDesc.$abstract.$lang_en'];			
 				if (typeof abstracts == 'string') {
 					abstract = abstracts;
@@ -2993,50 +3113,101 @@ console.log(label);
 				}
 				*/
 				if (abstract && (abstract.length>0) && (abstract.trim().indexOf(" ") != -1)) {
-					piece += '<p><strong>Abstract: </strong> ' + abstract + '</p>';
+					piece += '<p id="abstractNaked" pos="'+index+'" rel="'+abstractID+'" ><strong>Abstract: </strong> ' + abstract + '</p>';
 				}
 				
 				// keywords
 				var keyword = null;
+				var keywordID = null;
+				var keywordIDs = 
+					jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id'];
+				if (typeof keywordIDs == 'string') {
+					keywordID = keywordIDs;
+				}
+				else {
+					if (keywordIDs && (keywordIDs.length > 0)) {
+						keywordID = keywordIDs[0];
+						while ((typeof keywordID != 'string') && (typeof keywordID != 'undefined')) {
+							keywordID = keywordID[0];
+						}
+					}
+				}
+				
 				var keywords = 
-					jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$list.$item.$term'];
+					jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term'];
 
 				if (typeof keywords == 'string') {
 					keyword = keywords;
 				}	
 				else {
-					var keyArray = accessJsonPath(keywords, 
-							'$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$list.$item.$term');
+					var keyArray = keywords;
 					if (keyArray) {
 						for(var p in keyArray) {
 							if (p == 0) {
 								keyword = keyArray[p];
 							}
-							else {	
+							else {
 								keyword += ', ' + keyArray[p];
 							}
 						}
 					}
-					
-					/*if (keywords && (keywords.length > 0)) {
-						keyword = keywords[0];
-						while ((typeof keyword != 'string') && (typeof keyword != 'undefined')) {
-							keyword = keyword[0];
-						}
-					}*/
 				}
 				
+				
 				if (keyword && (keyword.length>0) && (keyword.trim().indexOf(" ") != -1)) {
-					piece += ' <p><strong>Keywords: </strong> ' + keyword + '</p>';
+					if (keywordID)
+						piece += ' <p id="keywordsNaked"  pos="'+index+'" rel="'+keywordID+'"><strong>Keywords: </strong> ' + keyword + '</p>';
+					/*else
+						piece += ' <p id="keywordsNaked"  pos="'+index+'" rel="'+keywordID+'"><strong>Keywords: </strong> ' + keyword + '</p>';*/
 				}
 				
 				piece += '</div>';
 				
-				//piece += '</div>';
-
+				// info box for the entities
+				piece += '<div class="span4" style="margin-left:10px; width:35%;">';
+				piece += '<span id="detailed_annot-'+index+'" />';
 				piece += "</div>";
 				
-				$('#innen_abstract[rel="'+docid+'"]').append(piece);												
+				piece += "</div>";
+				//piece += '<div class="row-fluid">';
+				
+				//piece += '</div>';
+
+				//piece += "</div>";
+				
+				$('#innen_abstract[rel="'+docid+'"]').append(piece);
+				
+				$('#abstractNaked[rel="'+abstractID+'"]',obj).each(function() {
+					// annotations for the abstract
+					var index = $(this).attr('pos');
+					var titleID = $(this).attr('rel');
+					var localQuery = { "query": { "filtered": { "query": { "term": { "_id": abstractID } } } } };
+
+					$.ajax({
+	                	type: "get",
+						url: options.search_url_annotations, 
+						contentType: 'application/json',
+						dataType: 'jsonp',
+						data: {source : JSON.stringify(localQuery) }, 
+					    success: function(data) { displayAnnotations(data, index, abstractID, 'abstract'); } 
+					} );
+				});		
+				
+				$('#keywordsNaked[rel="'+keywordID+'"]',obj).each(function() {
+					// annotations for the keywords
+					var index = $(this).attr('pos');
+					var titleID = $(this).attr('rel');
+					var localQuery = { "query": { "filtered": { "query": { "term": { "_id": keywordID } } } } };
+
+					$.ajax({
+	                	type: "get",
+						url: options.search_url_annotations, 
+						contentType: 'application/json',
+						dataType: 'jsonp',
+						data: {source : JSON.stringify(localQuery) }, 
+					    success: function(data) { displayAnnotations(data, index, keywordID, 'keyword'); } 
+					} );
+				});								
     		}
 			else if ( options.collection == "patent" ) {
 				var docid = jsonObject._id;
@@ -3251,7 +3422,7 @@ console.log(label);
 				
 				$('#innen_abstract[rel="'+docid+'"]').append(piece);
 				
-				if (annotatedAbstract) {
+				/*if (annotatedAbstract) {
 					// set the popovers 
 					for(var annotatedAbstractSentence in annotatedAbstract) {
 						var abstract = annotatedAbstract[annotatedAbstractSentence]['sentence'];		
@@ -3280,7 +3451,7 @@ console.log(label);
 							$('#annot-abs-'+index+'-'+annotatedAbstractSentence+'-'+m).bind('click', viewEntity);  		 
 						} 
 					}
-				}
+				}*/
 			}
 		}
  
@@ -3289,7 +3460,7 @@ console.log(label);
 		 */
 		function viewEntity(event) {
 			event.preventDefault();
-			// currently entity can appear in the title or in the abstract
+			// currently entity can appear in the title, abstract or keywords
 			// the origin is visible in the event origin id, as well as the "coordinates" of the entity 
 			
 			var localID = $(this).attr('id');
@@ -3299,15 +3470,16 @@ console.log(label);
 			var abstractSentenceNumber = -1;
 			var entityNumber = -1;
 
+			var inAbstract = false;
 			if (localID.indexOf("-abs-") != -1) {
 				// the entity is located in the abstract
-				
+				inAbstract = true;
 				var ind1 = localID.indexOf('-');
 				ind1 = localID.indexOf('-', ind1+1);
-				var ind2 = localID.indexOf('-', ind1+1);
+				//var ind2 = localID.indexOf('-', ind1+1);
 				var ind3 = localID.lastIndexOf('-');
-				resultIndex = parseInt(localID.substring(ind1+1,ind2));
-				abstractSentenceNumber = parseInt(localID.substring(ind2+1,ind3));
+				resultIndex = parseInt(localID.substring(ind1+1,ind3));
+				//abstractSentenceNumber = parseInt(localID.substring(ind2+1,ind3));
 				entityNumber = parseInt(localID.substring(ind3+1,localID.length));
 			}
 			else {
@@ -3324,23 +3496,23 @@ console.log(label);
 			var entity = null;
 			var localSize = -1;
 
-			if (abstractSentenceNumber != -1) {
-				console.log(resultIndex + " " + abstractSentenceNumber + " " + entityNumber);
-				console.log(options.data['abstract'][resultIndex][abstractSentenceNumber]['entities']);
+			if (inAbstract) {
+				console.log(resultIndex + " " + entityNumber);
+				console.log(options.data['abstract'][resultIndex]['entities']);
 				
 				if ((options.data['abstract'][resultIndex]) 
-						&& (options.data['abstract'][resultIndex][abstractSentenceNumber]) 
-						&& (options.data['abstract'][resultIndex][abstractSentenceNumber]['entities']) 
+						&& (options.data['abstract'][resultIndex]) 
+						&& (options.data['abstract'][resultIndex]['entities']) 
 						) {
 					localSize = options.data['abstract'][resultIndex]
-								[abstractSentenceNumber]['entities'].length;		
+								['entities'].length;		
 					entity = options.data['abstract'][resultIndex]
-						[abstractSentenceNumber]['entities'][localSize-entityNumber-1]; 	
+						['entities'][localSize-entityNumber-1]; 	
 				}
 			}
 			else {
 				console.log(resultIndex + " " + " " + entityNumber);
-				console.log(options.data['title'][resultIndex]);
+				//console.log(options.data['title'][resultIndex]);
 				console.log(options.data['title'][resultIndex]['entities']);
 				
 				if ( (options.data['title']) 
@@ -3352,24 +3524,94 @@ console.log(label);
 				}
 			}
 			
+			var string = "";
 			if (entity != null) {
-				var type = NERTypeMapping(entity.type, entity.rawName);
-				var subType = entity.subtype;
-				var conf = entity.confidence;
-				var description = entity.description;
-				var wikipedia = entity.wikipedia;
-				var content = $(this).text();
-
-				var string = "<div class='info-sense-box "+type+"'><h3 style='color:#FFF;padding-left:10px;'>"+content.toUpperCase()+
-					"</h3><div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;padding:5px;margin-top:5px;'><p>Type: <b>"+
-					type+"</b></p><p>Sub-type: <b>"+subType+
-					"</b></p><p>conf: <i>"+conf+
-					"</i></p><p>"+description+"</p>";
-				if (wikipedia != null) {
-					string += '<p>Reference: <a href="http://en.wikipedia.org/wiki?curid=' + 
-						wikipedia + 
-						'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" src="data/images/wikipedia.png"/></a></p>';
+				console.log(entity);
+				var domains = entity.domains;
+				if (domains && domains.length>0) {
+					domain = domains[0].toLowerCase();
 				}
+				var type = entity.type;
+				
+				var colorLabel = null;
+				if (type)
+					colorLabel = type;
+				else if (domains && domains.length>0) {
+					colorLabel = domain;
+				}
+				else 
+					colorLabel = entity.rawName;	
+								
+		    	var start = parseInt(entity.offsetStart,10);
+			    var end = parseInt(entity.offsetEnd,10);  
+				
+				var subType = entity.subtype;
+				var conf = entity.nerd_score;
+				if (conf && conf.length > 3)
+					conf = conf.substring(0, 3);
+				var definitions = entity.definitions;
+				var wikipedia = entity.wikipediaExternalRef;
+				var freebase = entity.freeBaseExternalRef;
+				var content = entity.rawName; //$(this).text();
+			
+				var sense = null;
+				if (entity.sense)
+					sense = entity.sense.fineSense;
+				
+				string += "<div class='info-sense-box "+colorLabel+"'><h3 style='color:#FFF;padding-left:10px;'>"+content.toUpperCase()+
+					"</h3>";
+				string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
+					"<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>";
+				
+				if (type)	
+					string += "<p>Type: <b>"+type+"</b></p>";
+
+				if (sense)
+					string += "<p>Sense: <b>"+sense+"</b></p>";
+			
+				if (domains && domains.length>0) {
+					string += "<p>Domains: <b>";
+					for(var i=0; i<domains.length; i++) {
+						if (i != 0) 
+							string += ", ";
+						string += domains[i].replace("_", " ");
+					}
+					string += "</b></p>";
+				}
+
+				string += "<p>conf: <i>"+conf+ "</i></p>";
+
+				string += "</td><td style='align:right;bgcolor:#fff'>";
+
+				if (freebase != null) {
+					var urlImage = 'https://usercontent.googleapis.com/freebase/v1/image' + freebase;
+					    urlImage += '?maxwidth=150';
+					    urlImage += '&maxheight=150';
+					    urlImage += '&key=' + api_key;
+					string += '<img src="' + urlImage + '" alt="' + freebase + '"/>';
+				}		
+
+				string += "</td></tr></table>";
+
+				if ((definitions != null) && (definitions.length > 0)) {
+					string += "<p>"+definitions[0].definition+"</p>";
+				}
+				if ( (wikipedia != null) || (freebase != null) ) {
+					string += '<p>Reference: '
+					if (wikipedia != null) {
+						string += '<a href="http://en.wikipedia.org/wiki?curid=' + 
+						wikipedia + 
+						'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" src="data/images/wikipedia.png"/></a>';
+					}
+					if (freebase != null) {
+						string += '<a href="http://www.freebase.com' + 
+						freebase + 
+						'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" src="data/images/freebase_icon.png"/></a>';
+				
+					}
+					string += '</p>';
+				}
+		
 				string += "</div></div>";
 
 				$('#detailed_annot-'+resultIndex).html(string);	
@@ -3383,7 +3625,7 @@ console.log(label);
 			'$teiCorpus.$teiCorpus.$TEI.$text.$body.$div.$p.'
 		];
 		
-		var textFieldNPL = [ '$TEI.$teiHeader.$titleStmt.$title.', 
+		var textFieldNPL = [ '$TEI.$teiHeader.$titleStmt.$title.$title-first',
 			'$TEI.$text.$front.$div.$p.',
 			'$TEI.$text.$body.$head.',
 			'$TEI.$text.$body.$div.',
@@ -3398,16 +3640,23 @@ console.log(label);
 		 	'_id'
 		];
 		
-		var textFieldsNPLReturned = [ '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_en', 
+		/*var textFieldsNPLReturned = [ '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_en', 
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_fr',
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_de',
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_es',
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_it',
-//		 	'$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$when',
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date',
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname',
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$forename',
-//			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$title',
+			'$TEI.$teiHeader.$sourceDesc.target',
+		 	'_id'
+		];*/
+
+		var textFieldsNPLReturned = [ '$TEI.$teiHeader.$titleStmt.$title.$title-first', 
+			'$TEI.$teiHeader.$titleStmt.xml:id',
+			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date',
+			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname',
+			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$forename',
 			'$TEI.$teiHeader.$sourceDesc.target',
 		 	'_id'
 		];
@@ -4498,6 +4747,9 @@ console.log(label);
 						obj['order'] = options.facets[item]['order'];
 					else
 						obj['order'] = 'count';
+					// we need to remove type and view fields since ES 1.2
+					delete obj['type'];
+					delete obj['view'];
 					qs['facets'][nameFacet] = {"terms":obj};
 				}
             }
@@ -5145,7 +5397,7 @@ console.log(label);
                <div class="span3"> \
                  <div id="facetview_filters"></div> \
                </div> \
-               <div class="span9" id="facetview_rightcol" style="position:relative; left:0px;"> \
+               <div class="span9" id="facetview_rightcol" style="position:relative; left:0px; margin-left:5px; margin-right:0px; "> \
                    <div id="facetview_searchbar" style="display:inline; float:left;" class="input-prepend"> \
                    <span class="add-on"><i class="icon-search"></i></span> \
                    <input class="span4" id="facetview_freetext" name="q" value="" placeholder="search term" autofocus /> \
