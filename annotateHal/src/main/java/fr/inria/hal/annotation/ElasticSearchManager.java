@@ -235,6 +235,18 @@ public class ElasticSearchManager {
 						String annotJson = newNode.toString();
 						//System.out.println(annotJson);
 				
+						// we do not index the empty annotation results! 
+						// the nerd subdoc has no entites field
+						JsonNode nerdNode = temp.findPath("nerd");
+						JsonNode entitiesNode = null;
+						if ( (nerdNode != null) && (!nerdNode.isMissingNode()) )
+							entitiesNode = nerdNode.findPath("entities");
+				
+						if ( (entitiesNode == null) || entitiesNode.isMissingNode() ) {
+							System.out.println("Skipping " + annotJson);
+							continue;
+						}
+						
 						// index the json in ElasticSearch
 						try {
 							// beware the document type bellow and corresponding mapping!
