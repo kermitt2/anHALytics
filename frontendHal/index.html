@@ -25,8 +25,6 @@
   <script src="lib/CryptoJS/components/enc-utf16-min.js"></script>
   <script src="lib/CryptoJS/components/enc-base64.js"></script>
 
-  
-
   <script type="text/javascript" src="hal.facetview.js"></script>
 
   <script type="text/javascript" src="lib/d3/d3.v2.min.js "></script>
@@ -57,7 +55,7 @@
   	//proxy_host: "http://pl50918z:8080/proxy/",
   	proxy_host: "http://localhost:8080/proxy/",	
   	freetext_submit_delay: "200", // in ms
-	display_images: true, 
+	display_images: false, 
 	facets: [
   		{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date', 'display': 'publication_date', 'type':'date', 'view':'graphic'},
 		{'field': '$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halDomain_abbrev', 'display': 'subject-headers', 'size':20, 'type':'taxonomy', 'view':'graphic'},
@@ -66,7 +64,7 @@
 		 	'$TEI.$teiHeader.$profileDesc.$langUsage.$language', 'display': 'language', 'size':6, 'type':'country', 'view':'graphic'},
   		{'field': 
 		 	'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$org.$desc.$address.key', 'display': 'country', 'size':6, 'type':'country', 'view':'graphic'},
-  		//{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$orgName', 'display': 'Organisation', 'size':6, 'type':'entity', 'view':'textual'},
+  		{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$org.$orgName', 'display': 'Organisation', 'size':6, 'type':'entity', 'view':'textual'},
   		{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName', 'display': 'Author', 'size':10, 'type':'entity', 'view':'graphic'}
       ],
       paging: {

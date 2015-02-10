@@ -463,7 +463,7 @@ jQuery.extend({
 				var temp_intro = '<form class="well" id="scope_area"><label class="checkbox">'+  
 			    	'<input type="checkbox" name="scientific" checked>Technical content</label>'; 
 				temp_intro += '<label class="checkbox">'+  
-				   	'<input type="checkbox" name="fulltext">Full text available online</label>';
+				   	'<input type="checkbox" name="fulltext" checked>Full text available online</label>';
 				temp_intro += '<label class="checkbox">'+  
 					   '<input type="checkbox" name="scholarly">Scholarly content</label>';
 				//temp_intro += '<button type="button" class="btn" data-toggle="button">Custom scope restriction</button>';
@@ -796,17 +796,69 @@ jQuery.extend({
 				var item2 = item.replace(/\s/g,'');
 				var count = records[item];
 				sum += count;
-				// first level
+				
 				var ind = item2.indexOf(".");
 				if (ind != -1) {
-					
+					// first level
+					var item3 = item2.substring(0,ind);
+					var found3 = false;
+					for(var p in datas) {
+						if (datas[p].term == item3) {
+							datas[p]['count'] += records[item];
+							found3 = true;
+							break;
+						}
+					}
+					if(!found3) {
+						datas.push( { 'term' : item3, 'count' : records[item], 'source' : item, 'relCount' : 0} );
+					}
+					var ind2 = item3.indexOf(".");
+					if (ind2 != -1) {
+						//second level
+						var item4 = item3.substring(0,ind2);
+						var found4 = false;
+						for(var p in datas) {
+							if (datas[p].term == item4) {
+								datas[p]['count'] += records[item];
+								found4 = true;
+								break;
+							}
+						}
+						if(!found4) {
+							datas.push( { 'term' : item4, 'count' : records[item], 'source' : item, 'relCount' : 0} );
+						}
+					}
+					else {
+						var found3 = false;
+						for(var p in datas) {
+							if (datas[p].term == item3) {
+								datas[p]['count'] += records[item];
+								found3 = true;
+								break;
+							}
+						}
+						if(!found3) {
+							datas.push( { 'term' : item3, 'count' : records[item], 'source' : item, 'relCount' : 0} );
+						}
+					}
 				}
-				else {	 
-					datas.push( { 'term' : item2, 'count' : records[item], 'source' : item, 'relCount' : 0} );
+				else {
+					var found2 = false;
+					for(var p in datas) {
+						if (datas[p].term == item2) {
+							datas[p]['count'] += records[item];
+							found2 = true;
+							break;
+						}
+					}
+					if(!found2) {
+						datas.push( { 'term' : item2, 'count' : records[item], 'source' : item, 'relCount' : 0} );
+					}
 				}
 				numb++;
 			}
-
+console.log('wheel data:');			
+console.log(datas);
 			for (var item in datas) {
 				datas[item]['relCount'] = datas[item]['count'] / sum;
 			}
@@ -820,9 +872,10 @@ jQuery.extend({
 			}*/
 	
 			var json = [];
+			
+			// first level
 			for(var item in entries) {
 				var symbol = entries[item]['term'];
-				//var ind = symbol.indexOf(":");
 				var ind = symbol.indexOf(".");
 				if (ind == -1) {
 					//first level category
@@ -834,6 +887,7 @@ jQuery.extend({
 				}*/
 			}
 			
+			//second level
 			for(var item in entries) {
 				//var ind = entries[item]['term'].indexOf(":");
 				var ind = entries[item]['term'].indexOf(".");
@@ -1801,7 +1855,7 @@ jQuery.extend({
             var record = options.data['records'][index];
 			var highlight = options.data['highlights'][index];
 			var score = options.data['scores'][index];
-			var id = options.data['ids'][index];
+			
             var result = '';
 
 			var jsonObject = eval(record);
@@ -1852,6 +1906,7 @@ jQuery.extend({
 			}
 			else {
 				//result += '<td>';
+				var id = options.data['ids'][index];
 			}
 	 
 			var family = id;
@@ -2531,7 +2586,7 @@ console.log(label);
 			
 			// add image where available
             if (options.display_images) {
-				if ( (options.search_index == "summon") || (options['collection'] == 'cendari') ) {
+				if ( (options['collection'] == 'cendari') ) {
 					// with summon we can use the image service
 					var img = jsonObject['thumbnail_s'];
 					var img2 = jsonObject['thumbnail_l'];
@@ -2558,6 +2613,27 @@ console.log(label);
 					}
 					else {
 						result += '<div class="span2" />';
+					}
+				}
+				else if (options.search_index == "summon") {
+					// with summon we can use the image service
+					var img = jsonObject['thumbnail_s'];					
+					var img2 = jsonObject['thumbnail_l'];
+					var img3 = jsonObject['thumbnail_m'];
+					if (img && img2) {
+						result += '<td><img alt="bla" src="' + img[0] + '" pbsrc="' + img2[0] + 
+						'" class="PopBoxImageSmall" pbRevertText="" onclick="Pop(this,50,\'PopBoxImageLarge\');" /></td>';
+					}
+					else if (img && img3) {
+						result += '<td><img alt="bla" src="' + img[0] + '" pbsrc="' + img3[0] + 
+						'" class="PopBoxImageSmall" pbRevertText="" onclick="Pop(this,50,\'PopBoxImageLarge\');" /></td>';
+					}
+					else if (img) {
+						result += '<td><img class="thumbnail" style="float:right; max-width:100px; '
+						   	+'max-height:150px;" src="' + img[0] + '" /></td>';
+					}
+					else {
+						result += '<td></td>';
 					}
 				}
 				else {
@@ -2657,6 +2733,7 @@ console.log(label);
 					}
 				}
 				
+				result += '</div>';
 				result += '</div>';
 			}
 			else  {

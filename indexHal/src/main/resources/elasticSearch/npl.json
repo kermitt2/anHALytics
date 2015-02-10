@@ -181,23 +181,29 @@
                                     "$idno": {
                                         "properties": {
                                             "$type_halBibtex": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "$type_halId": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "$type_halRef": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "$type_halRefHtml": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "$type_halUri": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }
                                         }
                                     }, 
                                     "type": {
+										"index": "not_analyzed", 
                                         "type": "string"
                                     }
                                 }
@@ -215,6 +221,7 @@
                                         "type": "string"
                                     }, 
                                     "type": {
+										"index": "not_analyzed", 
                                         "type": "string"
                                     }
                                 }
@@ -239,17 +246,21 @@
                                                                                                 "type": "string"
                                                                                             }, 
                                                                                             "key": {
+																								"index": "not_analyzed", 
                                                                                                 "type": "string"
                                                                                             }, 
                                                                                             "tagName": {
+																								"index": "not_analyzed", 
                                                                                                 "type": "string"
                                                                                             }
                                                                                         }
                                                                                     }, 
                                                                                     "$ref": {
+																						"index": "not_analyzed", 
                                                                                         "type": "string"
                                                                                     }, 
                                                                                     "type": {
+																						"index": "not_analyzed", 
                                                                                         "type": "string"
                                                                                     }
                                                                                 }
@@ -257,41 +268,51 @@
                                                                             "$listRelation": {
                                                                                 "properties": {
                                                                                     "active": {
+																						"index": "not_analyzed", 
                                                                                         "type": "string"
                                                                                     }, 
                                                                                     "name": {
+																						"index": "not_analyzed", 
                                                                                         "type": "string"
                                                                                     }, 
                                                                                     "tagName": {
+																						"index": "not_analyzed", 
                                                                                         "type": "string"
                                                                                     }, 
                                                                                     "type": {
+																						"index": "not_analyzed", 
                                                                                         "type": "string"
                                                                                     }
                                                                                 }
                                                                             }, 
                                                                             "$orgName": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }, 
                                                                             "type": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }
                                                                         }
                                                                     }, 
                                                                     "ref": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "type": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }
                                                                 }
                                                             }, 
                                                             "$email": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }, 
                                                             "$idno": {
                                                                 "properties": {
                                                                     "$type_halAuthorId": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }
                                                                 }
@@ -351,9 +372,11 @@
                                             "$idno": {
                                                 "properties": {
                                                     "$type_doi": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }, 
                                                     "$type_pubmed": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }
                                                 }
@@ -363,9 +386,11 @@
                                                     "$idno": {
                                                         "properties": {
                                                             "$type_halJournalId": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }, 
                                                             "$type_issn": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }
                                                         }
@@ -373,6 +398,7 @@
                                                     "$imprint": {
                                                         "properties": {
                                                             "$biblScope": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }, 
                                                             "$date": {
@@ -380,12 +406,15 @@
                                                                 "type": "date"
                                                             }, 
                                                             "$publisher": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }, 
                                                             "type": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }, 
                                                             "unit": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }
                                                         }
@@ -405,9 +434,11 @@
                                                         "type": "string"
                                                     },
                                                     "level": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }, 
                                                     "type": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }, 
                                                     "xml:id": {
@@ -417,6 +448,7 @@
                                                 }
                                             }, 
                                             "type": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }
                                         }
@@ -436,20 +468,25 @@
                                                                     "$address": {
                                                                         "properties": {
                                                                             "$addrLine": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }, 
                                                                             "key": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }, 
                                                                             "tagName": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }
                                                                         }
                                                                     }, 
                                                                     "$ref": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "type": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }
                                                                 }
@@ -457,41 +494,51 @@
                                                             "$listRelation": {
                                                                 "properties": {
                                                                     "active": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "name": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "tagName": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "type": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }
                                                                 }
                                                             }, 
                                                             "$orgName": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }, 
                                                             "type": {
+																"index": "not_analyzed", 
                                                                 "type": "string"
                                                             }
                                                         }
                                                     }, 
                                                     "ref": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }, 
                                                     "type": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }
                                                 }
                                             }, 
                                             "$email": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "$idno": {
                                                 "properties": {
                                                     "$type_halauthor": {
+														"index": "not_analyzed", 
                                                         "type": "string"
                                                     }
                                                 }
@@ -517,9 +564,11 @@
                                                 }
                                             }, 
                                             "tagName": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "type": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }
                                         }
@@ -527,6 +576,7 @@
                                     "$editor": {
                                         "properties": {
                                             "$email": {
+												"index": "not_analyzed", 
                                                 "type": "string"
                                             }, 
                                             "$persName": {
@@ -733,12 +783,15 @@
 				                                                        "type": "string"
 				                                                    },
                                                                     "id": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "level": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "type": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }
                                                                 }
@@ -764,21 +817,27 @@
                                                                     "$imprint": {
                                                                         "properties": {
                                                                             "$biblScope": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }, 
                                                                             "from": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }, 
                                                                             "tagName": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }, 
                                                                             "to": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }, 
                                                                             "type": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }, 
                                                                             "unit": {
+																				"index": "not_analyzed", 
                                                                                 "type": "string"
                                                                             }, 
                                                                             "when": {
@@ -801,12 +860,15 @@
 				                                                        "type": "string"
 				                                                    },
                                                                     "id": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "level": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }, 
                                                                     "type": {
+																		"index": "not_analyzed", 
                                                                         "type": "string"
                                                                     }
                                                                 }
