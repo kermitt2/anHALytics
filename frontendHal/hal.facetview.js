@@ -812,10 +812,10 @@ jQuery.extend({
 					if(!found3) {
 						datas.push( { 'term' : item3, 'count' : records[item], 'source' : item, 'relCount' : 0} );
 					}
-					var ind2 = item3.indexOf(".");
+					var ind2 = item2.indexOf(".", ind+1);
 					if (ind2 != -1) {
 						//second level
-						var item4 = item3.substring(0,ind2);
+						var item4 = item2.substring(0,ind2);
 						var found4 = false;
 						for(var p in datas) {
 							if (datas[p].term == item4) {
@@ -827,6 +827,7 @@ jQuery.extend({
 						if(!found4) {
 							datas.push( { 'term' : item4, 'count' : records[item], 'source' : item, 'relCount' : 0} );
 						}
+						datas.push( { 'term' : item2, 'count' : records[item], 'source' : item, 'relCount' : 0} );
 					}
 					else {
 						var found3 = false;
@@ -840,6 +841,7 @@ jQuery.extend({
 						if(!found3) {
 							datas.push( { 'term' : item3, 'count' : records[item], 'source' : item, 'relCount' : 0} );
 						}
+						datas.push( { 'term' : item2, 'count' : records[item], 'source' : item, 'relCount' : 0} );
 					}
 				}
 				else {
@@ -857,8 +859,8 @@ jQuery.extend({
 				}
 				numb++;
 			}
-console.log('wheel data:');			
-console.log(datas);
+			//console.log('wheel data:');			
+			//console.log(datas);
 			for (var item in datas) {
 				datas[item]['relCount'] = datas[item]['count'] / sum;
 			}
@@ -881,10 +883,6 @@ console.log(datas);
 					//first level category
 					json.push( { 'name' : symbol, 'colour' : fill(entries[item]['relCount']) } );
 				}
-				/*else {
-					//first level category
-					json.push( { 'name' : symbol.substring(0, ind), 'colour' : fill(entries[item]['relCount']) } );
-				}*/
 			}
 			
 			//second level
@@ -899,10 +897,9 @@ console.log(datas);
 							// second level category
 							var children = [];
 							if (json[item2]['children']) {
-								children = json[item2]['children']
+								children = json[item2]['children'];
 							}
 							var newSymbol = symbol.substring(ind+1,symbol.length);
-							//var ind2 = newSymbol.indexOf(":");
 							var ind2 = newSymbol.indexOf(".");
 							if (ind2 == -1) {
 								children.push( { 'name' : newSymbol, 
@@ -915,8 +912,8 @@ console.log(datas);
 				}
 			}		
 			
+			// third and last level
 			for(var item in entries) {
-				//var ind = entries[item]['term'].indexOf(":");
 				var ind = entries[item]['term'].indexOf(".");
 				if (ind != -1) {			
 					var symbol = entries[item]['term'];
@@ -951,128 +948,128 @@ console.log(datas);
 			//console.log(json);
 			//console.log(JSON.stringify(json,null, 2));
 						
-			  var nodes = partition.nodes({children: json});
-			  var path = vis.selectAll("path")
-							.data(nodes);
-			  path.enter().append("path")
-			      .attr("id", function(d, i) { return "path-" + i; })
-			      .attr("d", arc)
-			      .attr("fill-rule", "evenodd")
-			      .style("fill", colour)
-				//.style("fill", function(d) { return fill(d.data); })
-			      .on("click", click);
+		  var nodes = partition.nodes({children: json});
+		  var path = vis.selectAll("path")
+						.data(nodes);
+		  path.enter().append("path")
+		      .attr("id", function(d, i) { return "path-" + i; })
+		      .attr("d", arc)
+		      .attr("fill-rule", "evenodd")
+		      .style("fill", colour)
+			//.style("fill", function(d) { return fill(d.data); })
+		      .on("click", click);
 
-			  var text = vis.selectAll("text").data(nodes);
-			  var textEnter = text.enter().append("text")
-			      .style("fill-opacity", 1)
-			      .style("fill", function(d) {
-			        return brightness(d3.rgb(colour(d))) < 125 ? "#eee" : "#000";
-			      })
-			      .attr("text-anchor", function(d) {
-			        return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
-			      })
-			      .attr("dy", ".2em")
-			      .attr("transform", function(d) {
-			        var multiline = (d.name || "").split(" ").length > 1,
-			            angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
-			            rotate = angle + (multiline ? -.5 : 0);
-			        return "rotate(" + rotate + ")translate(" + (y(d.y) + p) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
-			      })
-			      .on("click", click);
-			  textEnter.append("tspan")
-			      .attr("x", 0)
-			      .text(function(d) { return d.depth ? d.name.split(" ")[0] : ""; });
-			  textEnter.append("tspan")
-			      .attr("x", 0)
-			      .attr("dy", "1em")
-			      .text(function(d) { return d.depth ? d.name.split(" ")[1] || "" : ""; });
-			
-			
-				  function click(d) {
-					// we need to reconstitute the complete field name
-					var theName = d.name;
-					if (d.parent && d.parent.name) {
-						//theName = d.parent.name + ":" + theName;
-						theName = d.parent.name + "." + theName;
-						if (d.parent.parent && d.parent.parent.name) {
-							//theName = d.parent.parent.name + ":" + theName;
-							theName = d.parent.parent.name + "." + theName;
-						}
+		  var text = vis.selectAll("text").data(nodes);
+		  var textEnter = text.enter().append("text")
+		      .style("fill-opacity", 1)
+		      .style("fill", function(d) {
+		        return brightness(d3.rgb(colour(d))) < 125 ? "#eee" : "#000";
+		      })
+		      .attr("text-anchor", function(d) {
+		        return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
+		      })
+		      .attr("dy", ".2em")
+		      .attr("transform", function(d) {
+		        var multiline = (d.name || "").split(" ").length > 1,
+		            angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
+		            rotate = angle + (multiline ? -.5 : 0);
+		        return "rotate(" + rotate + ")translate(" + (y(d.y) + p) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+		      })
+		      .on("click", click);
+		  textEnter.append("tspan")
+		      .attr("x", 0)
+		      .text(function(d) { return d.depth ? d.name.split(" ")[0] : ""; });
+		  textEnter.append("tspan")
+		      .attr("x", 0)
+		      .attr("dy", "1em")
+		      .text(function(d) { return d.depth ? d.name.split(" ")[1] || "" : ""; });
+		
+		
+			  function click(d) {
+				// we need to reconstitute the complete field name
+				var theName = d.name;
+				if (d.parent && d.parent.name) {
+					//theName = d.parent.name + ":" + theName;
+					theName = d.parent.name + "." + theName;
+					if (d.parent.parent && d.parent.parent.name) {
+						//theName = d.parent.parent.name + ":" + theName;
+						theName = d.parent.parent.name + "." + theName;
 					}
-					
-					clickGraph(facetfield, theName, theName);
-					
-				    path.transition()
-				      .duration(duration)
-				      .attrTween("d", arcTween(d));
-
-				    // Somewhat of a hack as we rely on arcTween updating the scales.
-				    text
-				      .style("visibility", function(e) {
-				        return isParentOf(d, e) ? null : d3.select(this).style("visibility");
-				      })
-				      .transition().duration(duration)
-				      .attrTween("text-anchor", function(d) {
-				        return function() {
-				          return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
-				        };
-				      })
-				      .attrTween("transform", function(d) {
-				        var multiline = (d.name || "").split(" ").length > 1;
-				        return function() {
-				          var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
-				              rotate = angle + (multiline ? -.5 : 0);
-				          return "rotate(" + rotate + ")translate(" + (y(d.y) + p) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
-				        };
-				      })
-				      .style("fill-opacity", function(e) { return isParentOf(d, e) ? 1 : 1e-6; })
-				      .each("end", function(e) {
-				        d3.select(this).style("visibility", isParentOf(d, e) ? null : "hidden");
-				      });
-				  }
-			
-				function isParentOf(p, c) {
-				  if (p === c) return true;
-				  if (p.children) {
-				    return p.children.some(function(d) {
-				      return isParentOf(d, c);
-				    });
-				  }
-				  return false;
 				}
+				
+				clickGraph(facetfield, theName, theName);
+				
+			    path.transition()
+			      .duration(duration)
+			      .attrTween("d", arcTween(d));
 
-				function colour(d) {
-				  if (d.children) {
-				    // There is a maximum of two children!
-				    var colours = d.children.map(colour),
-				        a = d3.hsl(colours[0]),
-				        b = d3.hsl(colours[1]);
-				    // L*a*b* might be better here...
-				    return d3.hsl((a.h + b.h) / 2, a.s * 1.2, a.l / 1.2);
-				  }
-				  return d.colour || "#fff";
-				}
+			    // Somewhat of a hack as we rely on arcTween updating the scales.
+			    text
+			      .style("visibility", function(e) {
+			        return isParentOf(d, e) ? null : d3.select(this).style("visibility");
+			      })
+			      .transition().duration(duration)
+			      .attrTween("text-anchor", function(d) {
+			        return function() {
+			          return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
+			        };
+			      })
+			      .attrTween("transform", function(d) {
+			        var multiline = (d.name || "").split(" ").length > 1;
+			        return function() {
+			          var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
+			              rotate = angle + (multiline ? -.5 : 0);
+			          return "rotate(" + rotate + ")translate(" + (y(d.y) + p) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+			        };
+			      })
+			      .style("fill-opacity", function(e) { return isParentOf(d, e) ? 1 : 1e-6; })
+			      .each("end", function(e) {
+			        d3.select(this).style("visibility", isParentOf(d, e) ? null : "hidden");
+			      });
+			  }
+		
+			function isParentOf(p, c) {
+			  if (p === c) return true;
+			  if (p.children) {
+			    return p.children.some(function(d) {
+			      return isParentOf(d, c);
+			    });
+			  }
+			  return false;
+			}
 
-				// Interpolate the scales!
-				function arcTween(d) {
-				  var my = maxY(d),
-				      xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
-				      yd = d3.interpolate(y.domain(), [d.y, my]),
-				      yr = d3.interpolate(y.range(), [d.y ? 20 : 0, r]);
-				  return function(d) {
-				    return function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); return arc(d); };
-				  };
-				}
+			function colour(d) {
+			  if (d.children) {
+			    // There is a maximum of two children!
+			    var colours = d.children.map(colour),
+			        a = d3.hsl(colours[0]),
+			        b = d3.hsl(colours[1]);
+			    // L*a*b* might be better here...
+			    return d3.hsl((a.h + b.h) / 2, a.s * 1.2, a.l / 1.2);
+			  }
+			  return d.colour || "#fff";
+			}
 
-				function maxY(d) {
-				  return d.children ? Math.max.apply(Math, d.children.map(maxY)) : d.y + d.dy;
-				}
+			// Interpolate the scales!
+			function arcTween(d) {
+			  var my = maxY(d),
+			      xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
+			      yd = d3.interpolate(y.domain(), [d.y, my]),
+			      yr = d3.interpolate(y.range(), [d.y ? 20 : 0, r]);
+			  return function(d) {
+			    return function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); return arc(d); };
+			  };
+			}
 
-				// http://www.w3.org/WAI/ER/WD-AERT/#color-contrast
-				function brightness(rgb) {
-				  return rgb.r * .299 + rgb.g * .587 + rgb.b * .114;
-			
-				}	
+			function maxY(d) {
+			  return d.children ? Math.max.apply(Math, d.children.map(maxY)) : d.y + d.dy;
+			}
+
+			// http://www.w3.org/WAI/ER/WD-AERT/#color-contrast
+			function brightness(rgb) {
+			  return rgb.r * .299 + rgb.g * .587 + rgb.b * .114;
+		
+			}	
 		}
 		
 		var donut = function(facetidx,facetkey,width,place) {
@@ -1861,6 +1858,7 @@ console.log(datas);
 			var jsonObject = eval(record);
 			//var jsonObject = record;
 
+//			result += '<tr><td>';
 			result += '<tr style="border-collapse:collapse;"><td>';
 
 			//result += '<table class="table" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border:none;">'+
@@ -1869,6 +1867,7 @@ console.log(datas);
 			result += '<div class="row-fluid">';
 			
 			var type = null;
+			var id = null;
 			if ( options.search_index == "summon" ) {
 				//result += '<td style="width:48px;">'
 				result += '<div class="span1">';
@@ -1906,7 +1905,7 @@ console.log(datas);
 			}
 			else {
 				//result += '<td>';
-				var id = options.data['ids'][index];
+				id = options.data['ids'][index];
 			}
 	 
 			var family = id;
@@ -2094,7 +2093,7 @@ console.log(label);
 					if (titleID) {
 						result += ' id="titleNaked" pos="'+index+'" rel="'+titleID+'" ';
 					}
-					result += ' style="font-size:13px"> ' + title + '<span></strong>';
+					result += ' style="font-size:13px; color:black;"> ' + title + '<span></strong>';
 				}
 				else {
 					result += '<strong><span style="font-size:13px">' + title + '<span></strong>';
@@ -2908,7 +2907,7 @@ console.log(label);
 "$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$title.$title-first",
 "$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$idno.$type_doi",
 "$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName",		
-"$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.*",
+'$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology',
 "$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term",
 '$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id' ],
 									   "query": { "filtered": { "query": { "term": { "_id": docID } } } } };
@@ -2986,7 +2985,7 @@ console.log(label);
 			return res;
 		}
 
-		var displayAnnotations = function(data,index,id, origin) {
+		var displayAnnotations = function(data,index,id,origin) {
 			var jsonObject = null;
 			if (!data) {
 				return;
@@ -3004,8 +3003,14 @@ console.log(label);
 			if (!options.data[''+origin]) {
 				options.data[''+origin] = [];
 			}
-			options.data[''+origin][index] = jsonObject['_source']['annotation']['nerd'];
-			
+			if (origin == 'keyword') {
+				if (!options.data[''+origin][index]) {
+					options.data[''+origin][index] = [];
+				}
+				options.data[''+origin][index][id] = jsonObject['_source']['annotation']['nerd'];
+			}
+			else
+				options.data[''+origin][index] = jsonObject['_source']['annotation']['nerd'];
 			//console.log('annotation for ' + id);
 			//console.log(jsonObject);
 
@@ -3036,6 +3041,13 @@ console.log(label);
 							+ text.substring(start,end) + '</span></span>' 
 							+ text.substring(end,text.length+1);
 				}
+				else if (origin == "keyword") {
+					text = text.substring(0,start) +
+						'<span id="annot-key-'+index+'-'+m+'-'+id+'" rel="popover" data-color="'+label+'">' +
+						'<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
+							+ text.substring(start,end) + '</span></span>' 
+							+ text.substring(end,text.length+1);
+				}
 				else {
 					text = text.substring(0,start) + 
 						'<span id="annot-'+index+'-'+m+'" rel="popover" data-color="'+label+'">' + 
@@ -3053,7 +3065,9 @@ console.log(label);
 			for(var m in entities) {
 				// set the info box
 				if (origin == "abstract") 
-					$('#annot-abs-'+index+'-'+m).bind('hover', viewEntity);	
+					$('#annot-abs-'+index+'-'+m).bind('hover', viewEntity);
+				else if (origin == "keyword") 	
+					$('#annot-key-'+index+'-'+m+'-'+id).bind('hover', viewEntity);
 				else
 					$('#annot-'+index+'-'+m).bind('hover', viewEntity);	
 			} 
@@ -3081,8 +3095,18 @@ console.log(label);
 				
 				piece += '<div class="span2" style="width:13%;">';
 				if ( options.subcollection == "hal" ) {
-					piece += '<p><strong>HAL ID:</strong> <a href="https://hal.archives-ouvertes.fr/'
-					+ docid + '" target="_blank">' + docid + '</a></p>';
+					//piece += '<p><strong>HAL ID:</strong> <a href="https://hal.archives-ouvertes.fr/'
+					piece += '<p><strong> <a href="https://hal.archives-ouvertes.fr/'
+					+ docid + '" target="_blank" style="text-decoration:underline;">' 
+					+ docid + '</a></strong></p>';
+				}
+				
+				// document type
+				
+				var type = jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology'];
+				if (type) {
+					piece += '<p><span class="label pubtype">'+type+'</span></p>';
+					//piece += '<p><strong>' + type + '</strong></p>';
 				}
 
 				// authors and affiliation
@@ -3199,10 +3223,11 @@ console.log(label);
 				
 				// keywords
 				var keyword = null;
-				var keywordID = null;
 				var keywordIDs = 
 					jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id'];
-				if (typeof keywordIDs == 'string') {
+				// we have a list of keyword IDs, each one corresponding to an independent annotation set
+						
+				/*if (typeof keywordIDs == 'string') {
 					keywordID = keywordIDs;
 				}
 				else {
@@ -3212,7 +3237,7 @@ console.log(label);
 							keywordID = keywordID[0];
 						}
 					}
-				}
+				}*/
 				
 				var keywords = 
 					jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term'];
@@ -3224,22 +3249,20 @@ console.log(label);
 					var keyArray = keywords;
 					if (keyArray) {
 						for(var p in keyArray) {
+							var keywordID = keywordIDs[p];
 							if (p == 0) {
-								keyword = keyArray[p];
+								keyword = '<span id="keywordsNaked"  pos="'+index+'" rel="'+keywordID+'">' 
+									+ keyArray[p] + '</span>';
 							}
 							else {
-								keyword += ', ' + keyArray[p];
+								keyword += ', ' + '<span id="keywordsNaked"  pos="'+index+'" rel="'+keywordID+'">'  + keyArray[p] + '</span>';
 							}
 						}
 					}
 				}
 				
-				
 				if (keyword && (keyword.length>0) && (keyword.trim().indexOf(" ") != -1)) {
-					if (keywordID)
-						piece += ' <p id="keywordsNaked"  pos="'+index+'" rel="'+keywordID+'"><strong>Keywords: </strong> ' + keyword + '</p>';
-					/*else
-						piece += ' <p id="keywordsNaked"  pos="'+index+'" rel="'+keywordID+'"><strong>Keywords: </strong> ' + keyword + '</p>';*/
+					piece += ' <p><strong>Keywords: </strong> ' + keyword + '</p>';
 				}
 				
 				piece += '</div>';
@@ -3274,21 +3297,23 @@ console.log(label);
 					} );
 				});		
 				
-				$('#keywordsNaked[rel="'+keywordID+'"]',obj).each(function() {
-					// annotations for the keywords
-					var index = $(this).attr('pos');
-					var titleID = $(this).attr('rel');
-					var localQuery = { "query": { "filtered": { "query": { "term": { "_id": keywordID } } } } };
+				for (var p in keywordIDs) {
+					$('#keywordsNaked[rel="'+keywordIDs[p]+'"]',obj).each(function() {
+						// annotations for the keywords
+						var index = $(this).attr('pos');
+						var keywordID = $(this).attr('rel');
+						var localQuery = { "query": { "filtered": { "query": { "term": { "_id": keywordID } } } } };
 
-					$.ajax({
-	                	type: "get",
-						url: options.search_url_annotations, 
-						contentType: 'application/json',
-						dataType: 'jsonp',
-						data: {source : JSON.stringify(localQuery) }, 
-					    success: function(data) { displayAnnotations(data, index, keywordID, 'keyword'); } 
-					} );
-				});								
+						$.ajax({
+		                	type: "get",
+							url: options.search_url_annotations, 
+							contentType: 'application/json',
+							dataType: 'jsonp',
+							data: {source : JSON.stringify(localQuery) }, 
+						    success: function(data) { displayAnnotations(data, index, keywordID, 'keyword'); } 
+						} );
+					});						
+				}		
     		}
 			else if ( options.collection == "patent" ) {
 				var docid = jsonObject._id;
@@ -3545,13 +3570,15 @@ console.log(label);
 			// the origin is visible in the event origin id, as well as the "coordinates" of the entity 
 			
 			var localID = $(this).attr('id');
-			console.log(localID);
+			//console.log(localID);
 
 			var resultIndex = -1;
 			var abstractSentenceNumber = -1;
 			var entityNumber = -1;
+			var idNumber = null;
 
 			var inAbstract = false;
+			var inKeyword = false;
 			if (localID.indexOf("-abs-") != -1) {
 				// the entity is located in the abstract
 				inAbstract = true;
@@ -3562,6 +3589,17 @@ console.log(label);
 				resultIndex = parseInt(localID.substring(ind1+1,ind3));
 				//abstractSentenceNumber = parseInt(localID.substring(ind2+1,ind3));
 				entityNumber = parseInt(localID.substring(ind3+1,localID.length));
+			}
+			else if (localID.indexOf("-key-") != -1) {
+				// the entity is located in the keywords
+				inKeyword = true;
+				var ind1 = localID.indexOf('-');
+				ind1 = localID.indexOf('-', ind1+1);
+				var ind2 = localID.indexOf('-', ind1+1);
+				var ind3 = localID.lastIndexOf('-');
+				resultIndex = parseInt(localID.substring(ind1+1,ind3));
+				entityNumber = parseInt(localID.substring(ind2+1,ind3));
+				idNumber = localID.substring(ind3+1,localID.length);
 			}
 			else {
 				// the entity is located in the title
@@ -3578,8 +3616,8 @@ console.log(label);
 			var localSize = -1;
 
 			if (inAbstract) {
-				console.log(resultIndex + " " + entityNumber);
-				console.log(options.data['abstract'][resultIndex]['entities']);
+				//console.log(resultIndex + " " + entityNumber);
+				//console.log(options.data['abstract'][resultIndex]['entities']);
 				
 				if ((options.data['abstract'][resultIndex]) 
 						&& (options.data['abstract'][resultIndex]) 
@@ -3591,10 +3629,23 @@ console.log(label);
 						['entities'][localSize-entityNumber-1]; 	
 				}
 			}
+			else if (inKeyword) {
+				//console.log(resultIndex + " " + entityNumber + " " + idNumber);
+				//console.log(options.data['keyword'][resultIndex][idNumber]['entities']);
+				
+				if ((options.data['keyword'][resultIndex]) 
+						&& (options.data['keyword'][resultIndex][idNumber]) 
+						&& (options.data['keyword'][resultIndex][idNumber]['entities']) 
+						) {
+					localSize = options.data['keyword'][resultIndex][idNumber]
+								['entities'].length;		
+					entity = options.data['keyword'][resultIndex][idNumber]
+						['entities'][localSize-entityNumber-1]; 
+				}
+			}
 			else {
-				console.log(resultIndex + " " + " " + entityNumber);
-				//console.log(options.data['title'][resultIndex]);
-				console.log(options.data['title'][resultIndex]['entities']);
+				//console.log(resultIndex + " " + " " + entityNumber);
+				//console.log(options.data['title'][resultIndex]['entities']);
 				
 				if ( (options.data['title']) 
 						&& (options.data['title'][resultIndex]) 
@@ -3607,7 +3658,7 @@ console.log(label);
 			
 			var string = "";
 			if (entity != null) {
-				console.log(entity);
+				//console.log(entity);
 				var domains = entity.domains;
 				if (domains && domains.length>0) {
 					domain = domains[0].toLowerCase();
@@ -3740,6 +3791,7 @@ console.log(label);
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname',
 			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$forename',
 			'$TEI.$teiHeader.$sourceDesc.target',
+//			'$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology',
 		 	'_id'
 		];
 
@@ -5146,6 +5198,104 @@ console.log(label);
 			doexpand(queryText);
 		}
 		
+		var disambiguateNERD = function() {
+			var queryText = $('#facetview_freetext').val();
+			doexpandNERD(queryText);
+		}
+
+		// call the NERD service and propose senses to the user for his query
+        var doexpandNERD = function(queryText) {
+			var queryString = '{ "text" : "' + encodeURIComponent(queryText) +'" }';
+			var urlNERD = "http://" + options.host_nerd + ":" + options.port_nerd + "/processNERDQueryScience";
+			$.ajax({
+            	type: "POST",
+				url: urlNERD,
+//				contentType: 'application/json',
+				contentType: false,
+				dataType: 'jsonp',
+//				dataType: "text",
+				data: { text : encodeURIComponent(queryText) },
+//				data: queryString,
+			    success: showexpandNERD
+			} );
+		}
+
+		var showexpandNERD = function(sdata) {
+			if (!sdata) {
+				return;
+			}
+			console.log(sdata);			
+			
+			var jsonObject = parseDisambNERD(sdata);
+			
+			$('#disambiguation_panel').empty();
+			var piece = '<div class="mini-layout fluid" style="background-color:#F7EDDC;"> \
+				   		 <div class="row-fluid"><div class="span11">';
+			if (jsonObject['senses']) {
+				piece += '<table class="table" style="width:100%;border:1px solid white;">';
+				for (var sens in jsonObject['entities']) {
+					var entity = jsonObject['entities'][sens];
+					var domains = entity.domains;
+					if (domains && domains.length>0) {
+						domain = domains[0].toLowerCase();
+					}
+					var type = entity.type;
+
+					var colorLabel = null;
+					if (type)
+						colorLabel = type;
+					else if (domains && domains.length>0) {
+						colorLabel = domain;
+					}
+					else 
+						colorLabel = entity.rawName;	
+								
+			    	var start = parseInt(entity.offsetStart,10);
+				    var end = parseInt(entity.offsetEnd,10);  
+				
+					var subType = entity.subtype;
+					var conf = entity.nerd_score;
+					if (conf && conf.length > 4)
+						conf = conf.substring(0, 4);
+					var definitions = entity.definitions;
+					var wikipedia = entity.wikipediaExternalRef;
+					var freebase = entity.freeBaseExternalRef;
+					var content = entity.rawName; //$(this).text();
+										
+					piece += '<tr><td><strong>' + entity.rawName + '&nbsp;</strong></td><td>'+ 
+					entity['definitions'][0]
+					+'</td><td>'
+					if (wikipedia) {
+						piece += '<a href="http://en.wikipedia.org/wiki?curid=' + 
+							wikipedia + 
+							'" target="_blank"><img style="max-width:28px;max-height:22px;" src="data/images/wikipedia.png"/></a>';
+					}
+					piece += '</td></tr>';
+				}
+				piece += '</table>';
+			}
+			
+			/*for (var surf in jsonObject['paraphrases']) {
+				piece += '<p>' + jsonObject['paraphrases'][surf] + '</p>';
+			}*/
+
+			piece += '</div><div class="span1"><div id="close-disambiguate-panel" \
+					  style="position:relative;float:right;" class="icon-remove icon-white"/></div></div></div>';
+			$('#disambiguation_panel').append(piece);
+			$('#close-disambiguate-panel').bind('click', function() { $('#disambiguation_panel').hide(); })
+				
+			$('#disambiguation_panel').show();
+		}
+		
+		var parseDisambNERD = function(sdata) {
+			//var resObj = {};
+			
+			var jsonObject = JSON.parse(sdata);
+			var entities = jsonObject['entities'];
+			
+			return entities;
+		}
+		
 		// execute a query expansion
         var doexpand = function(queryText) {
 			var header = authenticateIdilia(queryText);
@@ -5828,7 +5978,8 @@ console.log(label);
 	            $('#facetview_searchbar').css('width',thewidth/2 + 70 + 'px'); // -50
 	            $('#facetview_freetext').css('width', thewidth/2 + 32 + 'px'); // -88
 	
-				$('#disambiguate').bind('click',disambiguate);
+				//$('#disambiguate').bind('click',disambiguate);
+				$('#disambiguate').bind('click',disambiguateNERD);
 				$('#disambiguation_panel').hide();
 				
 				if ( options.search_index == "summon" ) {

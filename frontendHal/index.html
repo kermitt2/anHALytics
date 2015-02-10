@@ -56,6 +56,9 @@
   	proxy_host: "http://localhost:8080/proxy/",	
   	freetext_submit_delay: "200", // in ms
 	display_images: false, 
+	host_nerd: "localhost",
+	//host_nerd: "traces1.saclay.inria.fr",
+	port_nerd: "8090",
 	facets: [
   		{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date', 'display': 'publication_date', 'type':'date', 'view':'graphic'},
 		{'field': '$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halDomain_abbrev', 'display': 'subject-headers', 'size':20, 'type':'taxonomy', 'view':'graphic'},
@@ -65,7 +68,9 @@
   		{'field': 
 		 	'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$org.$desc.$address.key', 'display': 'country', 'size':6, 'type':'country', 'view':'graphic'},
   		{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$org.$orgName', 'display': 'Organisation', 'size':6, 'type':'entity', 'view':'textual'},
-  		{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName', 'display': 'Author', 'size':10, 'type':'entity', 'view':'graphic'}
+  		{'field': '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName', 'display': 'Author', 'size':10, 'type':'entity', 'view':'graphic'},
+  		{'field': 
+		 	'$TEI.$standoff.wikipediaExternalRef', 'display': 'concepts', 'size':10, 'type':'entity', 'view':'textual'},
       ],
       paging: {
   	  from: 0,

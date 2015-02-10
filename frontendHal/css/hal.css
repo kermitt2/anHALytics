@@ -95,6 +95,11 @@
 }
 
 
+.label.pubtype {
+    background-color: #d9534f;
+	font-size: 8px;
+}
+
 
 html, body {
   background-color: #2E2E2E;

@@ -99,49 +99,56 @@ public class IndexingPreprocess {
 				//System.out.println(annotation);
 				if ( (annotation != null) && (annotation.trim().length() > 0) ) {
 					JsonNode jsonAnnotation= mapper.readTree(annotation);
-	//System.out.println(jsonAnnotation.toString());			
-					// we only get the concept IDs and the nerd confidence score
-					JsonNode nerd = jsonAnnotation.findPath("nerd");
-					JsonNode entities = nerd.findPath("entities");
-					if ( (entities != null) && (!entities.isMissingNode()) ) {
-						Iterator<JsonNode> iter = entities.getElements();
-						JsonNode annotNode = mapper.createArrayNode(); 
-				
-						while(iter.hasNext()) {
-							JsonNode piece = (JsonNode)iter.next();
+//System.out.println(jsonAnnotation.toString());
+					Iterator<JsonNode> iter0 = jsonAnnotation.getElements();
+					JsonNode annotNode = mapper.createArrayNode(); 
+					int n = 0;
+					while(iter0.hasNext() && (n < 3)) {
+						JsonNode jsonLocalAnnotation = (JsonNode)iter0.next();
 
-							JsonNode nerd_scoreN = piece.findValue("nerd_score");
-							JsonNode wikipediaExternalRefN = piece.findValue("wikipediaExternalRef");
-							JsonNode freeBaseExternalRefN = piece.findValue("freeBaseExternalRef");
+						// we only get the concept IDs and the nerd confidence score
+						JsonNode nerd = jsonLocalAnnotation.findPath("nerd");
+						JsonNode entities = nerd.findPath("entities");
+						if ( (entities != null) && (!entities.isMissingNode()) ) {
+							Iterator<JsonNode> iter = entities.getElements();
 							
-							String nerd_score = nerd_scoreN.getTextValue();
-							String wikipediaExternalRef = wikipediaExternalRefN.getTextValue();
-							String freeBaseExternalRef = null;
-							if ( (freeBaseExternalRefN != null) && (!freeBaseExternalRefN.isMissingNode()) )
-								freeBaseExternalRef = freeBaseExternalRefN.getTextValue();
-							
-							JsonNode newNode = mapper.createArrayNode(); 
-							
-							JsonNode nerdScoreNode = mapper.createObjectNode();
-							((ObjectNode)nerdScoreNode).put("nerd_score",nerd_score);
-							((ArrayNode)newNode).add(nerdScoreNode);
+							while(iter.hasNext()) {
+								JsonNode piece = (JsonNode)iter.next();
+
+								JsonNode nerd_scoreN = piece.findValue("nerd_score");
+								JsonNode wikipediaExternalRefN = piece.findValue("wikipediaExternalRef");
+								JsonNode freeBaseExternalRefN = piece.findValue("freeBaseExternalRef");
 						
-							JsonNode wikiNode = mapper.createObjectNode();						
-							((ObjectNode)wikiNode).put("wikipediaExternalRef",wikipediaExternalRef);
-							((ArrayNode)newNode).add(wikiNode);
-							
-							if (freeBaseExternalRef != null) {
-								JsonNode freeBaseNode = mapper.createObjectNode();
-								((ObjectNode)freeBaseNode).put("freeBaseExternalRef",freeBaseExternalRef);
-								((ArrayNode)newNode).add(freeBaseNode);
-							}
+								String nerd_score = nerd_scoreN.getTextValue();
+								String wikipediaExternalRef = wikipediaExternalRefN.getTextValue();
+								String freeBaseExternalRef = null;
+								if ( (freeBaseExternalRefN != null) && (!freeBaseExternalRefN.isMissingNode()) )
+									freeBaseExternalRef = freeBaseExternalRefN.getTextValue();
+						
+								JsonNode newNode = mapper.createArrayNode(); 
+						
+								JsonNode nerdScoreNode = mapper.createObjectNode();
+								((ObjectNode)nerdScoreNode).put("nerd_score",nerd_score);
+								((ArrayNode)newNode).add(nerdScoreNode);
 					
-							((ArrayNode)annotNode).add(newNode);
+								JsonNode wikiNode = mapper.createObjectNode();						
+								((ObjectNode)wikiNode).put("wikipediaExternalRef",wikipediaExternalRef);
+								((ArrayNode)newNode).add(wikiNode);
+						
+								if (freeBaseExternalRef != null) {
+									JsonNode freeBaseNode = mapper.createObjectNode();
+									((ObjectNode)freeBaseNode).put("freeBaseExternalRef",freeBaseExternalRef);
+									((ArrayNode)newNode).add(freeBaseNode);
+								}
+				
+								((ArrayNode)annotNode).add(newNode);
+							}
 						}
-						JsonNode standoffNode = mapper.createObjectNode(); 
-						((ObjectNode)standoffNode).put("$standoff", annotNode);
-						((ArrayNode)teiRoot).add(standoffNode);
+						n++;
 					}
+					JsonNode standoffNode = mapper.createObjectNode(); 
+					((ObjectNode)standoffNode).put("$standoff", annotNode);
+					((ArrayNode)teiRoot).add(standoffNode);			
 				}
 				else {
 					// if we don't have annotations for the file, we skip it!
