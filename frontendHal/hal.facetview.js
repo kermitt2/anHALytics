@@ -588,7 +588,7 @@ jQuery.extend({
 
         // set the available filter values based on results
         var putvalsinfilters = function(data) {
-	console.log(data);
+//console.log(data);
             // for each filter setup, find the results for it and append them to the relevant filter
 			//$('#facetview_class_ec').children('li').remove();
             for ( var each in options.facets ) {
@@ -5205,17 +5205,19 @@ console.log(label);
 
 		// call the NERD service and propose senses to the user for his query
         var doexpandNERD = function(queryText) {
-			var queryString = '{ "text" : "' + encodeURIComponent(queryText) +'" }';
+			//var queryString = '{ "text" : "' + encodeURIComponent(queryText) +'", "shortText" : true }';
+			var queryString = '{ "text" : "' + queryText +'", "shortText" : true }';
 			var urlNERD = "http://" + options.host_nerd + ":" + options.port_nerd + "/processNERDQueryScience";
 			$.ajax({
             	type: "POST",
 				url: urlNERD,
 //				contentType: 'application/json',
-				contentType: false,
-				dataType: 'jsonp',
-//				dataType: "text",
-				data: { text : encodeURIComponent(queryText) },
-//				data: queryString,
+//				contentType: false,
+//				dataType: 'jsonp',
+				dataType: "text",
+//				data: { text : encodeURIComponent(queryText) },
+				data: queryString,
+//				data: JSON.stringify( { text : encodeURIComponent(queryText) } ),
 			    success: showexpandNERD
 			} );
 		}
@@ -5228,10 +5230,12 @@ console.log(label);
 			
 			var jsonObject = parseDisambNERD(sdata);
 			
+			console.log(jsonObject);
+			
 			$('#disambiguation_panel').empty();
 			var piece = '<div class="mini-layout fluid" style="background-color:#F7EDDC;"> \
-				   		 <div class="row-fluid"><div class="span11">';
-			if (jsonObject['senses']) {
+				   		 <div class="row-fluid"><div class="span11" style="width:95%;">';
+			if (jsonObject['entities']) {
 				piece += '<table class="table" style="width:100%;border:1px solid white;">';
 				for (var sens in jsonObject['entities']) {
 					var entity = jsonObject['entities'][sens];
@@ -5262,14 +5266,47 @@ console.log(label);
 					var freebase = entity.freeBaseExternalRef;
 					var content = entity.rawName; //$(this).text();
 										
-					piece += '<tr><td><strong>' + entity.rawName + '&nbsp;</strong></td><td>'+ 
-					entity['definitions'][0]
-					+'</td><td>'
+					piece += '<tr id="selectLine'+sens+'" href="'
+							+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef"><td id="selectArea'+sens+'" href="'
+							+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef">';
+					piece += '<div class="checkbox checkbox-inline checkbox-danger" id="selectEntityBlock'+
+					sens+'" href="'+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef">';
+					piece += '<input type="checkbox" id="selectEntity'+sens
+							+'" name="selectEntity'+sens+'" value="0" href="'
+							+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef">';
+					piece += '<label for="selectEntity'+sens+'" id="label'+sens+'"> <strong>' + entity.rawName + '&nbsp;</strong> </label></div></td>';
+					//piece += '<td><strong>' + entity.rawName + '&nbsp;</strong></td><td>'+ 
+					piece += '<td>'+
+					definitions[0]['definition']
+					+'</td><td>';
+					
+					if (freebase != null) {
+						var urlImage = 'https://usercontent.googleapis.com/freebase/v1/image' + freebase;
+						    urlImage += '?maxwidth=150';
+						    urlImage += '&maxheight=150';
+						    urlImage += '&key=' + api_key;
+						piece += '<img src="' + urlImage + '" alt="' + freebase + '"/>';
+					}	
+					
+					piece += '</td><td>';
+					
+					piece += '<table><tr><td>';
+					
 					if (wikipedia) {
 						piece += '<a href="http://en.wikipedia.org/wiki?curid=' + 
 							wikipedia + 
 							'" target="_blank"><img style="max-width:28px;max-height:22px;" src="data/images/wikipedia.png"/></a>';
 					}
+					piece += '</td></tr><tr><td>';
+					
+					if (freebase != null) {
+						piece += '<a href="http://www.freebase.com' + 
+						freebase + 
+						'" target="_blank"><img style="max-width:28px;max-height:22px;margin-top:5px;" src="data/images/freebase_icon.png"/></a>';
+			
+					}
+					piece += '</td></tr></table>';
+					
 					piece += '</td></tr>';
 				}
 				piece += '</table>';
@@ -5279,11 +5316,16 @@ console.log(label);
 				piece += '<p>' + jsonObject['paraphrases'][surf] + '</p>';
 			}*/
 
-			piece += '</div><div class="span1"><div id="close-disambiguate-panel" \
+			piece += '</div><div><div id="close-disambiguate-panel" \
 					  style="position:relative;float:right;" class="icon-remove icon-white"/></div></div></div>';
 			$('#disambiguation_panel').append(piece);
 			$('#close-disambiguate-panel').bind('click', function() { $('#disambiguation_panel').hide(); })
-				
+			
+			// we need to bind the checkbox...
+			for (var sens in jsonObject['entities']) {				
+				$('input#selectEntity'+sens).bind('change', clickfilterchoice);
+			}
+			
 			$('#disambiguation_panel').show();
 		}
 		
@@ -5291,9 +5333,9 @@ console.log(label);
 			//var resObj = {};
 			
 			var jsonObject = JSON.parse(sdata);
-			var entities = jsonObject['entities'];
+			//var entities = jsonObject['entities'];
 			
-			return entities;
+			return jsonObject;
 		}
 		
 		// execute a query expansion
@@ -5469,16 +5511,53 @@ console.log(label);
         // trigger a search when a filter choice is clicked
         var clickfilterchoice = function(event) {
             event.preventDefault();
-            var newobj = '<a class="facetview_filterselected facetview_clear ' + 
-                'btn btn-info" rel="' + $(this).attr("rel") + 
-                '" alt="remove" title="remove"' +
-                ' href="' + $(this).attr("href") + '">' +
-                $(this).html().replace(/\(.*\)/,'') + ' <i class="icon-remove"></i></a>';
-            $('#facetview_selectedfilters').append(newobj);
-            $('.facetview_filterselected').unbind('click',clearfilter);
-            $('.facetview_filterselected').bind('click',clearfilter);
-            options.paging.from = 0
-            dosearch();
+//console.log(event);	
+//console.log($(this));			
+			if ($(this).html().trim().length==0) {
+			//if ($(this).type == 'checkbox') {	
+				console.log('checkbox');
+				if (!$(this).is(':checked')) {
+				//if (!$(this).checked) {	
+					console.log('checked');
+					$('.facetview_filterselected[href="'+$(this).attr("href")+'"]').each(function() {
+						$(this).remove();
+					});
+					options.paging.from = 0
+		            dosearch();
+				}
+				else {					
+		            var newobj = '<a class="facetview_filterselected facetview_clear ' + 
+		                'btn btn-info" rel="' + $(this).attr("rel") + 
+		                '" alt="remove" title="remove"' +
+					    ' href="' + $(this).attr("href") + '">'; 
+					if ($(this).html().trim().length>0)	
+						newobj += $(this).html().replace(/\(.*\)/,'');
+					else
+						newobj += $(this).attr("href");
+					newobj += ' <i class="icon-remove"></i></a>';
+		            $('#facetview_selectedfilters').append(newobj);
+		            $('.facetview_filterselected').unbind('click',clearfilter);
+		            $('.facetview_filterselected').bind('click',clearfilter);
+		            options.paging.from = 0
+		            dosearch();
+				}
+			}
+			else {
+	            var newobj = '<a class="facetview_filterselected facetview_clear ' + 
+	                'btn btn-info" rel="' + $(this).attr("rel") + 
+	                '" alt="remove" title="remove"' +
+				    ' href="' + $(this).attr("href") + '">'; 
+				if ($(this).html().trim().length>0)	
+					newobj += $(this).html().replace(/\(.*\)/,'');
+				else
+					newobj += $(this).attr("href");
+				newobj += ' <i class="icon-remove"></i></a>';
+	            $('#facetview_selectedfilters').append(newobj);
+	            $('.facetview_filterselected').unbind('click',clearfilter);
+	            $('.facetview_filterselected').bind('click',clearfilter);
+	            options.paging.from = 0
+	            dosearch();
+			}
         }
 
         // clear a filter when clear button is pressed, and re-do the search
@@ -5660,13 +5739,13 @@ console.log(label);
 				   </div> \
                    <div style="clear:both;" id="facetview_selectedfilters"></div> \
 				   <div class="span5" id="results_summary"></div> \
-				   <div class="span8" id="disambiguation_panel"></div> \
+				   <div class="span9" id="disambiguation_panel" style="margin-left:5px;"></div> \
                  <table class="table table-striped" id="facetview_results"></table> \
                  <div id="facetview_metadata"></div> \
                </div> \
              </div> \
            </div> \
-           ';
+           '; 
 
 		// the facet view object to be appended to the page
         var thefacetview_nl = ' \
