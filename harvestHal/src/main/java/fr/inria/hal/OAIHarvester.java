@@ -344,6 +344,14 @@ public class OAIHarvester {
             in = conn.getInputStream();
             return in;
 
+        } catch(UnknownHostException e){
+            e.printStackTrace();
+            try {
+                Thread.sleep(1800000); //take a nap.
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            return request(request);
         } catch (IOException e) {
             e.printStackTrace();
         }
