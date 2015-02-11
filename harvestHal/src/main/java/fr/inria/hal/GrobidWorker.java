@@ -48,7 +48,7 @@ public class GrobidWorker implements Runnable {
         try {
             String teiFilename = filename.split("\\.")[0] + ".tei.xml";
             InputStream inBinary = mm.streamFile(filename);
-            String filepath = OAIHarvester.storeTmpFile(inBinary);
+            String filepath = Utilities.storeTmpFile(inBinary);
             inBinary.close();
             System.out.println(filename);
             GrobidService grobidService = new GrobidService(filepath, grobid_host, grobid_port, 2, -1, true);

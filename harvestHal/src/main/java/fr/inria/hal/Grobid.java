@@ -47,6 +47,7 @@ public class Grobid {
         String tei = null;
         try {
 			tei = engine.fullTextToTEI(pdfPath, false, false, null, 1, -1, generateIDs);
+                        tei = tei.replace("&amp\\s+;", "&amp;");
 			// no consolidation (it would take too much time)
 			// document assets not saved
 			// startPage is 1 to skip the cover page
