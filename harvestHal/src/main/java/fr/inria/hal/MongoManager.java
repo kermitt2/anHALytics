@@ -8,6 +8,7 @@ import com.mongodb.MongoException;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -49,6 +50,25 @@ public class MongoManager {
             boolean auth = db.authenticate(mongodbUser, mongodbPass.toCharArray());
             filenames = new HashMap<String, List<String>>();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void storeToGridfs(TEI tei, String fileName, String namespace, String dateString) throws IOException, ParseException {
+
+        try {
+            GridFS gfs = new GridFS(db, namespace);
+            gfs.remove(fileName);
+            GridFSInputFile gfsFile = gfs.createFile(new ByteArrayInputStream(tei.getTei().getBytes()),true);
+            gfsFile.put("uploadDate", Utilities.parseStringDate(dateString));
+            gfsFile.put("type", tei.getDocumentType());
+            gfsFile.put("doi", tei.getDoi());
+            gfsFile.put("ref", tei.getRef());
+            ///gfsFile.put("subjects", tei.getSubjects());
+            gfsFile.setFilename(fileName);
+            gfsFile.save();
+
+        } catch (MongoException e) {
             e.printStackTrace();
         }
     }

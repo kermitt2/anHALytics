@@ -10,6 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.xml.parsers.*;
 import javax.xml.transform.TransformerException;
+import javax.xml.xpath.XPathExpressionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.*;
@@ -98,7 +99,7 @@ public class OAIHarvester {
                     String teiString = tei.getTei();
                     if (teiString.length() > 0) {
                         logger.debug("\t\t\t\t Storing tei : " + tei.getId());
-                        mongoManager.storeToGridfs(new ByteArrayInputStream(teiString.getBytes()), teiFilename, MongoManager.OAI_TEI_NAMESPACE, date);
+                        mongoManager.storeToGridfs(tei, teiFilename, MongoManager.OAI_TEI_NAMESPACE, date);
 
                         //binary processing.
                         if (tei.getFileUrl() != null) {
@@ -155,7 +156,7 @@ public class OAIHarvester {
         }        
     }
     
-    private void processCommand() throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException{
+    private void processCommand() throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException {
         String process = hrtArgs.getProcessName();
         if (process.equals("harvestAll")) {
             if(dates.size() > 5)

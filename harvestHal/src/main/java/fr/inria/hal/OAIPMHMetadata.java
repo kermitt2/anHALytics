@@ -14,6 +14,8 @@ public interface OAIPMHMetadata {
     public final static String TypeElement = "setSpec";
     public final static String ResumptionToken = "resumptionToken";
     public final static String FileUrlElement = "ref";
+    public final static String RefPATH = "metadata/TEI/text/body/listBibl/biblFull/publicationStmt/idno[@type='halRef']";
+    public final static String DoiPATH = "metadata/TEI/text/body/listBibl/biblFull/sourceDesc/biblStruct/idno[@type='doi']";
     
     enum ConsideredTypes {
 
