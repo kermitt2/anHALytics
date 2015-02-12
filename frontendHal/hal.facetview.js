@@ -1912,12 +1912,12 @@ jQuery.extend({
 			// family id
 			if (options['collection'] == 'patent') {	
 				if (family.length > 1) {
-					result += '<div class="span10" class="height:100%;" id="myCollapsible_'+index+'" data-toggle="collapse" data-target="#abstract_'+index+'">';
+					result += '<div class="span10" class="height:100%;" id="myCollapsible_'+index+'" data-toggle="collapse" data-target="#abstract_'+index+'" style="white-space:normal;">';
 					result += 'Family: ' + family;	
 				}
 			}
 			else {
-				result += '<div class="span10" class="height:100%;" id="myCollapsible_'+index+'" data-toggle="collapse" data-target="#abstract_'+index+'">';
+				result += '<div class="span10" class="height:100%;" id="myCollapsible_'+index+'" data-toggle="collapse" data-target="#abstract_'+index+'" style="white-space:normal;">';
 			}									
 			
 			// date
@@ -2093,7 +2093,7 @@ console.log(label);
 					if (titleID) {
 						result += ' id="titleNaked" pos="'+index+'" rel="'+titleID+'" ';
 					}
-					result += ' style="font-size:13px; color:black;"> ' + title + '<span></strong>';
+					result += ' style="font-size:13px; color:black; white-space:normal;"> ' + title + '<span></strong>';
 				}
 				else {
 					result += '<strong><span style="font-size:13px">' + title + '<span></strong>';
@@ -3037,7 +3037,7 @@ console.log(label);
 				if (origin == "abstract") {
 					text = text.substring(0,start) +
 						'<span id="annot-abs-'+index+'-'+m+'" rel="popover" data-color="'+label+'">' +
-						'<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
+						'<span class="label ' + label + '" style="cursor:hand;cursor:pointer;white-space: normal;" >'
 							+ text.substring(start,end) + '</span></span>' 
 							+ text.substring(end,text.length+1);
 				}
@@ -3105,7 +3105,7 @@ console.log(label);
 				
 				var type = jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology'];
 				if (type) {
-					piece += '<p><span class="label pubtype">'+type+'</span></p>';
+					piece += '<p><span class="label pubtype" style="white-space:normal;">'+type+'</span></p>';
 					//piece += '<p><strong>' + type + '</strong></p>';
 				}
 
