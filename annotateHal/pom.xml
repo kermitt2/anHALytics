@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.inria.hal.annotation</groupId>
-    <artifactId>fr.inria.hal.annotation</artifactId>
+    <artifactId>annotateHal</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     
@@ -20,47 +20,12 @@
         <maven.compiler.target>1.6</maven.compiler.target>
     </properties>
     
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
-		</license>
-	</licenses>
-	
-	<profiles>
-		<!-- mvn -Dmaven.test.skip=true compile exec:exec -Pannotate -->
-		<profile>
-		  <id>annotate</id>
-		  <activation><property><name>annotate</name></property></activation>
-		  <build><plugins><plugin>
-		    <groupId>org.codehaus.mojo</groupId>
-		    <artifactId>exec-maven-plugin</artifactId>
-		    <configuration>
-		      <executable>java</executable>
-		      <arguments>
-		        <argument>-classpath</argument><classpath />
-		        <argument>fr.inria.hal.annotation.Annotator</argument>
-		      </arguments>
-		    </configuration>
-		  </plugin></plugins></build>
-		</profile>
-		<!-- mvn -Dmaven.test.skip=true compile exec:exec -Pindex -->
-		<profile>
-		  <id>index</id>
-		  <activation><property><name>index</name></property></activation>
-		  <build><plugins><plugin>
-		    <groupId>org.codehaus.mojo</groupId>
-		    <artifactId>exec-maven-plugin</artifactId>
-		    <configuration>
-		      <executable>java</executable>
-		      <arguments>
-		        <argument>-classpath</argument><classpath />
-		        <argument>fr.inria.hal.annotation.ElasticSearchManager</argument>
-		      </arguments>
-		    </configuration>
-		  </plugin></plugins></build>
-		</profile>
-	</profiles>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
     
     <repositories>
         <repository>
@@ -97,24 +62,27 @@
         </resources>
         
         <plugins>
-            <!--plugin>
+            <plugin>
                 <groupId>com.jolira</groupId>
                 <artifactId>onejar-maven-plugin</artifactId>
                 <version>1.4.4</version>
                 <executions>
                     <execution>
                         <configuration>
-                            <mainClass>org.annotateHal.Main</mainClass>
-							<onejarVersion>0.97</onejarVersion>
-							<attachToBuild>true</attachToBuild>
-							<classifier>onejar</classifier>
+                            <mainClass>fr.inria.hal.annotation.Annotator</mainClass>
+                            <!-- Optional -->
+                            <onejarVersion>0.97</onejarVersion>
+                            <!-- Optional, default is false -->
+                            <attachToBuild>true</attachToBuild>
+                            <!-- Optional, default is "onejar" -->
+                            <classifier>onejar</classifier>
                         </configuration>
                         <goals>
                             <goal>one-jar</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin-->
+            </plugin>
                     
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -159,17 +127,17 @@
             <version>2.0.1</version>
         </dependency>
 		
-		<dependency>
-		   <groupId>org.apache.httpcomponents</groupId>
-		   <artifactId>httpclient</artifactId>
-		   <version>4.2</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.2</version>
+        </dependency>
 		
-		<dependency>
-		   <groupId>org.apache.httpcomponents</groupId>
-		   <artifactId>httpmime</artifactId>
-		   <version>4.2</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.2</version>
+        </dependency>
         
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -189,11 +157,11 @@
             <version>1.2.17</version>
         </dependency>
 		
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.8.5</version>
-		</dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.8.5</version>
+        </dependency>
                 
         <dependency>
             <groupId>org.mongodb</groupId>
@@ -201,18 +169,18 @@
             <version>2.10.1</version>
         </dependency>
 		
-		<dependency>
-		    <groupId>org.elasticsearch</groupId>
-		    <artifactId>elasticsearch</artifactId>
-		    <version>1.4.2</version>
-		</dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>1.4.2</version>
+        </dependency>
 		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
 		
     </dependencies>
 </project>
