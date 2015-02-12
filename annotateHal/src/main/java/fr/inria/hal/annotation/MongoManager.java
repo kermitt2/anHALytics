@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.text.ParseException;
 import java.util.Set;
 import java.util.List;
 import java.util.Properties;
@@ -65,7 +66,6 @@ public class MongoManager {
             //db_annot = mongo.getDB(mongodbDbAnnot);
             boolean auth1 = db.authenticate(mongodbUser, mongodbPass.toCharArray());
             //boolean auth2 = db_annot.authenticate(mongodbUser, mongodbPass.toCharArray());
-            initGridFS();
             //initAnnotations();
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,12 +82,14 @@ public class MongoManager {
         return db;
     }
 
-    public boolean initGridFS() throws MongoException {
+    public boolean initGridFS(String date) throws MongoException, ParseException {
         // open the GridFS
         gfs = new GridFS(db, TEI_NAMESPACE); // will be TEI_NAMESPACE
 
         // init the loop
-        files = gfs.find(new BasicDBObject());
+        BasicDBObject bdbo = new BasicDBObject();
+        if(date != null) bdbo.append("uploadDate", Utilities.parseStringDate(date));
+        files = gfs.find(bdbo);
         indexFile = 0;
         return true;
     }
@@ -276,5 +278,4 @@ public class MongoManager {
         }
         return result;
     }
-
 }

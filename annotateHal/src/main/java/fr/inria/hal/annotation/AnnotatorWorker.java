@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -42,21 +43,15 @@ public class AnnotatorWorker implements Runnable {
 
     @Override
     public void run() {
-        //try {
-        long startTime = System.nanoTime();
-        System.out.println(Thread.currentThread().getName() + " Start. Processing = " + filename);
-        //processCommand();
         try {
-            Thread.sleep(9000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            long startTime = System.nanoTime();
+            System.out.println(Thread.currentThread().getName() + " Start. Processing = " + filename);
+            processCommand();
+            long endTime = System.nanoTime();
+            System.out.println(Thread.currentThread().getName() + " End. :" + (endTime - startTime) / 1000000 + " ms");
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(AnnotatorWorker.class.getName()).log(Level.SEVERE, null, ex);
         }
-        long endTime = System.nanoTime();
-        System.out.println(Thread.currentThread().getName() + " End. :" + (endTime - startTime) / 1000000 + " ms");
-        /*} catch (IOException ex) {
-         java.util.logging.Logger.getLogger(AnnotatorWorker.class.getName()).log(Level.SEVERE, null, ex);
-         } 
-         */
     }
 
     private void processCommand() throws IOException {
@@ -64,7 +59,7 @@ public class AnnotatorWorker implements Runnable {
         List<String> halDomains = new ArrayList<String>();
         List<String> meSHDescriptors = new ArrayList<String>();
         try {
-			// DocumentBuilderFactory and DocumentBuilder are not thread safe, 
+            // DocumentBuilderFactory and DocumentBuilder are not thread safe, 
             // so one per task
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -136,7 +131,7 @@ public class AnnotatorWorker implements Runnable {
             Element e = (Element) (node);
             String id = e.getAttribute("xml:id");
             if (id.startsWith("_") && (id.length() == 8)) {
-				// get the textual content of the element
+                // get the textual content of the element
                 // annotate
                 String text = e.getTextContent();
                 String jsonText = null;

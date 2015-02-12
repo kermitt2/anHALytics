@@ -364,25 +364,4 @@ public class ElasticSearchManager {
         return results;
     }
 
-    /**
-     * Set-up ElasticSearch.
-     */
-    public static void main(String[] args)
-            throws IOException, ClassNotFoundException,
-            InstantiationException, IllegalAccessException {
-
-        ElasticSearchManager esm = new ElasticSearchManager();
-
-        // loading based on DocDB XML, with TEI conversion
-        try {
-            esm.setUpElasticSearch();
-            int nbAnnots = esm.index();
-
-            System.out.println("Total: " + nbAnnots + " annotations indexed.");
-        } catch (Exception e) {
-            System.err.println("Error when setting-up ElasticSeach cluster");
-            e.printStackTrace();
-        }
-    }
-
 }

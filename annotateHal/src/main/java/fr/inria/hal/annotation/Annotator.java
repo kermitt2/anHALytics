@@ -2,19 +2,9 @@ package fr.inria.hal.annotation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.*;
 import java.util.*;
-
 import java.util.concurrent.*;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Element;
-import org.xml.sax.InputSource;
 
 /**
  * Use the NERD REST service for annotating HAL TEI documents. Resulting JSON
@@ -31,8 +21,11 @@ public class Annotator {
 
     private int nbThreads = 1;
 
+    private final MongoManager mm;
+
     public Annotator() {
         loadProperties();
+        mm = new MongoManager();
     }
 
     private void loadProperties() {
@@ -55,57 +48,36 @@ public class Annotator {
 
     public int annotateCollection() {
         int nb = 0;
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        docFactory.setValidating(false);
-        //docFactory.setNamespaceAware(true);
-        MongoManager mm = null;
         try {
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            for (String date : Utilities.getDates()) {
+                if (mm.initGridFS(date)) {
+                    logger.debug("processing teis for :" + date);
+                    while (mm.hasMoreDocuments()) {
+                        String filename = mm.getCurrentFilename();
+                        String halID = mm.getCurrentHalID();
 
-            // loop on the TEI documents in MongoDB
-            mm = new MongoManager();
-
-            if (mm.initGridFS()) {
-                int i = 0;
-
-                while (mm.hasMoreDocuments()) {
-                    String halID = mm.getCurrentHalID();
-                    String filename = mm.getCurrentFilename();
-                    String tei = mm.nextDocument();
-
-                    List<String> halDomainTexts = new ArrayList<String>();
-                    List<String> halDomains = new ArrayList<String>();
-                    List<String> meSHDescriptors = new ArrayList<String>();
-
-                    try {
-                        // parse the TEI
-                        Document docTei
-                                = docBuilder.parse(new InputSource(new ByteArrayInputStream(tei.getBytes("utf-8"))));
-
-                        // get the HAL domain 
-                        NodeList classes = docTei.getElementsByTagName("classCode");
-                        for (int p = 0; p < classes.getLength(); p++) {
-                            Node node = classes.item(p);
-                            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                                Element e = (Element) (node);
-                                // filter on attribute @scheme="halDomain"
-                                String scheme = e.getAttribute("scheme");
-                                if ((scheme != null) && scheme.equals("halDomain")) {
-                                    halDomainTexts.add(e.getTextContent());
-                                    String n_att = e.getAttribute("n");
-                                    halDomains.add(n_att);
-                                } else if ((scheme != null) && scheme.equals("mesh")) {
-                                    meSHDescriptors.add(e.getTextContent());
-                                }
+                        try {
+                            // check if the document is already annotated
+                            if (mm.isAnnotated()) {
+                                logger.debug("skipping " + filename + ": already annotated");
+                                mm.nextDocument();
+                                continue;
                             }
+
+                            String tei = mm.nextDocument();
+                            // filter based on document size... we should actually annotate only 
+                            // a given length and then stop
+                            if (tei.length() > 300000) {
+                                logger.debug("skipping " + filename + ": file too large");
+                                continue;
+                            }
+                            AnnotatorWorker worker
+                                    = new AnnotatorWorker(mm, filename, halID, tei, nerd_host, nerd_port);
+                            worker.run();
+                            nb++;
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                        // get all the elements having an attribute id and annotate their text content
-                        String jsonAnnotations
-                                = annotateDocument(docTei, filename, halID, nerd_host, nerd_port);
-                        mm.insertAnnotation(jsonAnnotations);
-                        nb++;
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 }
             }
@@ -118,6 +90,132 @@ public class Annotator {
     }
 
     public int annotateCollectionMultiThreaded() {
+        ThreadPoolExecutor executor = getThreadsExecutor();
+        int nb = 0;
+        try {
+            for (String date : Utilities.getDates()) {
+                if (mm.initGridFS(date)) {
+                    logger.debug("processing teis for :" + date);
+                    while (mm.hasMoreDocuments()) {
+                        String filename = mm.getCurrentFilename();
+                        String halID = mm.getCurrentHalID();
+
+                        // check if the document is already annotated
+                        if (mm.isAnnotated()) {
+                            logger.debug("skipping " + filename + ": already annotated");
+                            mm.nextDocument();
+                            continue;
+                        }
+
+                        String tei = mm.nextDocument();
+                        // filter based on document size... we should actually annotate only 
+                        // a given length and then stop
+                        if (tei.length() > 300000) {
+                            logger.debug("skipping " + filename + ": file too large");
+                            continue;
+                        }
+
+                        Runnable worker
+                                = new AnnotatorWorker(mm, filename, halID, tei, nerd_host, nerd_port);
+                        executor.execute(worker);
+                        nb++;
+                    }
+                }
+            }
+            executor.shutdown();
+            while (!executor.isTerminated()) {
+            }
+            System.out.println("Finished all threads");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mm.close();
+        }
+        return nb;
+    }
+
+    public static void main(String[] args)
+            throws IOException, ClassNotFoundException,
+            InstantiationException, IllegalAccessException {
+        String fromDate = null;
+        String untilDate = null;
+        boolean isMultiThread = false;
+        boolean indexingEnabled = false;
+        int nbAnnots;
+        Annotator annotator = new Annotator();
+        String currArg;
+        for (int i = 0; i < args.length; i++) {
+            currArg = args[i];
+            if (currArg.equals("-h")) {
+                System.out.println(getHelp());
+                continue;
+            }
+            if (currArg.equals("-dFromDate")) {
+                String stringDate = args[i + 1];
+                if (!stringDate.isEmpty()) {
+                    if (Utilities.isValidDate(stringDate)) {
+                        fromDate = args[i + 1];
+                    } else {
+                        System.err.println("The date given is not correct, make sure it follows the pattern : yyyy-MM-dd");
+                        return;
+                    }
+                }
+                i++;
+                continue;
+            }
+            if (currArg.equals("-dUntilDate")) {
+                String stringDate = args[i + 1];
+                if (!stringDate.isEmpty()) {
+                    if (Utilities.isValidDate(stringDate)) {
+                        untilDate = stringDate;
+                    } else {
+                        System.err.println("The date given is not correct, make sure it follows the pattern : yyyy-MM-dd");
+                        return;
+                    }
+                }
+                i++;
+                continue;
+            }
+            if (currArg.equals("-multiThread")) {
+                isMultiThread = true;
+                continue;
+            }
+            if (currArg.equals("-index")) {
+                indexingEnabled = true;
+                continue;
+            }
+        }
+        if (untilDate != null || fromDate != null) {
+            Utilities.updateDates(fromDate, untilDate);
+        }
+        // loading based on DocDB XML, with TEI conversion
+        try {
+            if (isMultiThread) {
+                nbAnnots = annotator.annotateCollectionMultiThreaded();
+            } else {
+                nbAnnots = annotator.annotateCollection();
+            }
+            logger.debug("Total: " + nbAnnots + " annotations produced.");
+            if (indexingEnabled) {
+                ElasticSearchManager esm = new ElasticSearchManager();
+                // loading based on DocDB XML, with TEI conversion
+                try {
+                    logger.debug("Total: ");
+                    //esm.setUpElasticSearch();
+                    //int nbAnnotsIndexed = esm.index();
+                    //logger.debug("Total: " + nbAnnotsIndexed + " annotations indexed.");
+                } catch (Exception e) {
+                    System.err.println("Error when setting-up ElasticSeach cluster");
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error when setting-up the annotator.");
+            e.printStackTrace();
+        }
+    }
+
+    private ThreadPoolExecutor getThreadsExecutor() {
         // max queue of tasks of 50 
         BlockingQueue<Runnable> blockingQueue = new ArrayBlockingQueue<Runnable>(50);
         ThreadPoolExecutor executor = new ThreadPoolExecutor(nbThreads, nbThreads, 60000,
@@ -142,136 +240,13 @@ public class Annotator {
             }
         });
         executor.prestartAllCoreThreads();
-        int nb = 0;
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        docFactory.setValidating(false);
-        //docFactory.setNamespaceAware(true);
-        MongoManager mm = null;
-        try {
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-            // loop on the TEI documents in MongoDB
-            mm = new MongoManager();
-
-            if (mm.initGridFS()) {
-                int i = 0;
-
-                while (mm.hasMoreDocuments()) {
-                    String filename = mm.getCurrentFilename();
-                    String halID = mm.getCurrentHalID();
-
-                    // check if the document is already annotated
-                    if (mm.isAnnotated()) {
-                        System.out.println("skipping " + filename + ": already annotated");
-                        mm.nextDocument();
-                        continue;
-                    }
-
-                    String tei = mm.nextDocument();
-                    // filter based on document size... we should actually annotate only 
-                    // a given length and then stop
-                    if (tei.length() > 300000) {
-                        System.out.println("skipping " + filename + ": file too large");
-                        continue;
-                    }
-
-                    Runnable worker
-                            = new AnnotatorWorker(mm, filename, halID, tei, nerd_host, nerd_port);
-                    executor.execute(worker);
-                    nb++;
-                }
-            }
-            executor.shutdown();
-            while (!executor.isTerminated()) {
-            }
-            System.out.println("Finished all threads");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            mm.close();
-        }
-        return nb;
-
+        return executor;
     }
 
-    public String annotateDocument(Document doc,
-            String filename,
-            String halID) {
-        return annotateDocument(doc, filename, halID, nerd_host, nerd_port);
-    }
-
-    /**
-     * Annotation of a complete document
-     */
-    public static String annotateDocument(Document doc,
-            String filename,
-            String halID,
-            String nerd_host,
-            String nerd_port) {
-        StringBuffer json = new StringBuffer();
-        json.append("{ \"filename\" : \"" + filename
-                + "\", \"halID\" : \"" + halID
-                + "\", \"nerd\" : [");
-        annotateNode(doc.getDocumentElement(), true, json, nerd_host, nerd_port);
-        json.append("] }");
-        return json.toString();
-    }
-
-    /**
-     * Recursive tree walk for annotating every nodes having a random xml:id
-     */
-    public static boolean annotateNode(Node node,
-            boolean first,
-            StringBuffer json,
-            String nerd_host,
-            String nerd_port) {
-        if (node.getNodeType() == Node.ELEMENT_NODE) {
-            Element e = (Element) (node);
-            String id = e.getAttribute("xml:id");
-            if (id.startsWith("_") && (id.length() == 8)) {
-                // get the textual content of the element
-                // annotate
-                String text = e.getTextContent();
-                String jsonText = null;
-                try {
-                    NerdService nerdService = new NerdService(text, nerd_host, nerd_port);
-                    jsonText = nerdService.runNerd();
-                } catch (Exception ex) {
-                    logger.debug("Text could not be annotated by NERD: " + text);
-                    ex.printStackTrace();
-                }
-                if (jsonText != null) {
-                    // resulting annotations, with the corresponding id
-                    if (first) {
-                        first = false;
-                    } else {
-                        json.append(", ");
-                    }
-                    json.append("{ \"xml:id\" : \"" + id + "\", \"nerd\" : " + jsonText + " }");
-                }
-            }
-        }
-        NodeList nodeList = node.getChildNodes();
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node currentNode = nodeList.item(i);
-            first = annotateNode(currentNode, first, json, nerd_host, nerd_port);
-        }
-        return first;
-    }
-
-    public static void main(String[] args)
-            throws IOException, ClassNotFoundException,
-            InstantiationException, IllegalAccessException {
-
-        Annotator annotator = new Annotator();
-
-        // loading based on DocDB XML, with TEI conversion
-        try {
-            int nbAnnots = annotator.annotateCollectionMultiThreaded();
-            System.out.println("Total: " + nbAnnots + " annotations produced.");
-        } catch (Exception e) {
-            System.err.println("Error when setting-up the annotator.");
-            e.printStackTrace();
-        }
+    protected static String getHelp() {
+        final StringBuffer help = new StringBuffer();
+        help.append("HELP ANNOTATE_HAL \n");
+        help.append("-h: displays help\n");
+        return help.toString();
     }
 }
