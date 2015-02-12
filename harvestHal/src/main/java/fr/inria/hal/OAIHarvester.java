@@ -306,7 +306,7 @@ public class OAIHarvester {
         Scanner kbd = new Scanner(System.in);
         String decision = null;
         boolean yn = true;
-        System.out.println("You are about to process a huge number of document, it's faster to use grobid service and then run the grobid process, is that ok ? [yes]");
+        System.out.println("You are about to process a huge number of documents, using multithreaded grobid process is recommended, ignore grobid for now ? [yes]");
         decision = kbd.nextLine();
         switch (Decision.valueOf(decision)) {
             case yes:

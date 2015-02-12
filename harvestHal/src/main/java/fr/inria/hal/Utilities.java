@@ -6,8 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Set;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -61,7 +66,9 @@ public class Utilities {
     
     public static void updateDates(String fromDate, String untilDate) {
         boolean isOkDate = false;
-        for(String date:dates){
+        String[] dates1 = new String[dates.size()];
+        dates.toArray(dates1);
+        for(String date:dates1){
             if(untilDate != null){
                 if(date.equals(untilDate))
                     isOkDate = true;
@@ -237,6 +244,17 @@ public class Utilities {
         } finally {
             in.close();
         }
+    }
+        
+    public static String formatDate(Date date) {
+        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd");
+        return dt1.format(date);
+    }
+
+    public static Date parseStringDate(String dateString) throws ParseException {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date date = format.parse(dateString);
+        return date;
     }
 
     /**

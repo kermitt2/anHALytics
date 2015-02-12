@@ -59,7 +59,7 @@ public class MongoManager {
             GridFS gfs = new GridFS(db, namespace);
             gfs.remove(fileName);
             GridFSInputFile gfsFile = gfs.createFile(file, true);
-            gfsFile.put("uploadDate", parseStringDate(dateString));
+            gfsFile.put("uploadDate", Utilities.parseStringDate(dateString));
             gfsFile.setFilename(fileName);
             gfsFile.save();
         } catch (MongoException e) {
@@ -74,7 +74,7 @@ public class MongoManager {
             File f = new File(filePath);
             gfs.remove(fileName);
             GridFSInputFile gfsFile = gfs.createFile(f);
-            gfsFile.put("uploadDate", parseStringDate(dateString));
+            gfsFile.put("uploadDate", Utilities.parseStringDate(dateString));
             gfsFile.setFilename(fileName);
             gfsFile.save();
 
@@ -90,7 +90,7 @@ public class MongoManager {
             DBCursor cursor = gfs.getFileList();
             while (cursor.hasNext()) {
                 DBObject dbo = cursor.next();
-                String date = formatDate((Date) dbo.get("uploadDate"));
+                String date = Utilities.formatDate((Date) dbo.get("uploadDate"));
                 String filename = (String) dbo.get("filename");
                 if (filenames.containsKey(date)) {
                     filenames.get(date).add(filename);
@@ -104,17 +104,6 @@ public class MongoManager {
         } catch (MongoException e) {
         }
         return filenames;
-    }
-
-    private String formatDate(Date date) {
-        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd");
-        return dt1.format(date);
-    }
-
-    private Date parseStringDate(String dateString) throws ParseException {
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        Date date = format.parse(dateString);
-        return date;
     }
 
     public InputStream streamFile(String filename, String collection) {

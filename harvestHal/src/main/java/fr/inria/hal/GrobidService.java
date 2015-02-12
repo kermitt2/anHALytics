@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpRetryException;
-import java.net.HttpURLConnection;
+import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -113,6 +113,15 @@ public class GrobidService {
                         tei = tei.replace("&amp\\s+;", "&amp;");
 			conn.disconnect();
 		}
+                catch(ConnectException e){
+                    e.printStackTrace();
+                    try {
+                        Thread.sleep(20000);
+                        runFullTextGrobid();
+                    } catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
                 catch (HttpRetryException e) {
                     e.printStackTrace();
                     try {
