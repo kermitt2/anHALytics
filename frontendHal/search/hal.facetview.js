@@ -18,7 +18,7 @@
         data = undefined;
     }
 
-    function cb() {
+    function cb() { 
         var e = $.extend(true, { }, arguments[0]);
         var throttler = function() {
             wait = null;
@@ -588,9 +588,7 @@ jQuery.extend({
 
         // set the available filter values based on results
         var putvalsinfilters = function(data) {
-//console.log(data);
             // for each filter setup, find the results for it and append them to the relevant filter
-			//$('#facetview_class_ec').children('li').remove();
             for ( var each in options.facets ) {
 				$('#facetview_' + options.facets[each]['display']).children('li').remove();
 				
@@ -626,7 +624,8 @@ jQuery.extend({
 						numb++;
 					}
 				}
-				if ( !$('.facetview_filtershow[rel="' + options.facets[each]['display'] + '"]').hasClass('facetview_open') ) {
+				if ( !$('.facetview_filtershow[rel="' + options.facets[each]['display'] + 
+					'"]').hasClass('facetview_open') ) {
                     $('#facetview_' + options.facets[each]['display']).children("li").hide();
                 }
 				if ( $('#facetview_visualisation_'+options.facets[each]['display']).length > 0 ) {
@@ -1925,9 +1924,6 @@ jQuery.extend({
 			var dates = null;
 			if (options['collection'] == 'patent')
 				dates = jsonObject['$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date'];
-			else if (options['collection'] == 'cendari') {
-				dates = jsonObject['PublicationDate'];
-			}
 			else if ( options.search_index == "summon" ) {
 				dates = jsonObject['PublicationDate'];
 			}
@@ -1960,14 +1956,11 @@ jQuery.extend({
 			var titleAnnotated = null; 
 			if (options['collection'] == 'patent') 
 				titles = jsonObject['$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_en'];
-			else if ( (options['collection'] == "cendari") || (options.search_index == "summon") ) {
+			else if ( (options.search_index == "summon") ) {
 				titles = jsonObject['Title'];
-				if (options['collection'] == "cendari") {
-					titleAnnotated = jsonObject['TitleAnnotated'];
-				}
 			}
 			else {
-				//titles = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_en'];	
+				// NPL
 				titles = jsonObject['$TEI.$teiHeader.$titleStmt.$title.$title-first'];		
 				titleIDs =  jsonObject['$TEI.$teiHeader.$titleStmt.xml:id'];
 			}
@@ -1992,34 +1985,6 @@ jQuery.extend({
 						titleID = titleID[0];
 					}
 				}
-			}
-			
-			if (titleAnnotated != null) {
-console.log(titleAnnotated);
-				if (!options.data['title']) {
-					options.data['title'] = [];
-				}
-				options.data['title'][index] = titleAnnotated[0];
-	
-				// we are in the Cendari case
-				title = titleAnnotated[0]['sentence'];		
-				var entities = titleAnnotated[0]['entities'];
-				var string = title;
-				var m = 0;
-				for(var m in entities) {
-					var entity = entities[entities.length - m - 1];
-console.log(entity);	 				
-					var label = NERTypeMapping(entity.type, entity.chunk);	
-console.log(label);					
-			    	var start = parseInt(entity.start,10);
-				    var end = parseInt(entity.end,10);                    
-					string = string.substring(0,start) 
-						+ '<span id="annot-'+index+'-'+m+'" rel="popover" data-color="'+label+'">'
-						+ '<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
-						+ string.substring(start,end) + '</span></span>' + string.substring(end,string.length+1);						
-				}
-				
-				result += '<strong><span style="font-size:13px">' + string + '<span></strong>';
 			}
 			
 			if (!title || (title.length==0)) {
@@ -2102,7 +2067,7 @@ console.log(label);
 			
 			result += '<br />';
 			
-			if ( (options['collection'] == 'cendari') || (options.search_index == "summon") ) {	
+			if (options.search_index == "summon") {	
 				var authors = jsonObject['Author_xml'];
 				if (!authors) {
 					// we can use alternatively corporate authors
@@ -2207,21 +2172,6 @@ console.log(label);
 					}
 					result += authorsLast[0] + ' et al.';
 				}
-				/*var authors = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName'];
-				if (authors.length < 4) {
-					for (var author in authors) {
-						if (author == 0) {
-							result += authors[0] ;
-						}
-						else {
-							result += ", ";
-							result += authors[author] ;
-						}
-					}
-				}
-				else {
-					result += authors[0] + ' et al.';
-				}*/
 			}
 			
 			// book, proceedings or journal title
@@ -2268,7 +2218,6 @@ console.log(label);
 					}
 					//}
 				if (titleBook && (titleBook.length > 1)) {
-					//result += '<strong><span style="font-size:13px">' + title.substring(1,title.length -1) + '<span></strong>' + '<br />';
 					result += ' - <em>' + titleBook + '</em>';
 				}
 			}
@@ -2321,35 +2270,6 @@ console.log(label);
 							result += month + '.';
 						if (year != undefined)
 							result += year + '</em>' + '<br />';
-					}
-				}
-				else if (options['collection'] == 'cendari') {
-					if (!dates) {
-						result += ' -  <em> Published ';
-						result += 'date unknown';
-						result += '</em>' + '<br />';
-					}
-					/*else if (dates) {
-						//var year = dates[0]['year'];
-						//var month = dates[0]['month'];
-						//var day = dates[0]['day'];
-						result += ' -  <em> Published ';	
-						result += dates.replace('-','.') + '</em>' + '<br />';
-					}*/
-					else if (dates[0]) {
-						/*var year = dates[0]['year'];
-						var month = dates[0]['month'];
-						var day = dates[0]['day'];
-						result += ' -  <em> Published ';
-						if ((day != undefined) && (day.length > 0))
-							result += day + '.';
-						if ((month != undefined) && (month.length > 0))
-							result += month + '.';
-						if (year != undefined)
-							result += year + '</em>' + '<br />';
-						*/	
-							result += ' -  <em> Published ';	
-							result += dates[0] + '</em>' + '<br />';
 					}
 				}
 				else {
@@ -2781,39 +2701,7 @@ console.log(label);
 			
             result += '</td></tr>';
 			
-			node.append(result);
-			//node.html(result);
-			
-			if (titleAnnotated != null) {
-				// set the popovers 
-				if (titleAnnotated.length > 0) {
-					var string = titleAnnotated[0]['sentence'];		
-					var entities = titleAnnotated[0]['entities'];
-					
-					var m = 0;
-					for(var m in entities) {
-						var entity = entities[entities.length - m - 1];
-						var label = NERTypeMapping(entity.type, entity.chunk);
-						
-						var start = parseInt(entity.start,10);
-					    var end = parseInt(entity.end,10);
-						//$('#annot-'+index+'-'+m).unbind('click');	
-				    	$('#annot-'+index+'-'+m).unbind('click').popover({ placement: 'right', 
-							title: label, 
-							trigger: 'hover', 
-							content: string.substring(start,end), 
-							delay: { hide: 500 },
-							template: '<div class="popover" data-color="'+label+'"><div class="arrow"></div>'+
-									  '<div class"popover-inner" style="padding:3px;background:#000000;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);-moz-box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);"><h3 class="popover-title"></h3>'+
-									  '<div class="popover-content">'+string.substring(start,end)+'</div></div></div>'
-							} ); 
-							
-						// set the info box
-						$('#annot-'+index+'-'+m).bind('click', viewEntity);					
-					} 
-				}
-				
-			}
+			node.append(result);			
         }
 		
         // view a full record when selected - not used!
@@ -2825,7 +2713,6 @@ console.log(label);
 		
         // put the results on the page
         showresults = function(sdata) {
-//console.log(sdata);
             // get the data and parse from elasticsearch or other 
             var data = null;
 			if ( options.search_index == "summon" ) {
@@ -2863,7 +2750,8 @@ console.log(label);
 					if ( $('#facetview_visualisation_' + options.facets[each]['display'] + '_chart').length == 0)
  						$('.facetview_visualise[href=' + options.facets[each]['display'] + ']').trigger('click');
 				}
-				else if ( (!$('.facetview_filtershow[rel=' + options.facets[each]['display'] + ']').hasClass('facetview_open')) 
+				else if ( (!$('.facetview_filtershow[rel=' + options.facets[each]['display'] + 
+					']').hasClass('facetview_open')) 
 					&& (options.facets[each]['view'] == 'textual') ) {
 					$('.facetview_filtershow[rel=' + options.facets[each]['display'] + ']').trigger('click');
 				}
@@ -3095,18 +2983,18 @@ console.log(label);
 				
 				piece += '<div class="span2" style="width:13%;">';
 				if ( options.subcollection == "hal" ) {
-					//piece += '<p><strong>HAL ID:</strong> <a href="https://hal.archives-ouvertes.fr/'
 					piece += '<p><strong> <a href="https://hal.archives-ouvertes.fr/'
 					+ docid + '" target="_blank" style="text-decoration:underline;">' 
 					+ docid + '</a></strong></p>';
-				}
 				
-				// document type
 				
-				var type = jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology'];
-				if (type) {
-					piece += '<p><span class="label pubtype" style="white-space:normal;">'+type+'</span></p>';
-					//piece += '<p><strong>' + type + '</strong></p>';
+					// document type
+					var type = 
+						jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology'];
+					if (type) {
+						piece += '<p><span class="label pubtype" style="white-space:normal;">'+type+'</span></p>';
+						//piece += '<p><strong>' + type + '</strong></p>';
+					}
 				}
 
 				// authors and affiliation
@@ -3201,22 +3089,6 @@ console.log(label);
 					}
 				}
 				
-				/*if (!abstract || (abstract.length==0)) {
-					abstracts = jsonObject.fields['$TEI.$text.$front.$div.$p'];
-					
-					if (typeof abstracts == 'string') {
-						abstract = abstracts;
-					}	
-					else {
-						if (abstracts && (abstracts.length > 0)) {
-							abstract = abstracts[0];
-							while ((typeof abstract != 'string') && (typeof abstract != 'undefined')) {
-								abstract = abstract[0];
-							}
-						}
-					}
-				}
-				*/
 				if (abstract && (abstract.length>0) && (abstract.trim().indexOf(" ") != -1)) {
 					piece += '<p id="abstractNaked" pos="'+index+'" rel="'+abstractID+'" ><strong>Abstract: </strong> ' + abstract + '</p>';
 				}
@@ -3226,19 +3098,6 @@ console.log(label);
 				var keywordIDs = 
 					jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id'];
 				// we have a list of keyword IDs, each one corresponding to an independent annotation set
-						
-				/*if (typeof keywordIDs == 'string') {
-					keywordID = keywordIDs;
-				}
-				else {
-					if (keywordIDs && (keywordIDs.length > 0)) {
-						keywordID = keywordIDs[0];
-						while ((typeof keywordID != 'string') && (typeof keywordID != 'undefined')) {
-							keywordID = keywordID[0];
-						}
-					}
-				}*/
-				
 				var keywords = 
 					jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term'];
 
@@ -3255,7 +3114,8 @@ console.log(label);
 									+ keyArray[p] + '</span>';
 							}
 							else {
-								keyword += ', ' + '<span id="keywordsNaked"  pos="'+index+'" rel="'+keywordID+'">'  + keyArray[p] + '</span>';
+								keyword += ', ' + '<span id="keywordsNaked"  pos="'+index+'" rel="'+keywordID+'">' + 
+									keyArray[p] + '</span>';
 							}
 						}
 					}
@@ -3273,11 +3133,6 @@ console.log(label);
 				piece += "</div>";
 				
 				piece += "</div>";
-				//piece += '<div class="row-fluid">';
-				
-				//piece += '</div>';
-
-				//piece += "</div>";
 				
 				$('#innen_abstract[rel="'+docid+'"]').append(piece);
 				
@@ -3385,179 +3240,6 @@ console.log(label);
 				piece += "</div>";
 				
 				$('#innen_abstract[rel="'+docid+'"]').append(piece);
-			}
-			else if ( options.collection == "cendari" ) {
-				var docid = jsonObject._id;
-				var piece = "";
-				
-				var piece = "";
-
-				piece += '<div class="row-fluid">';
-				
-				//piece += '<div class="span3">';
-				//piece += "<strong>Family ID:</strong> " + docid;
-				
-				//piece += '</div>';
-				
-				piece += '<div class="span8">'; 
-				// abstract, if any
-				var abstract = null;
-				var annotatedAbstract = null;
-				var abstracts = jsonObject.fields['Abstract'];	
-				var annotatedAbstract = jsonObject.fields['AbstractAnnotated'];			
-				if (typeof abstracts == 'string') {
-					abstract = abstracts;
-				}	
-				else {
-					if (abstracts && (abstracts.length > 0)) {
-						abstract = abstracts[0];
-						while ((typeof abstract != 'string') && (typeof abstract != 'undefined')) {
-							abstract = abstract[0];
-						}
-					}
-				}
-				
-				if (annotatedAbstract != null) {
-					if (!options.data['abstract']) {
-						options.data['abstract'] = [];
-					}
-					options.data['abstract'][index] = annotatedAbstract;
-					
-					// we are in the Cendari case
-					var string = "";
-					for(var annotatedAbstractSentence in annotatedAbstract) {
-					
-						var abstract = annotatedAbstract[annotatedAbstractSentence]['sentence'];		
-						var entities = annotatedAbstract[annotatedAbstractSentence]['entities'];
-						
-						var m = 0;
-						for(var m in entities) {
-							var entity = entities[entities.length - m - 1];
-							var label = NERTypeMapping(entity.type, entity.chunk);	
-					    	var start = parseInt(entity.start,10);
-						    var end = parseInt(entity.end,10);                    
-							abstract = abstract.substring(0,start) 
-								+ '<span id="annot-abs-'+index+'-'+annotatedAbstractSentence
-										+'-'+m+'" rel="popover" data-color="'+label+'">'
-								+ '<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
-								+ abstract.substring(start,end) + '</span></span>' + 
-									abstract.substring(end,abstract.length+1);								
-						}
-						string += " " + abstract;	
-					}
-					//result += '<strong><span style="font-size:13px">' + string + '<span></strong>';
-					piece += ' <strong>Abstract: </strong> ' + string + '';
-					piece += '<br/>'; 
-					piece += '<br/>'; 
-				}	
-				
-				if (abstract && (abstract.length>0) && (annotatedAbstract == null)) {
-					piece += ' <strong>Abstract: </strong> ' + abstract + '';
-					piece += '<br/>'; 
-					piece += '<br/>'; 
-				}
-					
-				// Author, if any
-				var author = jsonObject.fields['Author'];			
-				if (author && (author.length>0)) {
-					piece += ' <strong>Author(s): </strong> ';
-					
-					for(var i in author) {
-						if (i != 0)
-							piece += '<br/> ';
-						piece += author[i];	
-						break;
-					}
-					
-					piece += '<br/>'; 
-				}	
-					
-				// Subject terms, if any
-				var subjects = jsonObject.fields['SubjectTerms'];			
-				if (subjects && (subjects.length>0)) {
-					piece += ' <br/><strong>Subject Terms: </strong> ';
-					for(var i in subjects) {
-						if (i != 0)
-							piece += ', ';
-						piece += subjects[i];	
-					}
-					piece += '<br/>'; 
-				}	
-								
-				// copyright, if any
-				var copyright = null;
-				var copyrights = jsonObject.fields['Copyright'];			
-				if (typeof copyrights == 'string') {
-					copyright = copyrights;
-				}
-				else {
-					if (copyrights && (copyrights.length > 0)) {
-						copyright = copyrights[0];
-						while ((typeof copyright != 'string') && (typeof copyright != 'undefined')) {
-							copyright = copyright[0];
-						}
-					}
-				}
-				if (copyright && (copyright.length>0)) {
-					if (copyright == "UNDETCOP") {
-						copyright = "undetermined copyright";
-					}
-					else if (copyright == "INCOPYRIGHT") {
-						copyright = "under copyright";
-					}					
-					
-					piece += ' <strong>Copyright: </strong> ' + copyright + '';
-					piece += '<br/>'; 
-				}
-				
-				
-				
-				piece += '</div>';
-				
-				// info box for the entities
-				piece += '<div class="span4">';
-				piece += '<span id="detailed_annot-'+index+'" />';
-				piece += "</div>";
-				
-				piece += "</div>";
-				piece += '<div class="row-fluid">';
-				
-				//piece += '</div>';
-
-				piece += "</div>";
-				
-				$('#innen_abstract[rel="'+docid+'"]').append(piece);
-				
-				/*if (annotatedAbstract) {
-					// set the popovers 
-					for(var annotatedAbstractSentence in annotatedAbstract) {
-						var abstract = annotatedAbstract[annotatedAbstractSentence]['sentence'];		
-						var entities = annotatedAbstract[annotatedAbstractSentence]['entities'];
-						
-						var m = 0;
-						for(var m in entities) {
-							var entity = entities[entities.length - m - 1];
-							var label = NERTypeMapping(entity.type, entity.chunk);
-							
-							var start = parseInt(entity.start,10);
-						    var end = parseInt(entity.end,10);
-					    	$('#annot-abs-'+index+'-'+annotatedAbstractSentence+'-'+m)
-								.popover({ placement: 'right', 
-								title: label, 
-								trigger: 'hover', 
-								content: abstract.substring(start,end), 
-								delay: { hide: 500 },
-								template: '<div class="popover" data-color="'+label+'"><div class="arrow"></div>'+
-										  '<div class"popover-inner" style="padding:3px;background:#000000;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);-moz-box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);"><h3 class="popover-title"></h3>'+
-										  '<div class="popover-content">'+abstract.substring(start,end)+'</div></div></div>'
-								} );
-							// 'popover-title': { 'background-color': '#398739'}
-							
-							// set the info box
-							$('#annot-abs-'+index+'-'+annotatedAbstractSentence+'-'+m).bind('click', viewEntity);  		 
-						} 
-					}
-				}*/
 			}
 		}
  
@@ -3690,7 +3372,8 @@ console.log(label);
 				if (entity.sense)
 					sense = entity.sense.fineSense;
 				
-				string += "<div class='info-sense-box "+colorLabel+"'><h3 style='color:#FFF;padding-left:10px;'>"+content.toUpperCase()+
+				string += "<div class='info-sense-box "+colorLabel+
+					"'><h3 style='color:#FFF;padding-left:10px;'>"+content.toUpperCase()+
 					"</h3>";
 				string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
 					"<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;'>";
@@ -3771,18 +3454,6 @@ console.log(label);
 		 	'$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date',
 		 	'_id'
 		];
-		
-		/*var textFieldsNPLReturned = [ '$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_en', 
-			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_fr',
-			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_de',
-			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_es',
-			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_it',
-			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date',
-			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname',
-			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$forename',
-			'$TEI.$teiHeader.$sourceDesc.target',
-		 	'_id'
-		];*/
 
 		var textFieldsNPLReturned = [ '$TEI.$teiHeader.$titleStmt.$title.$title-first', 
 			'$TEI.$teiHeader.$titleStmt.xml:id',
@@ -3793,18 +3464,6 @@ console.log(label);
 			'$TEI.$teiHeader.$sourceDesc.target',
 //			'$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology',
 		 	'_id'
-		];
-
-		var textFieldsCendariReturned = [ 'Title', 
-			'normalizedDate',
-			'PublicationDate',
-			'Author',
-			'thumbnail_s',
-			'thumbnail_m',
-			'thumbnail_l',
-			'URI',
-			'TitleAnnotated',
-			'_id'
 		];
 
 		var computeIdString = function(acceptType, date, host, path, queryParameters) {
@@ -3992,16 +3651,6 @@ console.log(label);
 			var filterString = "";
 			$('.facetview_filterselected',obj).each(function() {
 	        	if ( $(this).hasClass('facetview_facetrange') ) {
-                    /*var rel = options.facets[ $(this).attr('rel') ]['field'];
-					var from_ = (parseInt( $('.facetview_lowrangeval', this).html() ) - 1970)* 365*24*60*60*1000;
-					var to_ = (parseInt( $('.facetview_highrangeval', this).html() ) - 1970) * 365*24*60*60*1000 - 1;
-                    var rngs = {
-                        'from': from_,
-                        'to': to_
-                    }
-                    var obj = {'range': {}};
-                    obj['range'][ rel ] = rngs;
-                    bool['must'].push(obj);*/
 					var rel = options.facets[ $(this).attr('rel') ]['field'];
 					var range = $(this).attr('href');
 					var ind = range.indexOf('_');
@@ -4137,17 +3786,14 @@ console.log(label);
 								queryText += " " + $('#facetview_freetext'+rank).val();
 							}
 							else if ($('#label1_facetview_searchbar'+rank).text() == "title") {
-								queryText += " (Title:" + $('#facetview_freetext'+rank).val() + ") ";															
+								queryText += " (Title:" + $('#facetview_freetext'+rank).val() + ") ";
 							}
 							else if ($('#label1_facetview_searchbar'+rank).text() == "abstract") {
-								queryText += " (Abstract:" + $('#facetview_freetext'+rank).val() + ") ";																							
+								queryText += " (Abstract:" + $('#facetview_freetext'+rank).val() + ") ";
 							}
 							else if ($('#label1_facetview_searchbar'+rank).text() == "author") {
 								queryText += " (Author:" + $('#facetview_freetext'+rank).val() + ") ";
 							}
-							/*else if ($('#label1_facetview_searchbar'+rank).text() == "language") {
-								queryText += " (Language:" + $('#facetview_freetext'+rank).val() + ")";
-							}*/
 						}
 					}
 						
@@ -4234,7 +3880,8 @@ console.log(label);
 		}
 
 		// this is the list of Lucene characters to escape when not used as lucene operators:  +-&amp;|!(){}[]^"~*?:\
-		var lucene_specials = [ "-", "[", "]", "{", "}", "(", ")", "*", "+", "?", "\\", "^", "|", "&", "!", '"', "~", ":" ];
+		var lucene_specials = 
+			[ "-", "[", "]", "{", "}", "(", ")", "*", "+", "?", "\\", "^", "|", "&", "!", '"', "~", ":" ];
 		
         // build the search query URL based on current params
         var elasticsearchquery = function() {
@@ -4249,8 +3896,6 @@ console.log(label);
 			// fields to be returned
 			if (options['collection'] == 'patent')
 				qs['fields'] = textFieldsPatentReturned;
-			else if (options['collection'] == 'cendari')
-				qs['fields'] = textFieldsCendariReturned;	
 			else 
 				qs['fields'] = textFieldsNPLReturned;
 			
@@ -4281,7 +3926,7 @@ console.log(label);
 								bool['must_not'] = [];
 						}
 						
-						if ($('#label1_facetview_searchbar'+rank).text() == "all text") {													
+						if ($('#label1_facetview_searchbar'+rank).text() == "all text") {
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
 		                    obj['query_string']['query'] = $('#facetview_freetext'+rank).val();							
 							queried_fields.push("_all");
@@ -4289,19 +3934,13 @@ console.log(label);
 						else if ($('#label1_facetview_searchbar'+rank).text() == "all titles") {
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
 							var theField;
-							if (options['collection'] == 'cendari') {
-								theField = "Title";
-							}
-							else if (options['collection'] == 'npl') {
+							if (options['collection'] == 'npl') {
 								theField = "$TEI.$teiHeader.$fileDesc.$titleStmt.$title.";
 							}
 							else {
 								theField = "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.";
 							}
-							if (options['collection'] == 'cendari') {
-								// do nothing as this is only english so far
-							}
-							else if ( ($('#label3_facetview_searchbar'+rank).text() == "all") ||
+							if ( ($('#label3_facetview_searchbar'+rank).text() == "all") ||
 								 ($('#label3_facetview_searchbar'+rank).text() == "lang") ) {
 								theField += "\\*";
 							}
@@ -4321,19 +3960,13 @@ console.log(label);
 						else if ($('#label1_facetview_searchbar'+rank).text() == "all abstracts") {	
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
 							var theField;
-							if (options['collection'] == 'cendari') {
-								theField = "Abstract";
-							}							
-							else if (options['collection'] == 'npl') {
+							if (options['collection'] == 'npl') {
 								theField = "$TEI.$text.$front.$div.$p.";
 							}
 							else {
 								theField = "$teiCorpus.$teiCorpus.$TEI.$text.$front.$div.$p.";
 							}
-							if (options['collection'] == 'cendari') {
-								// do nothing as this is only english so far
-							}
-							else if ( ($('#label3_facetview_searchbar'+rank).text() == "all") ||
+							if ( ($('#label3_facetview_searchbar'+rank).text() == "all") ||
 								 ($('#label3_facetview_searchbar'+rank).text() == "lang") ) {
 								theField += "\\*";
 							}
@@ -4420,7 +4053,8 @@ console.log(label);
 							// this one is for patent only
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
 							//var theField = "$teiCorpus.$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$term";
-							var theField = "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_ipc.$term";
+							var theField = 
+				"$teiCorpus.$teiCorpus.$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_ipc.$term";
 							obj['query_string']['query'] = 
 								theField+":"+$('#facetview_freetext'+rank).val();
 							queried_fields.push(theField);
@@ -4428,8 +4062,6 @@ console.log(label);
 						else if ($('#label1_facetview_searchbar'+rank).text() == "ECLA class") {	
 							// this one is for patent only
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
-							//var theField = "$teiCorpus.$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$term";
-							//var theField = "$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_patent-classification.$ecla.term";
 							var theField = "$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_patent-classification.$ecla.$path";
 							obj['query_string']['query'] = 
 								theField+":"+$('#facetview_freetext'+rank).val();
@@ -4824,9 +4456,6 @@ console.log(label);
 						if (options['collection'] == 'patent') {
 							qs['sort'] = [ { "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
 						}
-						else if (options['collection'] == 'cendari') {
-							qs['sort'] = [ { "normalizedDate": { "order": "asc" } } ];
-						}
 						else {
 							qs['sort'] = [ { "$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date": { "order": "desc" } } ];
 						}
@@ -4846,9 +4475,6 @@ console.log(label);
 						}
 						if (options['collection'] == 'patent') {
 							qs['sort'] = [ { "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
-						}
-						else if (options['collection'] == 'cendari') {
-							qs['sort'] = [ { "normalizedDate": { "order": "asc" } } ];
 						}
 						else {
 							qs['sort'] = [ { "$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date": { "order": "desc" } } ];
@@ -5781,23 +5407,7 @@ console.log(label);
            ';
 
 		var field_complex;
-		if (options['collection'] == 'cendari') {
-			field_complex = ' \
-			<div style="display:inline-block; margin-left:-2px;" class="btn-group"> \
-			    <a style="-moz-border-radius:0px 3px 3px 0px; \
-		       -webkit-border-radius:0px 3px 3px 0px; border-radius:0px 3px 3px 0px;" \
-		       class="btn dropdown-toggle" data-toggle="dropdown" href="#"> \
-		       <b><span id="label1_facetview_searchbar{{NUMBER}}">select field</span></b> <span class="caret"></span></a> \
-				<ul style="margin-left:-10px;" class="dropdown-menu"> \
-		       <li><a id="field_all_text{{NUMBER}}" rank="{{NUMBER}}" label="1" href="">all text</a></li> \
-			   <li><a id="field_title{{NUMBER}}" rank="{{NUMBER}}" label="1" href="">all titles</a></li> \
-			   <li><a id="field_abstract{{NUMBER}}" rank="{{NUMBER}}" label="1" href="">all abstracts</a></li> \
-			   <li><a id="field_author{{NUMBER}}" rank="{{NUMBER}}" label="1" href="">author</a></li> \
-			   <li><a id="field_subject_terms{{NUMBER}}" rank="{{NUMBER}}" label="1" href="">Subject Terms</a></li> \
-			   <li><a id="field_country{{NUMBER}}" rank="{{NUMBER}}" label="1" href="">authors\' country</a></li> \
-			   </div>';
-		}
-		else if (options.search_index == 'summon') {
+		if (options.search_index == 'summon') {
 			field_complex = ' \
 			<div style="display:inline-block; margin-left:-2px;" class="btn-group"> \
 			    <a style="-moz-border-radius:0px 3px 3px 0px; \
