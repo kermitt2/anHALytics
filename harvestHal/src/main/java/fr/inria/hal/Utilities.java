@@ -65,21 +65,20 @@ public class Utilities {
     }
     
     public static void updateDates(String fromDate, String untilDate) {
-        boolean isOkDate = false;
+        boolean isOkDate = true;
+        if(untilDate != null)
+            isOkDate = false;
         String[] dates1 = new String[dates.size()];
         dates.toArray(dates1);
-        for(String date:dates1){
-            if(untilDate != null){
-                if(date.equals(untilDate))
-                    isOkDate = true;
-            }
-            
+        for(String date:dates1){            
+            if(date.equals(untilDate))
+                isOkDate = true;                        
             if(!isOkDate)
                 dates.remove(date);
-                       
-            if(fromDate != null){
-                if(date.equals(fromDate))
+            if(fromDate != null) {
+                if(date.equals(fromDate)){
                     isOkDate = false;
+                }
             }
         }
     }

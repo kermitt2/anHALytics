@@ -164,10 +164,11 @@ public class OAIHarvester {
                    harvestAllHAL();
                    processGrobid();
                    return;
-                }
-            activateGrobid();
-            setGrobidProcess(new Grobid());
-            harvestAllHAL();
+                } else {
+                    activateGrobid();
+                    setGrobidProcess(new Grobid());
+                    harvestAllHAL();
+               }
         } else if (process.equals("harvestDaily")) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Calendar cal = Calendar.getInstance();
@@ -307,18 +308,22 @@ public class OAIHarvester {
         Scanner kbd = new Scanner(System.in);
         String decision = null;
         boolean yn = true;
-        System.out.println("You are about to process a huge number of documents, using multithreaded grobid process is recommended, ignore grobid for now ? [yes]");
+        System.out.println("You are about to process a huge number of documents, using multithreaded grobid process is recommended, continue? [yes]");
         decision = kbd.nextLine();
-        switch (Decision.valueOf(decision)) {
-            case yes:
-                break;
+        try{
+            switch (Decision.valueOf(decision)) {
+                case yes:
+                    break;
 
-            case no:
-                yn = false;
-                break;
+                case no:
+                    yn = false;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
+        }catch(IllegalArgumentException ex){
+            //yes by default 
         }
         return yn;
     }

@@ -42,7 +42,7 @@ public class OAIPMHDom implements OAIPMHMetadata {
 
         //XPath xPath = XPathFactory.newInstance().newXPath();//play with it  
         //NodeList nodes = (NodeList)xPath.evaluate("/OAI-PMH/ListRecords/record/metadata", rootElement, XPathConstants.NODESET);
-        setToken(rootElement.getElementsByTagName(ResumptionToken));
+        setToken(rootElement);
         if (listRecords.getLength() >= 1) {
             for (int i = listRecords.getLength() - 1; i >= 0; i--) {
                 if ((listRecords.item(i) instanceof Element)) {
@@ -69,8 +69,8 @@ public class OAIPMHDom implements OAIPMHMetadata {
         try {
             Node node = (Node) xPath.compile(RefPATH).evaluate(ref, XPathConstants.NODE);
             reference = node.getTextContent();
-        } catch (XPathExpressionException ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            // REf is not always available !
         }
         return reference;
     }
@@ -90,8 +90,12 @@ public class OAIPMHDom implements OAIPMHMetadata {
         return this.token;
     }
 
-    private void setToken(NodeList resumptionToken) {
-        this.token = resumptionToken.item(0).getTextContent();
+    private void setToken(Element rootElement) {
+        try {
+            this.token = rootElement.getElementsByTagName(ResumptionToken).item(0).getTextContent();
+        } catch (Exception ex) {
+            this.token = null;
+        }
     }
 
     private void setDoc(Document doc) {
