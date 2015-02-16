@@ -781,7 +781,8 @@ jQuery.extend({
 			    .innerRadius(function(d) { return Math.max(0, d.y ? y(d.y) : d.y); })
 			    .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 			
-			var fill = d3.scale.log(.1, 1).domain([0.005,0.1]).range(["#FF7700","#FCE6D4"]);
+			//var fill = d3.scale.log(.1, 1).domain([0.005,0.1]).range(["#FF7700","#FCE6D4"]);
+			var fill = d3.scale.log(.1, 1).domain([0.005,0.1]).range(["#FCE6D4","#FF7700"]);
 			
 			var facetfield = options.facets[facetidx]['field'];
 			var records = options.data['facets'][facetkey];
@@ -2058,7 +2059,7 @@ jQuery.extend({
 					if (titleID) {
 						result += ' id="titleNaked" pos="'+index+'" rel="'+titleID+'" ';
 					}
-					result += ' style="font-size:13px; color:black; white-space:normal;"> ' + title + '<span></strong>';
+					result += ' style="font-size:13px; color:black; white-space:normal;">' + title + '<span></strong>';
 				}
 				else {
 					result += '<strong><span style="font-size:13px">' + title + '<span></strong>';
@@ -2902,11 +2903,15 @@ jQuery.extend({
 			//console.log('annotation for ' + id);
 			//console.log(jsonObject);
 
-			var text = jsonObject['_source']['annotation']['nerd']['text'];		
+			//var text = jsonObject['_source']['annotation']['nerd']['text'];		
+			var text = $('[rel="'+id+'"]').text(); 
 			var entities = jsonObject['_source']['annotation']['nerd']['entities'];
 			var m = 0;
-			for(var m in entities) {
-				var entity = entities[entities.length - m - 1];
+			var lastMaxIndex = text.length;
+			//for(var m in entities) {
+			for(var m=entities.length-1; m>=0; m--) {	
+				//var entity = entities[entities.length - m - 1];
+				var entity = entities[m];
 				var chunk = entity.rawName;
 				var domains = entity.domains;
 				var domain = null;
@@ -2922,31 +2927,55 @@ jQuery.extend({
 					label = chunk;						
 		    	var start = parseInt(entity.offsetStart,10);
 			    var end = parseInt(entity.offsetEnd,10);
-				if (origin == "abstract") {
-					text = text.substring(0,start) +
-						'<span id="annot-abs-'+index+'-'+m+'" rel="popover" data-color="'+label+'">' +
-						'<span class="label ' + label + '" style="cursor:hand;cursor:pointer;white-space: normal;" >'
-							+ text.substring(start,end) + '</span></span>' 
-							+ text.substring(end,text.length+1);
+				
+				// keeping track of the lastMaxIndex allows to handle nbest results, e.g. possible
+				// overlapping annotations to display as infobox, but with only one annotation
+				// tagging the text
+				if (start > lastMaxIndex) {
+					// we have a problem in the initial sort of the entities
+					// the server response is not compatible with the client 
+					console.log("Sorting of entities as present in the server's response not valid for this client.");
 				}
-				else if (origin == "keyword") {
-					text = text.substring(0,start) +
-						'<span id="annot-key-'+index+'-'+m+'-'+id+'" rel="popover" data-color="'+label+'">' +
-						'<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
-							+ text.substring(start,end) + '</span></span>' 
-							+ text.substring(end,text.length+1);
+				else if ( (start == lastMaxIndex) || (end > lastMaxIndex) ) {
+					// overlap
+					end = lastMaxIndex;
 				}
 				else {
-					text = text.substring(0,start) + 
-						'<span id="annot-'+index+'-'+m+'" rel="popover" data-color="'+label+'">' + 
-						'<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
-					+ text.substring(start,end) + '</span></span>' 
-					+ text.substring(end,text.length+1);
-				} 					
+					// we produce the annotation on the string
+					if (origin == "abstract") {
+						text = text.substring(0,start) +
+							'<span id="annot-abs-'+index+'-'+(entities.length - m - 1)+
+							'" rel="popover" data-color="'+label+'">' +
+							'<span class="label ' + label + 
+							'" style="cursor:hand;cursor:pointer;white-space: normal;" >'
+								+ text.substring(start,end) + '</span></span>' 
+								+ text.substring(end,text.length+1);
+					}
+					else if (origin == "keyword") {
+						text = text.substring(0,start) +
+							'<span id="annot-key-'+index+'-'+(entities.length - m - 1)+'-'+id
+							+'" rel="popover" data-color="'+label+'">' +
+							'<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
+								+ text.substring(start,end) + '</span></span>' 
+								+ text.substring(end,text.length+1);
+					}
+					else {
+						text = text.substring(0,start) + 
+							'<span id="annot-'+index+'-'+(entities.length - m - 1)+
+							'" rel="popover" data-color="'+label+'">' + 
+							'<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
+						+ text.substring(start,end) + '</span></span>' 
+						+ text.substring(end,text.length+1);
+					} 
+					lastMaxIndex = start;
+				}		
 			}
-				
+
 			//var result = '<strong><span style="font-size:13px">' + text + '<span></strong>';
-			$('[rel="'+id+'"]').html(text);
+			if (origin == "abstract") 
+				$('[rel="'+id+'"]').html('<strong>Abstract: </strong>' + text);
+			else
+				$('[rel="'+id+'"]').html(text);
 		
 			// now set the popovers/view event 
 			var m = 0;
@@ -3090,7 +3119,7 @@ jQuery.extend({
 				}
 				
 				if (abstract && (abstract.length>0) && (abstract.trim().indexOf(" ") != -1)) {
-					piece += '<p id="abstractNaked" pos="'+index+'" rel="'+abstractID+'" ><strong>Abstract: </strong> ' + abstract + '</p>';
+					piece += '<p id="abstractNaked" pos="'+index+'" rel="'+abstractID+'" >' + abstract + '</p>';
 				}
 				
 				// keywords
@@ -3367,6 +3396,7 @@ jQuery.extend({
 				var wikipedia = entity.wikipediaExternalRef;
 				var freebase = entity.freeBaseExternalRef;
 				var content = entity.rawName; //$(this).text();
+				var preferredTerm = entity.preferredTerm;
 			
 				var sense = null;
 				if (entity.sense)
@@ -3392,6 +3422,10 @@ jQuery.extend({
 						string += domains[i].replace("_", " ");
 					}
 					string += "</b></p>";
+				}
+				
+				if (preferredTerm) {
+					string += "<p>Preferred: <b>"+preferredTerm+"</b></p>";
 				}
 
 				string += "<p>conf: <i>"+conf+ "</i></p>";
@@ -4838,7 +4872,7 @@ jQuery.extend({
             	type: "POST",
 				url: urlNERD,
 //				contentType: 'application/json',
-//				contentType: false,
+//				contentType: 'charset=UTF-8',
 //				dataType: 'jsonp',
 				dataType: "text",
 //				data: { text : encodeURIComponent(queryText) },
@@ -4891,7 +4925,8 @@ jQuery.extend({
 					var wikipedia = entity.wikipediaExternalRef;
 					var freebase = entity.freeBaseExternalRef;
 					var content = entity.rawName; //$(this).text();
-										
+					var preferredTerm = entity.preferredTerm;
+									
 					piece += '<tr id="selectLine'+sens+'" href="'
 							+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef"><td id="selectArea'+sens+'" href="'
 							+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef">';
@@ -4902,9 +4937,16 @@ jQuery.extend({
 							+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef">';
 					piece += '<label for="selectEntity'+sens+'" id="label'+sens+'"> <strong>' + entity.rawName + '&nbsp;</strong> </label></div></td>';
 					//piece += '<td><strong>' + entity.rawName + '&nbsp;</strong></td><td>'+ 
-					piece += '<td>'+
-					definitions[0]['definition']
-					+'</td><td>';
+					if (preferredTerm) {
+						piece += '<td><b>'+preferredTerm+': <b>'+
+						definitions[0]['definition']
+						+'</td><td>';
+					}
+					else { 
+						piece += '<td>'+
+						definitions[0]['definition']
+						+'</td><td>';
+					}
 					
 					if (freebase != null) {
 						var urlImage = 'https://usercontent.googleapis.com/freebase/v1/image' + freebase;
