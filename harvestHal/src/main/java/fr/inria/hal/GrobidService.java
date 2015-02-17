@@ -110,7 +110,7 @@ public class GrobidService {
 			}
                         
 			tei = output.toString();
-                        tei = tei.replace("&amp\\s+;", "&amp;");
+                        tei = Utilities.trimEncodedCaraters(tei);
 			conn.disconnect();
 		}
                 catch(ConnectException e){

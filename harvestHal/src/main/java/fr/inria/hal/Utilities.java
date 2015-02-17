@@ -262,4 +262,12 @@ public class Utilities {
     public static Set<String> getDates() {
         return dates;
     }
+    
+    public static String trimEncodedCaraters(String string){
+        return string.replaceAll("&amp\\s+;", "&amp;").
+                      replaceAll("&quot\\s+;|&amp;quot\\s*;", "&quot;").
+                      replaceAll("&lt\\s+;|&amp;lt\\s*;", "&lt;").
+                      replaceAll("&gt\\s+;|&amp;gt\\s*;", "&gt;").
+                      replaceAll("&apos\\s+;|&amp;apos\\s*;", "&apos;");     
+    }
 }
