@@ -190,20 +190,22 @@ public class Annotator {
         }
         // loading based on DocDB XML, with TEI conversion
         try {
+            
             if (isMultiThread) {
                 nbAnnots = annotator.annotateCollectionMultiThreaded();
             } else {
                 nbAnnots = annotator.annotateCollection();
             }
+                    
             logger.debug("Total: " + nbAnnots + " annotations produced.");
             if (indexingEnabled) {
                 ElasticSearchManager esm = new ElasticSearchManager();
                 // loading based on DocDB XML, with TEI conversion
                 try {
                     logger.debug("Total: ");
-                    //esm.setUpElasticSearch();
-                    //int nbAnnotsIndexed = esm.index();
-                    //logger.debug("Total: " + nbAnnotsIndexed + " annotations indexed.");
+                    esm.setUpElasticSearch();
+                    int nbAnnotsIndexed = esm.index();
+                    logger.debug("Total: " + nbAnnotsIndexed + " annotations indexed.");
                 } catch (Exception e) {
                     System.err.println("Error when setting-up ElasticSeach cluster");
                     e.printStackTrace();
