@@ -159,16 +159,16 @@ public class OAIHarvester {
     private void processCommand() throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException {
         String process = hrtArgs.getProcessName();
         if (process.equals("harvestAll")) {
-            if(dates.size() > 5)
+            if(dates.size() > 5){
                if(askConfirm()){
                    harvestAllHAL();
                    processGrobid();
                    return;
-                } else {
-                    activateGrobid();
-                    setGrobidProcess(new Grobid());
-                    harvestAllHAL();
-               }
+                }
+            }
+            activateGrobid();
+            setGrobidProcess(new Grobid());
+            harvestAllHAL();
         } else if (process.equals("harvestDaily")) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Calendar cal = Calendar.getInstance();
