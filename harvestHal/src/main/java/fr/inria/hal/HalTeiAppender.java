@@ -32,6 +32,7 @@ public class HalTeiAppender {
 		// remove ugly end-of-line in starting and ending text as it is
         // a problem for stand-off annotations
         Utilities.trimEOL(docHalTei.getDocumentElement(), docHalTei);
+        docHalTei = removeElement(docHalTei, "analytic");
 
         NodeList orgs = docHalTei.getElementsByTagName("org");
         NodeList authors = docHalTei.getElementsByTagName("author");
@@ -47,6 +48,13 @@ public class HalTeiAppender {
             teiString = updateFullTextTei(doc, biblFull);
         }
         return teiString;
+    }
+    
+    private static Document removeElement(Document doc, String elementTagName){
+        Element element = (Element) doc.getElementsByTagName(elementTagName).item(0);
+        element.getParentNode().removeChild(element);
+        doc.normalize();
+        return doc;
     }
 
     private static Node findNode(String id, NodeList orgs) {
