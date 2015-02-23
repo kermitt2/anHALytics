@@ -111,11 +111,8 @@ public class OAIHarvester {
                             mongoManager.storeToGridfs(tmpFilePath, tei.getId() + ".pdf", MongoManager.BINARY_NAMESPACE, date);
                             
                             if(isGrobidProcessEnabled){
-                                String fulltextTeiFilename = tei.getId() + ".fulltext.tei.xml";
                                 logger.debug("\t\t\t Grobid processing...");
-                                String grobidTei = grobidProcess.runFullTextGrobid(tmpFilePath, 2, -1, true);
-                                System.out.println(grobidTei);
-                                mongoManager.storeToGridfs(new ByteArrayInputStream(grobidTei.getBytes()), fulltextTeiFilename, MongoManager.GROBID_TEI_NAMESPACE, date);                                
+                                grobidProcess.runFullTextGrobid(mongoManager, tei.getId(), tmpFilePath, 2, -1, true, date);                               
                             }                           
                         } else {
                             logger.debug("\t\t\t PDF not found !");

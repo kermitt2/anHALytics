@@ -1,8 +1,6 @@
 package fr.inria.hal;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.util.logging.Level;
 import org.slf4j.Logger;
@@ -46,15 +44,9 @@ public class GrobidWorker implements Runnable {
 
     private void processCommand() throws IOException, ParseException {
         try {
-            String teiFilename = filename.split("\\.")[0] + ".tei.xml";
-            InputStream inBinary = mm.streamFile(filename);
-            String filepath = Utilities.storeTmpFile(inBinary);
-            inBinary.close();
             System.out.println(filename);
-            GrobidService grobidService = new GrobidService(filepath, grobid_host, grobid_port, 2, -1, true);
-            InputStream inTeiGrobid = new ByteArrayInputStream(grobidService.runFullTextGrobid().getBytes());
-            mm.storeToGridfs(inTeiGrobid, teiFilename, MongoManager.GROBID_TEI_NAMESPACE, date);
-            inTeiGrobid.close();
+            GrobidService grobidService = new GrobidService(filename, mm, grobid_host, grobid_port, 2, -1, true, date);
+            grobidService.runFullTextGrobid();
             logger.debug("\t\t "+filename+" for "+date+" processed.");
         } catch (RuntimeException e) {
             e.printStackTrace();

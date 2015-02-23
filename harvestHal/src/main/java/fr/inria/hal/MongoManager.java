@@ -1,5 +1,6 @@
 package fr.inria.hal;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.DB;
 import com.mongodb.DBCursor;
@@ -31,6 +32,7 @@ public class MongoManager {
     public static final String BINARY_NAMESPACE = "binarynamespaces";
     public static final String GROBID_HAL_TEI_NAMESPACE = "halheader_grobidbody";
     public static final String GROBID_TEI_NAMESPACE = "grobidtei";
+    public static final String ASSETS_NAMESPACE = "assets";
 
     public static String filePath = "";
     private Map<String, List<String>> filenames = null;
@@ -66,6 +68,7 @@ public class MongoManager {
             gfsFile.put("ref", tei.getRef());
             ///gfsFile.put("subjects", tei.getSubjects());
             gfsFile.setFilename(fileName);
+            gfsFile.put("halId", Utilities.getHalIDFromFilename(fileName));
             gfsFile.save();
 
         } catch (MongoException e) {
@@ -81,6 +84,7 @@ public class MongoManager {
             GridFSInputFile gfsFile = gfs.createFile(file, true);
             gfsFile.put("uploadDate", Utilities.parseStringDate(dateString));
             gfsFile.setFilename(fileName);
+            gfsFile.put("halId", Utilities.getHalIDFromFilename(fileName));
             gfsFile.save();
         } catch (MongoException e) {
             e.printStackTrace();
@@ -95,9 +99,28 @@ public class MongoManager {
             gfs.remove(fileName);
             GridFSInputFile gfsFile = gfs.createFile(f);
             gfsFile.put("uploadDate", Utilities.parseStringDate(dateString));
+            gfsFile.put("halId", Utilities.getHalIDFromFilename(fileName));
             gfsFile.setFilename(fileName);
             gfsFile.save();
 
+        } catch (MongoException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void storeAssetToGridfs(InputStream file, String id, String fileName, String namespace, String dateString) throws ParseException {
+
+        try {
+            GridFS gfs = new GridFS(db, namespace);
+            BasicDBObject whereQuery = new BasicDBObject();
+	    whereQuery.put("halId", id);
+            gfs.remove(whereQuery);
+            //version ?
+            GridFSInputFile gfsFile = gfs.createFile(file, true);
+            gfsFile.put("uploadDate", Utilities.parseStringDate(dateString));
+            gfsFile.setFilename(fileName);
+            gfsFile.put("halId", id);
+            gfsFile.save();
         } catch (MongoException e) {
             e.printStackTrace();
         }
