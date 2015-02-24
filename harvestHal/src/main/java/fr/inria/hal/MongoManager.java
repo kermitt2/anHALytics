@@ -148,6 +148,20 @@ public class MongoManager {
         }
         return filenames;
     }
+    
+    public InputStream getFile(String halId, String filename, String collection) {
+        InputStream file = null;
+        try {
+            GridFS gfs = new GridFS(db, collection);
+            BasicDBObject whereQuery = new BasicDBObject();
+	    whereQuery.put("halId", halId);
+            whereQuery.put("filename", filename);
+            GridFSDBFile cursor = gfs.findOne(whereQuery);
+            file = cursor.getInputStream();
+        } catch (MongoException e) {
+        }
+        return file;
+    }
 
     public InputStream streamFile(String filename, String collection) {
         GridFSDBFile file = null;
