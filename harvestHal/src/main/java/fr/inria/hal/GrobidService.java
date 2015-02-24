@@ -158,7 +158,7 @@ public class GrobidService {
                             targetStream.close();
                         } else if (currFile.getName().toLowerCase().endsWith(".xml")) {
                             tei = Utilities.readFile(currFile.getAbsolutePath());
-                            tei = Utilities.trimEncodedCaraters(tei);
+                            tei = Utilities.trimEncodedCharaters(tei);
                             mm.storeToGridfs(new ByteArrayInputStream(tei.getBytes()), filename, MongoManager.GROBID_TEI_NAMESPACE, date);
                         }
                     }

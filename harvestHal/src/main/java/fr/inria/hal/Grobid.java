@@ -59,7 +59,7 @@ public class Grobid {
             // no consolidation (it would take too much time)
             // startPage is 1 to skip the cover page
             // endPage is -1, meaning end of the document
-            tei = Utilities.trimEncodedCaraters(tei);
+            tei = Utilities.trimEncodedCharaters(tei);
             mm.storeToGridfs(new ByteArrayInputStream(tei.getBytes()), fulltextTeiFilename, MongoManager.GROBID_TEI_NAMESPACE, date);
             
             // put now the assets, i.e. all the files under the asset path

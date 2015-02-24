@@ -28,7 +28,7 @@ public class AssetHalService {
     @Path("{halid}/{filename}/{key}")
     @GET
     @Produces("image/png")
-    public Response sayPlainTextHello(@PathParam("halid") String id, @PathParam("filename") String filename, @PathParam("key") String key) {
+    public Response getFile(@PathParam("halid") String id, @PathParam("filename") String filename, @PathParam("key") String key) {
         Response response = null;
         if(key.equals(KEY)){
         try {

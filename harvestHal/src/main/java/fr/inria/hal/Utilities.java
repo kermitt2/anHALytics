@@ -276,7 +276,7 @@ public class Utilities {
         return dates;
     }
 
-    public static String trimEncodedCaraters(String string) {
+    public static String trimEncodedCharaters(String string) {
         return string.replaceAll("&amp\\s+;", "&amp;").
                 replaceAll("&quot\\s+;|&amp;quot\\s*;", "&quot;").
                 replaceAll("&lt\\s+;|&amp;lt\\s*;", "&lt;").
