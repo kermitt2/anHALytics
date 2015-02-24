@@ -265,7 +265,8 @@ public class Utilities {
         int ind = filename.indexOf(".");
         String halID = filename.substring(0, ind);
         ind = halID.lastIndexOf("v");
-        halID = halID.substring(0, ind);
+        if(ind > -1)
+            halID = halID.substring(0, ind);
         return halID;
     }
 
