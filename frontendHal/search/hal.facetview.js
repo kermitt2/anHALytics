@@ -2420,10 +2420,10 @@ jQuery.extend({
 										}
 									}
 								}
-								if (previousState == passiveTerms.length) {
+								/*if (previousState == passiveTerms.length) {
 									// no new term
 									remainingSnippets.push(snippets[i]);
-								}
+								}*/
 							}
 						}
 					}
