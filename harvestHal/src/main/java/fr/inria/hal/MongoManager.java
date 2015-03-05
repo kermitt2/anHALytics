@@ -3,6 +3,7 @@ package fr.inria.hal;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoException;
@@ -27,6 +28,7 @@ import java.util.Properties;
 
 public class MongoManager {
 
+    public static final String DIAGNOSTICS = "diagnostics";
     public static final String OAI_NAMESPACE = "oairesponses";
     public static final String OAI_TEI_NAMESPACE = "oaiteis";
     public static final String BINARY_NAMESPACE = "binarynamespaces";
@@ -55,13 +57,13 @@ public class MongoManager {
             e.printStackTrace();
         }
     }
-    
+
     public void storeToGridfs(TEI tei, String fileName, String namespace, String dateString) throws IOException, ParseException {
 
         try {
             GridFS gfs = new GridFS(db, namespace);
             gfs.remove(fileName);
-            GridFSInputFile gfsFile = gfs.createFile(new ByteArrayInputStream(tei.getTei().getBytes()),true);
+            GridFSInputFile gfsFile = gfs.createFile(new ByteArrayInputStream(tei.getTei().getBytes()), true);
             gfsFile.put("uploadDate", Utilities.parseStringDate(dateString));
             gfsFile.put("type", tei.getDocumentType());
             gfsFile.put("doi", tei.getDoi());
@@ -107,13 +109,13 @@ public class MongoManager {
             e.printStackTrace();
         }
     }
-    
+
     public void storeAssetToGridfs(InputStream file, String id, String fileName, String namespace, String dateString) throws ParseException {
 
         try {
             GridFS gfs = new GridFS(db, namespace);
             BasicDBObject whereQuery = new BasicDBObject();
-	    whereQuery.put("halId", id);
+            whereQuery.put("halId", id);
             gfs.remove(whereQuery);
             //version ?
             GridFSInputFile gfsFile = gfs.createFile(file, true);
@@ -148,13 +150,13 @@ public class MongoManager {
         }
         return filenames;
     }
-    
+
     public InputStream getFile(String halId, String filename, String collection) {
         InputStream file = null;
         try {
             GridFS gfs = new GridFS(db, collection);
             BasicDBObject whereQuery = new BasicDBObject();
-	    whereQuery.put("halId", halId);
+            whereQuery.put("halId", halId);
             whereQuery.put("filename", filename);
             GridFSDBFile cursor = gfs.findOne(whereQuery);
             file = cursor.getInputStream();
@@ -183,5 +185,17 @@ public class MongoManager {
         } catch (MongoException e) {
         }
         return file.getInputStream();
+    }
+
+    public void save(String haldID, String process, String desc) {
+        try {
+            DBCollection collection = db.getCollection(DIAGNOSTICS);
+            BasicDBObject document = new BasicDBObject();
+            document.put("haldID", haldID);
+            document.put("process", process);
+            document.put("desc", desc);
+            collection.insert(document);
+        } catch (MongoException e) {
+        }
     }
 }

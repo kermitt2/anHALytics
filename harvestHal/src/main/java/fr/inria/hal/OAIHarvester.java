@@ -113,14 +113,18 @@ public class OAIHarvester {
                             if(isGrobidProcessEnabled){
                                 logger.debug("\t\t\t Grobid processing...");
                                 grobidProcess.runFullTextGrobid(mongoManager, tei.getId(), tmpFilePath, 2, -1, true, date);                               
-                            }                           
+                            }
                         } else {
+                            mongoManager.save(tei.getId(), "harvestProcess", "no file url");
                             logger.debug("\t\t\t PDF not found !");
                         }
                     } else {
                         logger.debug("\t\t\t Tei not found !!!");
                     }
+                } catch(BinaryNotAvailableException bna){
+                    mongoManager.save(tei.getId(), "harvestProcess", "file not available");
                 } catch (Exception e) {
+                    mongoManager.save(tei.getId(), "harvestProcess", "harvest error");
                     e.printStackTrace();
                 }
             }
