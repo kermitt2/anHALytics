@@ -2562,7 +2562,7 @@ jQuery.extend({
 						var pubNum = family.substring(ind+1,family.length);
 	                    result += '<div class="span2"><a href="https://hal.archives-ouvertes.fr/'+ family + 
 						'/document" target="_blank"><img class="thumbnail" style="float:right; " src="' + 
-						'https://thumb.ccsd.cnrs.fr/' + pubNum + '/small' + '" /></a></div>';
+						'https://hal.archives-ouvertes.fr/' + family + '/thumb' + '" /></a></div>';
 	                }
 					else {
 						result += '<div class="span2" />';

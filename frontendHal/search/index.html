@@ -49,10 +49,10 @@
     $('.facet-view-simple').facetview({
   	collection: 'npl',
   	subcollection: 'hal',
-      //search_url: 'http://localhost:9200/hal/_search?',
-	  search_url: 'http://traces1.saclay.inria.fr:8080/hal/_search?',
-	  //search_url_annotations: 'http://localhost:9200/hal_annots/_search?',
-	  search_url_annotations: 'http://traces1.saclay.inria.fr:8080/hal_annots/_search?',
+      search_url: 'http://localhost:9200/hal/_search?',
+	  //search_url: 'http://traces1.saclay.inria.fr:8080/hal/_search?',
+	  search_url_annotations: 'http://localhost:9200/hal_annots/_search?',
+	  //search_url_annotations: 'http://traces1.saclay.inria.fr:8080/hal_annots/_search?',
       search_index: 'elasticsearch',
   	snippet_style: 'andlauer',
   	service: "proxy", // access to service can be local or proxy, depending on security requirements
