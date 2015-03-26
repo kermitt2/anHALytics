@@ -32,7 +32,7 @@ public class AssetHalService {
         Response response = null;
         if(key.equals(KEY)){
         try {
-            InputStream is = mm.getFile(id, filename, MongoManager.ASSETS_NAMESPACE);
+            InputStream is = mm.getFile(id, filename, MongoManager.ASSETS);
             if (is == null) {
                 response = Response.status(Status.NOT_FOUND).build();
             } else {
