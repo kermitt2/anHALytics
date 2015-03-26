@@ -110,10 +110,11 @@ public class OAIHarvester {
                             System.out.println(tei.getId() + ".pdf");
                             mongoManager.storeToGridfs(tmpFilePath, tei.getId() + ".pdf", MongoManager.BINARY_NAMESPACE, date);
                             
-                            if(isGrobidProcessEnabled){
+                            /*if(isGrobidProcessEnabled){
                                 logger.debug("\t\t\t Grobid processing...");
                                 grobidProcess.runFullTextGrobid(mongoManager, tei.getId(), tmpFilePath, 2, -1, true, date);                               
                             }
+                            */
                         } else {
                             mongoManager.save(tei.getId(), "harvestProcess", "no file url");
                             logger.debug("\t\t\t PDF not found !");
