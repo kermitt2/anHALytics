@@ -154,12 +154,12 @@ public class GrobidService {
                     for (final File currFile : files) {
                         if (currFile.getName().toLowerCase().endsWith(".png")) {
                             InputStream targetStream = FileUtils.openInputStream(currFile);
-                            mm.storeAssetToGridfs(targetStream, Utilities.getHalIDFromFilename(filename), filename, MongoManager.ASSETS_NAMESPACE, date);
+                            mm.storeAssetToGridfs(targetStream, Utilities.getHalIDFromFilename(filename), filename, MongoManager.ASSETS, date);
                             targetStream.close();
                         } else if (currFile.getName().toLowerCase().endsWith(".xml")) {
                             tei = Utilities.readFile(currFile.getAbsolutePath());
                             tei = Utilities.trimEncodedCharaters(tei);
-                            mm.storeToGridfs(new ByteArrayInputStream(tei.getBytes()), filename, MongoManager.GROBID_TEI_NAMESPACE, date);
+                            mm.storeToGridfs(new ByteArrayInputStream(tei.getBytes()), filename, MongoManager.GROBID_TEIS, date);
                         }
                     }
                 }

@@ -60,7 +60,7 @@ public class Grobid {
             // startPage is 1 to skip the cover page
             // endPage is -1, meaning end of the document
             tei = Utilities.trimEncodedCharaters(tei);
-            mm.storeToGridfs(new ByteArrayInputStream(tei.getBytes()), fulltextTeiFilename, MongoManager.GROBID_TEI_NAMESPACE, date);
+            mm.storeToGridfs(new ByteArrayInputStream(tei.getBytes()), fulltextTeiFilename, MongoManager.GROBID_TEIS, date);
             
             // put now the assets, i.e. all the files under the asset path
             File assetPathDir = new File(assetPath);
@@ -72,7 +72,7 @@ public class Grobid {
                                 || currFile.getName().toLowerCase().endsWith(".png")) {
                             try {
                                 FileInputStream in = new FileInputStream(currFile);                             
-                                mm.storeAssetToGridfs(in, Utilities.getHalIDFromFilename(fulltextTeiFilename), currFile.getName(), MongoManager.ASSETS_NAMESPACE, date);
+                                mm.storeAssetToGridfs(in, Utilities.getHalIDFromFilename(fulltextTeiFilename), currFile.getName(), MongoManager.ASSETS, date);
                                 in.close();
                             } catch (IOException e) {
                                 e.printStackTrace();

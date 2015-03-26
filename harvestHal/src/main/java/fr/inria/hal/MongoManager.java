@@ -29,12 +29,11 @@ import java.util.Properties;
 public class MongoManager {
 
     public static final String DIAGNOSTICS = "diagnostics";
-    public static final String OAI_NAMESPACE = "oairesponses";
-    public static final String OAI_TEI_NAMESPACE = "oaiteis";
-    public static final String BINARY_NAMESPACE = "binarynamespaces";
-    public static final String GROBID_HAL_TEI_NAMESPACE = "halheader_grobidbody";
-    public static final String GROBID_TEI_NAMESPACE = "grobidtei";
-    public static final String ASSETS_NAMESPACE = "assets";
+    public static final String HAL_TEIS = "hal_teis";
+    public static final String HAL_BINARIES = "hal_binaries";
+    public static final String HALHEADER_GROBIDBODY_TEIS = "halheader_grobidbody_teis";
+    public static final String GROBID_TEIS = "grobid_teis";
+    public static final String ASSETS = "assets";
 
     public static String filePath = "";
     private Map<String, List<String>> filenames = null;
@@ -179,7 +178,7 @@ public class MongoManager {
     public InputStream streamFile(String filename) {
         GridFSDBFile file = null;
         try {
-            GridFS gfs = new GridFS(db, BINARY_NAMESPACE);
+            GridFS gfs = new GridFS(db, HAL_BINARIES);
             file = gfs.findOne(filename);
 
         } catch (MongoException e) {

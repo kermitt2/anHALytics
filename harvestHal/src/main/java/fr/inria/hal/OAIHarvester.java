@@ -99,7 +99,7 @@ public class OAIHarvester {
                     String teiString = tei.getTei();
                     if (teiString.length() > 0) {
                         logger.debug("\t\t\t\t Storing tei : " + tei.getId());
-                        mongoManager.storeToGridfs(tei, teiFilename, MongoManager.OAI_TEI_NAMESPACE, date);
+                        mongoManager.storeToGridfs(tei, teiFilename, MongoManager.HAL_TEIS, date);
 
                         //binary processing.
                         if (tei.getFileUrl() != null) {
@@ -108,7 +108,7 @@ public class OAIHarvester {
                             inBinary = new BufferedInputStream(request(binaryUrl));
                             String tmpFilePath = Utilities.storeTmpFile(inBinary);
                             System.out.println(tei.getId() + ".pdf");
-                            mongoManager.storeToGridfs(tmpFilePath, tei.getId() + ".pdf", MongoManager.BINARY_NAMESPACE, date);
+                            mongoManager.storeToGridfs(tmpFilePath, tei.getId() + ".pdf", MongoManager.HAL_BINARIES, date);
                             
                             /*if(isGrobidProcessEnabled){
                                 logger.debug("\t\t\t Grobid processing...");
@@ -187,7 +187,7 @@ public class OAIHarvester {
     }
 
     private void processGrobid() throws IOException {
-        Map<String, List<String>> filenames = mongoManager.getFilenames(MongoManager.BINARY_NAMESPACE);
+        Map<String, List<String>> filenames = mongoManager.getFilenames(MongoManager.HAL_BINARIES);
         ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
         for (String date : dates) {
             List<String> dateFilenames = filenames.get(date);
@@ -210,7 +210,7 @@ public class OAIHarvester {
     }
 
     private void merge() throws ParserConfigurationException, IOException, SAXException, TransformerException, ParseException {        
-        Map<String, List<String>> filenames = mongoManager.getFilenames(MongoManager.GROBID_TEI_NAMESPACE);
+        Map<String, List<String>> filenames = mongoManager.getFilenames(MongoManager.GROBID_TEIS);
         InputStream grobid_tei = null;
         InputStream hal_tei = null;
         String result;
@@ -221,11 +221,11 @@ public class OAIHarvester {
                 for (final String filename : dateFilenames) {
                     try {
                         logger.debug("\t\t Merging documents.. for: " + filename);
-                        grobid_tei = mongoManager.streamFile(filename, MongoManager.GROBID_TEI_NAMESPACE);
-                        hal_tei = mongoManager.streamFile(filename, MongoManager.OAI_TEI_NAMESPACE);
+                        grobid_tei = mongoManager.streamFile(filename, MongoManager.GROBID_TEIS);
+                        hal_tei = mongoManager.streamFile(filename, MongoManager.HAL_TEIS);
                         result = HalTeiAppender.replaceHeader(hal_tei, grobid_tei, false);
                         InputStream tei = new ByteArrayInputStream(result.getBytes());
-                        mongoManager.storeToGridfs(tei, filename, MongoManager.GROBID_HAL_TEI_NAMESPACE, date);
+                        mongoManager.storeToGridfs(tei, filename, MongoManager.HALHEADER_GROBIDBODY_TEIS, date);
                         grobid_tei.close();
                         hal_tei.close();
                     } catch (SAXParseException e) {
