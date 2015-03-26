@@ -190,6 +190,10 @@ public class MongoManager {
     public void save(String haldID, String process, String desc) {
         try {
             DBCollection collection = db.getCollection(DIAGNOSTICS);
+            BasicDBObject whereQuery = new BasicDBObject();
+            whereQuery.put("halId", haldID);
+            whereQuery.put("process", process);
+            collection.remove(whereQuery);
             BasicDBObject document = new BasicDBObject();
             document.put("haldID", haldID);
             document.put("process", process);
