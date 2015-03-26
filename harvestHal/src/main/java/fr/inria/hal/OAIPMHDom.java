@@ -1,5 +1,6 @@
 package fr.inria.hal;
 
+import java.net.URLEncoder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -92,7 +93,7 @@ public class OAIPMHDom implements OAIPMHMetadata {
 
     private void setToken(Element rootElement) {
         try {
-            this.token = rootElement.getElementsByTagName(ResumptionToken).item(0).getTextContent();
+            this.token = URLEncoder.encode(rootElement.getElementsByTagName(ResumptionToken).item(0).getTextContent());
         } catch (Exception ex) {
             this.token = null;
         }
