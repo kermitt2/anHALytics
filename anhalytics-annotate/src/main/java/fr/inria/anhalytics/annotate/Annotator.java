@@ -142,7 +142,6 @@ public class Annotator {
         String fromDate = null;
         String untilDate = null;
         boolean isMultiThread = false;
-        boolean indexingEnabled = false;
         int nbAnnots;
         Annotator annotator = new Annotator();
         String currArg;
@@ -182,10 +181,6 @@ public class Annotator {
                 isMultiThread = true;
                 continue;
             }
-            if (currArg.equals("-index")) {
-                indexingEnabled = true;
-                continue;
-            }
         }
         if (untilDate != null || fromDate != null) {
             Utilities.updateDates(fromDate, untilDate);
@@ -200,19 +195,6 @@ public class Annotator {
             }
                     
             logger.debug("Total: " + nbAnnots + " annotations produced.");
-            if (indexingEnabled) {
-                ElasticSearchManager esm = new ElasticSearchManager();
-                // loading based on DocDB XML, with TEI conversion
-                try {
-                    logger.debug("Total: ");
-                    esm.setUpElasticSearch();
-                    int nbAnnotsIndexed = esm.index();
-                    logger.debug("Total: " + nbAnnotsIndexed + " annotations indexed.");
-                } catch (Exception e) {
-                    System.err.println("Error when setting-up ElasticSeach cluster");
-                    e.printStackTrace();
-                }
-            }
         } catch (Exception e) {
             System.err.println("Error when setting-up the annotator.");
             e.printStackTrace();
