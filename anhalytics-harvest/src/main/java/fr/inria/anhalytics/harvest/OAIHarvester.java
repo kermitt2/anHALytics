@@ -67,13 +67,13 @@ public class OAIHarvester {
 
         Properties prop = new Properties();
         try {
-            prop.load(new FileInputStream("harvestHal.properties"));
-            hrtArgs.setGrobidHost(prop.getProperty("harvestHal.grobid_host"));
-            hrtArgs.setGrobidPort(prop.getProperty("harvestHal.grobid_port"));
-            hrtArgs.setTmpPath(prop.getProperty("harvestHal.tmpPath"));
-            Utilities.setTmpPath(prop.getProperty("harvestHal.tmpPath"));   
-            hrtArgs.setPath2grobidHome(prop.getProperty("harvestHal.pGrobidHome"));
-            hrtArgs.setPath2grobidProperty(prop.getProperty("harvestHal.pGrobidProperties"));
+            prop.load(new FileInputStream("harvest.properties"));
+            hrtArgs.setGrobidHost(prop.getProperty("harvest.grobid_host"));
+            hrtArgs.setGrobidPort(prop.getProperty("harvest.grobid_port"));
+            hrtArgs.setTmpPath(prop.getProperty("harvest.tmpPath"));
+            Utilities.setTmpPath(prop.getProperty("harvest.tmpPath"));   
+            hrtArgs.setPath2grobidHome(prop.getProperty("harvest.pGrobidHome"));
+            hrtArgs.setPath2grobidProperty(prop.getProperty("harvest.pGrobidProperties"));
         } catch (Exception e) {
             e.printStackTrace();
         }

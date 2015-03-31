@@ -46,11 +46,11 @@ public class ElasticSearchManager {
     private void loadProperties() {
         try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream("annotateHal.properties"));
-            elasticSearch_host = prop.getProperty("org.annotateHal.elasticSearch_host");
-            elasticSearch_port = prop.getProperty("org.annotateHal.elasticSearch_port");
-            elasticSearchClusterName = prop.getProperty("org.annotateHal.elasticSearch_cluster");
-            indexName = prop.getProperty("org.annotateHal.elasticSearch_indexName");
+            prop.load(new FileInputStream("annotate.properties"));
+            elasticSearch_host = prop.getProperty("annotate.elasticSearch_host");
+            elasticSearch_port = prop.getProperty("annotate.elasticSearch_port");
+            elasticSearchClusterName = prop.getProperty("annotate.elasticSearch_cluster");
+            indexName = prop.getProperty("annotate.elasticSearch_indexName");
         } catch (Exception e) {
             System.err.println("Failed to load properties: " + e.getMessage());
             e.printStackTrace();

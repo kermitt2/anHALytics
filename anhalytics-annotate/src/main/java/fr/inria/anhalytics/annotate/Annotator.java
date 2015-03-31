@@ -33,10 +33,10 @@ public class Annotator {
     private void loadProperties() {
         try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream("annotateHal.properties"));
-            nerd_host = prop.getProperty("org.annotateHal.nerd_host");
-            nerd_port = prop.getProperty("org.annotateHal.nerd_port");
-            String threads = prop.getProperty("org.annotateHal.nbThreads");
+            prop.load(new FileInputStream("annotate.properties"));
+            nerd_host = prop.getProperty("annotate.nerd_host");
+            nerd_port = prop.getProperty("annotate.nerd_port");
+            String threads = prop.getProperty("annotate.nbThreads");
             try {
                 nbThreads = Integer.parseInt(threads);
             } catch (java.lang.NumberFormatException e) {

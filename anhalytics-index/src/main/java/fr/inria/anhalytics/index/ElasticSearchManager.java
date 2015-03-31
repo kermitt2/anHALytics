@@ -1,7 +1,6 @@
 package fr.inria.anhalytics.index;
 
 import fr.inria.anhalytics.commons.managers.MongoManager;
-import static fr.inria.anhalytics.commons.managers.MongoManager.HALHEADER_GROBIDBODY_TEIS;
 import java.io.*;
 import java.util.*;
 
@@ -37,11 +36,11 @@ public class ElasticSearchManager {
     private void loadProperties() {
         try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream("indexHal.properties"));
-            elasticSearch_host = prop.getProperty("org.indexHal.elasticSearch_host");
-            elasticSearch_port = prop.getProperty("org.indexHal.elasticSearch_port");
-            elasticSearchClusterName = prop.getProperty("org.indexHal.elasticSearch_cluster");
-            indexName = prop.getProperty("org.indexHal.elasticSearch_indexName");
+            prop.load(new FileInputStream("index.properties"));
+            elasticSearch_host = prop.getProperty("index.elasticSearch_host");
+            elasticSearch_port = prop.getProperty("index.elasticSearch_port");
+            elasticSearchClusterName = prop.getProperty("index.elasticSearch_cluster");
+            indexName = prop.getProperty("index.elasticSearch_indexName");
         } catch (Exception e) {
             System.err.println("Failed to load properties: " + e.getMessage());
             e.printStackTrace();

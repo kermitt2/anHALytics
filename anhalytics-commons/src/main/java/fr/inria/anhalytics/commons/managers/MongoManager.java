@@ -61,12 +61,12 @@ public class MongoManager {
     public MongoManager() {
         try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream("indexHal.properties"));
-            mongodbServer = prop.getProperty("org.indexHal.mongodb_host");
-            mongodbPort = Integer.parseInt(prop.getProperty("org.indexHal.mongodb_port"));
-            String mongodbDb = prop.getProperty("org.indexHal.mongodb_db");
-            String mongodbUser = prop.getProperty("org.indexHal.mongodb_user");
-            String mongodbPass = prop.getProperty("org.indexHal.mongodb_pass");
+            prop.load(new FileInputStream("commons.properties"));
+            mongodbServer = prop.getProperty("commons.mongodb_host");
+            mongodbPort = Integer.parseInt(prop.getProperty("commons.mongodb_port"));
+            String mongodbDb = prop.getProperty("commons.mongodb_db");
+            String mongodbUser = prop.getProperty("commons.mongodb_user");
+            String mongodbPass = prop.getProperty("commons.mongodb_pass");
             mongo = new MongoClient(mongodbServer, mongodbPort);
             db = mongo.getDB(mongodbDb);
             boolean auth = db.authenticate(mongodbUser, mongodbPass.toCharArray());
