@@ -189,11 +189,7 @@
 		   <version>20080701</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.8.5</version>
-		</dependency>
+		
 		
 		<dependency>
 		    <groupId>org.elasticsearch</groupId>
@@ -207,6 +203,12 @@
 			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
+                <dependency>
+            <groupId>fr.inria.anhalytics.commons</groupId>
+            <artifactId>anhalytics-commons</artifactId>
+            <version>0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 		
     </dependencies>
     <name>anhalytics-index</name>

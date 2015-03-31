@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>fr.inria.hal.harvestHal</groupId>
+    
+    <parent>
+        <groupId>fr.inria.anhalytics</groupId>
+        <artifactId>anhalytics</artifactId>
+        <version>0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    
+    <groupId>fr.inria.anhalytics.harvest</groupId>
     <artifactId>anhalytics-harvest</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -20,6 +28,7 @@
             </roles>
         </contributor>
     </contributors>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.6</maven.compiler.source>
@@ -196,11 +205,16 @@
         </dependency>
 
         <dependency>
-            <groupId>org.grobid.core</groupId>
-            <artifactId>grobid</artifactId>
+            <groupId>org.grobid</groupId>
+            <artifactId>grobid-core</artifactId>
             <version>0.3.3-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/grobid-core-0.3.3-SNAPSHOT.jar</systemPath>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>directory-naming</groupId>
+                    <artifactId>naming-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -286,6 +300,12 @@
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
             <version>1.9</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>fr.inria.anhalytics.commons</groupId>
+            <artifactId>anhalytics-commons</artifactId>
+            <version>0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
