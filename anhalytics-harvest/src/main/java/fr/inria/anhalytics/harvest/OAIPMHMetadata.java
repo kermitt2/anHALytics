@@ -1,5 +1,6 @@
-package fr.inria.hal;
+package fr.inria.anhalytics.harvest;
 
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -13,7 +14,7 @@ public interface OAIPMHMetadata {
     public final static String IdElement = "identifier";
     public final static String TypeElement = "setSpec";
     public final static String ResumptionToken = "resumptionToken";
-    public final static String FileUrlElement = "ref";
+    public final static String FileUrlElement = "metadata/TEI/text/body/listBibl/biblFull/editionStmt/edition/ref[@type='file'][1]";
     public final static String RefPATH = "metadata/TEI/text/body/listBibl/biblFull/publicationStmt/idno[@type='halRef']";
     public final static String DoiPATH = "metadata/TEI/text/body/listBibl/biblFull/sourceDesc/biblStruct/idno[@type='doi']";
     
@@ -25,5 +26,5 @@ public interface OAIPMHMetadata {
     public String getTei(NodeList tei);
     public String getId(NodeList tei);
     public String getDocumentType(NodeList tei);
-     public String getFileUrl(NodeList tei);
+     public String getFileUrl(Node record);
 }

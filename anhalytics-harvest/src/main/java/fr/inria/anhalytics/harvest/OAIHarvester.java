@@ -173,14 +173,14 @@ public class OAIHarvester {
                 }
             }
             activateGrobid();
-            setGrobidProcess(new Grobid());
+            //setGrobidProcess(new Grobid());
             harvestAllHAL();
         } else if (process.equals("harvestDaily")) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DATE, -1);
             activateGrobid();
-            setGrobidProcess(new Grobid());
+            //setGrobidProcess(new Grobid());
             harvestHALForDate(hrtArgs.getOaiUrl(), dateFormat.format(cal.getTime()));
         } else if (process.equals("processGrobid")) {
             //clearTmpDirectory();‡            

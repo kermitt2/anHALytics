@@ -1,5 +1,6 @@
-package fr.inria.hal;
+package fr.inria.anhalytics.harvest;
 
+import fr.inria.anhalytics.commons.data.TEI;
 import java.net.URLEncoder;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,7 +54,7 @@ public class OAIPMHDom implements OAIPMHMetadata {
                         String tei = getTei(record.getElementsByTagName(TeiElement));
                         String doi = getDoi(record);
                         String id = getId(record.getElementsByTagName(IdElement));
-                        String fileUrl = getFileUrl(record.getElementsByTagName(FileUrlElement));
+                        String fileUrl = getFileUrl(record);
                         String ref = getRef(record);
                         teis.add(new TEI(id, tei, doi, type, fileUrl, ref));
                     }
@@ -110,16 +111,12 @@ public class OAIPMHDom implements OAIPMHMetadata {
     }
 
     @Override
-    public String getFileUrl(NodeList refs) {
-        String url = null;
-        for (int i = refs.getLength() - 1; i >= 0; i--) {
-            if (refs.item(i) instanceof Element) {
-                Element ref = (Element) refs.item(i);
-                if (ref.getAttribute("type").equals("file")) {
-                    url = ref.getAttribute("target");
-                    break;
-                }
-            }
+    public String getFileUrl(Node record) {
+        String url = null;        
+        try {
+            Element node = (Element) xPath.compile(FileUrlElement).evaluate(record, XPathConstants.NODE);
+            url = node.getAttribute("target");
+        } catch (Exception ex) {
         }
         return url;
     }
