@@ -42,8 +42,6 @@ public class OAIHarvester {
 
     private final MongoManager mm;
     private final OAIPMHDom oaiDom;
-    private Grobid grobidProcess = null;
-    private boolean isGrobidProcessEnabled;
 
     
     private static int nullBinaries = 0;
@@ -110,15 +108,8 @@ public class OAIHarvester {
                             String binaryUrl = tei.getFileUrl();
                             logger.debug("\t\t\t Downloading: " + binaryUrl);
                             inBinary = new BufferedInputStream(request(binaryUrl));
-                            //String tmpFilePath = Utilities.storeTmpFile(inBinary);
                             System.out.println(tei.getId() + ".pdf");
                             mm.addDocument(inBinary, tei.getId() + ".pdf", MongoManager.HAL_BINARIES, date);
-                            
-                            /*if(isGrobidProcessEnabled){
-                                logger.debug("\t\t\t Grobid processing...");
-                                grobidProcess.runFullTextGrobid(mongoManager, tei.getId(), tmpFilePath, 2, -1, true, date);                               
-                            }
-                            */
                         } else {
                             mm.save(tei.getId(), "harvestProcess", "no file url");
                             logger.debug("\t\t\t PDF not found !");
@@ -165,28 +156,25 @@ public class OAIHarvester {
     private void processCommand() throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException, Exception {
         String process = hrtArgs.getProcessName();
         if (process.equals("harvestAll")) {
-            if(dates.size() > 5){
-               if(askConfirm()){
-                   harvestAllHAL();
-                   processGrobid();
-                   return;
-                }
-            }
-            activateGrobid();
-            //setGrobidProcess(new Grobid());
             harvestAllHAL();
+            processGrobid();
+            return;
         } else if (process.equals("harvestDaily")) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DATE, -1);
-            activateGrobid();
-            //setGrobidProcess(new Grobid());
-            harvestHALForDate(hrtArgs.getOaiUrl(), dateFormat.format(cal.getTime()));
-        } else if (process.equals("processGrobid")) {
-            //clearTmpDirectory();‡            
+            String date = dateFormat.format(cal.getTime());
+            Utilities.updateDates(date, date);
+            harvestHALForDate(hrtArgs.getOaiUrl(), date);
             processGrobid();
+            return;
+        } else if (process.equals("processGrobid")) {
+            //clearTmpDirectory();           
+            processGrobid();
+            return;
         } else if (process.equals("merge")) {
             merge();
+            return;
         }
     }
 
@@ -367,13 +355,5 @@ public class OAIHarvester {
             e.printStackTrace();
         }
         return in;
-    }
-    
-    public void setGrobidProcess(Grobid grobidProcess) {
-        this.grobidProcess = grobidProcess;
-    }
-
-    private void activateGrobid() {
-        this.isGrobidProcessEnabled = true;
     }
 }
