@@ -21,9 +21,9 @@ public class Grobid {
     public Grobid() {
         try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream("harvestHal.properties"));
-            String pGrobidHome = prop.getProperty("harvestHal.pGrobidHome");
-            String pGrobidProperties = prop.getProperty("harvestHal.pGrobidProperties");
+            prop.load(new FileInputStream("harvest.properties"));
+            String pGrobidHome = prop.getProperty("harvest.pGrobidHome");
+            String pGrobidProperties = prop.getProperty("harvest.pGrobidProperties");
 
             MockContext.setInitialContext(pGrobidHome, pGrobidProperties);
             GrobidProperties.getInstance();

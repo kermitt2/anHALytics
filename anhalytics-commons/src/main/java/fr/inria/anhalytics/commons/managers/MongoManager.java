@@ -61,7 +61,8 @@ public class MongoManager {
     public MongoManager() {
         try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream("commons.properties"));
+            File file = new File(System.getProperty("user.dir"));
+            prop.load(new FileInputStream(file.getParent()+"/anhalytics-commons/"+"commons.properties"));
             mongodbServer = prop.getProperty("commons.mongodb_host");
             mongodbPort = Integer.parseInt(prop.getProperty("commons.mongodb_port"));
             String mongodbDb = prop.getProperty("commons.mongodb_db");
