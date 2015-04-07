@@ -1,5 +1,6 @@
 package fr.inria.anhalytics.harvest;
 
+import fr.inria.anhalytics.commons.data.PubFile;
 import fr.inria.anhalytics.commons.data.TEI;
 import java.net.URLEncoder;
 import java.io.IOException;
@@ -50,13 +51,16 @@ public class OAIPMHDom implements OAIPMHMetadata {
                 if ((listRecords.item(i) instanceof Element)) {
                     Element record = (Element) listRecords.item(i);
                     String type = getDocumentType(record.getElementsByTagName(TypeElement));
-                    if (isConsideredType(type)) {
+                    if (isConsideredType(type)) {                        
                         String tei = getTei(record.getElementsByTagName(TeiElement));
                         String doi = getDoi(record);
                         String id = getId(record.getElementsByTagName(IdElement));
-                        String fileUrl = getFileUrl(record);
+                        
+                        PubFile file = getFile(record);
+                        List<PubFile> annexes = getAnnexes(record);
+                        
                         String ref = getRef(record);
-                        teis.add(new TEI(id, tei, doi, type, fileUrl, ref));
+                        teis.add(new TEI(id, file, annexes, doi, type, tei, ref));
                     }
                 }
             }
@@ -111,14 +115,38 @@ public class OAIPMHDom implements OAIPMHMetadata {
     }
 
     @Override
-    public String getFileUrl(Node record) {
-        String url = null;        
+    public PubFile getFile(Node record) {
+        PubFile file = null;        
         try {
-            Element node = (Element) xPath.compile(FileUrlElement).evaluate(record, XPathConstants.NODE);
-            url = node.getAttribute("target");
+            
+            Element node = (Element) xPath.compile(FileElement).evaluate(record, XPathConstants.NODE);            
+            String url = node.getAttribute("target");
+            String date = ((Element)node.getChildNodes().item(1)).getAttribute("notBefore");
+            file = new PubFile(url, date, "file");
         } catch (Exception ex) {
         }
-        return url;
+        return file;
+    }
+    
+    public List<PubFile> getAnnexes(Node record){
+    List<PubFile> annexes = new ArrayList<PubFile>();
+    try {
+        String url = null;
+        String date = null;
+        String type = null;
+            NodeList nodes = (NodeList) xPath.compile(AnnexesUrlsElement).evaluate(record, XPathConstants.NODESET);
+             for (int i = nodes.getLength() - 1; i >= 0; i--) {
+                 Element node = (Element)nodes.item(i);
+                 url = node.getAttribute("target");
+                 type = node.getAttribute("subtype");
+                 type = type == null ? "pdf":type;
+                 date = ((Element)node.getChildNodes().item(1)).getAttribute("notBefore");
+                 annexes.add(new PubFile(url, date, type));
+             }
+            
+        } catch (Exception ex) {
+        }
+        return annexes;
     }
 
     @Override

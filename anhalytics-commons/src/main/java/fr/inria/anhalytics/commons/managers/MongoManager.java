@@ -34,6 +34,7 @@ public class MongoManager {
     public static final String DIAGNOSTICS = "diagnostics";
     public static final String HAL_TEIS = "hal_teis";
     public static final String HAL_BINARIES = "hal_binaries";
+    public static final String HAL_PUB_ANNEXES = "hal_pub_annexes";
     public static final String HALHEADER_GROBIDBODY_TEIS = "halheader_grobidbody_teis";
     public static final String GROBID_TEIS = "grobid_teis";
     public static final String ASSETS = "assets";
@@ -369,12 +370,35 @@ public class MongoManager {
             GridFS gfs = new GridFS(db, namespace);
             BasicDBObject whereQuery = new BasicDBObject();
             whereQuery.put("halId", id);
+            whereQuery.put("fileName", fileName);
             gfs.remove(whereQuery);
             //version ?
             GridFSInputFile gfsFile = gfs.createFile(file, true);
             gfsFile.put("uploadDate", Utilities.parseStringDate(dateString));
             gfsFile.setFilename(fileName);
             gfsFile.put("halId", id);
+            gfsFile.save();
+        } catch (MongoException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     */
+    public void addAnnexDocument(InputStream file, String type, String id, String namespace, String dateString) throws ParseException {
+
+        try {
+            GridFS gfs = new GridFS(db, namespace);
+            BasicDBObject whereQuery = new BasicDBObject();
+            whereQuery.put("halId", id);
+            whereQuery.put("contentType", type);
+            gfs.remove(whereQuery);
+            //version ?
+            GridFSInputFile gfsFile = gfs.createFile(file, true);
+            gfsFile.put("uploadDate", Utilities.parseStringDate(dateString));
+            gfsFile.setFilename(id);
+            gfsFile.put("halId", id);
+            gfsFile.setContentType(type);
             gfsFile.save();
         } catch (MongoException e) {
             e.printStackTrace();
@@ -420,7 +444,7 @@ public class MongoManager {
         return file.getInputStream();
     }
 
-    public void save(String haldID, String process, String desc) {
+    public void save(String haldID, String process, String desc, String date) {
         try {
             DBCollection collection = db.getCollection(DIAGNOSTICS);
             BasicDBObject whereQuery = new BasicDBObject();
@@ -431,6 +455,9 @@ public class MongoManager {
             document.put("haldID", haldID);
             document.put("process", process);
             document.put("desc", desc);
+            if(date == null)
+                date = Utilities.formatDate(new Date());
+            document.put("date", date);
             collection.insert(document);
         } catch (MongoException e) {
         }

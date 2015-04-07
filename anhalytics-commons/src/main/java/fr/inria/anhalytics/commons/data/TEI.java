@@ -10,11 +10,12 @@ import java.util.List;
 public class TEI {
     
     public TEI(){}
-    public TEI(String id, String tei, String doi, String documentType, String fileUrl, String ref){
+    public TEI(String id, PubFile file, List<PubFile> annexes, String doi, String documentType, String tei, String ref){
         this.id = id;
         this.tei = tei;
         this.documentType = documentType;
-        this.fileUrl = fileUrl;
+        this.file = file;
+        this.annexes = annexes;
         this.doi = doi;
         this.ref = ref;
     }
@@ -23,7 +24,8 @@ public class TEI {
     private String doi;
     private String tei;
     private String documentType;
-    private String fileUrl;
+    private PubFile file;
+    private List<PubFile> annexes;
     private String ref;
     private List<String> subjects;
 
@@ -67,20 +69,6 @@ public class TEI {
      */
     public void setDocumentType(String documentType) {
         this.documentType = documentType;
-    }
-
-    /**
-     * @return the fileUrl
-     */
-    public String getFileUrl() {
-        return fileUrl;
-    }
-
-    /**
-     * @param fileUrl the fileUrl to set
-     */
-    public void setFileUrl(String fileUrl) {
-        this.fileUrl = fileUrl;
     }
 
     /**
@@ -129,5 +117,33 @@ public class TEI {
         if(subjects == null)
             subjects = new ArrayList<String>();
         subjects.add(subject);
+    }
+
+    /**
+     * @return the file
+     */
+    public PubFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(PubFile file) {
+        this.file = file;
+    }
+
+    /**
+     * @return the annexes
+     */
+    public List<PubFile> getAnnexes() {
+        return annexes;
+    }
+
+    /**
+     * @param annexes the annexes to set
+     */
+    public void setAnnexes(List<PubFile> annexes) {
+        this.annexes = annexes;
     }
 }

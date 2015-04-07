@@ -1,5 +1,6 @@
 package fr.inria.anhalytics.harvest;
 
+import fr.inria.anhalytics.commons.data.PubFile;
 import fr.inria.anhalytics.commons.exceptions.BinaryNotAvailableException;
 import fr.inria.anhalytics.commons.data.TEI;
 import fr.inria.anhalytics.commons.managers.MongoManager;
@@ -24,18 +25,20 @@ public class OAIHarvester {
     private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
 
     private static final int NTHREDS = 4;
-    
-    private static List<String> availableCommands = new ArrayList<String>() {{
-                                                                                add("harvestAll");
-                                                                                add("harvestDaily");
-                                                                                add("processGrobid");
-                                                                                add("merge");
-                                                                            }};
+
+    private static List<String> availableCommands = new ArrayList<String>() {
+        {
+            add("harvestAll");
+            add("harvestDaily");
+            add("processGrobid");
+            add("merge");
+        }
+    };
     private static Set<String> dates = new LinkedHashSet<String>();
     /**
-    * Arguments of processes.
-    */
-    private static HarvesterArgs hrtArgs ;
+     * Arguments of processes.
+     */
+    private static HarvesterArgs hrtArgs;
 
     private ArrayList<String> fields = null;
     private ArrayList<String> affiliations = null;
@@ -43,7 +46,6 @@ public class OAIHarvester {
     private final MongoManager mm;
     private final OAIPMHDom oaiDom;
 
-    
     private static int nullBinaries = 0;
 
     public enum Decision {
@@ -52,7 +54,7 @@ public class OAIHarvester {
     }
 
     public OAIHarvester() {
-        
+
         dates = Utilities.getDates();
         mm = new MongoManager();
         oaiDom = new OAIPMHDom();
@@ -69,32 +71,32 @@ public class OAIHarvester {
             hrtArgs.setGrobidHost(prop.getProperty("harvest.grobid_host"));
             hrtArgs.setGrobidPort(prop.getProperty("harvest.grobid_port"));
             hrtArgs.setTmpPath(prop.getProperty("harvest.tmpPath"));
-            Utilities.setTmpPath(prop.getProperty("harvest.tmpPath"));   
+            Utilities.setTmpPath(prop.getProperty("harvest.tmpPath"));
             hrtArgs.setPath2grobidHome(prop.getProperty("harvest.pGrobidHome"));
             hrtArgs.setPath2grobidProperty(prop.getProperty("harvest.pGrobidProperties"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
 
     public void harvestHALForDate(String url, String date) throws IOException, SAXException, ParserConfigurationException, ParseException {
         boolean stop = false;
         String tokenn = null;
-        InputStream inBinary = null;
         while (!stop) {
-            String request = url+"/?verb=ListRecords&metadataPrefix=xml-tei&from=" + date + "&until=" + date;
+            String request = url + "/?verb=ListRecords&metadataPrefix=xml-tei&from=" + date + "&until=" + date;
 
             if (tokenn != null) {
-                request = url+"/?verb=ListRecords&resumptionToken=" + tokenn;
+                request = url + "/?verb=ListRecords&resumptionToken=" + tokenn;
             }
-
+            System.out.println(request);
             logger.debug("Sending: " + request);
 
             InputStream in = request(request);
             logger.debug("\t Extracting teis.... for " + date);
             List<TEI> teis = oaiDom.getTeis(in);
-            for(TEI tei:teis) {
+
+            for (TEI tei : teis) {
                 try {
                     String teiFilename = tei.getId() + ".tei.xml";
                     logger.debug("\t\t Extracting tei.... for " + tei.getId());
@@ -104,23 +106,24 @@ public class OAIHarvester {
                         mm.addDocument(new ByteArrayInputStream(teiString.getBytes()), teiFilename, MongoManager.HAL_TEIS, date);
 
                         //binary processing.
-                        if (tei.getFileUrl() != null) {
-                            String binaryUrl = tei.getFileUrl();
-                            logger.debug("\t\t\t Downloading: " + binaryUrl);
-                            inBinary = new BufferedInputStream(request(binaryUrl));
+                        if (tei.getFile() != null) {
                             System.out.println(tei.getId() + ".pdf");
-                            mm.addDocument(inBinary, tei.getId() + ".pdf", MongoManager.HAL_BINARIES, date);
+                            downloadPubFiles(tei.getFile(), tei.getId(), date);
                         } else {
-                            mm.save(tei.getId(), "harvestProcess", "no file url");
+                            mm.save(tei.getId(), "harvestProcess", "no file url", null);
                             logger.debug("\t\t\t PDF not found !");
+                        }
+                        //annexes
+                        for (PubFile file : tei.getAnnexes()) {
+                            downloadPubFiles(file, tei.getId(), date);
                         }
                     } else {
                         logger.debug("\t\t\t Tei not found !!!");
                     }
-                } catch(BinaryNotAvailableException bna){
-                    mm.save(tei.getId(), "harvestProcess", "file not available");
+                } catch (BinaryNotAvailableException bna) {
+                    mm.save(tei.getId(), "harvestProcess", "file not available", null);
                 } catch (Exception e) {
-                    mm.save(tei.getId(), "harvestProcess", "harvest error");
+                    mm.save(tei.getId(), "harvestProcess", "harvest error", null);
                     e.printStackTrace();
                 }
             }
@@ -130,6 +133,27 @@ public class OAIHarvester {
             if (tokenn == null) {
                 stop = true;
             }
+        }
+    }
+
+    private void downloadPubFiles(PubFile file, String id, String date) throws ParseException, IOException {
+        InputStream inBinary = null;
+        Date embDate = Utilities.parseStringDate(file.getEmbargoDate());
+        Date today = new Date();
+        if (embDate.before(today) || embDate.equals(today)) {
+            logger.debug("\t\t\t Downloading: " + file.getUrl());
+            inBinary = new BufferedInputStream(request(file.getUrl()));
+            
+            if((file.getType()).equals("file")){
+                mm.addDocument(inBinary, id + ".pdf", MongoManager.HAL_BINARIES, date);
+            } else {
+                System.out.println(file.getUrl());
+                mm.addAnnexDocument(inBinary, file.getType(), id, MongoManager.HAL_PUB_ANNEXES, date);
+            }
+            inBinary.close();
+        } else {
+            mm.save(id, "embargo", file.getUrl(), file.getEmbargoDate());
+            logger.debug("\t\t\t file under embargo !");
         }
     }
 
@@ -146,13 +170,14 @@ public class OAIHarvester {
     public static void main(String[] args)
             throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException, Exception {
         OAIHarvester oai = new OAIHarvester();
-        if(processArgs(args)){
-            if(hrtArgs.getFromDate() != null || hrtArgs.getUntilDate() != null)
+        if (processArgs(args)) {
+            if (hrtArgs.getFromDate() != null || hrtArgs.getUntilDate() != null) {
                 Utilities.updateDates(hrtArgs.getFromDate(), hrtArgs.getUntilDate());
+            }
             oai.processCommand();
-        }        
+        }
     }
-    
+
     private void processCommand() throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException, Exception {
         String process = hrtArgs.getProcessName();
         if (process.equals("harvestAll")) {
@@ -181,7 +206,7 @@ public class OAIHarvester {
     private void processGrobid() throws IOException, Exception {
         ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
         for (String date : dates) {
-            if(mm.init(MongoManager.HAL_BINARIES, date)){
+            if (mm.init(MongoManager.HAL_BINARIES, date)) {
                 while (mm.hasMoreDocuments()) {
                     String filename = mm.getCurrentFilename();
                     try {
@@ -205,9 +230,9 @@ public class OAIHarvester {
         InputStream hal_tei = null;
         String result;
         for (String date : dates) {
-            if(mm.init(MongoManager.GROBID_TEIS, date)){
+            if (mm.init(MongoManager.GROBID_TEIS, date)) {
                 logger.debug("Merging documents.. for: " + date);
-                 while (mm.hasMoreDocuments()) {
+                while (mm.hasMoreDocuments()) {
                     String filename = mm.getCurrentFilename();
                     try {
                         logger.debug("\t\t Merging documents.. for: " + filename);
@@ -225,7 +250,7 @@ public class OAIHarvester {
             }
         }
     }
-    
+
     protected static boolean processArgs(final String[] pArgs) {
         boolean result = true;
         hrtArgs.setOaiUrl("http://api.archives-ouvertes.fr/oai/hal");
@@ -239,7 +264,7 @@ public class OAIHarvester {
                     System.out.println(getHelp());
                     result = false;
                     break;
-                }                
+                }
                 if (currArg.equals("-gH")) {
                     hrtArgs.setPath2grobidHome(pArgs[i + 1]);
                     if (pArgs[i + 1] != null) {
@@ -247,7 +272,7 @@ public class OAIHarvester {
                     }
                     i++;
                     continue;
-	        }
+                }
                 if (currArg.equals("-dOAI")) {
                     hrtArgs.setOaiUrl(pArgs[i + 1]);
                     i++;
@@ -255,8 +280,8 @@ public class OAIHarvester {
                 }
                 if (currArg.equals("-dFromDate")) {
                     String stringDate = pArgs[i + 1];
-                    if(!stringDate.isEmpty()){
-                        if(Utilities.isValidDate(stringDate)){
+                    if (!stringDate.isEmpty()) {
+                        if (Utilities.isValidDate(stringDate)) {
                             hrtArgs.setFromDate(pArgs[i + 1]);
                         } else {
                             System.err.println("The date given is not correct, make sure it follows the pattern : yyyy-MM-dd");
@@ -265,11 +290,11 @@ public class OAIHarvester {
                     }
                     i++;
                     continue;
-		}
+                }
                 if (currArg.equals("-dUntilDate")) {
                     String stringDate = pArgs[i + 1];
-                    if(!stringDate.isEmpty()){
-                        if(Utilities.isValidDate(stringDate)){
+                    if (!stringDate.isEmpty()) {
+                        if (Utilities.isValidDate(stringDate)) {
                             hrtArgs.setUntilDate(stringDate);
                         } else {
                             System.err.println("The date given is not correct, make sure it follows the pattern : yyyy-MM-dd");
@@ -278,7 +303,7 @@ public class OAIHarvester {
                     }
                     i++;
                     continue;
-		}
+                }
                 if (currArg.equals("-exe")) {
                     String command = pArgs[i + 1];
                     if (availableCommands.contains(command)) {
@@ -290,19 +315,19 @@ public class OAIHarvester {
                         result = false;
                         break;
                     }
+                }
             }
-            }
-        }     
+        }
         return result;
     }
-    
+
     public static boolean askConfirm() {
         Scanner kbd = new Scanner(System.in);
         String decision = null;
         boolean yn = true;
         System.out.println("You are about to process a huge number of documents, using multithreaded grobid process is recommended, continue? [yes]");
         decision = kbd.nextLine();
-        try{
+        try {
             switch (Decision.valueOf(decision)) {
                 case yes:
                     break;
@@ -314,7 +339,7 @@ public class OAIHarvester {
                 default:
                     break;
             }
-        }catch(IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             //yes by default 
         }
         return yn;
@@ -328,7 +353,7 @@ public class OAIHarvester {
         help.append("\t" + availableCommands + "\n");
         return help.toString();
     }
-    
+
     public static InputStream request(String request) {
         InputStream in = null;
         try {
@@ -343,11 +368,11 @@ public class OAIHarvester {
             in = conn.getInputStream();
             return in;
 
-        } catch(UnknownHostException e){
+        } catch (UnknownHostException e) {
             e.printStackTrace();
             try {
                 Thread.sleep(1800000); //take a nap.
-            } catch(InterruptedException ex) {
+            } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
             return request(request);
