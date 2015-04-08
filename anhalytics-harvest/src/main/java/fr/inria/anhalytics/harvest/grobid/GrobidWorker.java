@@ -1,4 +1,4 @@
-package fr.inria.anhalytics.harvest;
+package fr.inria.anhalytics.harvest.grobid;
 
 import fr.inria.anhalytics.commons.managers.MongoManager;
 import java.io.IOException;

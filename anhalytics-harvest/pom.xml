@@ -78,7 +78,7 @@
                 <executions>
                     <execution>
                         <configuration>
-                            <mainClass>fr.inria.anhalytics.harvest.OAIHarvester</mainClass>
+                            <mainClass>fr.inria.anhalytics.harvest.main.Main</mainClass>
                             <!-- Optional -->
                             <onejarVersion>0.97</onejarVersion>
                             <!-- Optional, default is false -->

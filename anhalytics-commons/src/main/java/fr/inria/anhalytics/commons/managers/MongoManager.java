@@ -385,18 +385,18 @@ public class MongoManager {
     
     /**
      */
-    public void addAnnexDocument(InputStream file, String type, String id, String namespace, String dateString) throws ParseException {
+    public void addAnnexDocument(InputStream file, String type, String id, String fileName, String namespace, String dateString) throws ParseException {
 
         try {
             GridFS gfs = new GridFS(db, namespace);
             BasicDBObject whereQuery = new BasicDBObject();
             whereQuery.put("halId", id);
-            whereQuery.put("contentType", type);
+            whereQuery.put("filename", fileName);
             gfs.remove(whereQuery);
             //version ?
             GridFSInputFile gfsFile = gfs.createFile(file, true);
             gfsFile.put("uploadDate", Utilities.parseStringDate(dateString));
-            gfsFile.setFilename(id);
+            gfsFile.setFilename(fileName);
             gfsFile.put("halId", id);
             gfsFile.setContentType(type);
             gfsFile.save();

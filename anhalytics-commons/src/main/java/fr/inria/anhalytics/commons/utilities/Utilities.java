@@ -1,5 +1,6 @@
 package fr.inria.anhalytics.commons.utilities;
 
+import fr.inria.anhalytics.commons.exceptions.BinaryNotAvailableException;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -9,6 +10,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -327,5 +331,33 @@ public class Utilities {
         } finally {
             br.close();
         }
+    }
+    
+    public static InputStream request(String request) {
+        InputStream in = null;
+        try {
+            URL url = new URL(request);
+            URLConnection conn = url.openConnection();
+            conn.setRequestProperty("accept-charset", "UTF-8");
+            if (request.endsWith("document") && !conn.getContentType().equals("application/pdf")) {
+                //nullBinaries++;
+                logger.debug("\t\t\t Cannot download pdf file, because input file is null.");
+                throw new BinaryNotAvailableException("Cannot download pdf file, because input file is null.");
+            }
+            in = conn.getInputStream();
+            return in;
+
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            try {
+                Thread.sleep(900000); //take a nap.
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            return request(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return in;
     }
 }

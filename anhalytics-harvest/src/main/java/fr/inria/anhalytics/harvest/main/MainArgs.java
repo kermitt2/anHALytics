@@ -1,10 +1,10 @@
-package fr.inria.anhalytics.harvest;
+package fr.inria.anhalytics.harvest.main;
 
 /**
  *
  * @author Achraf
  */
-public class HarvesterArgs {
+public class MainArgs {
     private String processName;
 
     private String fromDate;

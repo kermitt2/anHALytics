@@ -1,4 +1,4 @@
-package fr.inria.anhalytics.harvest;
+package fr.inria.anhalytics.harvest.merge;
 
 import fr.inria.anhalytics.commons.utilities.Utilities;
 import java.io.IOException;

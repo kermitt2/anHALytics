@@ -6,127 +6,56 @@ import fr.inria.anhalytics.commons.data.TEI;
 import fr.inria.anhalytics.commons.managers.MongoManager;
 import fr.inria.anhalytics.commons.utilities.Utilities;
 import java.io.*;
-import java.net.*;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javax.xml.parsers.*;
-import javax.xml.transform.TransformerException;
-import javax.xml.xpath.XPathExpressionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.*;
 
-public class OAIHarvester {
+public class OAIHarvester implements Harvester{
 
     private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
 
-    private static final int NTHREDS = 4;
-
-    private static List<String> availableCommands = new ArrayList<String>() {
-        {
-            add("harvestAll");
-            add("harvestDaily");
-            add("processGrobid");
-            add("merge");
-        }
-    };
-    private static Set<String> dates = new LinkedHashSet<String>();
-    /**
-     * Arguments of processes.
-     */
-    private static HarvesterArgs hrtArgs;
-
+    private static String OAI_FORMAT = "xml-tei";
     private ArrayList<String> fields = null;
     private ArrayList<String> affiliations = null;
 
-    private final MongoManager mm;
+    private MongoManager mm;
     private final OAIPMHDom oaiDom;
 
-    private static int nullBinaries = 0;
+    private String oai_url = null;
 
-    public enum Decision {
-
-        yes, no
-    }
-
-    public OAIHarvester() {
-
-        dates = Utilities.getDates();
-        mm = new MongoManager();
+    public OAIHarvester(MongoManager mm, String oai_url) {
+        this.mm = mm;
+        this.oai_url = oai_url;
         oaiDom = new OAIPMHDom();
-        hrtArgs = new HarvesterArgs();
 
         fields = new ArrayList<String>();
         affiliations = new ArrayList<String>();
 
         affiliations.add("INRIA");
 
-        Properties prop = new Properties();
-        try {
-            prop.load(new FileInputStream("harvest.properties"));
-            hrtArgs.setGrobidHost(prop.getProperty("harvest.grobid_host"));
-            hrtArgs.setGrobidPort(prop.getProperty("harvest.grobid_port"));
-            hrtArgs.setTmpPath(prop.getProperty("harvest.tmpPath"));
-            Utilities.setTmpPath(prop.getProperty("harvest.tmpPath"));
-            hrtArgs.setPath2grobidHome(prop.getProperty("harvest.pGrobidHome"));
-            hrtArgs.setPath2grobidProperty(prop.getProperty("harvest.pGrobidProperties"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
-    public void harvestHALForDate(String url, String date) throws IOException, SAXException, ParserConfigurationException, ParseException {
+    @Override
+    public void fetchDocumentsByDate(String date) throws IOException, SAXException, ParserConfigurationException, ParseException {
         boolean stop = false;
         String tokenn = null;
         while (!stop) {
-            String request = url + "/?verb=ListRecords&metadataPrefix=xml-tei&from=" + date + "&until=" + date;
+            String request = oai_url + "/?verb=ListRecords&metadataPrefix=" + OAI_FORMAT + "&from=" + date + "&until=" + date;
 
             if (tokenn != null) {
-                request = url + "/?verb=ListRecords&resumptionToken=" + tokenn;
+                request = oai_url + "/?verb=ListRecords&resumptionToken=" + tokenn;
             }
             System.out.println(request);
             logger.debug("Sending: " + request);
 
-            InputStream in = request(request);
+            InputStream in = Utilities.request(request);
             logger.debug("\t Extracting teis.... for " + date);
             List<TEI> teis = oaiDom.getTeis(in);
 
-            for (TEI tei : teis) {
-                try {
-                    String teiFilename = tei.getId() + ".tei.xml";
-                    logger.debug("\t\t Extracting tei.... for " + tei.getId());
-                    String teiString = tei.getTei();
-                    if (teiString.length() > 0) {
-                        logger.debug("\t\t\t\t Storing tei : " + tei.getId());
-                        mm.addDocument(new ByteArrayInputStream(teiString.getBytes()), teiFilename, MongoManager.HAL_TEIS, date);
-
-                        //binary processing.
-                        if (tei.getFile() != null) {
-                            System.out.println(tei.getId() + ".pdf");
-                            downloadPubFiles(tei.getFile(), tei.getId(), date);
-                        } else {
-                            mm.save(tei.getId(), "harvestProcess", "no file url", null);
-                            logger.debug("\t\t\t PDF not found !");
-                        }
-                        //annexes
-                        for (PubFile file : tei.getAnnexes()) {
-                            downloadPubFiles(file, tei.getId(), date);
-                        }
-                    } else {
-                        logger.debug("\t\t\t Tei not found !!!");
-                    }
-                } catch (BinaryNotAvailableException bna) {
-                    mm.save(tei.getId(), "harvestProcess", "file not available", null);
-                } catch (Exception e) {
-                    mm.save(tei.getId(), "harvestProcess", "harvest error", null);
-                    e.printStackTrace();
-                }
-            }
+            processTeis(teis, date);
 
             // token if any:
             tokenn = oaiDom.getToken();
@@ -135,250 +64,74 @@ public class OAIHarvester {
             }
         }
     }
+    
+    @Override
+    public void fetchAllDocuments() throws IOException, SAXException, ParserConfigurationException, ParseException {
+        for (String date : Utilities.getDates()) {
+            fetchDocumentsByDate(date);
+        }
+    }
 
-    private void downloadPubFiles(PubFile file, String id, String date) throws ParseException, IOException {
+    /*
+     * Stores the given teis and downloads attachements(main file(s), annexes ..). 
+     */
+    private void processTeis(List<TEI> teis, String date) {
+        for (TEI tei : teis) {
+            try {
+                String teiFilename = tei.getId() + ".tei.xml";
+                logger.debug("\t\t Extracting tei.... for " + tei.getId());
+                String teiString = tei.getTei();
+                if (teiString.length() > 0) {
+                    logger.debug("\t\t\t\t Storing tei : " + tei.getId());
+                    mm.addDocument(new ByteArrayInputStream(teiString.getBytes()), teiFilename, MongoManager.HAL_TEIS, date);
+
+                    //binary processing.
+                    if (tei.getFile() != null) {
+                        System.out.println(tei.getId() + ".pdf");
+                        downloadFile(tei.getFile(), tei.getId(), date);
+                    } else {
+                        mm.save(tei.getId(), "harvestProcess", "no file url", null);
+                        logger.debug("\t\t\t PDF not found !");
+                    }
+                    //annexes
+                    for (PubFile file : tei.getAnnexes()) {
+                        downloadFile(file, tei.getId(), date);
+                    }
+                } else {
+                    logger.debug("\t\t\t Tei not found !!!");
+                }
+            } catch (BinaryNotAvailableException bna) {
+                mm.save(tei.getId(), "harvestProcess", "file not available", null);
+            } catch (Exception e) {
+                mm.save(tei.getId(), "harvestProcess", "harvest error", null);
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Downloads the given file et classify either as main file or as an annex.
+     */
+    private void downloadFile(PubFile file, String id, String date) throws ParseException, IOException {
         InputStream inBinary = null;
         Date embDate = Utilities.parseStringDate(file.getEmbargoDate());
         Date today = new Date();
         if (embDate.before(today) || embDate.equals(today)) {
             logger.debug("\t\t\t Downloading: " + file.getUrl());
-            inBinary = new BufferedInputStream(request(file.getUrl()));
-            
-            if((file.getType()).equals("file")){
+            inBinary = new BufferedInputStream(Utilities.request(file.getUrl()));
+
+            if ((file.getType()).equals("file")) {
                 mm.addDocument(inBinary, id + ".pdf", MongoManager.HAL_BINARIES, date);
             } else {
-                System.out.println(file.getUrl());
-                mm.addAnnexDocument(inBinary, file.getType(), id, MongoManager.HAL_PUB_ANNEXES, date);
+                int n = file.getUrl().lastIndexOf("/");
+                String filename = file.getUrl().substring(n+1);
+                System.out.println(filename);
+                mm.addAnnexDocument(inBinary, file.getType(), id, filename, MongoManager.HAL_PUB_ANNEXES, date);
             }
             inBinary.close();
         } else {
             mm.save(id, "embargo", file.getUrl(), file.getEmbargoDate());
             logger.debug("\t\t\t file under embargo !");
         }
-    }
-
-    /**
-     * Harvesting of all HAL repository
-     */
-    public void harvestAllHAL() throws IOException, SAXException, ParserConfigurationException, ParseException {
-        String url = hrtArgs.getOaiUrl();
-        for (String date : dates) {
-            harvestHALForDate(url, date);
-        }
-    }
-
-    public static void main(String[] args)
-            throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException, Exception {
-        OAIHarvester oai = new OAIHarvester();
-        if (processArgs(args)) {
-            if (hrtArgs.getFromDate() != null || hrtArgs.getUntilDate() != null) {
-                Utilities.updateDates(hrtArgs.getFromDate(), hrtArgs.getUntilDate());
-            }
-            oai.processCommand();
-        }
-    }
-
-    private void processCommand() throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException, Exception {
-        String process = hrtArgs.getProcessName();
-        if (process.equals("harvestAll")) {
-            harvestAllHAL();
-            processGrobid();
-            return;
-        } else if (process.equals("harvestDaily")) {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.DATE, -1);
-            String date = dateFormat.format(cal.getTime());
-            Utilities.updateDates(date, date);
-            harvestHALForDate(hrtArgs.getOaiUrl(), date);
-            processGrobid();
-            return;
-        } else if (process.equals("processGrobid")) {
-            //clearTmpDirectory();           
-            processGrobid();
-            return;
-        } else if (process.equals("merge")) {
-            merge();
-            return;
-        }
-    }
-
-    private void processGrobid() throws IOException, Exception {
-        ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
-        for (String date : dates) {
-            if (mm.init(MongoManager.HAL_BINARIES, date)) {
-                while (mm.hasMoreDocuments()) {
-                    String filename = mm.getCurrentFilename();
-                    try {
-                        Runnable worker = new GrobidWorker(filename, mm, hrtArgs.getGrobidHost(), hrtArgs.getGrobidPort(), date);
-                        executor.execute(worker);
-                    } catch (final Exception exp) {
-                        logger.error("An error occured while processing the file " + filename
-                                + ". Continuing the process for the other files" + exp.getMessage());
-                    }
-                }
-            }
-        }
-        executor.shutdown();
-        while (!executor.isTerminated()) {
-        }
-        System.out.println("Finished all threads");
-    }
-
-    private void merge() throws ParserConfigurationException, IOException, SAXException, TransformerException, ParseException, Exception {
-        InputStream grobid_tei = null;
-        InputStream hal_tei = null;
-        String result;
-        for (String date : dates) {
-            if (mm.init(MongoManager.GROBID_TEIS, date)) {
-                logger.debug("Merging documents.. for: " + date);
-                while (mm.hasMoreDocuments()) {
-                    String filename = mm.getCurrentFilename();
-                    try {
-                        logger.debug("\t\t Merging documents.. for: " + filename);
-                        grobid_tei = new ByteArrayInputStream(mm.nextDocument().getBytes());
-                        hal_tei = mm.streamFile(filename, MongoManager.HAL_TEIS);
-                        result = HalTeiAppender.replaceHeader(hal_tei, grobid_tei, false);
-                        InputStream tei = new ByteArrayInputStream(result.getBytes());
-                        mm.addDocument(tei, filename, MongoManager.HALHEADER_GROBIDBODY_TEIS, date);
-                        grobid_tei.close();
-                        hal_tei.close();
-                    } catch (SAXParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-    }
-
-    protected static boolean processArgs(final String[] pArgs) {
-        boolean result = true;
-        hrtArgs.setOaiUrl("http://api.archives-ouvertes.fr/oai/hal");
-        if (pArgs.length == 0) {
-            System.out.println(getHelp());
-        } else {
-            String currArg;
-            for (int i = 0; i < pArgs.length; i++) {
-                currArg = pArgs[i];
-                if (currArg.equals("-h")) {
-                    System.out.println(getHelp());
-                    result = false;
-                    break;
-                }
-                if (currArg.equals("-gH")) {
-                    hrtArgs.setPath2grobidHome(pArgs[i + 1]);
-                    if (pArgs[i + 1] != null) {
-                        hrtArgs.setPath2grobidProperty((pArgs[i + 1]) + File.separator + "config" + File.separator + "grobid.properties");
-                    }
-                    i++;
-                    continue;
-                }
-                if (currArg.equals("-dOAI")) {
-                    hrtArgs.setOaiUrl(pArgs[i + 1]);
-                    i++;
-                    continue;
-                }
-                if (currArg.equals("-dFromDate")) {
-                    String stringDate = pArgs[i + 1];
-                    if (!stringDate.isEmpty()) {
-                        if (Utilities.isValidDate(stringDate)) {
-                            hrtArgs.setFromDate(pArgs[i + 1]);
-                        } else {
-                            System.err.println("The date given is not correct, make sure it follows the pattern : yyyy-MM-dd");
-                            result = false;
-                        }
-                    }
-                    i++;
-                    continue;
-                }
-                if (currArg.equals("-dUntilDate")) {
-                    String stringDate = pArgs[i + 1];
-                    if (!stringDate.isEmpty()) {
-                        if (Utilities.isValidDate(stringDate)) {
-                            hrtArgs.setUntilDate(stringDate);
-                        } else {
-                            System.err.println("The date given is not correct, make sure it follows the pattern : yyyy-MM-dd");
-                            result = false;
-                        }
-                    }
-                    i++;
-                    continue;
-                }
-                if (currArg.equals("-exe")) {
-                    String command = pArgs[i + 1];
-                    if (availableCommands.contains(command)) {
-                        hrtArgs.setProcessName(command);
-                        i++;
-                        continue;
-                    } else {
-                        System.err.println("-exe value should be one value from this list: " + availableCommands);
-                        result = false;
-                        break;
-                    }
-                }
-            }
-        }
-        return result;
-    }
-
-    public static boolean askConfirm() {
-        Scanner kbd = new Scanner(System.in);
-        String decision = null;
-        boolean yn = true;
-        System.out.println("You are about to process a huge number of documents, using multithreaded grobid process is recommended, continue? [yes]");
-        decision = kbd.nextLine();
-        try {
-            switch (Decision.valueOf(decision)) {
-                case yes:
-                    break;
-
-                case no:
-                    yn = false;
-                    break;
-
-                default:
-                    break;
-            }
-        } catch (IllegalArgumentException ex) {
-            //yes by default 
-        }
-        return yn;
-    }
-
-    protected static String getHelp() {
-        final StringBuffer help = new StringBuffer();
-        help.append("HELP HAL_OAI_HARVESTER\n");
-        help.append("-h: displays help\n");
-        help.append("-exe: gives the command to execute. The value should be one of these : \n");
-        help.append("\t" + availableCommands + "\n");
-        return help.toString();
-    }
-
-    public static InputStream request(String request) {
-        InputStream in = null;
-        try {
-            URL url = new URL(request);
-            URLConnection conn = url.openConnection();
-            conn.setRequestProperty("accept-charset", "UTF-8");
-            if (request.endsWith("document") && !conn.getContentType().equals("application/pdf")) {
-                nullBinaries++;
-                logger.debug("\t\t\t Cannot download pdf file, because input file is null.");
-                throw new BinaryNotAvailableException("Cannot download pdf file, because input file is null.");
-            }
-            in = conn.getInputStream();
-            return in;
-
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            try {
-                Thread.sleep(1800000); //take a nap.
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            return request(request);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return in;
     }
 }
