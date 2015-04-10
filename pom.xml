@@ -20,7 +20,8 @@
         <module>anhalytics-annotate</module>
         <module>anhalytics-index</module>
         <module>anhalytics-commons</module>
-    </modules>
+        <module>anhalytics-front</module>
+  </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
