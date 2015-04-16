@@ -14,8 +14,8 @@ import org.elasticsearch.common.transport.*;
 import org.elasticsearch.client.transport.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import fr.inria.anhalytics.index.jsonML.JsonTapasML;
-import fr.inria.anhalytics.index.jsonML.JSONObject;
+import org.json.JsonTapasML;
+import org.json.JSONObject;
 import fr.inria.anhalytics.commons.utilities.IndexingPreprocess;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -35,7 +35,7 @@ public class ElasticSearchManager {
     private String elasticSearchClusterName = null;
     private String indexName = null;
     private Client client = null;
-    
+
         // only annotations under these paths will be indexed for the moment
     static final public List<String> toBeIndexed
             = Arrays.asList("$TEI.$teiHeader.$titleStmt.xml:id",
@@ -51,9 +51,9 @@ public class ElasticSearchManager {
             elasticSearch_port = prop.getProperty("index.elasticSearch_port");
             elasticSearchClusterName = prop.getProperty("index.elasticSearch_cluster");
             if (process.equals("tei")) {
-                indexName = prop.getProperty("annotate.elasticSearch_indexName");
+                indexName = prop.getProperty("index.elasticSearch_indexName");
             } else if (process.equals("annotation")) {
-                indexName = prop.getProperty("annotate.elasticSearch_annotsIndexName");
+                indexName = prop.getProperty("index.elasticSearch_annotsIndexName");
             }
         } catch (Exception e) {
             System.err.println("Failed to load properties: " + e.getMessage());
@@ -211,7 +211,10 @@ public class ElasticSearchManager {
                 .addTransportAddress(new InetSocketTransportAddress(elasticSearch_host, 9300));
 
         MongoManager mm = new MongoManager();
+        
+        
         IndexingPreprocess indexingPreprocess = new IndexingPreprocess(mm);
+        
         int nb = 0;
 
         if (mm.init(MongoManager.HALHEADER_GROBIDBODY_TEIS, null)) {
@@ -222,12 +225,13 @@ public class ElasticSearchManager {
                 String filename = mm.getCurrentFilename();
                 String halID = mm.getCurrentHalID();
                 String tei = mm.nextDocument();
-
+            
                 // convert the TEI document into JSON via JsonML
                 //System.out.println(halID);
                 JSONObject json = JsonTapasML.toJSONObject(tei);
                 String jsonStr = json.toString();
                 try {
+                    
                     jsonStr = indexingPreprocess.process(jsonStr, filename);
                 } catch (Exception e) {
                     e.printStackTrace();

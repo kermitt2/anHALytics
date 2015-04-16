@@ -1,4 +1,6 @@
-package fr.inria.anhalytics.index.jsonML;
+package org.json;
+
+
 
 /*
 Derived from JSON.org reference implementation:
