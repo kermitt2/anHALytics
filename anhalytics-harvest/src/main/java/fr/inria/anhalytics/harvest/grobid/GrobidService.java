@@ -15,7 +15,6 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.grobid.core.utilities.KeyGen;
 
@@ -35,15 +34,13 @@ public class GrobidService {
     private MongoManager mm;
     private String date;
     
-    public GrobidService(String filename, MongoManager mongoManager, String grobidHost, String grobidPort,
+    public GrobidService(String grobidHost, String grobidPort,
             int start, int end, boolean generateIDs, String date) {
-        this.filename = filename;
         this.grobid_host = grobidHost;
         this.grobid_port = grobidPort;
         this.start = start;
         this.end = end;
         this.generateIDs = generateIDs;
-        this.mm = mongoManager;
         this.date = date;
         
     }
@@ -57,7 +54,7 @@ public class GrobidService {
      * @return the resulting TEI document as a String or null if the service
      * failed
      */
-    public void runFullTextGrobid() {
+    public String runFullTextGrobid(InputStream inBinary) {
         String zipDirectoryPath = null;
         String tei = null;
         File zipFolder = null;
@@ -66,8 +63,7 @@ public class GrobidService {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
-            
-            InputStream inBinary = mm.nextBinaryDocument();
+
             String filepath = Utilities.storeTmpFile(inBinary);
             FileBody fileBody = new FileBody(new File(filepath));
             MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.STRICT);
@@ -117,15 +113,14 @@ public class GrobidService {
             in.close();
             
             Utilities.unzipIt(zipDirectoryPath + "/" + "out.zip", zipDirectoryPath);
-            storeToGridfs(zipDirectoryPath);
             
             conn.disconnect();
-            inBinary.close();
+            
         } catch (ConnectException e) {
             e.printStackTrace();
             try {
                 Thread.sleep(20000);
-                runFullTextGrobid();
+                runFullTextGrobid(inBinary);
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
@@ -133,7 +128,7 @@ public class GrobidService {
             e.printStackTrace();
             try {
                 Thread.sleep(20000);
-                runFullTextGrobid();
+                runFullTextGrobid(inBinary);
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
@@ -141,34 +136,8 @@ public class GrobidService {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            zipFolder.delete();
         }
-    }
-    
-    private void storeToGridfs(String zipDirectoryPath) {
-        String tei = null;
-        try {
-            File directoryPath = new File(zipDirectoryPath);
-            if (directoryPath.exists()) {
-                File[] files = directoryPath.listFiles();
-                if (files != null) {
-                    for (final File currFile : files) {
-                        if (currFile.getName().toLowerCase().endsWith(".png")) {
-                            InputStream targetStream = FileUtils.openInputStream(currFile);
-                            mm.addAssetDocument(targetStream, Utilities.getHalIDFromFilename(filename), filename, MongoManager.ASSETS, date);
-                            targetStream.close();
-                        } else if (currFile.getName().toLowerCase().endsWith(".xml")) {
-                            tei = Utilities.readFile(currFile.getAbsolutePath());
-                            tei = Utilities.trimEncodedCharaters(tei);
-                            mm.addDocument(new ByteArrayInputStream(tei.getBytes()), filename, MongoManager.GROBID_TEIS, date);
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return zipDirectoryPath;        
     }
     
 }

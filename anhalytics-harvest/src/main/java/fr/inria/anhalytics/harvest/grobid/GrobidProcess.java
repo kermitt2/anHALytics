@@ -3,6 +3,7 @@ package fr.inria.anhalytics.harvest.grobid;
 import fr.inria.anhalytics.commons.managers.MongoManager;
 import fr.inria.anhalytics.commons.utilities.Utilities;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.slf4j.Logger;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class GrobidProcess {
     private static final Logger logger = LoggerFactory.getLogger(GrobidProcess.class);
     
-    private static final int NTHREDS = 4;
+    private static final int NTHREDS = 3;
     
     private String grobid_host = null;
     private String grobid_port = null;
@@ -33,13 +34,15 @@ public class GrobidProcess {
             if (mm.init(MongoManager.HAL_BINARIES, date)) {
                 while (mm.hasMoreDocuments()) {
                     String filename = mm.getCurrentFilename();
+                    InputStream content = mm.nextBinaryDocument();
                     try {
-                        Runnable worker = new GrobidWorker(filename, mm, grobid_host, grobid_port, date);
+                        Runnable worker = new GrobidWorker(content, mm, grobid_host, grobid_port, date);
                         executor.execute(worker);
                     } catch (final Exception exp) {
                         logger.error("An error occured while processing the file " + filename
                                 + ". Continuing the process for the other files" + exp.getMessage());
                     }
+                    content.close();
                 }
             }
         }
