@@ -28,28 +28,6 @@
             </roles>
         </contributor>
     </contributors>
-    
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
-    </properties>
-    
-    
-    <repositories>
-        <repository>
-            <id>3rd-party-local-repo</id>
-            <name>This is a local repository included in the grobid project, to access 3rd party libs.</name>
-            <url>file:///${basedir}/lib/</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <id>maven2-repository.dev.java.net</id>
-            <name>Java.net Repository for Maven</name>
-            <url>http://download.java.net/maven/2/</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
                 
     <build>
         <resources>
@@ -101,9 +79,7 @@
                     <!--argLine>-Dlog4j.debug=true</argLine-->
                     <source>1.6</source>
                     <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                    
-                    
+                    <encoding>UTF-8</encoding>                    
                 </configuration>
             </plugin>
             
@@ -112,21 +88,12 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.1.1</version>
                 <configuration>
-                    <webResources>
-                        <resource>
-                            <directory>${basedir}/src/main/webapp/WEB-INF/</directory>
-                            <excludes>
-                                <exclude>${basedir}/src/main/resources/*.xml</exclude>
-                            </excludes>
-                            <includes>
-                                <include>web.xml</include>
-                            </includes>
-                            <filtering>true</filtering>
-                            <targetPath>WEB-INF</targetPath>
-                        </resource>
-
-                    </webResources>
-                </configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+            </manifest>
+          </archive>
+        </configuration>
             </plugin>
                         
             <plugin>
