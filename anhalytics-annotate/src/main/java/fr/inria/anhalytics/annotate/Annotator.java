@@ -27,7 +27,7 @@ public class Annotator {
 
     public Annotator() {
         loadProperties();
-        mm = new MongoManager();
+        mm = new MongoManager(false);
     }
 
     private void loadProperties() {

@@ -34,7 +34,7 @@ public class Main {
             add("merge");
         }
     };
-    private final MongoManager mm = new MongoManager();
+    private final MongoManager mm = new MongoManager(false);
     private static MainArgs hrtArgs = new MainArgs();
     //private static int nullBinaries = 0;
 

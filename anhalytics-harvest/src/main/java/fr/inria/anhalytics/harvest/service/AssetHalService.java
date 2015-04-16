@@ -19,7 +19,7 @@ import org.apache.commons.io.IOUtils;
 @Path("/assetHal")
 public class AssetHalService {
 
-    private MongoManager mm = new MongoManager();
+    private MongoManager mm = new MongoManager(false);
 
     private static String KEY = "8uk797Nw74" ; // :) 
     

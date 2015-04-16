@@ -210,7 +210,7 @@ public class ElasticSearchManager {
         Client client = new TransportClient(settings)
                 .addTransportAddress(new InetSocketTransportAddress(elasticSearch_host, 9300));
 
-        MongoManager mm = new MongoManager();
+        MongoManager mm = new MongoManager(false);
         
         
         IndexingPreprocess indexingPreprocess = new IndexingPreprocess(mm);
@@ -305,7 +305,7 @@ public class ElasticSearchManager {
         MongoManager mm = null;
         int nb = 0;
         try {
-            mm = new MongoManager();
+            mm = new MongoManager(false);
             ObjectMapper mapper = new ObjectMapper();
 
             if (mm.initAnnotations()) {
