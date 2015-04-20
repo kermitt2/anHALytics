@@ -1,8 +1,6 @@
 package fr.inria.anhalytics.harvest.grobid;
 
 import fr.inria.anhalytics.commons.managers.MongoManager;
-import fr.inria.anhalytics.commons.utilities.Utilities;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,15 +14,15 @@ import org.slf4j.LoggerFactory;
  *
  * @author Achraf
  */
-public class GrobidWorker implements Runnable {
+abstract class GrobidWorker implements Runnable {
 
     private static final Logger logger = LoggerFactory.getLogger(GrobidWorker.class);
     private InputStream content;
-    private MongoManager mm;
+    protected MongoManager mm;
     private String grobid_host;
     private String grobid_port;
-    private String date;
-    private String filename;
+    protected String date;
+    protected String filename;
 
     public GrobidWorker(InputStream content, MongoManager mongoManager, String grobidHost, String grobidPort, String date) {
         this.content = content;
@@ -44,9 +42,9 @@ public class GrobidWorker implements Runnable {
             long endTime = System.nanoTime();
             System.out.println(Thread.currentThread().getName() + " End. :" + (endTime - startTime) / 1000000 + " ms");
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(GrobidWorker.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrobidFulltextWorker.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            java.util.logging.Logger.getLogger(GrobidWorker.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrobidFulltextWorker.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -63,31 +61,7 @@ public class GrobidWorker implements Runnable {
         }
     }
     
-    private void storeToGridfs(String zipDirectoryPath) {
-        String tei = null;
-        try {
-            File directoryPath = new File(zipDirectoryPath);
-            if (directoryPath.exists()) {
-                File[] files = directoryPath.listFiles();
-                if (files != null) {
-                    for (final File currFile : files) {
-                        if (currFile.getName().toLowerCase().endsWith(".png")) {
-                            InputStream targetStream = FileUtils.openInputStream(currFile);
-                            mm.addAssetDocument(targetStream, Utilities.getHalIDFromFilename(filename), currFile.getName(), MongoManager.GROBID_ASSETS, date);
-                            targetStream.close();
-                        } else if (currFile.getName().toLowerCase().endsWith(".xml")) {
-                            tei = Utilities.readFile(currFile.getAbsolutePath());
-                            tei = Utilities.trimEncodedCharaters(tei);
-                            System.out.println(filename);
-                            mm.addDocument(new ByteArrayInputStream(tei.getBytes()), filename.substring(0, filename.indexOf("."))+".tei.xml", MongoManager.GROBID_TEIS, date);
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    protected void storeToGridfs(String zipDirectoryPath) {};
 
     @Override
     public String toString() {

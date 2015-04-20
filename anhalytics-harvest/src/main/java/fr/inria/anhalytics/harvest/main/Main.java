@@ -65,7 +65,7 @@ public class Main {
         OAIHarvester oai = new OAIHarvester(mm, hrtArgs.getOaiUrl());
         if (process.equals("harvestAll")) {
             oai.fetchAllDocuments();
-            gp.processGrobid();
+            gp.processFulltext();
             return;
         } else if (process.equals("harvestDaily")) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -74,11 +74,11 @@ public class Main {
             String date = dateFormat.format(cal.getTime());
             Utilities.updateDates(date, date);
             oai.fetchDocumentsByDate(date);
-            gp.processGrobid();
+            gp.processFulltext();
             return;
         } else if (process.equals("processGrobid")) {
             //clearTmpDirectory();           
-            gp.processGrobid();
+            gp.processFulltext();
             return;
         } else if (process.equals("merge")) {
             tb.build();

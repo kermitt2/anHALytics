@@ -54,7 +54,7 @@ public class TestProcess {
         System.out.println("==================================");
         System.out.println("=========TEI extractions==========");
         System.out.println("==================================");
-        gp.processGrobid();
+        gp.processFulltext();
         System.out.println("===============Done===============");
         System.out.println("==================================");
         System.out.println("=======Annotate collection========");
