@@ -27,7 +27,7 @@ public class Main {
             add("harvestAll");
             add("harvestDaily");
             add("processGrobid");
-            add("merge");
+            add("buildTei");
         }
     };
     private final MongoManager mm = new MongoManager(false);
@@ -80,7 +80,7 @@ public class Main {
             //clearTmpDirectory();           
             gp.processFulltext();
             return;
-        } else if (process.equals("merge")) {
+        } else if (process.equals("buildTei")) {
             tb.build();
             return;
         }
