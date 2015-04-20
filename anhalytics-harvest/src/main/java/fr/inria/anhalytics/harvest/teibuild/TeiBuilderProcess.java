@@ -34,10 +34,10 @@ public class TeiBuilderProcess {
                     String filename = mm.getCurrentFilename();
                     logger.debug("\t\t Merging documents.. for: " + filename);
                     grobid_tei = new ByteArrayInputStream(mm.nextDocument().getBytes());
-                    additional_tei = mm.streamFile(filename, MongoManager.HAL_TEIS);
+                    additional_tei = mm.streamFile(filename, MongoManager.ADDITIONAL_TEIS);
                     result = TeiBuilder.generateTeiCorpus(additional_tei, grobid_tei, false);
                     InputStream tei = new ByteArrayInputStream(result.getBytes());
-                    mm.addDocument(tei, filename, MongoManager.HALHEADER_GROBIDBODY_TEIS, date);
+                    mm.addDocument(tei, filename, MongoManager.FINAL_TEIS, date);
                     grobid_tei.close();
                     additional_tei.close();
                 }

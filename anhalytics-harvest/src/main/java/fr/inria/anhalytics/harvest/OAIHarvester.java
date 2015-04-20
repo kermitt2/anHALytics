@@ -83,7 +83,7 @@ public class OAIHarvester implements Harvester {
                 String teiString = tei.getTei();
                 if (teiString.length() > 0) {
                     logger.debug("\t\t\t\t Storing tei : " + tei.getId());
-                    mm.addDocument(new ByteArrayInputStream(teiString.getBytes()), teiFilename, MongoManager.HAL_TEIS, date);
+                    mm.addDocument(new ByteArrayInputStream(teiString.getBytes()), teiFilename, MongoManager.ADDITIONAL_TEIS, date);
 
                     String filename = tei.getId() + ".pdf";
                     if(mm.isCollected(filename)) {
@@ -125,12 +125,12 @@ public class OAIHarvester implements Harvester {
             inBinary = new BufferedInputStream(Utilities.request(file.getUrl()));
 
             if ((file.getType()).equals("file")) {
-                mm.addDocument(inBinary, id + ".pdf", MongoManager.HAL_BINARIES, date);
+                mm.addDocument(inBinary, id + ".pdf", MongoManager.BINARIES, date);
             } else {
                 int n = file.getUrl().lastIndexOf("/");
                 String filename = file.getUrl().substring(n+1);
                 System.out.println(filename);
-                mm.addAnnexDocument(inBinary, file.getType(), id, filename, MongoManager.HAL_PUB_ANNEXES, date);
+                mm.addAnnexDocument(inBinary, file.getType(), id, filename, MongoManager.PUB_ANNEXES, date);
             }
             inBinary.close();
         } else {

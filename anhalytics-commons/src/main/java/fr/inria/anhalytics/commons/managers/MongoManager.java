@@ -27,13 +27,13 @@ public class MongoManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MongoManager.class);
 
-    public static final String DIAGNOSTICS = "diagnostics";
-    public static final String HAL_TEIS = "hal_teis";
-    public static final String HAL_BINARIES = "hal_binaries";
-    public static final String HAL_PUB_ANNEXES = "hal_pub_annexes";
-    public static final String HALHEADER_GROBIDBODY_TEIS = "halheader_grobidbody_teis";
+    public static final String HARVEST_DIAGNOSTIC = "harvest_diagnostic";
+    public static final String ADDITIONAL_TEIS = "additional_teis";
+    public static final String BINARIES = "binaries";
+    public static final String PUB_ANNEXES = "pub_annexes";
+    public static final String FINAL_TEIS = "final_teis";
     public static final String GROBID_TEIS = "grobid_teis";
-    public static final String ASSETS = "assets";
+    public static final String GROBID_ASSETS = "grobid_assets";
 
     public static final String ANNOTATIONS = "annotations";
 
@@ -211,7 +211,7 @@ public class MongoManager {
 
     public void removeDocument(String filename) {
         try {
-            GridFS gfs = new GridFS(db, HALHEADER_GROBIDBODY_TEIS);
+            GridFS gfs = new GridFS(db, FINAL_TEIS);
             gfs.remove(filename);
         } catch (MongoException e) {
             e.printStackTrace();
@@ -323,7 +323,7 @@ public class MongoManager {
      * Check if the given pdf has already been harvested.
      */
     public boolean isCollected(String filename) {
-        GridFS gfs = new GridFS(db, HAL_BINARIES);
+        GridFS gfs = new GridFS(db, BINARIES);
         GridFSDBFile f = gfs.findOne(filename);
         boolean result = false;        
         if (f != null) {
@@ -418,13 +418,13 @@ public class MongoManager {
 
     public InputStream streamFile(String filename) {
         GridFSDBFile file = null;
-        GridFS gfs = new GridFS(db, HAL_BINARIES);
+        GridFS gfs = new GridFS(db, BINARIES);
         file = gfs.findOne(filename);
         return file.getInputStream();
     }
 
     public void save(String haldID, String process, String desc, String date) {
-        DBCollection collection = db.getCollection(DIAGNOSTICS);
+        DBCollection collection = db.getCollection(HARVEST_DIAGNOSTIC);
         BasicDBObject whereQuery = new BasicDBObject();
         whereQuery.put("halId", haldID);
         whereQuery.put("process", process);

@@ -73,7 +73,7 @@ public class GrobidWorker implements Runnable {
                     for (final File currFile : files) {
                         if (currFile.getName().toLowerCase().endsWith(".png")) {
                             InputStream targetStream = FileUtils.openInputStream(currFile);
-                            mm.addAssetDocument(targetStream, Utilities.getHalIDFromFilename(filename), currFile.getName(), MongoManager.ASSETS, date);
+                            mm.addAssetDocument(targetStream, Utilities.getHalIDFromFilename(filename), currFile.getName(), MongoManager.GROBID_ASSETS, date);
                             targetStream.close();
                         } else if (currFile.getName().toLowerCase().endsWith(".xml")) {
                             tei = Utilities.readFile(currFile.getAbsolutePath());

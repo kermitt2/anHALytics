@@ -220,7 +220,7 @@ public class ElasticSearchManager {
         
         int nb = 0;
 
-        if (mm.init(MongoManager.HALHEADER_GROBIDBODY_TEIS, null)) {
+        if (mm.init(MongoManager.FINAL_TEIS, null)) {
             int i = 0;
             BulkRequestBuilder bulkRequest = client.prepareBulk();
             bulkRequest.setRefresh(true);

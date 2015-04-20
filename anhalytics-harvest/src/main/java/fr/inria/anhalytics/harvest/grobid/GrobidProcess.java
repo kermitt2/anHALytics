@@ -31,7 +31,7 @@ public class GrobidProcess {
     public void processGrobid() throws IOException {
         ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
         for (String date : Utilities.getDates()) {
-            if (mm.init(MongoManager.HAL_BINARIES, date)) {
+            if (mm.init(MongoManager.BINARIES, date)) {
                 while (mm.hasMoreDocuments()) {
                     String filename = mm.getCurrentFilename();
                     InputStream content = mm.nextBinaryDocument();

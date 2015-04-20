@@ -52,7 +52,7 @@ public class Annotator {
         int nb = 0;
         try {
             //for (String date : Utilities.getDates()) {
-                if (mm.init(MongoManager.HALHEADER_GROBIDBODY_TEIS, null)) {
+                if (mm.init(MongoManager.FINAL_TEIS, null)) {
                     //logger.debug("processing teis for :" + date);
                     while (mm.hasMoreDocuments()) {
                         String filename = mm.getCurrentFilename();
@@ -96,7 +96,7 @@ public class Annotator {
         int nb = 0;
         try {
             //for (String date : Utilities.getDates()) {
-                if (mm.init(MongoManager.HALHEADER_GROBIDBODY_TEIS, null)) {
+                if (mm.init(MongoManager.FINAL_TEIS, null)) {
                     //logger.debug("processing teis for :" + date);
                     while (mm.hasMoreDocuments()) {
                         String filename = mm.getCurrentFilename();
