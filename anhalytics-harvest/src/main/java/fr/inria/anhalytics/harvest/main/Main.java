@@ -38,11 +38,6 @@ public class Main {
     private static MainArgs hrtArgs = new MainArgs();
     //private static int nullBinaries = 0;
 
-    private enum Decision {
-
-        yes, no
-    }
-
     public static void main(String[] args)
             throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException, Exception {
 
@@ -164,30 +159,6 @@ public class Main {
             }
         }
         return result;
-    }
-
-    public static boolean askConfirm() {
-        Scanner kbd = new Scanner(System.in);
-        String decision = null;
-        boolean yn = true;
-        System.out.println("You are about to process a huge number of documents, using multithreaded grobid process is recommended, continue? [yes]");
-        decision = kbd.nextLine();
-        try {
-            switch (Decision.valueOf(decision)) {
-                case yes:
-                    break;
-
-                case no:
-                    yn = false;
-                    break;
-
-                default:
-                    break;
-            }
-        } catch (IllegalArgumentException ex) {
-            //yes by default 
-        }
-        return yn;
     }
 
     protected static String getHelp() {
