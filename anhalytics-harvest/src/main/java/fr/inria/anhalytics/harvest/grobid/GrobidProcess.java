@@ -28,7 +28,7 @@ public class GrobidProcess {
         this.mm = mm;
     }
     
-    public void processGrobid() throws IOException, Exception {
+    public void processGrobid() throws IOException {
         ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
         for (String date : Utilities.getDates()) {
             if (mm.init(MongoManager.HAL_BINARIES, date)) {

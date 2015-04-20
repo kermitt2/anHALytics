@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.*;
 
-public class OAIHarvester implements Harvester{
+public class OAIHarvester implements Harvester {
 
     private static final Logger logger = LoggerFactory.getLogger(OAIHarvester.class);
 
@@ -39,7 +39,7 @@ public class OAIHarvester implements Harvester{
     }
 
     @Override
-    public void fetchDocumentsByDate(String date) throws IOException, SAXException, ParserConfigurationException, ParseException {
+    public void fetchDocumentsByDate(String date) throws ParserConfigurationException, IOException {
         boolean stop = false;
         String tokenn = null;
         while (!stop) {
@@ -66,7 +66,7 @@ public class OAIHarvester implements Harvester{
     }
     
     @Override
-    public void fetchAllDocuments() throws IOException, SAXException, ParserConfigurationException, ParseException {
+    public void fetchAllDocuments() throws ParserConfigurationException, IOException {
         for (String date : Utilities.getDates()) {
             fetchDocumentsByDate(date);
         }
@@ -96,6 +96,7 @@ public class OAIHarvester implements Harvester{
                     //annexes
                     for (PubFile file : tei.getAnnexes()) {
                         downloadFile(file, tei.getId(), date);
+                        // diagnose annexes (not found)?
                     }
                 } else {
                     logger.debug("\t\t\t Tei not found !!!");
@@ -110,7 +111,7 @@ public class OAIHarvester implements Harvester{
     }
 
     /**
-     * Downloads the given file et classify either as main file or as an annex.
+     * Downloads the given file and classify it either as main file or as an annex.
      */
     private void downloadFile(PubFile file, String id, String date) throws ParseException, IOException {
         InputStream inBinary = null;

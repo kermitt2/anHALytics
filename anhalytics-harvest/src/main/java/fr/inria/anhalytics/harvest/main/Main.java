@@ -9,16 +9,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
-import java.util.Scanner;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -38,8 +34,7 @@ public class Main {
     private static MainArgs hrtArgs = new MainArgs();
     //private static int nullBinaries = 0;
 
-    public static void main(String[] args)
-            throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException, Exception {
+    public static void main(String[] args) throws IOException, ParserConfigurationException {
 
         Properties prop = new Properties();
         try {
@@ -63,7 +58,7 @@ public class Main {
         }
     }
 
-    private void processCommand() throws IOException, SAXException, ParserConfigurationException, ParseException, TransformerException, Exception {
+    private void processCommand() throws IOException, ParserConfigurationException {
         String process = hrtArgs.getProcessName();
         GrobidProcess gp = new GrobidProcess(hrtArgs.getGrobidHost(), hrtArgs.getGrobidPort(), mm);
         MergeProcess mp = new MergeProcess(mm);

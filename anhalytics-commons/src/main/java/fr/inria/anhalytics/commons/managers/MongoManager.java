@@ -5,19 +5,15 @@ import com.mongodb.gridfs.GridFSInputFile;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
-import fr.inria.anhalytics.commons.data.TEI;
 import fr.inria.anhalytics.commons.utilities.Utilities;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -63,10 +59,10 @@ public class MongoManager {
         try {
             Properties prop = new Properties();
             File file = new File(System.getProperty("user.dir"));
-            prop.load(new FileInputStream(file.getParent()+"/anhalytics-commons/"+"commons.properties"));
+            prop.load(new FileInputStream(file.getParent() + "/anhalytics-commons/" + "commons.properties"));
             mongodbServer = prop.getProperty("commons.mongodb_host");
             mongodbPort = Integer.parseInt(prop.getProperty("commons.mongodb_port"));
-            String mongodbDb = prop.getProperty("commons.mongodb_db")+ (test ? "_test":"");
+            String mongodbDb = prop.getProperty("commons.mongodb_db") + (test ? "_test" : "");
             String mongodbUser = prop.getProperty("commons.mongodb_user");
             String mongodbPass = prop.getProperty("commons.mongodb_pass");
             mongo = new MongoClient(mongodbServer, mongodbPort);
@@ -83,7 +79,7 @@ public class MongoManager {
         mongo.close();
     }
 
-    public boolean init(String collection, String date) throws Exception {
+    public boolean init(String collection, String date) {
         // open the GridFS
         try {
             gfs = new GridFS(db, collection);
@@ -95,9 +91,8 @@ public class MongoManager {
             }
             files = gfs.find(bdbo);
             indexFile = 0;
-        } catch (Exception e) {
-            LOGGER.debug("Cannot retrieve MongoDB TEI doc GridFS.");
-            throw new Exception(e);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         return true;
     }
@@ -141,20 +136,16 @@ public class MongoManager {
 
     public String nextAnnotation() {
         String json = null;
-        try {
-            if (cursor == null) {
-                // init the loop
-                cursor = collection.find();
-            }
+        if (cursor == null) {
+            // init the loop
+            cursor = collection.find();
+        }
 
-            DBObject obj = cursor.next();
-            json = obj.toString();
+        DBObject obj = cursor.next();
+        json = obj.toString();
 
-            if (!cursor.hasNext()) {
-                cursor.close();
-            }
-        } catch (MongoException e) {
-            e.printStackTrace();
+        if (!cursor.hasNext()) {
+            cursor.close();
         }
 
         return json;
@@ -162,31 +153,23 @@ public class MongoManager {
 
     public String getCurrentHalID() {
         String halID = null;
-        try {
-            if (indexFile < files.size()) {
-                GridFSDBFile teifile = files.get(indexFile);
-                String filename = teifile.getFilename();
-                int ind = filename.indexOf(".");
-                halID = filename.substring(0, ind);
-                // we still have possibly the version information
-                ind = halID.indexOf("v");
-                halID = halID.substring(0, ind);
-            }
-        } catch (MongoException e) {
-            e.printStackTrace();
+        if (indexFile < files.size()) {
+            GridFSDBFile teifile = files.get(indexFile);
+            String filename = teifile.getFilename();
+            int ind = filename.indexOf(".");
+            halID = filename.substring(0, ind);
+            // we still have possibly the version information
+            ind = halID.indexOf("v");
+            halID = halID.substring(0, ind);
         }
         return halID;
     }
 
     public String getCurrentFilename() {
         String filename = null;
-        try {
-            if (indexFile < files.size()) {
-                GridFSDBFile teifile = files.get(indexFile);
-                filename = teifile.getFilename();
-            }
-        } catch (MongoException e) {
-            e.printStackTrace();
+        if (indexFile < files.size()) {
+            GridFSDBFile teifile = files.get(indexFile);
+            filename = teifile.getFilename();
         }
         return filename;
     }
@@ -201,25 +184,19 @@ public class MongoManager {
                 indexFile++;
                 input.close();
             }
-        } catch (MongoException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return tei;
     }
-    
+
     public InputStream nextBinaryDocument() {
         InputStream input = null;
-        try {
-            if (indexFile < files.size()) {
-                GridFSDBFile teifile = files.get(indexFile);
-                input = teifile.getInputStream();
-                indexFile++;
-            }
-        } catch (MongoException e) {
-            e.printStackTrace();
+        if (indexFile < files.size()) {
+            GridFSDBFile teifile = files.get(indexFile);
+            input = teifile.getInputStream();
+            indexFile++;
         }
         return input;
     }
@@ -345,8 +322,7 @@ public class MongoManager {
     /**
      * Add a TEI/PDF document in the GridFS
      */
-    public void addDocument(InputStream file, String fileName, String namespace, String dateString) throws ParseException {
-
+    public void addDocument(InputStream file, String fileName, String namespace, String dateString) {
         try {
             GridFS gfs = new GridFS(db, namespace);
             gfs.remove(fileName);
@@ -355,9 +331,10 @@ public class MongoManager {
             gfsFile.setFilename(fileName);
             gfsFile.put("halId", Utilities.getHalIDFromFilename(fileName));
             gfsFile.save();
-        } catch (MongoException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
+
     }
 
     /**
@@ -378,11 +355,11 @@ public class MongoManager {
             gfsFile.setFilename(fileName);
             gfsFile.put("halId", id);
             gfsFile.save();
-        } catch (MongoException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
-    
+
     /**
      */
     public void addAnnexDocument(InputStream file, String type, String id, String fileName, String namespace, String dateString) throws ParseException {
@@ -400,66 +377,53 @@ public class MongoManager {
             gfsFile.put("halId", id);
             gfsFile.setContentType(type);
             gfsFile.save();
-        } catch (MongoException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
     /*
-      Returns the asset files using the halID+filename indexes.
-    */
+     Returns the asset files using the halID+filename indexes.
+     */
     public InputStream getFile(String halId, String filename, String collection) {
         InputStream file = null;
-        try {
-            GridFS gfs = new GridFS(db, collection);
-            BasicDBObject whereQuery = new BasicDBObject();
-            whereQuery.put("halId", halId);
-            whereQuery.put("filename", filename);
-            GridFSDBFile cursor = gfs.findOne(whereQuery);
-            file = cursor.getInputStream();
-        } catch (MongoException e) {
-        }
+        GridFS gfs = new GridFS(db, collection);
+        BasicDBObject whereQuery = new BasicDBObject();
+        whereQuery.put("halId", halId);
+        whereQuery.put("filename", filename);
+        GridFSDBFile cursor = gfs.findOne(whereQuery);
+        file = cursor.getInputStream();
         return file;
     }
 
     public InputStream streamFile(String filename, String collection) {
         GridFSDBFile file = null;
-        try {
-            GridFS gfs = new GridFS(db, collection);
-            file = gfs.findOne(filename);
-
-        } catch (MongoException e) {
-        }
+        GridFS gfs = new GridFS(db, collection);
+        file = gfs.findOne(filename);
         return file.getInputStream();
     }
 
     public InputStream streamFile(String filename) {
         GridFSDBFile file = null;
-        try {
-            GridFS gfs = new GridFS(db, HAL_BINARIES);
-            file = gfs.findOne(filename);
-
-        } catch (MongoException e) {
-        }
+        GridFS gfs = new GridFS(db, HAL_BINARIES);
+        file = gfs.findOne(filename);
         return file.getInputStream();
     }
 
     public void save(String haldID, String process, String desc, String date) {
-        try {
-            DBCollection collection = db.getCollection(DIAGNOSTICS);
-            BasicDBObject whereQuery = new BasicDBObject();
-            whereQuery.put("halId", haldID);
-            whereQuery.put("process", process);
-            collection.remove(whereQuery);
-            BasicDBObject document = new BasicDBObject();
-            document.put("haldID", haldID);
-            document.put("process", process);
-            document.put("desc", desc);
-            if(date == null)
-                date = Utilities.formatDate(new Date());
-            document.put("date", date);
-            collection.insert(document);
-        } catch (MongoException e) {
+        DBCollection collection = db.getCollection(DIAGNOSTICS);
+        BasicDBObject whereQuery = new BasicDBObject();
+        whereQuery.put("halId", haldID);
+        whereQuery.put("process", process);
+        collection.remove(whereQuery);
+        BasicDBObject document = new BasicDBObject();
+        document.put("haldID", haldID);
+        document.put("process", process);
+        document.put("desc", desc);
+        if (date == null) {
+            date = Utilities.formatDate(new Date());
         }
+        document.put("date", date);
+        collection.insert(document);
     }
 }

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -37,7 +39,7 @@ public class OAIPMHDom implements OAIPMHMetadata {
         xPath = XPathFactory.newInstance().newXPath();
     }
 
-    public List<TEI> getTeis(InputStream in) throws SAXException, IOException, ParserConfigurationException {
+    public List<TEI> getTeis(InputStream in) throws ParserConfigurationException, IOException {
         teis = new ArrayList<TEI>();
         setDoc(parse(in));
         Element rootElement = doc.getDocumentElement();
@@ -51,14 +53,14 @@ public class OAIPMHDom implements OAIPMHMetadata {
                 if ((listRecords.item(i) instanceof Element)) {
                     Element record = (Element) listRecords.item(i);
                     String type = getDocumentType(record.getElementsByTagName(TypeElement));
-                    if (isConsideredType(type)) {                        
+                    if (isConsideredType(type)) {
                         String tei = getTei(record.getElementsByTagName(TeiElement));
                         String doi = getDoi(record);
                         String id = getId(record.getElementsByTagName(IdElement));
-                        
+
                         PubFile file = getFile(record);
                         List<PubFile> annexes = getAnnexes(record);
-                        
+
                         String ref = getRef(record);
                         teis.add(new TEI(id, file, annexes, doi, type, tei, ref));
                     }
@@ -70,14 +72,14 @@ public class OAIPMHDom implements OAIPMHMetadata {
     }
 
     public String getRef(Node ref) {
-
         String reference = null;
+        Node node = null;
         try {
-            Node node = (Node) xPath.compile(RefPATH).evaluate(ref, XPathConstants.NODE);
-            reference = node.getTextContent();
-        } catch (Exception ex) {
-            // REf is not always available !
+            node = (Node) xPath.compile(RefPATH).evaluate(ref, XPathConstants.NODE);
+        } catch (XPathExpressionException ex) {
+            //
         }
+        reference = node.getTextContent();
         return reference;
     }
 
@@ -86,8 +88,8 @@ public class OAIPMHDom implements OAIPMHMetadata {
         try {
             Node node = (Node) xPath.compile(DoiPATH).evaluate(ref, XPathConstants.NODE);
             doi = node.getTextContent();
-        } catch (Exception ex) {
-            // DOI is not always available !
+        } catch (XPathExpressionException ex) {
+            // Sometimes doi is not indicated.
         }
         return doi;
     }
@@ -97,54 +99,57 @@ public class OAIPMHDom implements OAIPMHMetadata {
     }
 
     private void setToken(Element rootElement) {
-        try {
-            this.token = URLEncoder.encode(rootElement.getElementsByTagName(ResumptionToken).item(0).getTextContent());
-        } catch (Exception ex) {
-            this.token = null;
-        }
+        this.token = URLEncoder.encode(rootElement.getElementsByTagName(ResumptionToken).item(0).getTextContent());
     }
 
     private void setDoc(Document doc) {
         this.doc = doc;
     }
 
-    private Document parse(InputStream in) throws SAXException, ParserConfigurationException, IOException {
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        return db.parse(in);
+    private Document parse(InputStream in) throws ParserConfigurationException, IOException {
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            return db.parse(in);
+        } catch (SAXException e) {
+            System.out.println("Could not parse document because "
+                    + e.getMessage());
+        }
+        return null;
     }
 
     @Override
     public PubFile getFile(Node record) {
-        PubFile file = null;        
+        PubFile file = null;
         try {
-            
-            Element node = (Element) xPath.compile(FileElement).evaluate(record, XPathConstants.NODE);            
+            Element node = (Element) xPath.compile(FileElement).evaluate(record, XPathConstants.NODE);
             String url = node.getAttribute("target");
-            String date = ((Element)node.getChildNodes().item(1)).getAttribute("notBefore");
+            String date = ((Element) node.getChildNodes().item(1)).getAttribute("notBefore");
             file = new PubFile(url, date, "file");
-        } catch (Exception ex) {
+        } catch (XPathExpressionException ex) {
+            // Sometimes there is no document attached.
         }
         return file;
     }
-    
-    public List<PubFile> getAnnexes(Node record){
-    List<PubFile> annexes = new ArrayList<PubFile>();
-    try {
+
+    public List<PubFile> getAnnexes(Node record) {
+        List<PubFile> annexes = new ArrayList<PubFile>();
+        NodeList nodes = null;
+        try {
+            nodes = (NodeList) xPath.compile(AnnexesUrlsElement).evaluate(record, XPathConstants.NODESET);
+        } catch (XPathExpressionException ex) {
+            // Sometimes there is no annexes.
+        }
         String url = null;
         String date = null;
         String type = null;
-            NodeList nodes = (NodeList) xPath.compile(AnnexesUrlsElement).evaluate(record, XPathConstants.NODESET);
-             for (int i = nodes.getLength() - 1; i >= 0; i--) {
-                 Element node = (Element)nodes.item(i);
-                 url = node.getAttribute("target");
-                 type = node.getAttribute("subtype");
-                 type = type == null ? "pdf":type;
-                 date = ((Element)node.getChildNodes().item(1)).getAttribute("notBefore");
-                 annexes.add(new PubFile(url, date, type));
-             }
-            
-        } catch (Exception ex) {
+        for (int i = nodes.getLength() - 1; i >= 0; i--) {
+            Element node = (Element) nodes.item(i);
+            url = node.getAttribute("target");
+            type = node.getAttribute("subtype");
+            type = type == null ? "pdf" : type;
+            date = ((Element) node.getChildNodes().item(1)).getAttribute("notBefore");
+            annexes.add(new PubFile(url, date, type));
         }
         return annexes;
     }

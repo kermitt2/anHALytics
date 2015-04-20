@@ -18,19 +18,23 @@ import org.apache.commons.io.IOUtils;
 
 public class HalTeiAppender {
 
-    public static String replaceHeader(InputStream halTei, InputStream grobidTei, boolean modeBrutal) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+    public static String replaceHeader(InputStream halTei, InputStream grobidTei, boolean modeBrutal) throws ParserConfigurationException, IOException {
         String teiString;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
         //docFactory.setNamespaceAware(true);
 
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document docHalTei = docBuilder.parse(halTei);
-
+        Document docHalTei = null;
+        try {
+            docHalTei = docBuilder.parse(halTei);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
         // add random xml:id on textual elements
         Utilities.generateIDs(docHalTei);
 
-		// remove ugly end-of-line in starting and ending text as it is
+        // remove ugly end-of-line in starting and ending text as it is
         // a problem for stand-off annotations
         Utilities.trimEOL(docHalTei.getDocumentElement(), docHalTei);
         docHalTei = removeElement(docHalTei, "analytic");
@@ -45,13 +49,18 @@ public class HalTeiAppender {
         if (modeBrutal) {
             teiString = updateFullTextTeiBrutal(biblFull, grobidTei);
         } else {
-            Document doc = docBuilder.parse(grobidTei);
+            Document doc = null;
+            try {
+                doc = docBuilder.parse(grobidTei);
+            } catch (SAXException e) {
+                e.printStackTrace();
+            }
             teiString = updateFullTextTei(doc, biblFull);
         }
         return teiString;
     }
-    
-    private static Document removeElement(Document doc, String elementTagName){
+
+    private static Document removeElement(Document doc, String elementTagName) {
         Element element = (Element) doc.getElementsByTagName(elementTagName).item(0);
         element.getParentNode().removeChild(element);
         doc.normalize();
@@ -88,7 +97,7 @@ public class HalTeiAppender {
                         if (aff != null) {
                             //person.removeChild(theNodes.item(y));
                             Node localNode = docHalTei.importNode(aff, true);
-							// we need to rename this attribute because we cannot multiply the id attribute
+                            // we need to rename this attribute because we cannot multiply the id attribute
                             // with the same value (XML doc becomes not well-formed)
                             Element orgElement = (Element) localNode;
                             orgElement.removeAttribute("xml:id");
