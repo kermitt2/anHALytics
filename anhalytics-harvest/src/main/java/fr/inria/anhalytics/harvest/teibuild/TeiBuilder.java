@@ -1,4 +1,4 @@
-package fr.inria.anhalytics.harvest.merge;
+package fr.inria.anhalytics.harvest.teibuild;
 
 import fr.inria.anhalytics.commons.utilities.Utilities;
 import java.io.IOException;
@@ -6,8 +6,6 @@ import java.io.InputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -15,47 +13,52 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 import org.apache.commons.io.IOUtils;
+import org.w3c.dom.Attr;
 
-public class HalTeiAppender {
+public class TeiBuilder {
 
-    public static String replaceHeader(InputStream halTei, InputStream grobidTei, boolean modeBrutal) throws ParserConfigurationException, IOException {
+    public static String generateTeiCorpus(InputStream additionalTei, InputStream grobidTei, boolean modeBrutal) throws ParserConfigurationException, IOException {
         String teiString;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
         //docFactory.setNamespaceAware(true);
 
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document docHalTei = null;
+        Document docAdditionalTei = null;
         try {
-            docHalTei = docBuilder.parse(halTei);
+            docAdditionalTei = docBuilder.parse(additionalTei);
         } catch (SAXException e) {
             e.printStackTrace();
         }
         // add random xml:id on textual elements
-        Utilities.generateIDs(docHalTei);
+        Utilities.generateIDs(docAdditionalTei);
 
+        
+        /////////////// Hal specific : To be done as a harvesting post process before storing tei ////////////////////
         // remove ugly end-of-line in starting and ending text as it is
         // a problem for stand-off annotations
-        Utilities.trimEOL(docHalTei.getDocumentElement(), docHalTei);
-        docHalTei = removeElement(docHalTei, "analytic");
-
-        NodeList orgs = docHalTei.getElementsByTagName("org");
-        NodeList authors = docHalTei.getElementsByTagName("author");
-        updateAffiliations(authors, orgs, docHalTei);
-        NodeList editors = docHalTei.getElementsByTagName("editor");
-        updateAffiliations(editors, orgs, docHalTei);
-        NodeList biblFull = docHalTei.getElementsByTagName("biblFull");
-
+        Utilities.trimEOL(docAdditionalTei.getDocumentElement(), docAdditionalTei);
+        docAdditionalTei = removeElement(docAdditionalTei, "analytic");
+        NodeList orgs = docAdditionalTei.getElementsByTagName("org");
+        NodeList authors = docAdditionalTei.getElementsByTagName("author");
+        updateAffiliations(authors, orgs, docAdditionalTei);
+        NodeList editors = docAdditionalTei.getElementsByTagName("editor");
+        updateAffiliations(editors, orgs, docAdditionalTei);        
+        ///////////////////////////////////////////////////////////////////////
+        
+        
+        NodeList biblFull = docAdditionalTei.getElementsByTagName("biblFull");
         if (modeBrutal) {
-            teiString = updateFullTextTeiBrutal(biblFull, grobidTei);
+            teiString = updateFullTextTeiBrutal(biblFull, grobidTei);// TBR
         } else {
             Document doc = null;
             try {
                 doc = docBuilder.parse(grobidTei);
+                createTEICorpus(doc);
             } catch (SAXException e) {
                 e.printStackTrace();
             }
-            teiString = updateFullTextTei(doc, biblFull);
+            teiString = updateCorpusTei(doc, biblFull);
         }
         return teiString;
     }
@@ -82,7 +85,7 @@ public class HalTeiAppender {
         return org;
     }
 
-    private static void updateAffiliations(NodeList persons, NodeList orgs, Document docHalTei) {
+    private static void updateAffiliations(NodeList persons, NodeList orgs, Document docAdditionalTei) {
         Node person = null;
         NodeList theNodes = null;
         for (int i = 0; i < persons.getLength(); i++) {
@@ -96,7 +99,7 @@ public class HalTeiAppender {
                         Node aff = findNode(name, orgs);
                         if (aff != null) {
                             //person.removeChild(theNodes.item(y));
-                            Node localNode = docHalTei.importNode(aff, true);
+                            Node localNode = docAdditionalTei.importNode(aff, true);
                             // we need to rename this attribute because we cannot multiply the id attribute
                             // with the same value (XML doc becomes not well-formed)
                             Element orgElement = (Element) localNode;
@@ -111,10 +114,10 @@ public class HalTeiAppender {
         }
     }
 
-    private static String updateFullTextTei(Document doc, NodeList biblFull) {
-        Node teiHeader = doc.getElementsByTagName("teiHeader").item(0);
-        clear(teiHeader);
-        addHalHeader(biblFull, teiHeader, doc);
+    private static String updateCorpusTei(Document doc, NodeList biblFull) {
+        Element teiHeader = doc.createElement("teiHeader");
+        addAdditionalTeiHeader(biblFull, teiHeader, doc);
+        doc.getLastChild().appendChild(teiHeader);
         return Utilities.toString(doc);
     }
 
@@ -133,7 +136,7 @@ public class HalTeiAppender {
         }
     }
 
-    private static void addHalHeader(NodeList biblFull, Node header, Document doc) {
+    private static void addAdditionalTeiHeader(NodeList biblFull, Node header, Document doc) {
         if (biblFull.getLength() == 0) {
             return;
         }
@@ -142,5 +145,15 @@ public class HalTeiAppender {
             Node localNode = doc.importNode(biblFullRoot.getChildNodes().item(i), true);
             header.appendChild(localNode);
         }
+    }
+
+    private static void createTEICorpus(Document doc) {
+        Element tei = (Element) doc.getDocumentElement();
+        Attr attr = tei.getAttributeNode("xmlns");
+        tei.removeAttributeNode(attr);
+        Element teiCorpus = doc.createElement("teiCorpus");
+        teiCorpus.appendChild(tei);
+        teiCorpus.setAttributeNode(attr);
+        doc.appendChild(teiCorpus);
     }
 }

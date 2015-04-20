@@ -4,7 +4,7 @@ import fr.inria.anhalytics.commons.managers.MongoManager;
 import fr.inria.anhalytics.commons.utilities.Utilities;
 import fr.inria.anhalytics.harvest.OAIHarvester;
 import fr.inria.anhalytics.harvest.grobid.GrobidProcess;
-import fr.inria.anhalytics.harvest.merge.MergeProcess;
+import fr.inria.anhalytics.harvest.teibuild.TeiBuilderProcess;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -61,7 +61,7 @@ public class Main {
     private void processCommand() throws IOException, ParserConfigurationException {
         String process = hrtArgs.getProcessName();
         GrobidProcess gp = new GrobidProcess(hrtArgs.getGrobidHost(), hrtArgs.getGrobidPort(), mm);
-        MergeProcess mp = new MergeProcess(mm);
+        TeiBuilderProcess tb = new TeiBuilderProcess(mm);
         OAIHarvester oai = new OAIHarvester(mm, hrtArgs.getOaiUrl());
         if (process.equals("harvestAll")) {
             oai.fetchAllDocuments();
@@ -81,7 +81,7 @@ public class Main {
             gp.processGrobid();
             return;
         } else if (process.equals("merge")) {
-            mp.merge();
+            tb.build();
             return;
         }
     }
