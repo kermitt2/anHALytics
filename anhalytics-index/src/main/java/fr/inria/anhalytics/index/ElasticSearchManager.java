@@ -35,12 +35,18 @@ public class ElasticSearchManager {
     private String elasticSearchClusterName = null;
     private String indexName = null;
     private Client client = null;
+    
+    private final MongoManager mm;
 
         // only annotations under these paths will be indexed for the moment
     static final public List<String> toBeIndexed
             = Arrays.asList("$TEI.$teiHeader.$titleStmt.xml:id",
                     "$TEI.$teiHeader.$profileDesc.xml:id",
                     "$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id");
+
+    public ElasticSearchManager(MongoManager mm) {
+        this.mm = mm;
+    }
 
 
     private void loadProperties(String process) {
@@ -209,9 +215,6 @@ public class ElasticSearchManager {
                 .put("cluster.name", elasticSearchClusterName).build();
         Client client = new TransportClient(settings)
                 .addTransportAddress(new InetSocketTransportAddress(elasticSearch_host, 9300));
-
-        MongoManager mm = new MongoManager(false);
-        
         
         IndexingPreprocess indexingPreprocess = new IndexingPreprocess(mm);
         
@@ -302,10 +305,8 @@ public class ElasticSearchManager {
                 .put("cluster.name", elasticSearchClusterName).build();
         Client client = new TransportClient(settings)
                 .addTransportAddress(new InetSocketTransportAddress(elasticSearch_host, 9300));
-        MongoManager mm = null;
         int nb = 0;
         try {
-            mm = new MongoManager(false);
             ObjectMapper mapper = new ObjectMapper();
 
             if (mm.initAnnotations()) {

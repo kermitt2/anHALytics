@@ -25,9 +25,9 @@ public class Annotator {
 
     private final MongoManager mm;
 
-    public Annotator() {
+    public Annotator(MongoManager mm) {
+        this.mm = mm;
         loadProperties();
-        mm = new MongoManager(false);
     }
 
     private void loadProperties() {
@@ -143,7 +143,7 @@ public class Annotator {
         String untilDate = null;
         boolean isMultiThread = false;
         int nbAnnots;
-        Annotator annotator = new Annotator();
+        Annotator annotator = new Annotator(new MongoManager(false));
         String currArg;
         for (int i = 0; i < args.length; i++) {
             currArg = args[i];

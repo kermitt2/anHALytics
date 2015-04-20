@@ -1,5 +1,6 @@
 package fr.inria.anhalytics.index;
 
+import fr.inria.anhalytics.commons.managers.MongoManager;
 import fr.inria.anhalytics.commons.utilities.Utilities;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +30,8 @@ public class Indexer {
             throws IOException, ClassNotFoundException,
             InstantiationException, IllegalAccessException {
         String currArg;
-        ElasticSearchManager esm = new ElasticSearchManager();
+        MongoManager mm = new MongoManager(false);
+        ElasticSearchManager esm = new ElasticSearchManager(mm);
         for (int i = 0; i < args.length; i++) {
 
             currArg = args[i];
