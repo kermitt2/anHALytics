@@ -318,6 +318,19 @@ public class MongoManager {
         }
         return result;
     }
+    
+    /**
+     * Check if the given pdf has already been harvested.
+     */
+    public boolean isCollected(String filename) {
+        GridFS gfs = new GridFS(db, HAL_BINARIES);
+        GridFSDBFile f = gfs.findOne(filename);
+        boolean result = false;        
+        if (f != null) {
+            result = true;
+        }
+        return result;
+    }
 
     /**
      * Add a TEI/PDF document in the GridFS

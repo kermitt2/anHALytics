@@ -85,13 +85,16 @@ public class OAIHarvester implements Harvester {
                     logger.debug("\t\t\t\t Storing tei : " + tei.getId());
                     mm.addDocument(new ByteArrayInputStream(teiString.getBytes()), teiFilename, MongoManager.HAL_TEIS, date);
 
-                    //binary processing.
-                    if (tei.getFile() != null) {
-                        System.out.println(tei.getId() + ".pdf");
-                        downloadFile(tei.getFile(), tei.getId(), date);
-                    } else {
-                        mm.save(tei.getId(), "harvestProcess", "no file url", null);
-                        logger.debug("\t\t\t PDF not found !");
+                    String filename = tei.getId() + ".pdf";
+                    if(mm.isCollected(filename)) {
+                        //binary processing.
+                        if (tei.getFile() != null) {
+                            System.out.println(filename);
+                            downloadFile(tei.getFile(), tei.getId(), date);
+                        } else {
+                            mm.save(tei.getId(), "harvestProcess", "no file url", null);
+                            logger.debug("\t\t\t PDF not found !");
+                        }
                     }
                     //annexes
                     for (PubFile file : tei.getAnnexes()) {
