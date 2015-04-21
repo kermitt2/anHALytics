@@ -76,10 +76,10 @@ public class OAIPMHDom implements OAIPMHMetadata {
         Node node = null;
         try {
             node = (Node) xPath.compile(RefPATH).evaluate(ref, XPathConstants.NODE);
+            reference = node.getTextContent();
         } catch (Exception ex) {
             //
         }
-        reference = node.getTextContent();
         return reference;
     }
 

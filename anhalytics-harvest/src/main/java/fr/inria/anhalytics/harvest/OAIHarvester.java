@@ -86,7 +86,7 @@ public class OAIHarvester implements Harvester {
                     mm.addDocument(new ByteArrayInputStream(teiString.getBytes()), teiFilename, MongoManager.ADDITIONAL_TEIS, date);
 
                     String filename = tei.getId() + ".pdf";
-                    if(mm.isCollected(filename)) {
+                    if(!mm.isCollected(filename)) {
                         //binary processing.
                         if (tei.getFile() != null) {
                             System.out.println(filename);
