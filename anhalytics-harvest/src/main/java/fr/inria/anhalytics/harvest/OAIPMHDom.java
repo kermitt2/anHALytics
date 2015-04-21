@@ -76,7 +76,7 @@ public class OAIPMHDom implements OAIPMHMetadata {
         Node node = null;
         try {
             node = (Node) xPath.compile(RefPATH).evaluate(ref, XPathConstants.NODE);
-        } catch (XPathExpressionException ex) {
+        } catch (Exception ex) {
             //
         }
         reference = node.getTextContent();
@@ -88,7 +88,7 @@ public class OAIPMHDom implements OAIPMHMetadata {
         try {
             Node node = (Node) xPath.compile(DoiPATH).evaluate(ref, XPathConstants.NODE);
             doi = node.getTextContent();
-        } catch (XPathExpressionException ex) {
+        } catch (Exception ex) {
             // Sometimes doi is not indicated.
         }
         return doi;
@@ -126,7 +126,7 @@ public class OAIPMHDom implements OAIPMHMetadata {
             String url = node.getAttribute("target");
             String date = ((Element) node.getChildNodes().item(1)).getAttribute("notBefore");
             file = new PubFile(url, date, "file");
-        } catch (XPathExpressionException ex) {
+        } catch (Exception ex) {
             // Sometimes there is no document attached.
         }
         return file;
@@ -137,7 +137,7 @@ public class OAIPMHDom implements OAIPMHMetadata {
         NodeList nodes = null;
         try {
             nodes = (NodeList) xPath.compile(AnnexesUrlsElement).evaluate(record, XPathConstants.NODESET);
-        } catch (XPathExpressionException ex) {
+        } catch (Exception ex) {
             // Sometimes there is no annexes.
         }
         String url = null;
