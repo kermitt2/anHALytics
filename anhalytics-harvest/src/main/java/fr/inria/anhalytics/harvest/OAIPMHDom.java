@@ -99,7 +99,11 @@ public class OAIPMHDom implements OAIPMHMetadata {
     }
 
     private void setToken(Element rootElement) {
-        this.token = URLEncoder.encode(rootElement.getElementsByTagName(ResumptionToken).item(0).getTextContent());
+        try {
+            this.token = URLEncoder.encode(rootElement.getElementsByTagName(ResumptionToken).item(0).getTextContent());
+        } catch (Exception ex) {
+            this.token = null;
+        }
     }
 
     private void setDoc(Document doc) {
