@@ -283,10 +283,10 @@ public class Utilities {
 
     public static String trimEncodedCharaters(String string) {
         return string.replaceAll("&amp\\s+;", "&amp;").
-                replaceAll("&quot\\s+;|&amp;quot\\s*;", "&quot;").
-                replaceAll("&lt\\s+;|&amp;lt\\s*;", "&lt;").
-                replaceAll("&gt\\s+;|&amp;gt\\s*;", "&gt;").
-                replaceAll("&apos\\s+;|&amp;apos\\s*;", "&apos;");
+                replaceAll("&quot[^;]|&amp;quot\\s*;", "&quot;").
+                replaceAll("&lt[^;]|&amp;lt\\s*;", "&lt;").
+                replaceAll("&gt[^;]|&amp;gt\\s*;", "&gt;").
+                replaceAll("&apos[^;]|&amp;apos\\s*;", "&apos;");
     }
 
     public static void unzipIt(String file, String outPath) {
@@ -333,28 +333,24 @@ public class Utilities {
         }
     }
     
-    public static InputStream request(String request) {
+    public static InputStream request(String request, boolean retry) {
         InputStream in = null;
         try {
             URL url = new URL(request);
             URLConnection conn = url.openConnection();
             conn.setRequestProperty("accept-charset", "UTF-8");
-            if (request.endsWith("document") && !conn.getContentType().equals("application/pdf")) {
-                //nullBinaries++;
-                logger.debug("\t\t\t Cannot download pdf file, because input file is null.");
-                throw new BinaryNotAvailableException("Cannot download pdf file, because input file is null.");
-            }
             in = conn.getInputStream();
             return in;
-
         } catch (UnknownHostException e) {
             e.printStackTrace();
-            try {
-                Thread.sleep(900000); //take a nap.
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
+            if(retry) {
+                try {
+                    Thread.sleep(900000); //take a nap.
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }            
+                in = request(request, true);
             }
-            return request(request);
         } catch (IOException e) {
             e.printStackTrace();
         }

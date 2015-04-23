@@ -51,7 +51,7 @@ public class OAIHarvester implements Harvester {
             System.out.println(request);
             logger.debug("Sending: " + request);
 
-            InputStream in = Utilities.request(request);
+            InputStream in = Utilities.request(request, true);
             logger.debug("\t Extracting teis.... for " + date);
             List<TEI> teis = oaiDom.getTeis(in);
 
@@ -64,7 +64,7 @@ public class OAIHarvester implements Harvester {
             }
         }
     }
-    
+
     @Override
     public void fetchAllDocuments() throws ParserConfigurationException, IOException {
         for (String date : Utilities.getDates()) {
@@ -86,7 +86,7 @@ public class OAIHarvester implements Harvester {
                     mm.addDocument(new ByteArrayInputStream(teiString.getBytes()), teiFilename, MongoManager.ADDITIONAL_TEIS, date);
 
                     String filename = tei.getId() + ".pdf";
-                    if(!mm.isCollected(filename)) {
+                    if (!mm.isCollected(filename)) {
                         //binary processing.
                         if (tei.getFile() != null) {
                             System.out.println(filename);
@@ -114,7 +114,8 @@ public class OAIHarvester implements Harvester {
     }
 
     /**
-     * Downloads the given file and classify it either as main file or as an annex.
+     * Downloads the given file and classify it either as main file or as an
+     * annex.
      */
     private void downloadFile(PubFile file, String id, String date) throws ParseException, IOException {
         InputStream inBinary = null;
@@ -122,17 +123,20 @@ public class OAIHarvester implements Harvester {
         Date today = new Date();
         if (embDate.before(today) || embDate.equals(today)) {
             logger.debug("\t\t\t Downloading: " + file.getUrl());
-            inBinary = new BufferedInputStream(Utilities.request(file.getUrl()));
-
-            if ((file.getType()).equals("file")) {
-                mm.addDocument(inBinary, id + ".pdf", MongoManager.BINARIES, date);
+            inBinary = Utilities.request(file.getUrl(), false);
+            if (inBinary == null) {
+                mm.save(id, "no stream/"+file.getType(), file.getUrl(), date);
             } else {
-                int n = file.getUrl().lastIndexOf("/");
-                String filename = file.getUrl().substring(n+1);
-                System.out.println(filename);
-                mm.addAnnexDocument(inBinary, file.getType(), id, filename, MongoManager.PUB_ANNEXES, date);
+                if ((file.getType()).equals("file")) {
+                    mm.addDocument(inBinary, id + ".pdf", MongoManager.BINARIES, date);
+                } else {
+                    int n = file.getUrl().lastIndexOf("/");
+                    String filename = file.getUrl().substring(n + 1);
+                    System.out.println(filename);
+                    mm.addAnnexDocument(inBinary, file.getType(), id, filename, MongoManager.PUB_ANNEXES, date);
+                }
+                inBinary.close();
             }
-            inBinary.close();
         } else {
             mm.save(id, "embargo", file.getUrl(), file.getEmbargoDate());
             logger.debug("\t\t\t file under embargo !");
