@@ -22,12 +22,12 @@ import java.text.SimpleDateFormat;
  */
 public class IndexingPreprocess {
 
-	// this is the list of elements for which the text nodes should be expanded with an additional json
+    // this is the list of elements for which the text nodes should be expanded with an additional json
     // node capturing the nesting xml:lang attribute name/value pair
     static final public List<String> expandable
             = Arrays.asList("$title", "$p", "$item", "$figDesc", "$head", "$meeting", "$div", "$abstract");
 
-	// this is the list of elements to be locally enriched with annotations for the purpose of 
+    // this is the list of elements to be locally enriched with annotations for the purpose of 
     // presentation of the annotated text
     static final public List<String> annotated
             = Arrays.asList("$title", "$abstract", "term");
@@ -80,145 +80,22 @@ public class IndexingPreprocess {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonRoot = mapper.readTree(jsonStr);
 
-		// root node is the TEI node, we add as a child the "light" annotations in a 
+        // root node is the TEI node, we add as a child the "light" annotations in a 
         // standoff element
         if (filename != null) {
-            JsonNode teiRoot = jsonRoot.findPath("$TEI");
+            JsonNode teiRoot = jsonRoot.findPath("$teiCorpus");
 
             if ((teiRoot != null) && (!teiRoot.isMissingNode())) {
-
-                //System.out.println("filename: " + filename);
-                String annotation = mm.getAnnotation(filename);
-                //System.out.println(annotation);
-                if ((annotation != null) && (annotation.trim().length() > 0)) {
-                    JsonNode jsonAnnotation = mapper.readTree(annotation);
-//System.out.println(jsonAnnotation.toString());
-                    Iterator<JsonNode> iter0 = jsonAnnotation.getElements();
-                    JsonNode annotNode = mapper.createArrayNode();
-                    int n = 0;
-                    while (iter0.hasNext() && (n < 3)) {
-                        JsonNode jsonLocalAnnotation = (JsonNode) iter0.next();
-
-                        // we only get the concept IDs and the nerd confidence score
-                        JsonNode nerd = jsonLocalAnnotation.findPath("nerd");
-                        JsonNode entities = nerd.findPath("entities");
-                        if ((entities != null) && (!entities.isMissingNode())) {
-                            Iterator<JsonNode> iter = entities.getElements();
-
-                            while (iter.hasNext()) {
-                                JsonNode piece = (JsonNode) iter.next();
-
-                                JsonNode nerd_scoreN = piece.findValue("nerd_score");
-                                JsonNode wikipediaExternalRefN = piece.findValue("wikipediaExternalRef");
-                                JsonNode freeBaseExternalRefN = piece.findValue("freeBaseExternalRef");
-
-                                String nerd_score = nerd_scoreN.getTextValue();
-                                String wikipediaExternalRef = wikipediaExternalRefN.getTextValue();
-                                String freeBaseExternalRef = null;
-                                if ((freeBaseExternalRefN != null) && (!freeBaseExternalRefN.isMissingNode())) {
-                                    freeBaseExternalRef = freeBaseExternalRefN.getTextValue();
-                                }
-
-                                JsonNode newNode = mapper.createArrayNode();
-
-                                JsonNode nerdScoreNode = mapper.createObjectNode();
-                                ((ObjectNode) nerdScoreNode).put("nerd_score", nerd_score);
-                                ((ArrayNode) newNode).add(nerdScoreNode);
-
-                                JsonNode wikiNode = mapper.createObjectNode();
-                                ((ObjectNode) wikiNode).put("wikipediaExternalRef", wikipediaExternalRef);
-                                ((ArrayNode) newNode).add(wikiNode);
-
-                                if (freeBaseExternalRef != null) {
-                                    JsonNode freeBaseNode = mapper.createObjectNode();
-                                    ((ObjectNode) freeBaseNode).put("freeBaseExternalRef", freeBaseExternalRef);
-                                    ((ArrayNode) newNode).add(freeBaseNode);
-                                }
-
-                                ((ArrayNode) annotNode).add(newNode);
-                            }
-                        }
-                        n++;
-                    }
-                    JsonNode standoffNode = mapper.createObjectNode();
-                    ((ObjectNode) standoffNode).put("$standoff", annotNode);
-                    ((ArrayNode) teiRoot).add(standoffNode);
-                } else {
-                    // if we don't have annotations for the file, we skip it!
-                    return null;
-                }
+                JsonNode standoffNode = getStandoff(mapper, filename);
+                ((ArrayNode) teiRoot).add(standoffNode);
             }
         }
 
         // here recursive modification of the json document via Jackson
         jsonRoot = process(jsonRoot, mapper, null, false, false, false, filename);
 
-		// we want to filter out documents in the future...
-        // paths are $TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date
-        // or $TEI.$teiHeader.$editionStmt.$edition.$date
-        // now a piece of art of progamming : ;)
-        JsonNode teiRoot = jsonRoot.findPath("$TEI");
-        if ((teiRoot != null) && (!teiRoot.isMissingNode())) {
-            JsonNode teiHeader = teiRoot.findPath("$teiHeader");
-            if ((teiHeader != null) && (!teiHeader.isMissingNode())) {
-                JsonNode sourceDesc = teiHeader.findPath("$sourceDesc");
-                if ((sourceDesc != null) && (!sourceDesc.isMissingNode())) {
-                    JsonNode biblStruct = sourceDesc.findPath("$biblStruct");
-                    if ((biblStruct != null) && (!biblStruct.isMissingNode())) {
-                        JsonNode monogr = biblStruct.findPath("$monogr");
-                        if ((monogr != null) && (!monogr.isMissingNode())) {
-                            JsonNode imprint = monogr.findPath("$imprint");
-                            if ((imprint != null) && (!imprint.isMissingNode())) {
-                                JsonNode date = imprint.findPath("$date");
-                                if ((date != null) && (!date.isMissingNode())) {
-                                    if (date.isArray()) {
-                                        Iterator<JsonNode> ite = ((ArrayNode) date).getElements();
-                                        if (ite.hasNext()) {
-                                            JsonNode dateVal = (JsonNode) ite.next();
-                                            String dateStr = dateVal.getTextValue();
-                                            try {
-                                                Date theDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
-                                                Date today = new Date();
-                                                if (theDate.compareTo(today) > 0) {
-                                                    return null;
-                                                }
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    JsonNode editionStmt = teiHeader.findPath("$editionStmt");
-                    if ((editionStmt != null) && (!editionStmt.isMissingNode())) {
-                        JsonNode edition = editionStmt.findPath("$edition");
-                        if ((edition != null) && (!edition.isMissingNode())) {
-                            JsonNode date = edition.findPath("$date");
-                            if ((date != null) && (!date.isMissingNode())) {
-                                if (date.isArray()) {
-                                    Iterator<JsonNode> ite = ((ArrayNode) date).getElements();
-                                    if (ite.hasNext()) {
-                                        JsonNode dateVal = (JsonNode) ite.next();
-                                        String dateStr = dateVal.getTextValue();
-                                        try {
-                                            Date theDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
-                                            Date today = new Date();
-                                            if (theDate.compareTo(today) > 0) {
-                                                return null;
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if (!filterDocuments(jsonRoot)) {
+            return null;
         }
 
         return jsonRoot.toString();
@@ -250,7 +127,6 @@ public class IndexingPreprocess {
                 JsonNode theXmlIdNode = null;
                 while (fields.hasNext()) {
                     String field = fields.next();
-
                     if (field.startsWith("$")) {
                         if (expandable.contains(field)) {
                             expandLang = true;
@@ -260,87 +136,35 @@ public class IndexingPreprocess {
                     }
 
                     // ignoring the possibly present $lang_ nodes (this can appear in old version of JsonTapasML)
-                    if (field.startsWith("$lang_") || field.startsWith("$lang_")) {
-						// we need to ignore this node, as the expansion is added automatically when the textual element 
-                        // is reached
-                        JsonNode theChildNode = subJson.path(field);
-                        // the child should then always be an array with a unique textual child
-                        if (theChildNode.isArray()) {
-                            Iterator<JsonNode> ite = theChildNode.getElements();
-                            while (ite.hasNext()) {
-                                JsonNode temp = ite.next();
-                                theChildNode = temp;
-                                break;
-                            }
-                        }
-                        return process(theChildNode, mapper, currentLang, false, expandLang, false, filename);
-                    }
-
-					// we add the full name in order to index it directly without more time consuming
+                    /*if (field.startsWith("$lang_") || field.startsWith("$lang_")) {
+                     // we need to ignore this node, as the expansion is added automatically when the textual element 
+                     // is reached
+                     JsonNode theChildNode = subJson.path(field);
+                     // the child should then always be an array with a unique textual child
+                     if (theChildNode.isArray()) {
+                     Iterator<JsonNode> ite = theChildNode.getElements();
+                     while (ite.hasNext()) {
+                     JsonNode temp = ite.next();
+                     theChildNode = temp;
+                     break;
+                     }
+                     }
+                     return process(theChildNode, mapper, currentLang, false, expandLang, false, filename);
+                     }
+                     */
+                    // we add the full name in order to index it directly without more time consuming
                     // script and concatenation at facet creation time
                     if (field.equals("$persName")) {
                         JsonNode theChild = subJson.path("$persName");
                         // this child is an array
-                        String fullName = null;
-                        if (theChild.isArray()) {
-                            String forename = null;
-                            String surname = null;
-                            Iterator<JsonNode> ite = theChild.getElements();
-                            while (ite.hasNext()) {
-                                JsonNode temp = ite.next();
-                                if (temp.isObject()) {
-                                    Iterator<String> subfields = ((ObjectNode) temp).getFieldNames();
+                        addFullName(theChild, mapper);
 
-                                    while (subfields.hasNext()) {
-                                        String subfield = subfields.next();
-                                        if (subfield.equals("$forename")) {
-                                            // get the text value of the array
-                                            Iterator<JsonNode> ite2 = temp.path(subfield).getElements();
-                                            while (ite2.hasNext()) {
-                                                JsonNode temp2 = ite2.next();
-
-                                                if (forename != null) {
-                                                    forename += " " + temp2.getTextValue();
-                                                } else {
-                                                    forename = temp2.getTextValue();
-                                                }
-                                                break;
-                                            }
-                                        } else if (subfield.equals("$surname")) {
-                                            // get the text value of the array
-                                            Iterator<JsonNode> ite2 = temp.path(subfield).getElements();
-                                            while (ite2.hasNext()) {
-                                                JsonNode temp2 = ite2.next();
-                                                surname = temp2.getTextValue();
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            if (forename != null) {
-                                fullName = forename;
-                            }
-                            if (surname != null) {
-                                fullName += " " + surname;
-                            }
-
-                            if (fullName != null) {
-                                fullName = fullName.trim();
-                                JsonNode newNode = mapper.createObjectNode();
-                                JsonNode textNode = mapper.createArrayNode();
-                                JsonNode tnode = new TextNode(fullName);
-                                ((ArrayNode) textNode).add(tnode);
-                                ((ObjectNode) newNode).put("$fullName", textNode);
-                                ((ArrayNode) theChild).add(newNode);
-                            }
-                        }
                         return subJson;
                     } else if (field.equals("$classCode")) {
                         theClassCodeNode = subJson.path("$classCode");
                     } else if (field.equals("$title")) {
                         theTitleNode = subJson.path("$title");
-						// we add a canonical copy of the title under $first, which allows to 
+                        // we add a canonical copy of the title under $first, which allows to 
                         // query easily the title of an article without knowing the language
                         JsonNode newNode = mapper.createObjectNode();
                         JsonNode textNode = mapper.createArrayNode();
@@ -634,7 +458,7 @@ public class IndexingPreprocess {
                 }
             } else {
                 val = subJson.getTextValue().trim();
-				// we have the "lazy programmer" case where the month is 00, e.g. 2012-00-31
+                // we have the "lazy programmer" case where the month is 00, e.g. 2012-00-31
                 // which means the month is unknown
                 val = val.replace("-00-", "-12-");
             }
@@ -756,6 +580,196 @@ public class IndexingPreprocess {
             eclas.add(classs);
         }
         return eclas;
+    }
+
+    private JsonNode getStandoff(ObjectMapper mapper, String filename) throws Exception {
+        JsonNode standoffNode = null;
+        //System.out.println("filename: " + filename);
+        String annotation = mm.getAnnotation(filename);
+        //System.out.println(annotation);
+        if ((annotation != null) && (annotation.trim().length() > 0)) {
+            JsonNode jsonAnnotation = mapper.readTree(annotation);
+//System.out.println(jsonAnnotation.toString());
+            Iterator<JsonNode> iter0 = jsonAnnotation.getElements();
+            JsonNode annotNode = mapper.createArrayNode();
+            int n = 0;
+            while (iter0.hasNext() && (n < 3)) {
+                JsonNode jsonLocalAnnotation = (JsonNode) iter0.next();
+
+                // we only get the concept IDs and the nerd confidence score
+                JsonNode nerd = jsonLocalAnnotation.findPath("nerd");
+                JsonNode entities = nerd.findPath("entities");
+                if ((entities != null) && (!entities.isMissingNode())) {
+                    Iterator<JsonNode> iter = entities.getElements();
+
+                    while (iter.hasNext()) {
+                        JsonNode piece = (JsonNode) iter.next();
+
+                        JsonNode nerd_scoreN = piece.findValue("nerd_score");
+                        JsonNode wikipediaExternalRefN = piece.findValue("wikipediaExternalRef");
+                        JsonNode freeBaseExternalRefN = piece.findValue("freeBaseExternalRef");
+
+                        String nerd_score = nerd_scoreN.getTextValue();
+                        String wikipediaExternalRef = wikipediaExternalRefN.getTextValue();
+                        String freeBaseExternalRef = null;
+                        if ((freeBaseExternalRefN != null) && (!freeBaseExternalRefN.isMissingNode())) {
+                            freeBaseExternalRef = freeBaseExternalRefN.getTextValue();
+                        }
+
+                        JsonNode newNode = mapper.createArrayNode();
+
+                        JsonNode nerdScoreNode = mapper.createObjectNode();
+                        ((ObjectNode) nerdScoreNode).put("nerd_score", nerd_score);
+                        ((ArrayNode) newNode).add(nerdScoreNode);
+
+                        JsonNode wikiNode = mapper.createObjectNode();
+                        ((ObjectNode) wikiNode).put("wikipediaExternalRef", wikipediaExternalRef);
+                        ((ArrayNode) newNode).add(wikiNode);
+
+                        if (freeBaseExternalRef != null) {
+                            JsonNode freeBaseNode = mapper.createObjectNode();
+                            ((ObjectNode) freeBaseNode).put("freeBaseExternalRef", freeBaseExternalRef);
+                            ((ArrayNode) newNode).add(freeBaseNode);
+                        }
+
+                        ((ArrayNode) annotNode).add(newNode);
+                    }
+                }
+                n++;
+            }
+            standoffNode = mapper.createObjectNode();
+            ((ObjectNode) standoffNode).put("$standoff", annotNode);
+        } else {
+            // if we don't have annotations for the file, we skip it!
+            standoffNode = null;
+        }
+        return standoffNode;
+    }
+
+    private boolean filterDocuments(JsonNode jsonRoot) {
+        // we want to filter out documents in the future...
+        // paths are $TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date
+        // or $TEI.$teiHeader.$editionStmt.$edition.$date
+        // now a piece of art of progamming : ;)
+        boolean ok = true;
+        JsonNode teiHeader = jsonRoot.findPath("$teiCorpus.$teiHeader");
+        if ((teiHeader != null) && (!teiHeader.isMissingNode())) {
+            JsonNode sourceDesc = teiHeader.findPath("$sourceDesc");
+            if ((sourceDesc != null) && (!sourceDesc.isMissingNode())) {
+                JsonNode biblStruct = sourceDesc.findPath("$biblStruct");
+                if ((biblStruct != null) && (!biblStruct.isMissingNode())) {
+                    JsonNode monogr = biblStruct.findPath("$monogr");
+                    if ((monogr != null) && (!monogr.isMissingNode())) {
+                        JsonNode imprint = monogr.findPath("$imprint");
+                        if ((imprint != null) && (!imprint.isMissingNode())) {
+                            JsonNode date = imprint.findPath("$date");
+                            if ((date != null) && (!date.isMissingNode())) {
+                                if (date.isArray()) {
+                                    Iterator<JsonNode> ite = ((ArrayNode) date).getElements();
+                                    if (ite.hasNext()) {
+                                        JsonNode dateVal = (JsonNode) ite.next();
+                                        String dateStr = dateVal.getTextValue();
+                                        try {
+                                            Date theDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+                                            Date today = new Date();
+                                            if (theDate.compareTo(today) > 0) {
+                                                ok = false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                JsonNode editionStmt = teiHeader.findPath("$editionStmt");
+                if ((editionStmt != null) && (!editionStmt.isMissingNode())) {
+                    JsonNode edition = editionStmt.findPath("$edition");
+                    if ((edition != null) && (!edition.isMissingNode())) {
+                        JsonNode date = edition.findPath("$date");
+                        if ((date != null) && (!date.isMissingNode())) {
+                            if (date.isArray()) {
+                                Iterator<JsonNode> ite = ((ArrayNode) date).getElements();
+                                if (ite.hasNext()) {
+                                    JsonNode dateVal = (JsonNode) ite.next();
+                                    String dateStr = dateVal.getTextValue();
+                                    try {
+                                        Date theDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+                                        Date today = new Date();
+                                        if (theDate.compareTo(today) > 0) {
+                                            ok = false;
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return ok;
+    }
+
+    private void addFullName(JsonNode theChild, ObjectMapper mapper) {
+        String fullName = null;
+        if (theChild.isArray()) {
+            String forename = null;
+            String surname = null;
+            Iterator<JsonNode> ite = theChild.getElements();
+            while (ite.hasNext()) {
+                JsonNode temp = ite.next();
+                if (temp.isObject()) {
+                    Iterator<String> subfields = ((ObjectNode) temp).getFieldNames();
+
+                    while (subfields.hasNext()) {
+                        String subfield = subfields.next();
+                        if (subfield.equals("$forename")) {
+                            // get the text value of the array
+                            Iterator<JsonNode> ite2 = temp.path(subfield).getElements();
+                            while (ite2.hasNext()) {
+                                JsonNode temp2 = ite2.next();
+
+                                if (forename != null) {
+                                    forename += " " + temp2.getTextValue();
+                                } else {
+                                    forename = temp2.getTextValue();
+                                }
+                                break;
+                            }
+                        } else if (subfield.equals("$surname")) {
+                            // get the text value of the array
+                            Iterator<JsonNode> ite2 = temp.path(subfield).getElements();
+                            while (ite2.hasNext()) {
+                                JsonNode temp2 = ite2.next();
+                                surname = temp2.getTextValue();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if (forename != null) {
+                fullName = forename;
+            }
+            if (surname != null) {
+                fullName += " " + surname;
+            }
+
+            if (fullName != null) {
+                fullName = fullName.trim();
+                JsonNode newNode = mapper.createObjectNode();
+                JsonNode textNode = mapper.createArrayNode();
+                JsonNode tnode = new TextNode(fullName);
+                ((ArrayNode) textNode).add(tnode);
+                ((ObjectNode) newNode).put("$fullName", textNode);
+                ((ArrayNode) theChild).add(newNode);
+            }
+        }
     }
 
 }
