@@ -18,7 +18,7 @@ import org.w3c.dom.Attr;
 public class TeiBuilder {
 
     public static String generateTeiCorpus(InputStream additionalTei, InputStream grobidTei, boolean modeBrutal) throws ParserConfigurationException, IOException {
-        String teiString;
+        String teiString = null;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
         //docFactory.setNamespaceAware(true);
@@ -46,7 +46,7 @@ public class TeiBuilder {
         updateAffiliations(editors, orgs, docAdditionalTei);        
         ///////////////////////////////////////////////////////////////////////
         
-        
+        // du pre processsing
         NodeList biblFull = docAdditionalTei.getElementsByTagName("biblFull");
         if (modeBrutal) {
             teiString = updateFullTextTeiBrutal(biblFull, grobidTei);// TBR
@@ -55,10 +55,10 @@ public class TeiBuilder {
             try {
                 doc = docBuilder.parse(grobidTei);
                 createTEICorpus(doc);
+                teiString = updateCorpusTei(doc, biblFull);
             } catch (SAXException e) {
                 e.printStackTrace();
-            }
-            teiString = updateCorpusTei(doc, biblFull);
+            }            
         }
         return teiString;
     }
