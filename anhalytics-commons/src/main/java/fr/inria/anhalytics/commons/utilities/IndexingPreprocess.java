@@ -117,6 +117,7 @@ public class IndexingPreprocess {
                 JsonNode thePersonNode = null;
                 JsonNode theItemNode = null;
                 JsonNode theKeywordsNode = null;
+                JsonNode theDepositorKeywordsNode = null;
                 JsonNode theDateNode = null;
                 JsonNode theIdnoNode = null;
                 JsonNode theBiblScopeNode = null;
@@ -125,6 +126,7 @@ public class IndexingPreprocess {
                 JsonNode theNNode = null;
                 JsonNode theTitleNode = null;
                 JsonNode theXmlIdNode = null;
+                boolean isDepositorKeywords = false;
                 while (fields.hasNext()) {
                     String field = fields.next();
                     if (field.startsWith("$")) {
@@ -192,12 +194,39 @@ public class IndexingPreprocess {
                         theDateNode = subJson.path("$date");
                     } else if (field.equals("$keywords")) {
                         theKeywordsNode = subJson.path("$keywords");
+                        String keywords = "";
+                        if(isDepositorKeywords)
+                            theDepositorKeywordsNode = theKeywordsNode;
+                        Iterator<JsonNode> ite2 = theKeywordsNode.getElements();
+                        while (ite2.hasNext()) {
+                            JsonNode temp2 = ite2.next();
+                            if (temp2.isTextual()) {
+                                // To avoid ambiguity, we wrap the text directy contained into keywords in a text element (otherwise ES doesnt like it)
+                                keywords += temp2.getTextValue();
+                                String xml_id = fields.next();
+                                JsonNode xml_idNode= subJson.path(xml_id);
+                                ((ArrayNode) theKeywordsNode).remove(0);
+                                JsonNode newNode = mapper.createObjectNode();
+                                JsonNode textNode = mapper.createArrayNode();
+                                JsonNode tnode = new TextNode(keywords);
+                                ((ArrayNode) textNode).add(tnode);
+                                ((ObjectNode) newNode).put("$text", textNode);
+                                theKeywordsNode = subJson.path("$keywords");
+                                ((ObjectNode) newNode).put(xml_id, xml_idNode.getTextValue());
+                                ((ArrayNode) theKeywordsNode).add(newNode);
+                            }
+                            break;
+                        }
                     } else if (field.equals("$idno")) {
                         theIdnoNode = subJson.path("$idno");
                     } else if (field.equals("$biblScope")) {
                         theBiblScopeNode = subJson.path("$biblScope");
                     } else if (field.equals("scheme")) {
                         theSchemeNode = subJson.path("scheme");
+                        
+                        if(theSchemeNode.getTextValue().equals("author")){
+                            isDepositorKeywords = true;
+                        }
                     } else if (field.equals("type")) {
                         theTypeNode = subJson.path("type");
                     } else if (field.equals("when")) {
@@ -285,11 +314,11 @@ public class IndexingPreprocess {
                     ((ArrayNode) arrayNode).add(typeNode);
                     ((ObjectNode) subJson).put("$keywords", arrayNode); // update value
                     return subJson;
-                } else if ((theTypeNode == null) && (theKeywordsNode != null)) {
+                } else if (theDepositorKeywordsNode != null) {
                     // we need to set a default "author" type 
                     JsonNode typeNode = mapper.createObjectNode();
                     ((ObjectNode) typeNode).put("$type_author",
-                            process(theKeywordsNode, mapper, currentLang, false, expandLang, false, filename));
+                            process(theDepositorKeywordsNode, mapper, currentLang, false, expandLang, false, filename));
                     JsonNode arrayNode = mapper.createArrayNode();
                     ((ArrayNode) arrayNode).add(typeNode);
                     ((ObjectNode) subJson).put("$keywords", arrayNode); // update value
