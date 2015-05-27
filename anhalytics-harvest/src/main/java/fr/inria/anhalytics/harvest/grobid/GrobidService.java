@@ -1,6 +1,7 @@
 package fr.inria.anhalytics.harvest.grobid;
 
 import fr.inria.anhalytics.commons.managers.MongoManager;
+import fr.inria.anhalytics.commons.utilities.KeyGen;
 import fr.inria.anhalytics.commons.utilities.Utilities;
 import java.io.*;
 import java.io.IOException;
@@ -16,7 +17,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.apache.commons.io.IOUtils;
-import org.grobid.core.utilities.KeyGen;
 
 /**
  * Call of Grobid process via its REST web services.
