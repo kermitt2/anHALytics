@@ -33,16 +33,18 @@ public class ElasticSearchManager {
     private String elasticSearch_host = null;
     private String elasticSearch_port = null;
     private String elasticSearchClusterName = null;
-    private String indexName = null;
+    private String workingIndexName = null;
+    private String teiIndexName = null;
+    private String annotsIndexName = null;
     private Client client = null;
     
     private final MongoManager mm;
 
         // only annotations under these paths will be indexed for the moment
     static final public List<String> toBeIndexed
-            = Arrays.asList("$TEI.$teiHeader.$titleStmt.xml:id",
-                    "$TEI.$teiHeader.$profileDesc.xml:id",
-                    "$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id");
+            = Arrays.asList("$teiCorpus.$teiHeader.$titleStmt.xml:id",
+                    "$teiCorpus.$teiHeader.$profileDesc.xml:id",
+                    "$teiCorpus.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id");
 
     public ElasticSearchManager(MongoManager mm) {
         this.mm = mm;
@@ -55,11 +57,13 @@ public class ElasticSearchManager {
             prop.load(new FileInputStream("index.properties"));
             elasticSearch_host = prop.getProperty("index.elasticSearch_host");
             elasticSearch_port = prop.getProperty("index.elasticSearch_port");
-            elasticSearchClusterName = prop.getProperty("index.elasticSearch_cluster");
+            elasticSearchClusterName = prop.getProperty("index.elasticSearch_cluster");            
+            teiIndexName = prop.getProperty("index.elasticSearch_indexName");
+            annotsIndexName = prop.getProperty("index.elasticSearch_annotsIndexName");
             if (process.equals("tei")) {
-                indexName = prop.getProperty("index.elasticSearch_indexName");
+                workingIndexName = prop.getProperty("index.elasticSearch_indexName");
             } else if (process.equals("annotation")) {
-                indexName = prop.getProperty("index.elasticSearch_annotsIndexName");
+                workingIndexName = prop.getProperty("index.elasticSearch_annotsIndexName");
             }
         } catch (Exception e) {
             System.err.println("Failed to load properties: " + e.getMessage());
@@ -92,7 +96,7 @@ public class ElasticSearchManager {
     private boolean deleteIndex() throws Exception {
         boolean val = false;
         try {
-            String urlStr = "http://" + elasticSearch_host + ":" + elasticSearch_port + "/" + indexName;
+            String urlStr = "http://" + elasticSearch_host + ":" + elasticSearch_port + "/" + workingIndexName;
             URL url = new URL(urlStr);
             HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
             httpCon.setDoOutput(true);
@@ -100,14 +104,14 @@ public class ElasticSearchManager {
                     "Content-Type", "application/x-www-form-urlencoded");
             httpCon.setRequestMethod("DELETE");
             httpCon.connect();
-            System.out.println("ElasticSearch Index " + indexName + " deleted: status is "
+            System.out.println("ElasticSearch Index " + workingIndexName + " deleted: status is "
                     + httpCon.getResponseCode());
             if (httpCon.getResponseCode() == 200) {
                 val = true;
             }
             httpCon.disconnect();
         } catch (Exception e) {
-            throw new Exception("Cannot delete index for " + indexName);
+            throw new Exception("Cannot delete index for " + workingIndexName);
         }
         return val;
     }
@@ -119,7 +123,7 @@ public class ElasticSearchManager {
         boolean val = false;
 
         // create index
-        String urlStr = "http://" + elasticSearch_host + ":" + elasticSearch_port + "/" + indexName;
+        String urlStr = "http://" + elasticSearch_host + ":" + elasticSearch_port + "/" + workingIndexName;
         URL url = new URL(urlStr);
         HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
         httpCon.setDoOutput(true);
@@ -138,7 +142,7 @@ public class ElasticSearchManager {
             File file = new File("src/main/resources/elasticSearch/analyzer.json");
             analyserStr = FileUtils.readFileToString(file, "UTF-8");
         } catch (Exception e) {
-            throw new Exception("Cannot read analyzer for " + indexName);
+            throw new Exception("Cannot read analyzer for " + workingIndexName);
         }
 
         httpCon.setDoOutput(true);
@@ -148,7 +152,7 @@ public class ElasticSearchManager {
         out.write(analyserStr);
         out.close();
 
-        System.out.println("ElasticSearch analyzer for " + indexName + " : status is "
+        System.out.println("ElasticSearch analyzer for " + workingIndexName + " : status is "
                 + httpCon.getResponseCode());
         if (httpCon.getResponseCode() == 200) {
             val = true;
@@ -164,7 +168,7 @@ public class ElasticSearchManager {
     private boolean loadMapping(String process) throws Exception {
         boolean val = false;
 
-        String urlStr = "http://" + elasticSearch_host + ":" + elasticSearch_port + "/" + indexName;
+        String urlStr = "http://" + elasticSearch_host + ":" + elasticSearch_port + "/" + workingIndexName;
         if (process.equals("annotation")) {
             urlStr += "/annotation/_mapping";
         } else {
@@ -187,9 +191,8 @@ public class ElasticSearchManager {
             }
             mappingStr = FileUtils.readFileToString(file, "UTF-8");
         } catch (Exception e) {
-            throw new Exception("Cannot read mapping for " + indexName);
+            throw new Exception("Cannot read mapping for " + workingIndexName);
         }
-
         System.out.println(urlStr);
 
         httpCon.setDoOutput(true);
@@ -199,7 +202,7 @@ public class ElasticSearchManager {
         out.write(mappingStr);
         out.close();
 
-        System.out.println("ElasticSearch mapping for " + indexName + " : status is "
+        System.out.println("ElasticSearch mapping for " + workingIndexName + " : status is "
                 + httpCon.getResponseCode());
         if (httpCon.getResponseCode() == 200) {
             val = true;
@@ -248,9 +251,9 @@ public class ElasticSearchManager {
                 // index the json in ElasticSearch
                 try {
                     // beware the document type bellow and corresponding mapping!
-                    bulkRequest.add(client.prepareIndex(indexName, "npl", halID).setSource(jsonStr));
+                    bulkRequest.add(client.prepareIndex(teiIndexName, "npl", halID).setSource(jsonStr));
 
-                    if (i >= 500) {
+                    if (i >= 100) {
                         BulkResponse bulkResponse = bulkRequest.execute().actionGet();
                         if (bulkResponse.hasFailures()) {
                             // process failures by iterating through each bulk response item	
@@ -287,7 +290,7 @@ public class ElasticSearchManager {
         Client client = new TransportClient(settings)
                 .addTransportAddress(new InetSocketTransportAddress(elasticSearch_host, 9300));
 
-        IndexResponse response = client.prepareIndex(indexName, "npl", halID)
+        IndexResponse response = client.prepareIndex(teiIndexName, "npl", halID)
                 .setSource(json)
                 .execute()
                 .actionGet();
@@ -317,27 +320,25 @@ public class ElasticSearchManager {
                     String json = mm.nextAnnotation();
                     String filename = mm.getCurrentAnnotationFilename();
                     String halID = mm.getCurrentAnnotationHalID();
-
                     // get the xml:id of the elements we want to index from the document
                     // we only index title, abstract and keyphrase annotations !
                     List<String> validIDs = validDocIDs(halID, mapper);
                     //System.out.println(validIDs.toString());
                     JsonNode jsonAnnotation = mapper.readTree(json);
+                    JsonNode jn = jsonAnnotation.findPath("nerd");
                     JsonNode newNode = mapper.createObjectNode();
-
-                    Iterator<JsonNode> ite = jsonAnnotation.getElements();
+                    Iterator<JsonNode> ite = jn.getElements();
                     while (ite.hasNext()) {
                         JsonNode temp = ite.next();
                         JsonNode idNode = temp.findValue("xml:id");
+                        
                         String xmlID = idNode.getTextValue();
-                        //System.out.println(xmlID);						
+                        						
                         if (!validIDs.contains(xmlID)) {
                             continue;
                         }
-
                         ((ObjectNode) newNode).put("annotation", temp);
                         String annotJson = newNode.toString();
-						//System.out.println(annotJson);
 
                         // we do not index the empty annotation results! 
                         // the nerd subdoc has no entites field
@@ -355,9 +356,9 @@ public class ElasticSearchManager {
                         // index the json in ElasticSearch
                         try {
                             // beware the document type bellow and corresponding mapping!
-                            bulkRequest.add(client.prepareIndex(indexName, "annotation", xmlID).setSource(annotJson));
+                            bulkRequest.add(client.prepareIndex(annotsIndexName, "annotation", xmlID).setSource(annotJson));
 
-                            if (i >= 500) {
+                            if (i >= 100) {
                                 BulkResponse bulkResponse = bulkRequest.execute().actionGet();
                                 if (bulkResponse.hasFailures()) {
                                     // process failures by iterating through each bulk response item	
@@ -410,7 +411,7 @@ public class ElasticSearchManager {
         request += "], \"query\": { \"filtered\": { \"query\": { \"term\": {\"_id\": \"" + halID + "\"}}}}}";
         //System.out.println(request);
 
-        String urlStr = "http://" + elasticSearch_host + ":" + elasticSearch_port + "/hal/_search";
+        String urlStr = "http://" + elasticSearch_host + ":" + elasticSearch_port + "/"+ teiIndexName +"/_search";
         StringBuffer json = new StringBuffer();
         try {
             URL url = new URL(urlStr);
@@ -443,7 +444,7 @@ public class ElasticSearchManager {
             e.printStackTrace();
         }
 
-        //System.out.println(json.toString());
+        
         try {
             JsonNode resJsonStruct = mapper.readTree(json.toString());
             JsonNode hits = resJsonStruct.findPath("hits").findPath("hits");

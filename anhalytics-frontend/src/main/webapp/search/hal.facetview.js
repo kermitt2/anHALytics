@@ -1924,17 +1924,17 @@ jQuery.extend({
 			var date;
 			var dates = null;
 			if (options['collection'] == 'patent')
-				dates = jsonObject['$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date'];
+				dates = jsonObject['$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date'];
 			else if ( options.search_index == "summon" ) {
 				dates = jsonObject['PublicationDate'];
 			}
 			else {
-				dates = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date'];
+				dates = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date'];
 				if (!dates) {
-					dates = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$when'];
+					dates = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$when'];
 				}
 				if (!dates) {
-					dates = jsonObject['$TEI.$teiHeader.$editionStmt.$edition.$date'];
+					dates = jsonObject['$teiCorpus.$teiHeader.$editionStmt.$edition.$date'];
 				}
 			}
 			
@@ -1956,14 +1956,14 @@ jQuery.extend({
 			var titleIDs = null;
 			var titleAnnotated = null; 
 			if (options['collection'] == 'patent') 
-				titles = jsonObject['$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_en'];
+				titles = jsonObject['$teiCorpus.$teiHeader.$fileDesc.$titleStmt.$title.$lang_en'];
 			else if ( (options.search_index == "summon") ) {
 				titles = jsonObject['Title'];
 			}
 			else {
 				// NPL
-				titles = jsonObject['$TEI.$teiHeader.$titleStmt.$title.$title-first'];		
-				titleIDs =  jsonObject['$TEI.$teiHeader.$titleStmt.xml:id'];
+				titles = jsonObject['$teiCorpus.$teiHeader.$titleStmt.$title.$title-first'];		
+				titleIDs =  jsonObject['$teiCorpus.$teiHeader.$titleStmt.xml:id'];
 			}
 			if (typeof titles == 'string') {
 				title = titles;
@@ -1990,10 +1990,10 @@ jQuery.extend({
 			
 			if (!title || (title.length==0)) {
 				if (options['collection'] == 'patent') {
-					titles = jsonObject['$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_en'];
+					titles = jsonObject['$teiCorpus.$teiHeader.$fileDesc.$titleStmt.$title.$lang_en'];
 				}
 				else {
-					titles = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_en'];
+					titles = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_en'];
 				}
 				if (typeof titles == 'string') {
 					title = titles;
@@ -2010,10 +2010,10 @@ jQuery.extend({
 			
 			if (!title || (title.length==0)) {
 				if (options['collection'] == 'patent') {
-					titles = jsonObject['$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_fr'];
+					titles = jsonObject['$teiCorpus.$teiHeader.$fileDesc.$titleStmt.$title.$lang_fr'];
 				}
 				else {
-					titles = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_fr'];
+					titles = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_fr'];
 				}
 				if (typeof titles == 'string') {
 					title = titles;
@@ -2030,10 +2030,10 @@ jQuery.extend({
 			
 			if (!title || (title.length==0)) {
 				if (options['collection'] == 'patent') {
-					titles = jsonObject['$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_de'];
+					titles = jsonObject['$teiCorpus.$teiHeader.$fileDesc.$titleStmt.$title.$lang_de'];
 				}
 				else {
-					titles = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_de'];
+					titles = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$title.$lang_de'];
 				}
 				if (typeof titles == 'string') {
 					title = titles;
@@ -2143,10 +2143,10 @@ jQuery.extend({
 				var authorsLast = null;
 				var authorsFirst = null;
 
-				authorsLast = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname'];
+				authorsLast = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname'];
 				var tempStr = "" + authorsLast;
 				authorsLast = tempStr.split(",");
-				authorsFirst = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$forename'];
+				authorsFirst = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$forename'];
 				tempStr = "" + authorsFirst;
 				authorsFirst = tempStr.split(",");
 				
@@ -2192,7 +2192,7 @@ jQuery.extend({
 				var titleBook = null;	
 				var titlesBook = null;
 				//if (options['collection'] == 'npl') {
-					titlesBook = jsonObject['$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$title'];
+					titlesBook = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$title'];
 					var titleBookTmp = null;
 					if (typeof titlesBook == 'string') {
 						titleBook = titlesBook;
@@ -2674,7 +2674,7 @@ jQuery.extend({
 			
 			if ( (options['collection'] == 'npl') && ( options.search_index != "summon" ) 
 			 		&& (options['collection'] != 'cendari') ) {	
-				var pdfURL = jsonObject['$TEI.$teiHeader.$sourceDesc.target'];
+				var pdfURL = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.target'];
 				var docid = jsonObject._id;	
 				if (pdfURL || docid) {
 					result += '<td>';
@@ -2789,16 +2789,16 @@ jQuery.extend({
 					if ( options.collection == "npl" ) {				
 
 						// abstract and further informations
-						localQuery = { "fields": [ "$TEI.$teiHeader.$profileDesc.xml:id",
-												   "$TEI.$teiHeader.$profileDesc.$abstract.$lang_en", 
-												   "$TEI.$teiHeader.$profileDesc.$abstract.$lang_fr", 
-												   "$TEI.$teiHeader.$profileDesc.$abstract.$lang_de", 
-"$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$title.$title-first",
-"$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$idno.$type_doi",
-"$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName",		
-'$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology',
-"$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term",
-'$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id' ],
+						localQuery = { "fields": [ "$teiCorpus.$teiHeader.$profileDesc.xml:id",
+												   "$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_en", 
+												   "$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_fr", 
+												   "$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_de", 
+"$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$title.$title-first",
+"$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$idno.$type_doi",
+"$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName",		
+'$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology',
+"$teiCorpus.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term",
+'$teiCorpus.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id' ],
 									   "query": { "filtered": { "query": { "term": { "_id": docID } } } } };
 
 						$.ajax({
@@ -2813,9 +2813,9 @@ jQuery.extend({
 					}
 					else if ( options.collection == "patent" ) {	
 						localQuery = { "fields": [ "_id",
-						 						   "$teiCorpus.$teiCorpus.$TEI.$text.$front.$div.$p.$lang_en",
-												   "$teiCorpus.$teiCorpus.$TEI.$text.$front.$div.$p.$lang_de",
-												   "$teiCorpus.$teiCorpus.$TEI.$text.$front.$div.$p.$lang_fr" ],
+						 						   "$teiCorpus.$TEI.$text.$front.$div.$p.$lang_en",
+												   "$teiCorpus.$TEI.$text.$front.$div.$p.$lang_de",
+												   "$teiCorpus.$TEI.$text.$front.$div.$p.$lang_fr" ],
 									   "query": { "filtered": { "query": { "term": { "_id": docID } } } } };
 
 						/*$.post(options.search_url, 
@@ -3019,7 +3019,7 @@ jQuery.extend({
 				
 					// document type
 					var type = 
-						jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology'];
+						jsonObject.fields['$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology'];
 					if (type) {
 						piece += '<p><span class="label pubtype" style="white-space:normal;">'+type+'</span></p>';
 						//piece += '<p><strong>' + type + '</strong></p>';
@@ -3028,7 +3028,7 @@ jQuery.extend({
 
 				// authors and affiliation
 				var names = 
-					jsonObject.fields['$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName'];
+					jsonObject.fields['$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName'];
 
 				if (names) {
 					for(var aut in names) {
@@ -3044,7 +3044,7 @@ jQuery.extend({
 				var abstract = null;
 				
 				var abstractID = null;
-				var abstractIDs = jsonObject.fields['$TEI.$teiHeader.$profileDesc.xml:id'];
+				var abstractIDs = jsonObject.fields['$teiCorpus.$teiHeader.$profileDesc.xml:id'];
 				if (typeof abstractIDs == 'string') {
 					abstractID = abstractIDs;
 				}
@@ -3057,7 +3057,7 @@ jQuery.extend({
 					}
 				}
 				
-				var abstracts = jsonObject.fields['$TEI.$teiHeader.$profileDesc.$abstract.$lang_en'];			
+				var abstracts = jsonObject.fields['$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_en'];			
 				if (typeof abstracts == 'string') {
 					abstract = abstracts;
 				}	
@@ -3071,7 +3071,7 @@ jQuery.extend({
 				}
 
 				if (!abstract || (abstract.length==0)) {
-					abstracts = jsonObject.fields['$TEI.$teiHeader.$profileDesc.$abstract.$lang_fr'];
+					abstracts = jsonObject.fields['$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_fr'];
 					
 					if (typeof abstracts == 'string') {
 						abstract = abstracts;
@@ -3087,7 +3087,7 @@ jQuery.extend({
 				}
 				
 				if (!abstract || (abstract.length==0)) {
-					abstracts = jsonObject.fields['$TEI.$teiHeader.$profileDesc.$abstract.$lang_de'];
+					abstracts = jsonObject.fields['$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_de'];
 					
 					if (typeof abstracts == 'string') {
 						abstract = abstracts;
@@ -3103,7 +3103,7 @@ jQuery.extend({
 				}
 				
 				if (!abstract || (abstract.length==0)) {
-					abstracts = jsonObject.fields['$TEI.$teiHeader.$profileDesc.$abstract.$lang_es'];
+					abstracts = jsonObject.fields['$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_es'];
 					
 					if (typeof abstracts == 'string') {
 						abstract = abstracts;
@@ -3125,10 +3125,10 @@ jQuery.extend({
 				// keywords
 				var keyword = null;
 				var keywordIDs = 
-					jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id'];
+					jsonObject.fields['$teiCorpus.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id'];
 				// we have a list of keyword IDs, each one corresponding to an independent annotation set
 				var keywords = 
-					jsonObject.fields['$TEI.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term'];
+					jsonObject.fields['$teiCorpus.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term'];
 
 				if (typeof keywords == 'string') {
 					keyword = keywords;
@@ -3468,35 +3468,35 @@ jQuery.extend({
 			}
 		}
 
-		var textFieldPatents = [ '$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.', 
-			'$teiCorpus.$teiCorpus.$TEI.$text.$front.$div.$p.',
-			'$teiCorpus.$teiCorpus.$TEI.$text.$body.$div.$div.',
-			'$teiCorpus.$teiCorpus.$TEI.$text.$body.$div.$p.'
+		var textFieldPatents = [ '$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.', 
+			'$teiCorpus.$TEI.$text.$front.$div.$p.',
+			'$teiCorpus.$TEI.$text.$body.$div.$div.',
+			'$teiCorpus.$TEI.$text.$body.$div.$p.'
 		];
 		
-		var textFieldNPL = [ '$TEI.$teiHeader.$titleStmt.$title.$title-first',
-			'$TEI.$text.$front.$div.$p.',
-			'$TEI.$text.$body.$head.',
-			'$TEI.$text.$body.$div.',
-			'$TEI.$text.$body.$figure.$head.',
-			'$TEI.$text.$body.$p.'
+		var textFieldNPL = [ '$teiCorpus.$teiHeader.$titleStmt.$title.$title-first',
+			'$teiCorpus.$text.$front.$div.$p.',
+			'$teiCorpus.$text.$body.$head.',
+			'$teiCorpus.$text.$body.$div.',
+			'$teiCorpus.$text.$body.$figure.$head.',
+			'$teiCorpus.$text.$body.$p.'
 		];	
 		
-		var textFieldsPatentReturned = [ '$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_de', 
-			'$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_en',
-			'$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_fr',
-		 	'$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date',
+		var textFieldsPatentReturned = [ '$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_de', 
+			'$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_en',
+			'$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.$lang_fr',
+		 	'$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date',
 		 	'_id'
 		];
 
-		var textFieldsNPLReturned = [ '$TEI.$teiHeader.$titleStmt.$title.$title-first', 
-			'$TEI.$teiHeader.$titleStmt.xml:id',
-			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date',
-			'$TEI.$teiHeader.$editionStmt.$edition.$date',
-			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname',
-			'$TEI.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$forename',
-			'$TEI.$teiHeader.$sourceDesc.target',
-//			'$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology',
+		var textFieldsNPLReturned = [ '$teiCorpus.$teiHeader.$titleStmt.$title.$title-first', 
+			'$teiCorpus.$teiHeader.$titleStmt.xml:id',
+			'$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date',
+			'$teiCorpus.$teiHeader.$editionStmt.$edition.$date',
+			'$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname',
+			'$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$forename',
+			'$teiCorpus.$teiHeader.$sourceDesc.target',
+//			'$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology',
 		 	'_id'
 		];
 
@@ -3969,10 +3969,10 @@ jQuery.extend({
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
 							var theField;
 							if (options['collection'] == 'npl') {
-								theField = "$TEI.$teiHeader.$fileDesc.$titleStmt.$title.";
+								theField = "$teiCorpus.$teiHeader.$fileDesc.$titleStmt.$title.";
 							}
 							else {
-								theField = "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$titleStmt.$title.";
+								theField = "$teiCorpus.$teiHeader.$fileDesc.$titleStmt.$title.";
 							}
 							if ( ($('#label3_facetview_searchbar'+rank).text() == "all") ||
 								 ($('#label3_facetview_searchbar'+rank).text() == "lang") ) {
@@ -3995,10 +3995,10 @@ jQuery.extend({
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
 							var theField;
 							if (options['collection'] == 'npl') {
-								theField = "$TEI.$text.$front.$div.$p.";
+								theField = "$teiCorpus.$teiHeader.$text.$front.$div.$p.";
 							}
 							else {
-								theField = "$teiCorpus.$teiCorpus.$TEI.$text.$front.$div.$p.";
+								theField = "$teiCorpus.$teiHeader.$text.$front.$div.$p.";
 							}
 							if ( ($('#label3_facetview_searchbar'+rank).text() == "all") ||
 								 ($('#label3_facetview_searchbar'+rank).text() == "lang") ) {
@@ -4021,7 +4021,7 @@ jQuery.extend({
 						else if ($('#label1_facetview_searchbar'+rank).text() == "claims") {	
 							// this one is for patent only
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
-							var theField = "$teiCorpus.$teiCorpus.$TEI.$text.$body.$div.$div.";
+							var theField = "$teiCorpus.$teiHeader.$text.$body.$div.$div.";
 							if ( ($('#label3_facetview_searchbar'+rank).text() == "all") ||
 								 ($('#label3_facetview_searchbar'+rank).text() == "lang") ) {
 								theField += "\\*";
@@ -4042,7 +4042,7 @@ jQuery.extend({
 						else if ($('#label1_facetview_searchbar'+rank).text() == "description") {
 							// this one is for patent only
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
-							var theField = "$teiCorpus.$teiCorpus.$TEI.$text.$body.$div.$p.";
+							var theField = "$teiCorpus.$teiHeader.$text.$body.$div.$p.";
 							if ( ($('#label3_facetview_searchbar'+rank).text() == "all") ||
 								 ($('#label3_facetview_searchbar'+rank).text() == "lang") ) {
 								theField += "\\*";
@@ -4064,7 +4064,7 @@ jQuery.extend({
 						else if ($('#label1_facetview_searchbar'+rank).text() == "full text") {
 							// this one is for NPL only
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
-							var theField = "$TEI.$text.$body.$div.$p.";
+							var theField = "$teiCorpus.$teiHeader.$text.$body.$div.$p.";
 							if ( ($('#label3_facetview_searchbar'+rank).text() == "all") ||
 								 ($('#label3_facetview_searchbar'+rank).text() == "lang") ) {
 								theField += "\\*";
@@ -4088,7 +4088,7 @@ jQuery.extend({
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
 							//var theField = "$teiCorpus.$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$term";
 							var theField = 
-				"$teiCorpus.$teiCorpus.$TEI.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_ipc.$term";
+				"$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_ipc.$term";
 							obj['query_string']['query'] = 
 								theField+":"+$('#facetview_freetext'+rank).val();
 							queried_fields.push(theField);
@@ -4104,7 +4104,7 @@ jQuery.extend({
 						else if ($('#label1_facetview_searchbar'+rank).text() == "ap. country") {
 							// this one is for patent only	 
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
-							var theField = "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$list.$item.$list.$item.$country";
+							var theField = "$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$list.$item.$list.$item.$country";
 							obj['query_string']['query'] = 
 								theField+":"+$('#facetview_freetext'+rank).val();
 							queried_fields.push(theField);
@@ -4112,7 +4112,7 @@ jQuery.extend({
 						else if ($('#label1_facetview_searchbar'+rank).text() == "authors\' country") {	 
 							// this one is for NPL only
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
-							var theField = "$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$address.key";
+							var theField = "$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$address.key";
 							obj['query_string']['query'] = 
 								theField+":"+$('#facetview_freetext'+rank).val();
 							queried_fields.push(theField);
@@ -4120,7 +4120,7 @@ jQuery.extend({
 						else if ($('#label1_facetview_searchbar'+rank).text() == "author") {	 
 							// this one is for NPL only
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
-							var theField = "$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname";
+							var theField = "$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$analytic.$author.$persName.$surname";
 							obj['query_string']['query'] = 
 								theField+":"+$('#facetview_freetext'+rank).val();
 							queried_fields.push(theField);
@@ -4128,7 +4128,7 @@ jQuery.extend({
 						else if ($('#label1_facetview_searchbar'+rank).text() == "affiliation") {	 
 							// this one is for NPL only
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
-							var theField = "$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$orgName";
+							var theField = "$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$orgName";
 							obj['query_string']['query'] = 
 								theField+":"+$('#facetview_freetext'+rank).val();
 							queried_fields.push(theField);
@@ -4136,7 +4136,7 @@ jQuery.extend({
 						else if ($('#label1_facetview_searchbar'+rank).text() == "inventor") {
 							// this one is for NPL only
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
-							var theField = "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$list.$item.$type_parties.$listPerson.$person.$type_docdba.$persName";
+							var theField = "$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$list.$item.$type_parties.$listPerson.$person.$type_docdba.$persName";
 							obj['query_string']['query'] = 
 								theField+":"+$('#facetview_freetext'+rank).val();
 							queried_fields.push(theField);
@@ -4144,7 +4144,7 @@ jQuery.extend({
 						else if ($('#label1_facetview_searchbar'+rank).text() == "applicant") {	 
 							// this one is for NPL only
 							var obj = {'query_string':{ 'default_operator': 'AND' }};
-							var theField = "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$list.$item.$type_parties.$list.$item.$type_docdb.$name";
+							var theField = "$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$list.$item.$type_parties.$list.$item.$type_docdb.$name";
 							obj['query_string']['query'] = 
 								theField+":"+$('#facetview_freetext'+rank).val();
 							queried_fields.push(theField);
@@ -4233,10 +4233,10 @@ jQuery.extend({
 					else 
 						qs['query'] = {'match_all': {}};
 					if (options['collection'] == 'patent') {
-						qs['sort'] = [ { "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
+						qs['sort'] = [ { "$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
 					}
 					else { 
-						qs['sort'] = [ { "$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date": { "order": "desc" } } ];
+						qs['sort'] = [ { "$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date": { "order": "desc" } } ];
 					}
 				}
 			}
@@ -4324,10 +4324,10 @@ jQuery.extend({
 					if ($('#facetview_freetext').val() == "") {
 						obj4['query'] = {'match_all': {}};
 						if (options['collection'] == 'patent') {
-							qs['sort'] = [ { "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
+							qs['sort'] = [ { "$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
 						}
 						else {
-							qs['sort'] = [ { "$TEI.$teiHeader.$fileDesc.$publicationStmt.$date": { "order": "desc" } } ];
+							qs['sort'] = [ { "$teiCorpus.$teiHeader.$fileDesc.$publicationStmt.$date": { "order": "desc" } } ];
 						}
 					}
 					else {
@@ -4366,10 +4366,10 @@ jQuery.extend({
 	                if ($('#facetview_freetext').val() == "") {
 						qs['query'] = {'match_all': {}};
 						if (options['collection'] == 'patent') {
-							qs['sort'] = [ { "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
+							qs['sort'] = [ { "$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
 						}
 						else {
-							qs['sort'] = [ { "$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date": { "order": "desc" } } ];
+							qs['sort'] = [ { "$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date": { "order": "desc" } } ];
 						}
 					}
 					else {
@@ -4488,10 +4488,10 @@ jQuery.extend({
 					if ($('#facetview_freetext').val() == "") {
 						obj4['query'] = {'match_all': {}};
 						if (options['collection'] == 'patent') {
-							qs['sort'] = [ { "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
+							qs['sort'] = [ { "$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
 						}
 						else {
-							qs['sort'] = [ { "$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date": { "order": "desc" } } ];
+							qs['sort'] = [ { "$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date": { "order": "desc" } } ];
 						}
 					}
 					else
@@ -4508,10 +4508,10 @@ jQuery.extend({
 							qs['query'] = {'match_all': {}};
 						}
 						if (options['collection'] == 'patent') {
-							qs['sort'] = [ { "$teiCorpus.$teiCorpus.$TEI.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
+							qs['sort'] = [ { "$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date": { "order": "asc" } } ];
 						}
 						else {
-							qs['sort'] = [ { "$TEI.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date": { "order": "desc" } } ];
+							qs['sort'] = [ { "$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date": { "order": "desc" } } ];
 						}
 					}
 	            }
@@ -4928,10 +4928,10 @@ jQuery.extend({
 					var preferredTerm = entity.preferredTerm;
 									
 					piece += '<tr id="selectLine'+sens+'" href="'
-							+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef"><td id="selectArea'+sens+'" href="'
-							+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef">';
+							+wikipedia+'" rel="$teiCorpus.$standoff.wikipediaExternalRef"><td id="selectArea'+sens+'" href="'
+							+wikipedia+'" rel="$teiCorpus.$standoff.wikipediaExternalRef">';
 					piece += '<div class="checkbox checkbox-inline checkbox-danger" id="selectEntityBlock'+
-					sens+'" href="'+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef">';
+					sens+'" href="'+wikipedia+'" rel="$teiCorpus.$standoff.wikipediaExternalRef">';
 					piece += '<input type="checkbox" id="selectEntity'+sens
 							+'" name="selectEntity'+sens+'" value="0" href="'
 							+wikipedia+'" rel="$TEI.$standoff.wikipediaExternalRef">';
