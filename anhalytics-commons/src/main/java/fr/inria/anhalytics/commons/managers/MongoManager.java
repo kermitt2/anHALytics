@@ -114,7 +114,8 @@ public class MongoManager {
         // index on filename and xml:id
         collection.ensureIndex(new BasicDBObject("filename", 1));
         collection.ensureIndex(new BasicDBObject("xml:id", 1));
-
+        cursor = collection.find();
+        indexFile = 0;
         return true;
     }
 
@@ -127,27 +128,25 @@ public class MongoManager {
     }
 
     public boolean hasMoreAnnotations() {
-        if (cursor == null) {
-            // init the loop
-            cursor = collection.find();
+        if (indexFile < cursor.size()) {
+            return true;
+        } else {
+            return false;
         }
-        return cursor.hasNext();
     }
 
     public String nextAnnotation() {
         String json = null;
-        if (cursor == null) {
-            // init the loop
-            cursor = collection.find();
-        }
 
         DBObject obj = cursor.next();
         json = obj.toString();
+        currentAnnotationFilename = (String) obj.get("filename");
+        currentAnnotationHalID = (String) obj.get("halID");
 
         if (!cursor.hasNext()) {
             cursor.close();
         }
-
+        indexFile++;
         return json;
     }
 
