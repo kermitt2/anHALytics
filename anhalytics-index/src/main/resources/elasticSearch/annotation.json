@@ -1,75 +1,71 @@
 {
-    "hal_annots": {
-        "mappings": {
+    "annotation": {
+        "_all": {
+            "enabled": false,
+            "store": true
+        },
+        "properties": {
             "annotation": {
-                "_all": {
-                    "enabled": false,
-                    "store": true
-                },
+                "dynamic": "false",
                 "properties": {
-                    "annotation": {
+                    "filename": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "nerd": {
                         "dynamic": "false",
                         "properties": {
-                            "filename": {
-                                "type": "string",
-                                "index": "not_analyzed"
-                            },
-                            "nerd": {
+                            "entities": {
                                 "dynamic": "false",
                                 "properties": {
-                                    "entities": {
+                                    "definitions": {
                                         "dynamic": "false",
                                         "properties": {
-                                            "definitions": {
-                                                "dynamic": "false",
-                                                "properties": {
-                                                    "$definition": {
-                                                        "type": "string"
-                                                    },
-                                                    "$source": {
-                                                        "type": "string",
-                                                        "index": "not_analyzed"
-                                                    },
-                                                    "lang": {
-                                                        "type": "string",
-                                                        "index": "not_analyzed"
-                                                    }
-                                                }
-                                            },
-                                            "domains": {
-                                                "type": "string",
-                                                "index": "not_analyzed"
-                                            },
-                                            "freeBaseExternalRef": {
-                                                "type": "string",
-                                                "index": "not_analyzed"
-                                            },
-                                            "nerd_score": {
-                                                "type": "string",
-                                                "index": "not_analyzed"
-                                            },
-                                            "offsetEnd": {
-                                                "type": "integer"
-                                            },
-                                            "offsetStart": {
-                                                "type": "integer"
-                                            },
-                                            "rawName": {
+                                            "$definition": {
                                                 "type": "string"
                                             },
-                                            "wikipediaExternalRef": {
+                                            "$source": {
+                                                "type": "string",
+                                                "index": "not_analyzed"
+                                            },
+                                            "lang": {
                                                 "type": "string",
                                                 "index": "not_analyzed"
                                             }
                                         }
+                                    },
+                                    "domains": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    },
+                                    "freeBaseExternalRef": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    },
+                                    "nerd_score": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    },
+                                    "offsetEnd": {
+                                        "type": "integer"
+                                    },
+                                    "offsetStart": {
+                                        "type": "integer"
+                                    },
+                                    "rawName": {
+                                        "type": "string"
+                                    },
+                                    "wikipediaExternalRef": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
                                     }
                                 }
-                            },
-                            "xml:id": {
-                                "type": "string",
-                                "index": "not_analyzed"
                             }
                         }
+                    },
+                    "xml:id": {
+                        "type": "string",
+                        "index": "not_analyzed"
                     }
                 }
             }
