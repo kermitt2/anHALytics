@@ -3,65 +3,6 @@
  *
  */
 
-// first define the bind with delay function from (saves loading it separately) 
-// https://github.com/bgrins/bindWithDelay/blob/master/bindWithDelay.js
-
-(function ($) {
-    $.fn.bindWithDelay = function (type, data, fn, timeout, throttle) {
-        var wait = null;
-        var that = this;
-
-        if ($.isFunction(data)) {
-            throttle = timeout;
-            timeout = fn;
-            fn = data;
-            data = undefined;
-        }
-
-        function cb() {
-            var e = $.extend(true, {}, arguments[0]);
-            var throttler = function () {
-                wait = null;
-                fn.apply(that, [e]);
-            };
-
-            if (!throttle) {
-                clearTimeout(wait);
-            }
-            if (!throttle || !wait) {
-                wait = setTimeout(throttler, timeout);
-            }
-        }
-
-        return this.bind(type, data, cb);
-    }
-})(jQuery);
-
-// add extension to jQuery with a function to get URL parameters
-jQuery.extend({
-    getUrlVars: function () {
-        var params = new Object
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')
-        for (var i = 0; i < hashes.length; i++) {
-            hash = hashes[i].split('=');
-            if (hash.length > 1) {
-                if (hash[1].replace(/%22/gi, "")[0] == "[" || hash[1].replace(/%22/gi, "")[0] == "{") {
-                    hash[1] = hash[1].replace(/^%22/, "").replace(/%22$/, "")
-                    var newval = JSON.parse(unescape(hash[1].replace(/%22/gi, '"')))
-                } else {
-                    var newval = unescape(hash[1].replace(/%22/gi, ""))
-                }
-                params[hash[0]] = newval
-            }
-        }
-        return params
-    },
-    getUrlVar: function (name) {
-        return jQuery.getUrlVars()[name]
-    }
-});
-
-
 // now the display function
 (function ($) {
     $.fn.facetview = function (options) {
@@ -69,31 +10,6 @@ jQuery.extend({
         // a default value (pulled into options below)
         var resdisplay = [
         ]
-
-        // specify the defaults
-        var defaults = {
-            "config_file": false, // a remote config file URL
-            "facets": [], // facet objects: {"field":"blah", "display":"arg",...}
-            "addremovefacets": false, // false if no facets can be added at front end, otherwise list of facet names
-            "result_display": resdisplay, // display template for search results
-            "display_images": true, // whether or not to display images found in links in search results
-            "visualise_filters": true, // whether or not to allow filter vis via d3
-            "description": "", // a description of the current search to embed in the display
-            "search_url": "", // the URL against which to submit searches
-            "search_index": "elasticsearch", // elasticsearch or SOLR
-            "default_url_params": {}, // any params that the search URL needs by default
-            "freetext_submit_delay": "200", // delay for auto-update of search results
-            "query_parameter": "q", // the query parameter if required for setting to the search URL
-            "q": "", // default query value
-            "predefined_filters": {}, // predefined filters to apply to all searches
-            "paging": {
-                "from": 0, // where to start the results from
-                "size": 10                   // how many results to get
-            },
-            "mode_query": "simple", // query input, possible values: simple, complex, epoque, nl, semantic, analytics
-            "complex_fields": 0, // number of fields introduced in the complex query form
-            "collection": "npl"				// by default the collection is considered as scholar litterature
-        }
 
         // and add in any overrides from the call
         // these options are also overridable by URL parameters
