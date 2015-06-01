@@ -12,7 +12,7 @@ The project is based on the usage of [Grobid](https://github.com/grobid/grobid) 
 Clone the project from github:
 	
 	git clone https://github.com/kermitt2/grobid.git
-Actually Grobid can be runned as a service so that we can use multithreaded process, once the service is ready, update the ``anhalytics-harvest/harvest.properties`` file.
+Actually Grobid can be used as a service so that we can use multithreaded process, once the service is ready, update the ``anhalytics-harvest/harvest.properties`` file.
 ###### 3. Nerd (Named Entity Recognition and Disambiguisation)
 Nerd annotates the text by detecting named entity recognition, Not open sourced yet (update coming soon ?)
 ###### 4. ElasticSearch, Elastic
@@ -94,6 +94,7 @@ The final TEI is built and has the following struture
 
 At least there should be the grobid tei to produce the final TEI, you can do so with :
 > java -Xmx2048m -jar target/anhalytics-harvest-```<current version>```.one-jar.jar -exe buildTei
+
 ###### About the storage
 
 We use mongoDb along with gridFS component for file support.
