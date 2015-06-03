@@ -6,6 +6,10 @@ import java.io.InputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -17,7 +21,7 @@ import org.w3c.dom.Attr;
 
 public class TeiBuilder {
 
-    public static String generateTeiCorpus(InputStream additionalTei, InputStream grobidTei, boolean modeBrutal) throws ParserConfigurationException, IOException {
+    public static String generateTeiCorpus(InputStream additionalTei, InputStream grobidTei, boolean update) throws ParserConfigurationException, IOException {
         String teiString = null;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         docFactory.setValidating(false);
@@ -33,85 +37,22 @@ public class TeiBuilder {
         // add random xml:id on textual elements
         Utilities.generateIDs(docAdditionalTei);
 
-        
-        /////////////// Hal specific : To be done as a harvesting post process before storing tei ////////////////////
-        // remove ugly end-of-line in starting and ending text as it is
-        // a problem for stand-off annotations
-        Utilities.trimEOL(docAdditionalTei.getDocumentElement(), docAdditionalTei);
-        docAdditionalTei = removeElement(docAdditionalTei, "analytic");
-        NodeList orgs = docAdditionalTei.getElementsByTagName("org");
-        NodeList authors = docAdditionalTei.getElementsByTagName("author");
-        updateAffiliations(authors, orgs, docAdditionalTei);
-        NodeList editors = docAdditionalTei.getElementsByTagName("editor");
-        updateAffiliations(editors, orgs, docAdditionalTei);        
-        ///////////////////////////////////////////////////////////////////////
-        
-        // du pre processsing
-        NodeList biblFull = docAdditionalTei.getElementsByTagName("biblFull");
-        if (modeBrutal) {
-            teiString = updateFullTextTeiBrutal(biblFull, grobidTei);// TBR
-        } else {
-            Document doc = null;
-            try {
-                doc = docBuilder.parse(grobidTei);
-                createTEICorpus(doc);
-                teiString = updateCorpusTei(doc, biblFull);
-            } catch (SAXException e) {
-                e.printStackTrace();
-            }            
+        NodeList teiHeader = halTeiExtractor.getTeiHeader(docAdditionalTei);
+
+        Document doc = null;
+        try {
+            doc = docBuilder.parse(grobidTei);
+
+            //if update activated, title, abstract, authors and textclass will be update using available metadata.
+            if (update) {
+                updateGrobidTEI(doc, docAdditionalTei);
+            }
+            createTEICorpus(doc);
+            teiString = updateCorpusTei(doc, teiHeader);
+        } catch (SAXException e) {
+            e.printStackTrace();
         }
         return teiString;
-    }
-
-    private static Document removeElement(Document doc, String elementTagName) {
-        Element element = (Element) doc.getElementsByTagName(elementTagName).item(0);
-        element.getParentNode().removeChild(element);
-        doc.normalize();
-        return doc;
-    }
-
-    private static Node findNode(String id, NodeList orgs) {
-        Node org = null;
-        for (int i = 0; i < orgs.getLength(); i++) {
-            NamedNodeMap attr = orgs.item(i).getAttributes();
-            if (attr.getNamedItem("xml:id") == null) {
-                continue;
-            }
-            if (attr.getNamedItem("xml:id").getNodeValue().equals(id)) {
-                org = orgs.item(i);
-                break;
-            }
-        }
-        return org;
-    }
-
-    private static void updateAffiliations(NodeList persons, NodeList orgs, Document docAdditionalTei) {
-        Node person = null;
-        NodeList theNodes = null;
-        for (int i = 0; i < persons.getLength(); i++) {
-            person = persons.item(i);
-            theNodes = person.getChildNodes();
-            for (int y = 0; y < theNodes.getLength(); y++) {
-                if (theNodes.item(y).getNodeType() == Node.ELEMENT_NODE) {
-                    Element e = (Element) (theNodes.item(y));
-                    if (e.getTagName().equals("affiliation")) {
-                        String name = e.getAttribute("ref").replace("#", "");
-                        Node aff = findNode(name, orgs);
-                        if (aff != null) {
-                            //person.removeChild(theNodes.item(y));
-                            Node localNode = docAdditionalTei.importNode(aff, true);
-                            // we need to rename this attribute because we cannot multiply the id attribute
-                            // with the same value (XML doc becomes not well-formed)
-                            Element orgElement = (Element) localNode;
-                            orgElement.removeAttribute("xml:id");
-                            orgElement.setAttribute("ref", "#" + name);
-                            e.removeAttribute("ref");
-                            e.appendChild(localNode);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private static String updateCorpusTei(Document doc, NodeList biblFull) {
@@ -119,21 +60,6 @@ public class TeiBuilder {
         addAdditionalTeiHeader(biblFull, teiHeader, doc);
         doc.getLastChild().appendChild(teiHeader);
         return Utilities.toString(doc);
-    }
-
-    private static String updateFullTextTeiBrutal(NodeList biblFull, InputStream tei) throws IOException {
-        String teiStr = IOUtils.toString(tei, "UTF-8");
-        int ind1 = teiStr.indexOf("<teiHeader");
-        int ind12 = teiStr.indexOf(">", ind1 + 1);
-        int ind2 = teiStr.indexOf("</teiHeader>");
-        teiStr = teiStr.substring(0, ind12 + 1) + Utilities.innerXmlToString(biblFull.item(0)) + teiStr.substring(ind2, teiStr.length());
-        return teiStr;
-    }
-
-    private static void clear(Node node) {
-        for (int i = node.getChildNodes().getLength() - 1; i >= 0; i--) {
-            node.removeChild(node.getChildNodes().item(i));
-        }
     }
 
     private static void addAdditionalTeiHeader(NodeList biblFull, Node header, Document doc) {
@@ -155,5 +81,83 @@ public class TeiBuilder {
         teiCorpus.appendChild(tei);
         teiCorpus.setAttributeNode(attr);
         doc.appendChild(teiCorpus);
+    }
+
+    /**
+     * Updates the extracted TEI with the authors data.
+     */
+    private static void updateGrobidTEI(Document doc, Document docAdditionalTei) {
+        Node titleNode = halTeiExtractor.getTitle(docAdditionalTei);
+        Node abstractNode = halTeiExtractor.getAbstract(docAdditionalTei);
+        NodeList authorsNodes = halTeiExtractor.getAuthors(docAdditionalTei);
+        NodeList textClassNode = halTeiExtractor.getTextClass(docAdditionalTei);
+        
+        ((Element) doc.getElementsByTagName("title").item(0)).setTextContent(titleNode.getTextContent());
+        ((Element) getAbstractTextNode(doc)).setTextContent(abstractNode.getTextContent());
+        
+        Node authsNode = getAuthorsNode(doc);
+        for (int i = 0; i < authorsNodes.getLength(); i++) {
+            Node localNode = doc.importNode(authorsNodes.item(i), true);
+            authsNode.appendChild(localNode);
+        }
+        
+        Node textClass = getTextClass(doc);
+        Node myNode = doc.importNode(textClassNode.item(0), true);
+        if (textClass == null) {
+            Element profileDesc = doc.createElement("profileDesc");
+            profileDesc.appendChild(myNode);
+            getTeiHeader(doc).appendChild(profileDesc);
+        } else {
+            for (int i = myNode.getChildNodes().getLength() - 1; i >= 0; i--) {
+                textClass.appendChild(myNode.getChildNodes().item(i));
+            }
+        }
+    }
+
+    private static Node getAbstractTextNode(Document doc) {
+        Node AbstractTextNode = null;
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        try {
+            AbstractTextNode = (Node) xPath.evaluate("/TEI/text/front/div/p",
+                    doc.getDocumentElement(), XPathConstants.NODE);
+        } catch (XPathExpressionException xpee) {
+            //xpee.printStackTrace();
+        }
+        return AbstractTextNode;
+    }
+
+    private static Node getAuthorsNode(Document doc) {
+        Node authorsNode = null;
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        try {
+            authorsNode = (Node) xPath.evaluate("/TEI/teiHeader/fileDesc/sourceDesc/biblStruct/analytic",
+                    doc.getDocumentElement(), XPathConstants.NODE);
+        } catch (XPathExpressionException xpee) {
+            //xpee.printStackTrace();
+        }
+        return authorsNode;
+    }
+
+    private static Node getTextClass(Document doc) {
+        Node textClassNode = null;
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        try {
+            textClassNode = (Node) xPath.evaluate("/TEI/teiHeader/profileDesc/textClass",
+                    doc.getDocumentElement(), XPathConstants.NODE);
+        } catch (XPathExpressionException xpee) {
+        }
+        return textClassNode;
+    }
+
+    private static Node getTeiHeader(Document doc) {
+        Node teiHeaderNode = null;
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        try {
+            teiHeaderNode = (Node) xPath.evaluate("/TEI/teiHeader",
+                    doc.getDocumentElement(), XPathConstants.NODE);
+        } catch (XPathExpressionException xpee) {
+            //
+        }
+        return teiHeaderNode;
     }
 }

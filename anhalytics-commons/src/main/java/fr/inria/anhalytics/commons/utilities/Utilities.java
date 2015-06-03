@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ls.DOMImplementationLS;
@@ -156,6 +157,28 @@ public class Utilities {
             sb.append(lsSerializer.writeToString(childNodes.item(i)));
         }
         return sb.toString();
+    }
+    
+    public static Document removeElement(Document doc, String elementTagName) {
+        Element element = (Element) doc.getElementsByTagName(elementTagName).item(0);
+        element.getParentNode().removeChild(element);
+        doc.normalize();
+        return doc;
+    }
+
+    public static Node findNode(String id, NodeList orgs) {
+        Node org = null;
+        for (int i = 0; i < orgs.getLength(); i++) {
+            NamedNodeMap attr = orgs.item(i).getAttributes();
+            if (attr.getNamedItem("xml:id") == null) {
+                continue;
+            }
+            if (attr.getNamedItem("xml:id").getNodeValue().equals(id)) {
+                org = orgs.item(i);
+                break;
+            }
+        }
+        return org;
     }
 
     /**

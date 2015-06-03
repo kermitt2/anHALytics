@@ -38,7 +38,7 @@ public class TeiBuilderProcess {
                     grobid_tei = new ByteArrayInputStream(tei_doc.getBytes());
                     additional_tei = mm.streamFile(filename, MongoManager.ADDITIONAL_TEIS);
                     try {
-                        result = TeiBuilder.generateTeiCorpus(additional_tei, grobid_tei, false);
+                        result = TeiBuilder.generateTeiCorpus(additional_tei, grobid_tei, true);
                         InputStream tei = new ByteArrayInputStream(result.getBytes());
                         mm.addDocument(tei, filename, MongoManager.FINAL_TEIS, date);
                     } catch (Exception e) {
