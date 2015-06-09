@@ -1,5 +1,5 @@
 var defaults = {
-    host_nerd: "localhost",
+    host_nerd: "traces1.saclay.inria.fr",
     port_nerd: "8090",
     service: "proxy", // access to service can be local or proxy, depending on security requirements
     //service: "local",

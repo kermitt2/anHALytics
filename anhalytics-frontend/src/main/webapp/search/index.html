@@ -38,20 +38,28 @@
   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 	<link rel="stylesheet" href="../css/hal.css"/>
+         <script src="../js/resource/config.js"></script>
+         <script type="text/javascript" src="../js/utilities.js"></script>
+         <script type="text/javascript" src="../js/elasticsearchquery.js"></script>
+         <script type="text/javascript" src="../js/summonsquery.js"></script>
+         <script type="text/javascript" src="../js/parsers.js"></script>
+         <script type="text/javascript" src="../js/displays.js"></script>
+         <script type="text/javascript" src="../js/authentifications.js"></script>
+         <script type="text/javascript" src="../js/recordBuild.js"></script>
+         
+  <script type="text/javascript" src="../js/facetviews.js"></script>
   <script type="text/javascript" src="../js/extension.js"></script>
-  <script src="../js/resource/config.js"></script>
-  <script type="text/javascript" src="hal.facetview.js"></script>
-  
+ <script type="text/javascript" src="../js/modals.js"></script>
+ <script type="text/javascript" src="../js/harvest.js"></script>
+ <script type="text/javascript" src="../js/disambiguation.js"></script>
   <script type="text/javascript">
-
-  jQuery(document).ready(function($) {
-    $('.facet-view-simple').facetview({
+      var options = $.extend(defaults, {
 	facets: [
   		{'field': '$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date', 'display': 'publication_date', 'type':'date', 'view':'graphic'},
 		{'field': '$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halDomain_abbrev', 'display': 'subject-headers', 'size':20, 'type':'taxonomy', 'view':'graphic'},
   		{'field': '$teiCorpus.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term', 'display': 'keywords', 'size':10, 'type':'entity', 'view':'textual'},
   		{'field': 
-		 	'$$teiCorpus.$teiHeader.$profileDesc.$langUsage.$language', 'display': 'language', 'size':6, 'type':'country', 'view':'graphic'},
+		 	'$teiCorpus.$teiHeader.$profileDesc.$langUsage.$language', 'display': 'language', 'size':6, 'type':'country', 'view':'graphic'},
   		{'field': 
 		 	'$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$org.$desc.$address.key', 'display': 'country', 'size':6, 'type':'country', 'view':'graphic'},
   		{'field': '$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$affiliation.$org.$orgName', 'display': 'Organisation', 'size':6, 'type':'entity', 'view':'textual'},
@@ -60,6 +68,18 @@
 		 	'$teiCorpus.$standoff.wikipediaExternalRef', 'display': 'concepts', 'size':10, 'type':'entity', 'view':'textual'},
       ]
   });
+      
+  </script>
+  
+  <script type="text/javascript" src="hal.facetview.js"></script>
+  <script src="../js/filters.js"></script>
+  <script type="text/javascript">
+        // this is a google key for freebase image service
+        var api_key = "AIzaSyBLNMpXpWZxcR9rbjjFQHn_ULbU-w1EZ5U";
+
+
+  jQuery(document).ready(function($) {
+    $('.facet-view-simple').facetview(options);
 
 
   // set up form
@@ -74,6 +94,7 @@
   });
 });
   </script>
+   
 </head>
 
 <body>
