@@ -1,15 +1,17 @@
 package fr.inria.anhalytics.harvest;
 
+import fr.inria.anhalytics.commons.data.PubFile;
 import fr.inria.anhalytics.commons.data.TEI;
 import fr.inria.anhalytics.commons.managers.MongoManager;
 import fr.inria.anhalytics.commons.utilities.Utilities;
 import java.io.*;
+import java.text.ParseException;
 import java.util.*;
 import javax.xml.parsers.*;
 
 /**
-* HAL OAI-PMH implementation.
-*/
+ * HAL OAI-PMH implementation.
+ */
 public class OAIHarvester extends Harvester {
 
     private static String OAI_FORMAT = "xml-tei";
@@ -57,12 +59,28 @@ public class OAIHarvester extends Harvester {
                 stop = true;
             }
         }
+        processEmbargoFiles(date);
     }
 
     @Override
     public void fetchAllDocuments() throws ParserConfigurationException, IOException {
         for (String date : Utilities.getDates()) {
             fetchDocumentsByDate(date);
+        }
+    }
+
+    public void processEmbargoFiles(String date) {
+        Map<String, String> files = mm.getEmbargoFiles(date);
+        Iterator it = files.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            try {
+                downloadFile(new PubFile((String) pair.getValue(), date, "file"), (String) pair.getKey(), date);
+                System.out.println("done");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            it.remove(); // avoids a ConcurrentModificationException
         }
     }
 }

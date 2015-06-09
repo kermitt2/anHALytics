@@ -27,7 +27,7 @@ abstract class Harvester {
         this.mm = mm;
     }
     
-    private MongoManager mm;
+    protected MongoManager mm;
     /**
      * Harvests the documents submitted on the given date.
      */
@@ -82,7 +82,7 @@ abstract class Harvester {
      * Downloads the given file and classify it either as main file or as an
      * annex.
      */
-    private void downloadFile(PubFile file, String id, String date) throws ParseException, IOException {
+    protected void downloadFile(PubFile file, String id, String date) throws ParseException, IOException {
         InputStream inBinary = null;
         Date embDate = Utilities.parseStringDate(file.getEmbargoDate());
         Date today = new Date();

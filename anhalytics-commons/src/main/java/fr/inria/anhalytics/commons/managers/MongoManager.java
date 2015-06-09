@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -265,6 +267,28 @@ public class MongoManager {
         return result;
     }
 
+    public Map<String, String> getEmbargoFiles(String date) {
+        Map<String, String> files = new HashMap<String, String>();
+        if (db.collectionExists(HARVEST_DIAGNOSTIC)) {
+            collection = db.getCollection(HARVEST_DIAGNOSTIC);
+            BasicDBObject query = new BasicDBObject("date", date);
+            DBCursor curs = collection.find(query);
+            try {
+                if (curs.hasNext()) {
+                    DBObject entry = curs.next();
+                    String url = (String) entry.get("desc");
+                    String id = (String) entry.get("halID");
+                    files.put(id, url);
+                }
+            } finally {
+                if (curs != null) {
+                    curs.close();
+                }
+            }
+        }
+        return files;
+    }
+
     public String getAnnotation(String filename) {
         if (collection == null) {
             collection = db.getCollection("annotations");
@@ -317,14 +341,14 @@ public class MongoManager {
         }
         return result;
     }
-    
+
     /**
      * Check if the given pdf has already been harvested.
      */
     public boolean isCollected(String filename) {
         GridFS gfs = new GridFS(db, BINARIES);
         GridFSDBFile f = gfs.findOne(filename);
-        boolean result = false;        
+        boolean result = false;
         if (f != null) {
             result = true;
         }
