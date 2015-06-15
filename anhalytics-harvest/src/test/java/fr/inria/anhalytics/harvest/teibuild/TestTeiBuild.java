@@ -34,7 +34,7 @@ public class TestTeiBuild extends XMLTestCase {
         if (!fullTextFile.exists()) {
             throw new Exception("Cannot start test, because test resource folder is not correctly set.");
         }
-        String result = TeiBuilder.generateTeiCorpus(new FileInputStream(mtdTeiFile), new FileInputStream(fullTextFile), false);
+        String result = TeiBuilder.generateTeiCorpus(new FileInputStream(mtdTeiFile), new FileInputStream(fullTextFile), true);
 		//System.out.println(result);
         // some test here...
         String expected = FileUtils.readFileToString(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile()
@@ -53,7 +53,7 @@ public class TestTeiBuild extends XMLTestCase {
         if (!fullTextFile.exists()) {
             throw new Exception("Cannot start test, because test resource folder is not correctly set.");
         }
-        result = TeiBuilder.generateTeiCorpus(new FileInputStream(mtdTeiFile), new FileInputStream(fullTextFile), false);
+        result = TeiBuilder.generateTeiCorpus(new FileInputStream(mtdTeiFile), new FileInputStream(fullTextFile), true);
         //System.out.println(result);
         expected = FileUtils.readFileToString(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile()
                 + "/hal-01110668v1.final.tei.xml"), "UTF-8");

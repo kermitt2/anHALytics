@@ -91,16 +91,18 @@ public class TeiBuilder {
         Node abstractNode = halTeiExtractor.getAbstract(docAdditionalTei);
         NodeList authorsNodes = halTeiExtractor.getAuthors(docAdditionalTei);
         NodeList textClassNode = halTeiExtractor.getTextClass(docAdditionalTei);
-        
+
         ((Element) doc.getElementsByTagName("title").item(0)).setTextContent(titleNode.getTextContent());
-        ((Element) getAbstractTextNode(doc)).setTextContent(abstractNode.getTextContent());
-        
+        Element abstractTextNode = ((Element) getAbstractTextNode(doc));
+        if (abstractTextNode != null) {
+            abstractTextNode.setTextContent(abstractNode.getTextContent());
+        }
         Node authsNode = getAuthorsNode(doc);
         for (int i = 0; i < authorsNodes.getLength(); i++) {
             Node localNode = doc.importNode(authorsNodes.item(i), true);
             authsNode.appendChild(localNode);
         }
-        
+
         Node textClass = getTextClass(doc);
         Node myNode = doc.importNode(textClassNode.item(0), true);
         if (textClass == null) {
@@ -118,7 +120,7 @@ public class TeiBuilder {
         Node AbstractTextNode = null;
         XPath xPath = XPathFactory.newInstance().newXPath();
         try {
-            AbstractTextNode = (Node) xPath.evaluate("/TEI/text/front/div/p",
+            AbstractTextNode = (Node) xPath.evaluate("/TEI/teiHeader/profileDesc/abstract/p",
                     doc.getDocumentElement(), XPathConstants.NODE);
         } catch (XPathExpressionException xpee) {
             //xpee.printStackTrace();
