@@ -1,10 +1,6 @@
 package fr.inria.anhalytics.harvest.teibuild;
 
 import fr.inria.anhalytics.commons.utilities.Utilities;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,19 +17,55 @@ public class halTeiExtractor {
     public static final String ABSTRACT_PATH = "/TEI/text/body/listBibl/biblFull/profileDesc/abstract";
     public static final String AUTHORS_PATH = "/TEI/text/body/listBibl/biblFull/titleStmt/author";
     public static final String TEXTCLASS_PATH = "/TEI/text/body/listBibl/biblFull/profileDesc/textClass";
+    public static final String PUBDATE_PATH = "/TEI/text/body/listBibl/biblFull/sourceDesc/biblStruct/monogr/imprint/date";
+    public static final String PUBPRODDATE_PATH = "/TEI/text/body/listBibl/biblFull/editionStmt/edition[@type='current']/date[@type='whenProduced']";
+    public static final String LANG_PATH = "/TEI/text/body/listBibl/biblFull/profileDesc/langUsage";
     
     public static NodeList getTeiHeader(Document docAdditionalTei) {
         /////////////// Hal specific : To be done as a harvesting post process before storing tei ////////////////////
         // remove ugly end-of-line in starting and ending text as it is
         // a problem for stand-off annotations
         Utilities.trimEOL(docAdditionalTei.getDocumentElement(), docAdditionalTei);
-        docAdditionalTei = Utilities.removeElement(docAdditionalTei, "analytic");
+        docAdditionalTei = removeUnnecessaryParts(docAdditionalTei);
         NodeList orgs = docAdditionalTei.getElementsByTagName("org");
         NodeList authors = docAdditionalTei.getElementsByTagName("author");
+        removeConsolidatedData(docAdditionalTei, authors);
         updateAffiliations(authors, orgs, docAdditionalTei);
         NodeList editors = docAdditionalTei.getElementsByTagName("editor");
+        removeConsolidatedData(docAdditionalTei, editors);
         updateAffiliations(editors, orgs, docAdditionalTei);
         return docAdditionalTei.getElementsByTagName("biblFull");
+    }
+    
+    private static void removeConsolidatedData(Document docAdditionalTei, NodeList entities){
+        Node person = null;
+        for (int i = entities.getLength() - 1; i >= 0; i--) {
+            person = entities.item(i);
+            /*
+            theNodes = person.getChildNodes();
+            for (int y = 0; y < theNodes.getLength(); y++) {
+                Node node = theNodes.item(y);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    if(!node.getNodeName().equals("idno"))
+                        person.removeChild(node);
+                }
+            }
+                    */
+            docAdditionalTei.getElementsByTagName("titleStmt").item(1).removeChild(person);
+            NodeList biblStruct = docAdditionalTei.getElementsByTagName("biblStruct");
+            biblStruct.item(0).insertBefore(person, biblStruct.item(0).getFirstChild());
+        }
+    
+    }
+    
+    private static Document removeUnnecessaryParts(Document docAdditionalTei){
+        docAdditionalTei = Utilities.removeElement(docAdditionalTei, "analytic");
+        docAdditionalTei = Utilities.removeElement(docAdditionalTei, "editionStmt");
+        docAdditionalTei = Utilities.removeElement(docAdditionalTei, "publicationStmt");
+        docAdditionalTei = Utilities.removeElement(docAdditionalTei, "publicationStmt");
+        docAdditionalTei = Utilities.removeElement(docAdditionalTei, "seriesStmt");
+        docAdditionalTei = Utilities.removeElement(docAdditionalTei, "notesStmt");
+        return docAdditionalTei;
     }
 
     private static void updateAffiliations(NodeList persons, NodeList orgs, Document docAdditionalTei) {
@@ -63,53 +95,5 @@ public class halTeiExtractor {
                 }
             }
         }
-    }
-
-    public static Node getTitle(Document document) {
-        Node titleNode = null;
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        try {
-            titleNode = (Node) xPath.evaluate(TITLE_PATH,
-                    document.getDocumentElement(), XPathConstants.NODE);
-        } catch (XPathExpressionException xpee) {
-            xpee.printStackTrace();
-        }
-        return titleNode;
-    }
-    
-    public static Node getAbstract(Document document) {
-        Node abstractNode = null;
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        try {
-            abstractNode = (Node) xPath.evaluate(ABSTRACT_PATH,
-                    document.getDocumentElement(), XPathConstants.NODE);
-        } catch (XPathExpressionException xpee) {
-            xpee.printStackTrace();
-        }
-        return abstractNode;
-    }
-    
-    public static NodeList getAuthors(Document document) {
-        NodeList authorsNode = null;
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        try {
-            authorsNode = (NodeList) xPath.evaluate(AUTHORS_PATH,
-                    document.getDocumentElement(), XPathConstants.NODESET);
-        } catch (XPathExpressionException xpee) {
-            xpee.printStackTrace();
-        }
-        return authorsNode;
-    }
-    
-    public static NodeList getTextClass(Document document) {
-        NodeList textClassNode = null;
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        try {
-            textClassNode = (NodeList) xPath.evaluate(TEXTCLASS_PATH,
-                    document.getDocumentElement(), XPathConstants.NODESET);
-        } catch (XPathExpressionException xpee) {
-            //xpee.printStackTrace();
-        }
-        return textClassNode;
     }
 }

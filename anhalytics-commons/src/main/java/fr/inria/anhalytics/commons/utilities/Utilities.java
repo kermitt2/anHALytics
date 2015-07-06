@@ -2,6 +2,7 @@ package fr.inria.anhalytics.commons.utilities;
 
 import fr.inria.anhalytics.commons.exceptions.BinaryNotAvailableException;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,11 +24,15 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +43,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSSerializer;
+import org.xml.sax.InputSource;
 
 /**
  *
@@ -158,7 +164,7 @@ public class Utilities {
         }
         return sb.toString();
     }
-    
+
     public static Document removeElement(Document doc, String elementTagName) {
         Element element = (Element) doc.getElementsByTagName(elementTagName).item(0);
         element.getParentNode().removeChild(element);
@@ -291,8 +297,9 @@ public class Utilities {
         int ind = filename.indexOf(".");
         String halID = filename.substring(0, ind);
         ind = halID.lastIndexOf("v");
-        if(ind > -1)
+        if (ind > -1) {
             halID = halID.substring(0, ind);
+        }
         return halID;
     }
 
@@ -354,7 +361,7 @@ public class Utilities {
             br.close();
         }
     }
-    
+
     public static InputStream request(String request, boolean retry) {
         InputStream in = null;
         try {
@@ -365,12 +372,12 @@ public class Utilities {
             return in;
         } catch (UnknownHostException e) {
             e.printStackTrace();
-            if(retry) {
+            if (retry) {
                 try {
                     Thread.sleep(900000); //take a nap.
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
-                }            
+                }
                 in = request(request, true);
             }
         } catch (IOException e) {
@@ -378,4 +385,40 @@ public class Utilities {
         }
         return in;
     }
+
+    public static String formatXMLString(String xmlString) {
+        String formatedXml = null;
+        try {
+            Document document = DocumentBuilderFactory.newInstance()
+                    .newDocumentBuilder()
+                    .parse(new InputSource(new ByteArrayInputStream(xmlString.getBytes("utf-8"))));
+
+            XPath xPath = XPathFactory.newInstance().newXPath();
+            NodeList nodeList = (NodeList) xPath.evaluate("//text()[normalize-space()='']",
+                    document,
+                    XPathConstants.NODESET);
+
+            for (int i = 0; i < nodeList.getLength(); ++i) {
+                Node node = nodeList.item(i);
+                node.getParentNode().removeChild(node);
+            }
+
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
+            StringWriter stringWriter = new StringWriter();
+            StreamResult streamResult = new StreamResult(stringWriter);
+
+            transformer.transform(new DOMSource(document), streamResult);
+
+            formatedXml = stringWriter.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return formatedXml;
+    }
+
 }
