@@ -39,7 +39,7 @@ public class TestTeiBuild extends XMLTestCase {
         // some test here...
         String expected = FileUtils.readFileToString(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile()
                 + "/hal-01110586v1.final.tei.xml"), "UTF-8");
-        String titleHalTei = (String) xPath.evaluate("/TEI/text/body/listBibl/biblFull/titleStmt/title/text()", new InputSource(new FileInputStream(mtdTeiFile)), XPathConstants.STRING);
+        String titleHalTei = (String) xPath.evaluate("/teiHeader/titleStmt/title/text()", new InputSource(new FileInputStream(mtdTeiFile)), XPathConstants.STRING);
         String titleResult = (String) xPath.evaluate("/teiCorpus/teiHeader/titleStmt/title/text()", new InputSource(new StringReader(result)), XPathConstants.STRING);
         assertEquals(titleResult.trim(), titleHalTei.trim());
 
@@ -54,15 +54,14 @@ public class TestTeiBuild extends XMLTestCase {
             throw new Exception("Cannot start test, because test resource folder is not correctly set.");
         }
         result = TeiBuilder.generateTeiCorpus(new FileInputStream(mtdTeiFile), new FileInputStream(fullTextFile), true);
-        //System.out.println(result);
+        System.out.println(result);
         expected = FileUtils.readFileToString(new File(this.getResourceDir("src/test/resources/").getAbsoluteFile()
                 + "/hal-01110668v1.final.tei.xml"), "UTF-8");
 		//assertXpathExists("/TEI[1]/teiHeader[1]", expected);
         
-        titleResult = (String) xPath.evaluate("/TEI/text/body/listBibl/biblFull/titleStmt/title/text()", new InputSource(new FileInputStream(mtdTeiFile)), XPathConstants.STRING);
+        titleResult = (String) xPath.evaluate("/teiHeader/titleStmt/title/text()", new InputSource(new FileInputStream(mtdTeiFile)), XPathConstants.STRING);
         titleHalTei = (String) xPath.evaluate("/teiCorpus/teiHeader/titleStmt/title/text()", new InputSource(new StringReader(result)), XPathConstants.STRING);
         assertEquals(titleResult.trim(), titleHalTei.trim());
-
     }
 
     /*
