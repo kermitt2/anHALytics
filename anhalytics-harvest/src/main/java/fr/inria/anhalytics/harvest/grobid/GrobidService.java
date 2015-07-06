@@ -77,10 +77,10 @@ public class GrobidService {
                 StringBody contentString = new StringBody("" + end);
                 multipartEntity.addPart("end", contentString);
             }
-            if (generateIDs) {
+            /*if (generateIDs) {
                 StringBody contentString = new StringBody("1");
                 multipartEntity.addPart("generateIDs", contentString);
-            }
+            }*/
             
             conn.setRequestProperty("Content-Type", multipartEntity.getContentType().getValue());
             OutputStream out = conn.getOutputStream();
