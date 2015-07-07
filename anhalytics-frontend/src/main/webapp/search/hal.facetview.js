@@ -573,27 +573,26 @@
                 }
             }
 
-            if (options.search_index != "summon") {
-                var temp_intro = '<a style="text-align:left; min-width:20%;margin-bottom:10px;" class="btn" \
-	             		id="new_facet" href=""> \
-	             		<i class="icon-plus"></i> add new facet </a> \
-				';
-                $('#facetview_filters').html("").append(temp_intro);
-                $('#new_facet').bind('click', add_facet);
-            }
-            else {
-                var temp_intro = '<form class="well" id="scope_area"><label class="checkbox">' +
-                        '<input type="checkbox" name="scientific" checked>Technical content</label>';
-                temp_intro += '<label class="checkbox">' +
-                        '<input type="checkbox" name="fulltext" checked>Full text available online</label>';
-                temp_intro += '<label class="checkbox">' +
-                        '<input type="checkbox" name="scholarly">Scholarly content</label>';
-                //temp_intro += '<button type="button" class="btn" data-toggle="button">Custom scope restriction</button>';
-                temp_intro += '</form>';
+            var temp_intro = '<a style="text-align:left; min-width:20%;margin-bottom:10px;" class="btn" \
+             		id="new_facet" href=""> \
+             		<i class="icon-plus"></i> add new facet </a> \
+			';
+            $('#facetview_filters').html("").append(temp_intro);
+            $('#new_facet').bind('click', add_facet);
+        }
+        else {
+            var temp_intro = '<form class="well" id="scope_area"><label class="checkbox">' +
+                    '<input type="checkbox" name="scientific" checked>Technical content</label>';
+            temp_intro += '<label class="checkbox">' +
+                    '<input type="checkbox" name="fulltext" checked>Full text available online</label>';
+            temp_intro += '<label class="checkbox">' +
+                    '<input type="checkbox" name="scholarly">Scholarly content</label>';
+            //temp_intro += '<button type="button" class="btn" data-toggle="button">Custom scope restriction</button>';
+            temp_intro += '</form>';
 
-                $('#facetview_filters').html("").append(temp_intro);
-                $('#scope_area').bind('click', setScope);
-            }
+            $('#facetview_filters').html("").append(temp_intro);
+            $('#scope_area').bind('click', setScope);
+            
 
             $('#facetview_filters').append(thefilters);
             options.visualise_filters ? $('.facetview_visualise').bind('click', show_vis) : "";
@@ -1147,16 +1146,6 @@
             var numb = 0;
             for (var item in records) {
                 if (records[item] > 0) {
-                    if (facetkey == 'Discipline') {
-                        if (options.search_index == 'summon') {
-                            if (options.scope == 'scientific') {
-                                //console.log(item);
-                                if (scientificDisciplinesLow.indexOf(item) == -1) {
-                                    continue;
-                                }
-                            }
-                        }
-                    }
 
                     if (numb >= options.facets[facetidx]['size']) {
                         break;
@@ -1762,19 +1751,6 @@
                     + addCommas("" + data.found) + " results - in " + Math.floor(data.took)
                     + " ms (server time)</p>");
 
-            if (options.search_index == "summon") {
-                // did you mean suggestion
-                var suggest = data.suggest;
-                if (suggest.length > 0) {
-                    var candidate = suggest[0]['suggestedQuery'];
-                    $('#results_summary')
-                            .append("<p>Did you mean: <a href='#' onclick='document.getElementById(\"facetview_freetext\").value=\"" +
-                                    candidate +
-                                    "\"; $(\"#facetview_freetext\").focus().trigger(\"keyup\");' id='suggest_token'><span style='color:" + fillDefaultColor + ";'><strong>"
-                                    + candidate + "</strong></span></a> ?</p>");
-                }
-            }
-
             if (typeof (options.paging.from) != 'number') {
                 options.paging.from = parseInt(options.paging.from);
             }
@@ -1827,10 +1803,7 @@
         showresults = function (sdata) {
             // get the data and parse from elasticsearch or other 
             var data = null;
-            if (options.search_index == "summon") {
-                data = parseresultsSummons(sdata);
-            }
-            else if (options.search_index == "elasticsearch") {
+            if (options.search_index == "elasticsearch") {
                 // default is elasticsearch
                 data = parseresultsElasticSearch(sdata);
             }
@@ -1870,86 +1843,84 @@
             }
 
             //we load now in background the additional record information requiring a user interaction for
-            // visualisation - this is not require for summon
-            if (options.search_index != "summon") {
-                $('#titleNaked', obj).each(function () {
-                    if (options.collection == "npl") {
-                        // annotations for the title
-                        var index = $(this).attr('pos');
-                        var titleID = $(this).attr('rel');
-                        var localQuery = {"query": {"filtered": {"query": {"term": {"_id": titleID}}}}};
-
-                        $.ajax({
-                            type: "get",
-                            url: options.search_url_annotations,
-                            contentType: 'application/json',
-                            dataType: 'jsonp',
-                            data: {source: JSON.stringify(localQuery)},
-                            success: function (data) {
-                                displayAnnotations(data, index, titleID, 'title');
-                            }
-                        });
-                    }
-                });
-
-                $('#innen_abstract', obj).each(function () {
-                    // load biblio and abstract info. 
-                    // pos attribute gives the result index, rel attribute gives the document ID 
+            // visualisation
+            $('#titleNaked', obj).each(function () {
+                if (options.collection == "npl") {
+                    // annotations for the title
                     var index = $(this).attr('pos');
-                    var docID = $(this).attr('rel');
-                    var localQuery;
+                    var titleID = $(this).attr('rel');
+                    var localQuery = {"query": {"filtered": {"query": {"term": {"_id": titleID}}}}};
 
-                    if (options.collection == "npl") {
+                    $.ajax({
+                        type: "get",
+                        url: options.search_url_annotations,
+                        contentType: 'application/json',
+                        dataType: 'jsonp',
+                        data: {source: JSON.stringify(localQuery)},
+                        success: function (data) {
+                            displayAnnotations(data, index, titleID, 'title');
+                        }
+                    });
+                }
+            });
 
-                        // abstract and further informations
-                        localQuery = {"fields": ["$teiCorpus.$teiHeader.$profileDesc.xml:id",
-                                "$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_en",
-                                "$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_fr",
-                                "$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_de",
-                                "$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$title.$title-first",
-                                "$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$idno.$type_doi",
-                                "$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName",
-                                '$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology',
-                                "$teiCorpus.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term",
-                                '$teiCorpus.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id'],
-                            "query": {"filtered": {"query": {"term": {"_id": docID}}}}};
+            $('#innen_abstract', obj).each(function () {
+                // load biblio and abstract info. 
+                // pos attribute gives the result index, rel attribute gives the document ID 
+                var index = $(this).attr('pos');
+                var docID = $(this).attr('rel');
+                var localQuery;
 
-                        $.ajax({
-                            type: "get",
-                            url: options.search_url,
-                            contentType: 'application/json',
-                            dataType: 'jsonp',
-                            data: {source: JSON.stringify(localQuery)},
-                            success: function (data) {
-                                displayAbstract(data, index);
-                            }
-                        });
+                if (options.collection == "npl") {
 
-                    }
-                    else if (options.collection == "patent") {
-                        localQuery = {"fields": ["_id",
-                                "$teiCorpus.$TEI.$text.$front.$div.$p.$lang_en",
-                                "$teiCorpus.$TEI.$text.$front.$div.$p.$lang_de",
-                                "$teiCorpus.$TEI.$text.$front.$div.$p.$lang_fr"],
-                            "query": {"filtered": {"query": {"term": {"_id": docID}}}}};
+                    // abstract and further informations
+                    localQuery = {"fields": ["$teiCorpus.$teiHeader.$profileDesc.xml:id",
+                            "$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_en",
+                            "$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_fr",
+                            "$teiCorpus.$teiHeader.$profileDesc.$abstract.$lang_de",
+                            "$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$title.$title-first",
+                            "$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$idno.$type_doi",
+                            "$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$analytic.$author.$persName.$fullName",
+                            '$teiCorpus.$teiHeader.$profileDesc.$textClass.$classCode.$scheme_halTypology',
+                            "$teiCorpus.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.$term",
+                            '$teiCorpus.$teiHeader.$profileDesc.$textClass.$keywords.$type_author.xml:id'],
+                        "query": {"filtered": {"query": {"term": {"_id": docID}}}}};
 
-                        /*$.post(options.search_url, 
-                         {source : JSON.stringify(localQuery) }, 
-                         function(data) { displayAbstract(data, index); }, 
-                         "jsonp");*/
-                        $.ajax({
-                            type: "get",
-                            url: options.search_url,
-                            contentType: 'application/json',
-                            dataType: 'jsonp',
-                            data: {source: JSON.stringify(localQuery)},
-                            success: function (data) {
-                                displayAbstract(data, index);
-                            }
-                        });
-                    }
-                });
-            }
+                    $.ajax({
+                        type: "get",
+                        url: options.search_url,
+                        contentType: 'application/json',
+                        dataType: 'jsonp',
+                        data: {source: JSON.stringify(localQuery)},
+                        success: function (data) {
+                            displayAbstract(data, index);
+                        }
+                    });
+
+                }
+                else if (options.collection == "patent") {
+                    localQuery = {"fields": ["_id",
+                            "$teiCorpus.$TEI.$text.$front.$div.$p.$lang_en",
+                            "$teiCorpus.$TEI.$text.$front.$div.$p.$lang_de",
+                            "$teiCorpus.$TEI.$text.$front.$div.$p.$lang_fr"],
+                        "query": {"filtered": {"query": {"term": {"_id": docID}}}}};
+
+                    /*$.post(options.search_url, 
+                     {source : JSON.stringify(localQuery) }, 
+                     function(data) { displayAbstract(data, index); }, 
+                     "jsonp");*/
+                    $.ajax({
+                        type: "get",
+                        url: options.search_url,
+                        contentType: 'application/json',
+                        dataType: 'jsonp',
+                        data: {source: JSON.stringify(localQuery)},
+                        success: function (data) {
+                            displayAbstract(data, index);
+                        }
+                    });
+                }
+            });
         }
         
         // execute a search
@@ -1966,64 +1937,6 @@
                     dataType: "jsonp",
                     success: showresults
                 });
-            }
-            else if (options.search_index == "summon") {
-                var queryParameters = summonsquery(-1, -1);
-                var header0 = authenticateSummons(queryParameters);
-                queryParameters = summonsquery(-1, -1);
-                var queryString = "";
-                var first = true;
-                for (var param in queryParameters) {
-                    var obj = queryParameters[param];
-                    for (var key in obj) {
-                        if (first) {
-                            queryString += key + '=' + queryParameters[param][key];
-                            first = false;
-                        }
-                        else {
-                            queryString += '&' + key + '=' + queryParameters[param][key];
-                        }
-                    }
-                }
-
-                if (options.service == 'proxy') {
-                    // ajax service access via a proxy
-                    for (var param in header0) {
-                        var obj = header0[param];
-                        for (var key in obj) {
-                            queryString += '&' + key + '=' + encodeURIComponent(header0[param][key]);
-                        }
-                    }
-
-                    var proxy = options.proxy_host + "/proxy-summon.jsp?";
-                    $.ajax({
-                        type: "get",
-                        url: proxy,
-                        contentType: 'application/json',
-                        dataType: 'jsonp',
-                        data: queryString,
-                        success: showresults
-                    });
-                }
-                else {
-                    // ajax service access is local
-                    $.ajax({
-                        type: "get",
-                        url: options.search_url,
-                        contentType: 'application/json',
-                        dataType: 'json',
-                        beforeSend: function (xhr) {
-                            for (var param in header0) {
-                                var obj = header0[param];
-                                for (var key in obj) {
-                                    xhr.setRequestHeader(key, header0[param][key]);
-                                }
-                            }
-                        },
-                        data: queryString,
-                        success: showresults
-                    });
-                }
             }
         }
 
@@ -2142,12 +2055,7 @@
                 $('#disambiguate').bind('click', disambiguateNERD);
                 $('#disambiguation_panel').hide();
 
-                if (options.search_index == "summon") {
-                    $('#harvest').bind('click', harvest);
-                }
-                else {
-                    $('#harvest').hide();
-                }
+                //$('#harvest').hide();
             }
             // check paging info is available
             !options.paging.size ? options.paging.size = 10 : "";
@@ -2165,7 +2073,7 @@
             else {
                 $('#facetview_freetext', obj).bindWithDelay('keyup', dosearch, options.freetext_submit_delay);
                 $('#facetview_freetext', obj).bind('keyup', activateDisambButton);
-                $('#facetview_freetext', obj).bind('keyup', activateHarvestButton);
+                //$('#facetview_freetext', obj).bind('keyup', activateHarvestButton);
             }
 
             // trigger the search once on load, to get all results

@@ -157,3 +157,12 @@ var getPieceShowexpandNERD = function (jsonObject){
 					  style="position:relative;float:right;" class="icon-remove icon-white"/></div></div></div>';
     return piece;
 }
+
+var activateDisambButton = function () {
+    if ($('#facetview_freetext').val()) {
+        $('#disambiguate').attr("disabled", false);
+    }
+    else {
+        $('#disambiguate').attr("disabled", true);
+    }
+}

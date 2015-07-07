@@ -4,11 +4,11 @@ AnHALytics is a project aiming at creating an analytic platform for the [HAL res
 
 ![View of anHALytics search and discovery front end](doc/screen1.png)
 
-*View of anHALytics search and discovery front end*
+*Above: View of anHALytics search and discovery front end*
 
 ![Example of query disambiguation in the anHALytics search and discovery front end](doc/screen2.png)
 
-*Example of query disambiguation in the anHALytics search and discovery front end*
+*Above: Example of query disambiguation in the anHALytics search and discovery front end*
 
 ## License
 

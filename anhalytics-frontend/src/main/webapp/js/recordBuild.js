@@ -18,46 +18,7 @@ var buildrecord = function (index, node) {
     result += '<div class="row-fluid">';
 
     var type = null;
-    var id = null;
-    if (options.search_index == "summon") {
-        //result += '<td style="width:48px;">'
-        result += '<div class="span1">';
-        type = jsonObject['ContentType'];
-        var openurl = jsonObject['openUrl'];
-
-        if (type) {
-            if (type.length > 0) {
-                if ((type[0] == "Journal Article") || (type[0] == "Trade Publication Article")) {
-                    result += '<img  style="float:center; width:38px; '
-                            + 'margin:0 0px 0px 0; max-height:64px;" src="data/images/article.png" />';
-                }
-                else if ((type[0] == "Book") || (type[0] == "eBook")) {
-                    result += '<img  style="float:center; width:28px; '
-                            + 'margin-left:4px; max-height:64px;" src="data/images/book1.png" />';
-                }
-                else if (type[0] == "Standard") {
-                    result += '<img style="float:center; width:38px; '
-                            + 'margin:0 5px 10px 0; max-height:64px;" src="data/images/standard.png" />';
-                }
-                else if ((type[0] == "Newspaper Article") || (type[0] == "Newsletter")) {
-                    result += '<img style="float:center; width:36px; '
-                            + 'margin:0 5px 10px 0; max-height:64px;" src="data/images/news.png" />';
-                }
-                else if (type[0] == "Report") {
-                    result += '<img style="float:center; width:36px; '
-                            + 'margin:0 5px 10px 0; max-height:64px;" src="data/images/report.png" />';
-                }
-                if (openurl)
-                    result += '<span class="z3988" title="' + openurl + '" />'
-            }
-        }
-        result += '</div>';
-        //result += '</td><td>';
-    }
-    else {
-        //result += '<td>';
-        id = options.data['ids'][index];
-    }
+    var id = options.data['ids'][index];
 
     var family = id;
     // family id
@@ -76,9 +37,6 @@ var buildrecord = function (index, node) {
     var dates = null;
     if (options['collection'] == 'patent')
         dates = jsonObject['$teiCorpus.$teiHeader.$fileDesc.$sourceDesc.$biblStruct.$monogr.$date'];
-    else if (options.search_index == "summon") {
-        dates = jsonObject['PublicationDate'];
-    }
     else {
         dates = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.$biblStruct.$monogr.$imprint.$date'];
         if (!dates) {
@@ -108,9 +66,6 @@ var buildrecord = function (index, node) {
     var titleAnnotated = null;
     if (options['collection'] == 'patent')
         titles = jsonObject['$teiCorpus.$teiHeader.$fileDesc.$titleStmt.$title.$lang_en'];
-    else if ((options.search_index == "summon")) {
-        titles = jsonObject['Title'];
-    }
     else {
         // NPL
         titles = jsonObject['$teiCorpus.$teiHeader.$titleStmt.$title.$title-first'];
@@ -200,7 +155,7 @@ var buildrecord = function (index, node) {
     }
 
     if (title && (title.length > 1) && !titleAnnotated) {
-        if ((options['collection'] == 'npl') && (options.search_index != "summon")) {
+        if (options['collection'] == 'npl') {
             var docid = id;
             if (docid.indexOf('fulltext')) {
                 docid = docid.replace('.fulltext', '');
@@ -219,78 +174,7 @@ var buildrecord = function (index, node) {
 
     result += '<br />';
 
-    if (options.search_index == "summon") {
-        var authors = jsonObject['Author_xml'];
-        if (!authors) {
-            // we can use alternatively corporate authors
-            authors = jsonObject['CorporateAuthor_xml'];
-            if (!authors) {
-                result += "Anonymous";
-            }
-            else {
-                if (authors.length > 0) {
-                    var name = authors[0]['name'];
-                    result += name + " ";
-                }
-            }
-        }
-        else if (authors.length < 4) {
-            var first = true;
-            for (var aut in authors) {
-                var fullname = authors[aut]['fullname'];
-                var firstname = authors[aut]['givenname'];
-                var middlename = authors[aut]['middlename'];
-                var lastname = authors[aut]['surname'];
-                if (!first) {
-                    result += ", ";
-                }
-                else {
-                    first = false;
-                }
-                if (firstname || lastname) {
-                    if (firstname) {
-                        if (firstname.length > 4)
-                            result += firstname + " ";
-                        else
-                            result += firstname.replace(" ", ".") + '. ';
-                    }
-                    if (middlename) {
-                        if (middlename.length > 4)
-                            result += middlename + " ";
-                        else
-                            result += middlename.replace(" ", ".") + '. ';
-                    }
-                    if (lastname)
-                        result += lastname;
-                }
-                else if (fullname != null) {
-                    var ind = fullname.indexOf(",");
-                    if (ind != -1) {
-                        result += fullname.substring(ind + 1, fullname.length) + " " + fullname.substring(0, ind);
-                    }
-                    else
-                        result += fullname;
-                }
-
-            }
-        }
-        else {
-            var fullname = authors[0]['fullname'];
-            var firstname = authors[0]['givenname'];
-            var lastname = authors[0]['surname'];
-            if (firstname || lastname) {
-                if (firstname)
-                    result += firstname.replace(" ", ".") + '. ';
-                if (lastname)
-                    result += lastname + ' et al.';
-            }
-            else {
-                result += fullname + ' et al.';
-            }
-        }
-
-    }
-    else if (options['collection'] != 'patent') {
+    if (options['collection'] != 'patent') {
         var authorsLast = null;
         var authorsFirst = null;
 
@@ -327,19 +211,7 @@ var buildrecord = function (index, node) {
     }
 
     // book, proceedings or journal title
-    if (options.search_index == "summon") {
-        var titlesBook = jsonObject['PublicationTitle'];
-        if (!titlesBook) {
-            titlesBook = jsonObject['PublicationSeriesTitle'];
-        }
-        if (titlesBook) {
-            var titleBook = titlesBook[0]
-            if (titleBook && (titleBook.length > 1)) {
-                result += ' - <em>' + titleBook + '</em>';
-            }
-        }
-    }
-    else if (options['collection'] == 'npl') {
+    if (options['collection'] == 'npl') {
         var titleBook = null;
         var titlesBook = null;
         //if (options['collection'] == 'npl') {
@@ -374,85 +246,34 @@ var buildrecord = function (index, node) {
         }
     }
 
-    if (options.search_index == "summon") {
-        var pageCount = jsonObject['PageCount'];
-
-        if (pageCount) {
-            if (pageCount[0] == '0') {
-                result += ' - ' + '<em>less than 1 page. </em>'
-            }
-            else
-                result += ' - ' + '<em>' + pageCount[0] + ' pages. </em>'
-        }
-
-        var startPage = jsonObject['StartPage'];
-        var endPage = jsonObject['EndPage'];
-
-        var e1 = -1
-        var e2 = -1;
-
-        if (endPage) {
-            e2 = endPage[0];
-            if (startPage) {
-                e1 = startPage[0];
-
-                if ((e1 != -1) && (e2 != -1)) {
-                    result += ' - ' + '<em>' + (e2 - e1 + 1) + ' pages. </em>'
-                }
-            }
-        }
-
-    }
-
     if (options['collection'] != 'patent') {
-        if (options.search_index == "summon") {
-            if (!dates) {
-                result += ' -  <em> Published ';
-                result += 'date unknown';
-                result += '</em>' + '<br />';
-            }
-            else if (dates[0]) {
-                var year = dates[0]['year'];
-                var month = dates[0]['month'];
-                var day = dates[0]['day'];
-                result += ' -  <em> Published ';
+        var rawDate = JSON.stringify(dates);
+        if (rawDate != null) {
+            var ind1 = rawDate.indexOf('"');
+            var ind2 = rawDate.indexOf('"', ind1 + 1);
+            date = rawDate.substring(ind1, ind2 + 1);
+
+            if (date && (date.length > 1)) {
+                var year = date.substring(1, 5);
+                var month = null;
+                if (date.length > 6)
+                    month = date.substring(6, 8);
+                if ((month) && (month.length > 1) && (month[0] == "0")) {
+                    month = month.substring(1, month.length)
+                }
+                var day = null;
+                if (date.length > 9)
+                    day = date.substring(9, date.length - 1);
+                if ((day != undefined) && (day.length > 1) && (day[0] == "0")) {
+                    day = day.substring(1, day.length)
+                }
+                result += ' - <em>';
                 if ((day != undefined) && (day.length > 0))
                     result += day + '.';
                 if ((month != undefined) && (month.length > 0))
                     result += month + '.';
                 if (year != undefined)
                     result += year + '</em>' + '<br />';
-            }
-        }
-        else {
-            var rawDate = JSON.stringify(dates);
-            if (rawDate != null) {
-                var ind1 = rawDate.indexOf('"');
-                var ind2 = rawDate.indexOf('"', ind1 + 1);
-                date = rawDate.substring(ind1, ind2 + 1);
-
-                if (date && (date.length > 1)) {
-                    var year = date.substring(1, 5);
-                    var month = null;
-                    if (date.length > 6)
-                        month = date.substring(6, 8);
-                    if ((month) && (month.length > 1) && (month[0] == "0")) {
-                        month = month.substring(1, month.length)
-                    }
-                    var day = null;
-                    if (date.length > 9)
-                        day = date.substring(9, date.length - 1);
-                    if ((day != undefined) && (day.length > 1) && (day[0] == "0")) {
-                        day = day.substring(1, day.length)
-                    }
-                    result += ' - <em>';
-                    if ((day != undefined) && (day.length > 0))
-                        result += day + '.';
-                    if ((month != undefined) && (month.length > 0))
-                        result += month + '.';
-                    if (year != undefined)
-                        result += year + '</em>' + '<br />';
-                }
             }
         }
     }
@@ -607,21 +428,7 @@ var buildrecord = function (index, node) {
     }
     else {
         // here default strategy, snippet ranking per relevance
-        if (options.search_index == "summon") {
-            if ($('#facetview_freetext').val()) {
-                if ($('#facetview_freetext').val().trim().length > 0) {
-                    var snippets = jsonObject['Snippet'];
-                    if (snippets) {
-                        for (var snippet in snippets) {
-                            //var snip = snippets[snippet].replace(/h>/g,'strong>');
-                            var snip = snippets[snippet];
-                            result += '...<span style="font-size:12px"><em>' + snip + '</em></span>...<br />';
-                        }
-                    }
-                }
-            }
-        }
-        else if (highlight) {
+        if (highlight) {
             var jsonObject2 = eval(highlight);
             //var snippets = jsonObject2['_all'];
             //console.log(snippets);
@@ -658,7 +465,6 @@ var buildrecord = function (index, node) {
     // add image where available
     if (options.display_images) {
         if ((options['collection'] == 'cendari')) {
-            // with summon we can use the image service
             var img = jsonObject['thumbnail_s'];
             var img2 = jsonObject['thumbnail_l'];
             var img3 = jsonObject['thumbnail_m'];
@@ -684,27 +490,6 @@ var buildrecord = function (index, node) {
             }
             else {
                 result += '<div class="span2" />';
-            }
-        }
-        else if (options.search_index == "summon") {
-            // with summon we can use the image service
-            var img = jsonObject['thumbnail_s'];
-            var img2 = jsonObject['thumbnail_l'];
-            var img3 = jsonObject['thumbnail_m'];
-            if (img && img2) {
-                result += '<td><img alt="bla" src="' + img[0] + '" pbsrc="' + img2[0] +
-                        '" class="PopBoxImageSmall" pbRevertText="" onclick="Pop(this,50,\'PopBoxImageLarge\');" /></td>';
-            }
-            else if (img && img3) {
-                result += '<td><img alt="bla" src="' + img[0] + '" pbsrc="' + img3[0] +
-                        '" class="PopBoxImageSmall" pbRevertText="" onclick="Pop(this,50,\'PopBoxImageLarge\');" /></td>';
-            }
-            else if (img) {
-                result += '<td><img class="thumbnail" style="float:right; max-width:100px; '
-                        + 'max-height:150px;" src="' + img[0] + '" /></td>';
-            }
-            else {
-                result += '<td></td>';
             }
         }
         else {
@@ -735,79 +520,7 @@ var buildrecord = function (index, node) {
     //result += '<div class="class="container-fluid" style="border: 1px solid #DDD;">';
     result += '<div class="row-fluid">';
 
-    if (options.search_index == "summon") {
-        /*if (index % 2) {
-         result += '<div class="mini-layout fluid" style="background-color:#f8f8f8;">';
-         }
-         else {
-         result += '<div class="mini-layout fluid" style="background-color:#ffffff;">';
-         }
-         //result += '<div class="class="container-fluid" style="border: 1px solid #DDD;">';
-         result += '<div class="row-fluid">';
-         result += '<div class="span3">';*/
-        result += '<div class="span3">';
-        // extra biblo, if any
-        if (type) {
-            if (type.length > 0) {
-                result += '<p style="height:12px;"><strong>Type: </strong> ';
-                var first = true;
-                for (var typ in type) {
-                    var ty = type[typ];
-                    if (first) {
-                        result += ty;
-                        first = false;
-                    }
-                    else {
-                        result += ', ' + ty;
-                    }
-                }
-                result += '</p>';
-            }
-        }
-        var isbn = jsonObject['ISBN'];
-        if (isbn) {
-            var isbnn = isbn[0]
-            if (isbnn) {
-                result += '<p style="height:12px;"><strong>ISBN: </strong> ' + isbnn + '</p>';
-            }
-        }
-        var issn = jsonObject['ISSN'];
-        if (issn) {
-            var issnn = issn[0]
-            if (issnn) {
-                result += '<p style="height:12px;"><strong>ISSN: </strong> ' + issnn + '</p>';
-            }
-        }
-        var vol = jsonObject['Volume'];
-        if (vol) {
-            var volu = vol[0]
-            if (volu) {
-                result += '<p style="height:12px;"><strong>Volume: </strong> ' + volu + '</p>';
-            }
-        }
-        var issue = jsonObject['Issue'];
-        if (issue) {
-            var issuee = issue[0]
-            if (issuee) {
-                result += '<p style="height:12px;"><strong>Issue: </strong> ' + issuee + '</p>';
-            }
-        }
-
-        result += '</div>';
-        result += '<div class="span9">'; //#FDF5E1
-        // abstract, if any
-        var abstract_ = jsonObject['Abstract'];
-        if (abstract_) {
-            var abstractt = abstract_[0]
-            if (abstractt) {
-                result += ' <strong>Abstract: </strong> ' + abstractt + '';
-            }
-        }
-
-        result += '</div>';
-        result += '</div>';
-    }
-    else {
+    {
         // we need to retrieve the extra biblio and abstract for this biblo item
         result +=
                 '<div class="row-fluid" id="innen_abstract" pos="' + index + '" rel="' + family + '">';
@@ -823,8 +536,7 @@ var buildrecord = function (index, node) {
 
     result += "</div>";
 
-    if ((options['collection'] == 'npl') && (options.search_index != "summon")
-            && (options['collection'] != 'cendari')) {
+    if ((options['collection'] == 'npl') && (options['collection'] != 'cendari')) {
         var pdfURL = jsonObject['$teiCorpus.$teiHeader.$sourceDesc.target'];
         var docid = jsonObject._id;
         if (pdfURL || docid) {

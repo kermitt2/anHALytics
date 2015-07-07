@@ -1,4 +1,4 @@
-var getHarvestModal = function (found) {
+/*var getHarvestModal = function (found) {
 
     var harvestModal = '<div class="modal" id="facetview_harvestmodal" style="max-width:800px;width:650px;"> \
                 <div class="modal-header"> \
@@ -46,7 +46,7 @@ var getHarvestModal = function (found) {
                 </div>';
 
     return harvestModal;
-}
+}*/
 
 var getEditFilterModal = function (which) {
     var editFilterModal = '<div class="modal" id="facetview_editmodal" style="max-width:800px;width:650px;"> \
@@ -143,8 +143,6 @@ var getEditFilterModal = function (which) {
 
 
 }
-
-
 
 var facetrangeModal = '<div class="modal" id="facetview_rangemodal"> \
                 <div class="modal-header"> \

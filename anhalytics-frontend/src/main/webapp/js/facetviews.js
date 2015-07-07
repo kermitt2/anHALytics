@@ -32,7 +32,6 @@ var thefacetview_simple = ' \
                    </div> \
 				   <div class-"span2" id="disambiguate_button"> \
 				   <button type="button" id="disambiguate" class="btn" disabled="true" data-toggle="button">Disamb./Expand</button> \
-				   <button type="button" id="harvest" class="btn" disabled="true" data-toggle="button">Harvest</button> \
 				   </div> \
                    <div style="clear:both;" id="facetview_selectedfilters"></div> \
 				   <div class="span5" id="results_summary"></div> \
@@ -78,21 +77,7 @@ var thefacetview_nl = ' \
            ';
 
 var field_complex;
-if (options.search_index == 'summon') {
-    field_complex = ' \
-			<div style="display:inline-block; margin-left:-2px;" class="btn-group"> \
-			    <a style="-moz-border-radius:0px 3px 3px 0px; \
-		       -webkit-border-radius:0px 3px 3px 0px; border-radius:0px 3px 3px 0px;" \
-		       class="btn dropdown-toggle" data-toggle="dropdown" href="#"> \
-		       <b><span id="label1_facetview_searchbar{{NUMBER}}">select field</span></b> <span class="caret"></span></a> \
-				<ul style="margin-left:-10px;" class="dropdown-menu"> \
-		       <li><a id="field_all_text{{NUMBER}}" rank="{{NUMBER}}" label="1" href="">all text</a></li> \
-			   <li><a id="field_title{{NUMBER}}" rank="{{NUMBER}}" label="1" href="">title</a></li> \
-			   <li><a id="field_abstract{{NUMBER}}" rank="{{NUMBER}}" label="1" href="">abstract</a></li> \
-			   <li><a id="field_author{{NUMBER}}" rank="{{NUMBER}}" label="1" href="">author</a></li> \
-			   </div>';
-}
-else if (options['collection'] == 'npl') {
+if (options['collection'] == 'npl') {
     field_complex = ' \
 			<div style="display:inline-block; margin-left:-2px;" class="btn-group"> \
 			    <a style="-moz-border-radius:0px 3px 3px 0px; \
