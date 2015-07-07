@@ -20,14 +20,10 @@
         $.fn.facetview.options = $.extend(provided_options, url_options)
         var options = $.fn.facetview.options
 
-
         //var fillDefaultColor = '#FF8000';
         var fillDefaultColor = '#BC0E0E';
         //var fillDefaultColor = '#FF9900';
         var fillDefaultColorLight = '#FE9A2E';
-
-        // this is a google key for freebase image service
-        var api_key = "AIzaSyBLNMpXpWZxcR9rbjjFQHn_ULbU-w1EZ5U";
 
         // ===============================================
         // functions to do with filters

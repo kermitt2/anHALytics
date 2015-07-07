@@ -565,7 +565,7 @@ function viewEntity(event) {
             var urlImage = 'https://usercontent.googleapis.com/freebase/v1/image' + freebase;
             urlImage += '?maxwidth=150';
             urlImage += '&maxheight=150';
-            urlImage += '&key=' + api_key;
+            urlImage += '&key=' + options.api_key;
             string += '<img src="' + urlImage + '" alt="' + freebase + '"/>';
         }
 
