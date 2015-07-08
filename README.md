@@ -1,6 +1,6 @@
 # AnHALytics
 
-AnHALytics is a project aiming at creating an analytic platform for the [HAL research archive](https://hal.archives-ouvertes.fr)(mainly), exploring various analytic aspects such as search/discovery, activity and collaboration statistics, trend/technology maps, knowledge graph and data visualization. The project is supported by an [ADT Inria](http://www.inria.fr/en/research/research-teams/technological-development-at-inria) grant and good will :). 
+AnHALytics is a project aiming at creating an analytic platform for the [HAL research archive](https://hal.archives-ouvertes.fr) or other scientific Open Access repositories, exploring various analytic aspects such as search/discovery, activity and collaboration statistics, trend/technology maps, knowledge graph and data visualization. The project is supported by an [ADT Inria](http://www.inria.fr/en/research/research-teams/technological-development-at-inria) grant and good will :). 
 
 ![View of anHALytics search and discovery front end](doc/screen1.png)
 
@@ -193,5 +193,4 @@ A war file is produced under the directory ``anhalytics-frontend/target``, you c
 
 #### 5. Test
 
-
-
+In progress...
