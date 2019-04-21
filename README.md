@@ -1,5 +1,5 @@
-### This repository is outdated, 
-### for the latest developments see https://github.com/anHALytics
+### This repository is outdated!
+### For the latest developments see https://github.com/anHALytics
 
 
 # AnHALytics
